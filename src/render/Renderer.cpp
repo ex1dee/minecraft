@@ -4,10 +4,6 @@
 
 #include "../world/chunk/Chunk.h"
 
-Renderer::Renderer() {
-	
-}
-
 void Renderer::renderChunk(Chunk* chunk) {
 	chunkRenderer.add(chunk->getMeshes());
 }
