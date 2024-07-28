@@ -4,10 +4,6 @@
 
 #include "../world/chunk/Chunk.h"
 
-Renderer::Renderer() {
-	std::cout << "YES!!!\n";
-}
-
 void Renderer::renderChunk(Chunk* chunk) {
 	chunkRenderer.add(chunk->getMeshes());
 }
