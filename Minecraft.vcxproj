@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{8b7cc904-ad58-44ae-95ee-6f18a6095f5d}</ProjectGuid>
+    <RootNamespace>Minecraft</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\OpenGL\includes\;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\OpenGL\libs;$(LibraryPath)</LibraryPath>
+    <ReferencePath />
+    <LibraryWPath />
+    <IntDir>$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\User\source\repos\Minecraft\Minecraft\dependencies\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glfw3.lib;glfw3_mt.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\math\Frustum.cpp" />
+    <ClCompile Include="src\player\Player.cpp" />
+    <ClCompile Include="src\render\SkyboxRenderer.cpp" />
+    <ClCompile Include="src\states\PlayState.cpp" />
+    <ClCompile Include="src\render\ChunkRenderer.cpp" />
+    <ClCompile Include="src\world\chunk\Chunk.cpp" />
+    <ClCompile Include="src\textures\CubeTexture.cpp" />
+    <ClCompile Include="src\textures\BasicTexture.cpp" />
+    <ClCompile Include="src\config\Config.cpp" />
+    <ClCompile Include="dependencies\stb_image.cpp" />
+    <ClCompile Include="src\render\Renderer.cpp" />
+    <ClCompile Include="src\textures\TextureManager.cpp" />
+    <ClCompile Include="src\utils\Json.cpp" />
+    <ClCompile Include="src\player\Camera.cpp" />
+    <ClCompile Include="src\render\Model.cpp" />
+    <ClCompile Include="src\shaders\Shader.cpp" />
+    <ClCompile Include="src\utils\Files.cpp" />
+    <ClCompile Include="src\window\Events.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\window\Window.cpp" />
+    <ClCompile Include="src\textures\TextureAtlas.cpp" />
+    <ClCompile Include="src\world\block\Block.cpp" />
+    <ClCompile Include="src\world\block\BlocksDatabase.cpp" />
+    <ClCompile Include="src\world\chunk\ChunkManager.cpp" />
+    <ClCompile Include="src\world\chunk\ChunkMesh.cpp" />
+    <ClCompile Include="src\world\chunk\ChunkMeshBuilder.cpp" />
+    <ClCompile Include="src\world\generation\terrain\SuperFlatGenerator.cpp" />
+    <ClCompile Include="src\world\World.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\entity\Entity.h" />
+    <ClInclude Include="src\math\Frustum.h" />
+    <ClInclude Include="src\math\Plane.h" />
+    <ClInclude Include="src\math\AABB.h" />
+    <ClInclude Include="src\math\Transform.h" />
+    <ClInclude Include="src\player\Player.h" />
+    <ClInclude Include="src\render\SkyboxRenderer.h" />
+    <ClInclude Include="src\states\PlayState.h" />
+    <ClInclude Include="src\render\ChunkRenderer.h" />
+    <ClInclude Include="src\states\BaseState.h" />
+    <ClInclude Include="src\utils\random\BaseRandomGenerator.h" />
+    <ClInclude Include="src\utils\random\Random.h" />
+    <ClInclude Include="src\utils\random\RandomGenerator.h" />
+    <ClInclude Include="src\utils\VecMap.h" />
+    <ClInclude Include="src\world\block\BlockFaces.h" />
+    <ClInclude Include="src\world\block\ShaderType.h" />
+    <ClInclude Include="src\world\chunk\Chunk.h" />
+    <ClInclude Include="src\world\block\Block.h" />
+    <ClInclude Include="src\world\block\BlockType.h" />
+    <ClInclude Include="src\textures\CubeTexture.h" />
+    <ClInclude Include="src\textures\BasicTexture.h" />
+    <ClInclude Include="src\config\Config.h" />
+    <ClInclude Include="dependencies\stb_image.h" />
+    <ClInclude Include="src\render\Renderer.h" />
+    <ClInclude Include="src\textures\Image.h" />
+    <ClInclude Include="src\textures\Texture.h" />
+    <ClInclude Include="src\textures\TextureManager.h" />
+    <ClInclude Include="src\utils\Json.h" />
+    <ClInclude Include="src\player\Camera.h" />
+    <ClInclude Include="src\render\Model.h" />
+    <ClInclude Include="src\render\mesh\Mesh.h" />
+    <ClInclude Include="src\render\RenderInfo.h" />
+    <ClInclude Include="src\shaders\Shader.h" />
+    <ClInclude Include="src\utils\Files.h" />
+    <ClInclude Include="src\window\Button.h" />
+    <ClInclude Include="src\window\Events.h" />
+    <ClInclude Include="src\window\CursorPos.h" />
+    <ClInclude Include="src\window\Window.h" />
+    <ClInclude Include="src\textures\TextureAtlas.h" />
+    <ClInclude Include="src\world\block\BlockID.h" />
+    <ClInclude Include="src\render\mesh\MeshType.h" />
+    <ClInclude Include="src\world\block\BlocksDatabase.h" />
+    <ClInclude Include="src\world\chunk\ChunkManager.h" />
+    <ClInclude Include="src\world\chunk\ChunkMesh.h" />
+    <ClInclude Include="src\world\chunk\ChunkMeshBuilder.h" />
+    <ClInclude Include="src\world\generation\terrain\DefaultWorldGenerator.h" />
+    <ClInclude Include="src\world\generation\terrain\SuperFlatGenerator.h" />
+    <ClInclude Include="src\world\generation\terrain\TerrainGenerator.h" />
+    <ClInclude Include="src\world\World.h" />
+    <ClInclude Include="src\world\WorldConstants.h" />
+    <ClInclude Include="src\world\WorldPosition.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config\config.json" />
+    <None Include="config\settings.json" />
+    <None Include="packages.config" />
+    <None Include="resources\blocks\air.json" />
+    <None Include="resources\blocks\dirt.json" />
+    <None Include="resources\blocks\grass.json" />
+    <None Include="resources\blocks\stone.json" />
+    <None Include="shaders\default.fs" />
+    <None Include="shaders\default.vs" />
+    <None Include="shaders\skybox.fs" />
+    <None Include="shaders\skybox.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\textures\blocks_atlas.png" />
+    <Image Include="resources\textures\skybox\back.bmp" />
+    <Image Include="resources\textures\skybox\bottom.bmp" />
+    <Image Include="resources\textures\skybox\front.bmp" />
+    <Image Include="resources\textures\skybox\left.bmp" />
+    <Image Include="resources\textures\skybox\right.bmp" />
+    <Image Include="resources\textures\skybox\top.bmp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\fluid.yaml-cpp.1.0.10\build\fluid.yaml-cpp.targets" Condition="Exists('..\packages\fluid.yaml-cpp.1.0.10\build\fluid.yaml-cpp.targets')" />
+    <Import Project="..\packages\glfw.3.4.0\build\native\glfw.targets" Condition="Exists('..\packages\glfw.3.4.0\build\native\glfw.targets')" />
+  </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\fluid.yaml-cpp.1.0.10\build\fluid.yaml-cpp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\fluid.yaml-cpp.1.0.10\build\fluid.yaml-cpp.targets'))" />
+    <Error Condition="!Exists('..\packages\glfw.3.4.0\build\native\glfw.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glfw.3.4.0\build\native\glfw.targets'))" />
+  </Target>
+</Project>

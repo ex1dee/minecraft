@@ -1,0 +1,10 @@
+{
+    "world": {
+        "loadDistance": 5
+    },
+
+    "camera": {
+        "fov": 70,
+        "sensitivity": 0.1
+    }
+}

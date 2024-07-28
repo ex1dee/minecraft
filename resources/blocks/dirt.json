@@ -1,0 +1,21 @@
+{
+    "id": 2,
+    "meshType": 0,
+    "shaderType": 0,
+    "opaque": true,
+
+    "texCoords": {
+        "side": {
+            "x": 2,
+            "y": 15
+        },
+        "top": {
+            "x": 2,
+            "y": 15
+        },
+        "bottom": {
+            "x": 2,
+            "y": 15
+        }
+    }
+}

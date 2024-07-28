@@ -1,0 +1,7 @@
+﻿  PlayState.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\states\PlayState.cpp(19,37): warning C4305: +=: усечение из "double" в "T"
+          with
+          [
+              T=float
+          ]
+  Minecraft.vcxproj -> C:\Users\User\source\repos\Minecraft\x64\Debug\Minecraft.exe

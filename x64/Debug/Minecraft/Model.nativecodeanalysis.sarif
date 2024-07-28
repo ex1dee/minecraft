@@ -1,0 +1,118 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Mesh::type\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/mesh/Mesh.h"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 2,
+                  "endLine": 17,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Mesh::{ctor}",
+                  "decoratedName": "??0Mesh@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Mesh::type"
+          }
+        }
+      ],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.34.31937.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/mesh/Mesh.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "0caf4e0f200c83c698ca308e1d4a10d08f9f70b8736652b2433b2e9f43fc9476"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/render/model.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "bfaae49d41770970381c7608fb088591a2e005dd09ded0b822650966ff89f199"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/render/model.h"
+          },
+          "hashes": {
+            "sha-256": "5a03da6a580a7f0abfb751c7861e24b8831cb19be5141022e0a90d28466f0af3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/opengl/includes/glad/glad.h"
+          },
+          "hashes": {
+            "sha-256": "127e616ec235e11b5fe945c89cdaa50d4c3b98c5ee79845deb7a54e7a7be8254"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/opengl/includes/khr/khrplatform.h"
+          },
+          "hashes": {
+            "sha-256": "7b1e01aaa7ad8f6fc34b5c7bdf79ebf5189bb09e2c4d2e79fc5d350623d11e83"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/render/renderinfo.h"
+          },
+          "hashes": {
+            "sha-256": "d11bdb12b3a9a461fe4832da017de9ad3de302a7380f4895592c296e163e94a9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/render/mesh/meshtype.h"
+          },
+          "hashes": {
+            "sha-256": "3052a132f15687987a851c22e3d972a5602bdc138eb328cac8d51b9f1f8da943"
+          }
+        }
+      ]
+    }
+  ]
+}

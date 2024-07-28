@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Исходные файлы\Window">
+      <UniqueIdentifier>{022168ad-b372-454a-8449-a2244d70cd7a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\window\Window.cpp">
+      <Filter>Исходные файлы\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\window\Events.cpp">
+      <Filter>Исходные файлы\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="dependencies\stb_image.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shaders\Shader.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\Model.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\player\Camera.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\Files.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\Json.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\config\Config.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\Renderer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\textures\BasicTexture.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\textures\CubeTexture.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\textures\TextureManager.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\textures\TextureAtlas.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\block\BlocksDatabase.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\block\Block.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\chunk\Chunk.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\chunk\ChunkMesh.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\chunk\ChunkMeshBuilder.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\World.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\chunk\ChunkManager.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\ChunkRenderer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\generation\terrain\SuperFlatGenerator.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\states\PlayState.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\player\Player.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\Frustum.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\SkyboxRenderer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\window\Window.h">
+      <Filter>Исходные файлы\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\window\Events.h">
+      <Filter>Исходные файлы\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\window\Button.h">
+      <Filter>Исходные файлы\Window</Filter>
+    </ClInclude>
+    <ClInclude Include="src\window\CursorPos.h" />
+    <ClInclude Include="dependencies\stb_image.h" />
+    <ClInclude Include="src\shaders\Shader.h" />
+    <ClInclude Include="src\render\Model.h" />
+    <ClInclude Include="src\render\RenderInfo.h" />
+    <ClInclude Include="src\player\Camera.h" />
+    <ClInclude Include="src\utils\Files.h" />
+    <ClInclude Include="src\utils\Json.h" />
+    <ClInclude Include="src\config\Config.h" />
+    <ClInclude Include="src\render\Renderer.h" />
+    <ClInclude Include="src\textures\BasicTexture.h" />
+    <ClInclude Include="src\textures\CubeTexture.h" />
+    <ClInclude Include="src\textures\TextureManager.h" />
+    <ClInclude Include="src\textures\Image.h" />
+    <ClInclude Include="src\textures\Texture.h" />
+    <ClInclude Include="src\textures\TextureAtlas.h" />
+    <ClInclude Include="src\world\block\BlocksDatabase.h" />
+    <ClInclude Include="src\world\block\BlockType.h" />
+    <ClInclude Include="src\world\block\BlockID.h" />
+    <ClInclude Include="src\render\mesh\Mesh.h" />
+    <ClInclude Include="src\render\mesh\MeshType.h" />
+    <ClInclude Include="src\world\block\Block.h" />
+    <ClInclude Include="src\world\chunk\Chunk.h" />
+    <ClInclude Include="src\world\chunk\ChunkMesh.h" />
+    <ClInclude Include="src\world\WorldConstants.h" />
+    <ClInclude Include="src\world\chunk\ChunkMeshBuilder.h" />
+    <ClInclude Include="src\world\block\ShaderType.h" />
+    <ClInclude Include="src\world\block\BlockFaces.h" />
+    <ClInclude Include="src\world\World.h" />
+    <ClInclude Include="src\utils\VecMap.h" />
+    <ClInclude Include="src\world\chunk\ChunkManager.h" />
+    <ClInclude Include="src\world\generation\terrain\TerrainGenerator.h" />
+    <ClInclude Include="src\world\generation\terrain\DefaultWorldGenerator.h" />
+    <ClInclude Include="src\render\ChunkRenderer.h" />
+    <ClInclude Include="src\world\WorldPosition.h" />
+    <ClInclude Include="src\utils\random\BaseRandomGenerator.h" />
+    <ClInclude Include="src\utils\random\Random.h" />
+    <ClInclude Include="src\utils\random\RandomGenerator.h" />
+    <ClInclude Include="src\world\generation\terrain\SuperFlatGenerator.h" />
+    <ClInclude Include="src\states\BaseState.h" />
+    <ClInclude Include="src\states\PlayState.h" />
+    <ClInclude Include="src\player\Player.h" />
+    <ClInclude Include="src\entity\Entity.h" />
+    <ClInclude Include="src\math\AABB.h" />
+    <ClInclude Include="src\math\Plane.h" />
+    <ClInclude Include="src\math\Frustum.h" />
+    <ClInclude Include="src\math\Transform.h" />
+    <ClInclude Include="src\render\SkyboxRenderer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="config\settings.json" />
+    <None Include="config\config.json" />
+    <None Include="shaders\default.vs" />
+    <None Include="shaders\default.fs" />
+    <None Include="resources\blocks\grass.json" />
+    <None Include="packages.config" />
+    <None Include="resources\blocks\air.json" />
+    <None Include="resources\blocks\dirt.json" />
+    <None Include="resources\blocks\stone.json" />
+    <None Include="shaders\skybox.vs" />
+    <None Include="shaders\skybox.fs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\textures\blocks_atlas.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\skybox\back.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\skybox\bottom.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\skybox\front.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\skybox\left.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\skybox\right.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\skybox\top.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+  </ItemGroup>
+</Project>

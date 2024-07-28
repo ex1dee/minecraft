@@ -1,0 +1,31 @@
+﻿  CubeTexture.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\textures\CubeTexture.cpp : fatal  error C1041: невозможно открыть базу данных программы C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\vc143.pdb; если несколько файлов CL.EXE осуществляют запись в один и тот же PDB-файл, воспользуйтесь /FS
+  BasicTexture.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\textures\BasicTexture.cpp : fatal  error C1041: невозможно открыть базу данных программы C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\vc143.pdb; если несколько файлов CL.EXE осуществляют запись в один и тот же PDB-файл, воспользуйтесь /FS
+  Config.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\config\Config.cpp : fatal  error C1041: невозможно открыть базу данных программы C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\vc143.pdb; если несколько файлов CL.EXE осуществляют запись в один и тот же PDB-файл, воспользуйтесь /FS
+  stb_image.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\dependencies\stb_image.cpp : fatal  error C1041: невозможно открыть базу данных программы C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\vc143.pdb; если несколько файлов CL.EXE осуществляют запись в один и тот же PDB-файл, воспользуйтесь /FS
+  Renderer.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\Renderer.cpp : fatal  error C1041: невозможно открыть базу данных программы C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\vc143.pdb; если несколько файлов CL.EXE осуществляют запись в один и тот же PDB-файл, воспользуйтесь /FS
+  TextureManager.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\textures\TextureManager.cpp : fatal  error C1041: невозможно открыть базу данных программы C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\vc143.pdb; если несколько файлов CL.EXE осуществляют запись в один и тот же PDB-файл, воспользуйтесь /FS
+  Json.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Json.cpp : fatal  error C1041: невозможно открыть базу данных программы C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\vc143.pdb; если несколько файлов CL.EXE осуществляют запись в один и тот же PDB-файл, воспользуйтесь /FS
+  Camera.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\player\Camera.cpp : fatal  error C1041: невозможно открыть базу данных программы C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\vc143.pdb; если несколько файлов CL.EXE осуществляют запись в один и тот же PDB-файл, воспользуйтесь /FS
+  Model.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\Model.cpp : fatal  error C1041: невозможно открыть базу данных программы C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\vc143.pdb; если несколько файлов CL.EXE осуществляют запись в один и тот же PDB-файл, воспользуйтесь /FS
+  Shader.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\shaders\Shader.cpp : fatal  error C1041: невозможно открыть базу данных программы C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\vc143.pdb; если несколько файлов CL.EXE осуществляют запись в один и тот же PDB-файл, воспользуйтесь /FS
+  Files.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Files.cpp : fatal  error C1041: невозможно открыть базу данных программы C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\vc143.pdb; если несколько файлов CL.EXE осуществляют запись в один и тот же PDB-файл, воспользуйтесь /FS
+  Events.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\window\Events.cpp : fatal  error C1041: невозможно открыть базу данных программы C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\vc143.pdb; если несколько файлов CL.EXE осуществляют запись в один и тот же PDB-файл, воспользуйтесь /FS
+  Window.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\window\Window.cpp : fatal  error C1041: невозможно открыть базу данных программы C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\vc143.pdb; если несколько файлов CL.EXE осуществляют запись в один и тот же PDB-файл, воспользуйтесь /FS
+  TextureAtlas.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\textures\TextureAtlas.cpp : fatal  error C1041: невозможно открыть базу данных программы C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\vc143.pdb; если несколько файлов CL.EXE осуществляют запись в один и тот же PDB-файл, воспользуйтесь /FS
+  BlocksDatabase.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\block\BlocksDatabase.cpp : fatal  error C1041: невозможно открыть базу данных программы C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\vc143.pdb; если несколько файлов CL.EXE осуществляют запись в один и тот же PDB-файл, воспользуйтесь /FS
+  Создание кода...
