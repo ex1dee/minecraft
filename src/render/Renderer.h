@@ -11,7 +11,7 @@ class Renderer {
 	ChunkRenderer chunkRenderer;
 	SkyboxRenderer skyboxRenderer;
 public:
-	Renderer();
+	Renderer() {}
 
 	void setTime(float time);
 	void renderChunk(Chunk* chunk);
