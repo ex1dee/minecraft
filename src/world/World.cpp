@@ -89,6 +89,8 @@ void World::render(Renderer& renderer, Camera& camera) {
 
 void World::update(Renderer& renderer, Player& player, Camera& camera) {
 	updateChunks(camera);
+
+	renderer.setTime(glfwGetTime() * 10);
 }
 
 void World::updateChunks(Camera& camera) {

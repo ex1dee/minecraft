@@ -8,16 +8,12 @@ RenderInfo Model::getRenderInfo() {
 	return renderInfo;
 }
 
-void Model::addMesh(Mesh &mesh) {
+void Model::addMesh(Mesh &mesh, int dimensions) {
 	genVAO();
 
-	addVBO(3, mesh.vertexPositions);
-
-	if (mesh.textureCoords.size())
-		addVBO(2, mesh.textureCoords);
-
-	if (mesh.indices.size())
-		addEBO(mesh.indices);
+	addVBO(dimensions, mesh.vertexPositions);
+	addVBO(2, mesh.textureCoords);
+	addEBO(mesh.indices);
 }
 
 void Model::genVAO() {
@@ -29,6 +25,9 @@ void Model::genVAO() {
 }
 
 void Model::addVBO(int dimensions, const std::vector<float>& vertices) {
+	if (!vertices.size())
+		return;
+
 	renderInfo.vertexCount = vertices.size();
 
 	unsigned int VBO;
@@ -43,6 +42,9 @@ void Model::addVBO(int dimensions, const std::vector<float>& vertices) {
 }
 
 void Model::addEBO(const std::vector<unsigned int>& indices) {
+	if (!indices.size())
+		return;
+
 	renderInfo.indicesCount = indices.size();
 
 	if (EBO)
@@ -61,6 +63,7 @@ void Model::reset() {
 		glDeleteBuffers(buffers.size(), buffers.data());
 
 	glDeleteBuffers(1, &EBO);
+	glDeleteFramebuffers(1, &FBO);
 
 	EBO = 0;
 	buffers.clear();

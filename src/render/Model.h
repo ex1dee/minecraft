@@ -5,7 +5,7 @@
 #include <vector>
 
 #include "RenderInfo.h"
-#include "mesh/Mesh.h"
+#include "Mesh.h"
 
 class Model {
 	void genVAO();
@@ -15,12 +15,13 @@ class Model {
 	std::vector<unsigned int> buffers;
 	RenderInfo renderInfo;
 	unsigned int EBO;
+	unsigned int FBO;
 public:
 	Model() = default;
 	~Model();
 
 	RenderInfo getRenderInfo();
-	void addMesh(Mesh& mesh);
+	void addMesh(Mesh& mesh, int dimensions);
 	void reset();
 };
 

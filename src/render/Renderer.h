@@ -10,14 +10,16 @@ class Chunk;
 class Renderer {
 	ChunkRenderer chunkRenderer;
 	SkyboxRenderer skyboxRenderer;
+	glm::vec3 lightDir;
 public:
-	Renderer() {}
+	Renderer();
 
 	void setTime(float time);
 	void renderChunk(Chunk* chunk);
 	void finishRender(Player& player, Camera& camera);
 
-	static void drawElements(RenderInfo rInfo);
+	static void drawElements(const RenderInfo& rInfo);
+	static void drawPoints(const RenderInfo& rInfo);
 };
 
 #endif

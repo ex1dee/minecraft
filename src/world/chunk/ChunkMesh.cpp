@@ -31,7 +31,7 @@ void ChunkMesh::addBlockFace(const std::array<float, 12>& face,
 }
 
 void ChunkMesh::createBuffers() {
-	model.addMesh(mesh);
+	model.addMesh(mesh, 3);
 
 	mesh.reset();
 	vertIndex = 0;

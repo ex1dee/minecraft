@@ -198,7 +198,7 @@
     <ClInclude Include="src\utils\Json.h" />
     <ClInclude Include="src\player\Camera.h" />
     <ClInclude Include="src\render\Model.h" />
-    <ClInclude Include="src\render\mesh\Mesh.h" />
+    <ClInclude Include="src\render\Mesh.h" />
     <ClInclude Include="src\render\RenderInfo.h" />
     <ClInclude Include="src\shaders\Shader.h" />
     <ClInclude Include="src\utils\Files.h" />
@@ -208,7 +208,7 @@
     <ClInclude Include="src\window\Window.h" />
     <ClInclude Include="src\textures\TextureAtlas.h" />
     <ClInclude Include="src\world\block\BlockID.h" />
-    <ClInclude Include="src\render\mesh\MeshType.h" />
+    <ClInclude Include="src\render\MeshType.h" />
     <ClInclude Include="src\world\block\BlocksDatabase.h" />
     <ClInclude Include="src\world\chunk\ChunkManager.h" />
     <ClInclude Include="src\world\chunk\ChunkMesh.h" />

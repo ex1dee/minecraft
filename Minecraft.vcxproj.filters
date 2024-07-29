@@ -128,8 +128,8 @@
     <ClInclude Include="src\world\block\BlocksDatabase.h" />
     <ClInclude Include="src\world\block\BlockType.h" />
     <ClInclude Include="src\world\block\BlockID.h" />
-    <ClInclude Include="src\render\mesh\Mesh.h" />
-    <ClInclude Include="src\render\mesh\MeshType.h" />
+    <ClInclude Include="src\render\Mesh.h" />
+    <ClInclude Include="src\render\MeshType.h" />
     <ClInclude Include="src\world\block\Block.h" />
     <ClInclude Include="src\world\chunk\Chunk.h" />
     <ClInclude Include="src\world\chunk\ChunkMesh.h" />

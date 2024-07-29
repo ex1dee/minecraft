@@ -1,6 +1,7 @@
 #ifndef SKYBOXRENDERER_H
 #define SKYBOXRENDERER_H
 
+#include "../textures/BasicTexture.h"
 #include "../textures/CubeTexture.h"
 #include "../shaders/Shader.h"
 #include "../player/Camera.h"
@@ -8,9 +9,8 @@
 
 class SkyboxRenderer {
 	Model model;
-	Shader* shader;
+	Shader* skyboxShader;
 	CubeTexture* texture;
-	glm::mat4 matModel;
 
 	void loadTexture();
 	void makeModel();
@@ -18,8 +18,7 @@ public:
 	SkyboxRenderer();
 	~SkyboxRenderer();
 
-	void setTime(float time);
-	void render(Camera& camera);
+	void render(Camera& camera, const glm::vec3& lightDir);
 };
 
 #endif

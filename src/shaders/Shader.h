@@ -33,8 +33,9 @@ public:
 	void setBool(const char* uniform, bool value) const;
 	void setInt(const char* uniform, int value) const;
 	void setFloat(const char* uniform, float value) const;
-	void setMat4(const char* uniform, glm::mat4 value) const;
-	void setVec3(const char* uniform, glm::vec3 value) const;
+	void setMat4(const char* uniform, const glm::mat4& value) const;
+	void setVec3(const char* uniform, const glm::vec3& value) const;
+	void setVec4(const char* uniform, const glm::vec4& value) const;
 	unsigned int getProgramID();
 };
 

@@ -20,29 +20,31 @@ void ChunkRenderer::add(ChunkMeshCollection& chunk) {
 		waterMeshes.push_back(chunk.water);
 }
 
-void ChunkRenderer::render(Camera& camera) {
-	activeShader = defShader;
-	render(camera, solidMeshes);
+void ChunkRenderer::render(Camera& camera, const glm::vec3& lightDir) {
+	if (solidMeshes.size()) {
+		updateSolidShader(camera, lightDir);
+		render(solidMeshes);
+	}
 
-	activeShader = defShader;
-	render(camera, waterMeshes);
+	render(waterMeshes);
 
 	solidMeshes.clear();
 	waterMeshes.clear();
 }
 
-void ChunkRenderer::render(Camera& camera, std::vector<ChunkMesh*>& meshes) {
-	if (!meshes.size())
-		return;
-
-	activeShader->use();
-	
-	TextureManager::bindTexture(BlocksDatabase::textureAtlas, *activeShader, "tex", 0);
-
-	activeShader->setMat4("view", camera.getView());
-	activeShader->setMat4("projection", camera.getProjection());
-
+void ChunkRenderer::render(std::vector<ChunkMesh*>& meshes) {
 	for (ChunkMesh* mesh : meshes) {
 		Renderer::drawElements(mesh->getModel().getRenderInfo());
 	}
+}
+
+void ChunkRenderer::updateSolidShader(Camera& camera, const glm::vec3& lightDir) {
+	activeShader = defShader;
+	activeShader->use();
+
+	activeShader->setMat4("view", camera.getView());
+	activeShader->setMat4("projection", camera.getProjection());
+	activeShader->setVec3("lightDir", lightDir);
+
+	TextureManager::bindTexture(BlocksDatabase::textureAtlas, *activeShader, "tex", 0);
 }

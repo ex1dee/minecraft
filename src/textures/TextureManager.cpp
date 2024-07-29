@@ -14,6 +14,7 @@ GLenum TextureManager::getFormat(int nchannels) {
 void TextureManager::bindTexture(Texture& texture, Shader& shader, const char* uniform, int id) {
 	shader.use();
 	shader.setInt(uniform, id);
+
 	glActiveTexture(GL_TEXTURE0 + id);
 	glBindTexture(texture.getType(), texture.getID());
 }

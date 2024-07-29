@@ -13,13 +13,14 @@ class ChunkRenderer {
 	Shader* activeShader;
 	Shader* defShader;
 
-	void render(Camera& camera, std::vector<ChunkMesh*>& mesh);
+	void render(std::vector<ChunkMesh*>& mesh);
 public:
 	ChunkRenderer();
 	~ChunkRenderer();
 
+	void updateSolidShader(Camera& camera, const glm::vec3& lightDir);
 	void add(ChunkMeshCollection& chunk);
-	void render(Camera& camera);
+	void render(Camera& camera, const glm::vec3& lightDir);
 };
 
 #endif

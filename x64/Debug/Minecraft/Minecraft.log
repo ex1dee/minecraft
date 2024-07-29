@@ -1,7 +1,7 @@
-﻿  PlayState.cpp
-C:\Users\User\source\repos\Minecraft\Minecraft\src\states\PlayState.cpp(19,37): warning C4305: +=: усечение из "double" в "T"
-          with
-          [
-              T=float
-          ]
+﻿  Model.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\Model.cpp(32,42): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\Model.cpp(39,73): warning C4267: аргумент: преобразование из "size_t" в "GLuint"; возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\Model.cpp(40,42): warning C4267: аргумент: преобразование из "size_t" в "GLuint"; возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\Model.cpp(49,42): warning C4267: =: преобразование из "size_t" в "int"; возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\Model.cpp(64,49): warning C4267: аргумент: преобразование из "size_t" в "GLsizei"; возможна потеря данных
   Minecraft.vcxproj -> C:\Users\User\source\repos\Minecraft\x64\Debug\Minecraft.exe

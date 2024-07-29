@@ -5,8 +5,7 @@
 #include "Renderer.h"
 
 SkyboxRenderer::SkyboxRenderer() {
-	shader = new Shader("shaders/skybox.vs", "shaders/skybox.fs");
-    matModel = glm::mat4(1);
+	skyboxShader = new Shader("shaders/skybox.vs", "shaders/skybox.fs");
 
 	loadTexture();
 	makeModel();
@@ -15,41 +14,36 @@ SkyboxRenderer::SkyboxRenderer() {
 SkyboxRenderer::~SkyboxRenderer() {
 	model.reset();
 
-	delete shader;
+	delete skyboxShader;
 	delete texture;
 }
 
-void SkyboxRenderer::setTime(float time) {
-    float angle = time * 360.0f / DAYCYCLE_TICKS;
-
-    matModel = glm::rotate(glm::mat4(1.0f), glm::radians(angle), glm::vec3(1, 0, 0));
-}
-
-void SkyboxRenderer::render(Camera& camera) {
+void SkyboxRenderer::render(Camera& camera, const glm::vec3& lightDir) {
 	glDisable(GL_CULL_FACE);
 	glDepthMask(GL_FALSE);
     
-	shader->use();
+	skyboxShader->use();
 
-	TextureManager::bindTexture(*texture, *shader, "skybox", 0);
+    TextureManager::bindTexture(*texture, *skyboxShader, "background", 0);
 
-	shader->setMat4("model", matModel);
-	shader->setMat4("view", glm::mat4(glm::mat3(camera.getView())));
-	shader->setMat4("projection", camera.getProjection());
+    skyboxShader->setMat4("view", glm::mat4(glm::mat3(camera.getView())));
+    skyboxShader->setMat4("projection", camera.getProjection());
+    skyboxShader->setVec3("cameraPos", camera.transform->position);
+    skyboxShader->setVec3("lightDir", lightDir);
 	
-	Renderer::drawElements(model.getRenderInfo());
+    Renderer::drawElements(model.getRenderInfo());
 
 	glDepthMask(GL_TRUE);
 }
 
 void SkyboxRenderer::loadTexture() {
 	std::array<const char*, 6> files{
-		"resources/textures/skybox/right.jpg", 
-		"resources/textures/skybox/left.jpg", 
-		"resources/textures/skybox/top.jpg",
-		"resources/textures/skybox/bottom.jpg",
-		"resources/textures/skybox/front.jpg", 
-		"resources/textures/skybox/back.jpg"
+		"resources/textures/skybox/stars.jpg", 
+        "resources/textures/skybox/stars.jpg",
+        "resources/textures/skybox/stars.jpg",
+        "resources/textures/skybox/stars.jpg",
+        "resources/textures/skybox/stars.jpg",
+        "resources/textures/skybox/stars.jpg"
 	};
 
 	texture = new CubeTexture(files, false);
@@ -58,21 +52,8 @@ void SkyboxRenderer::loadTexture() {
 void SkyboxRenderer::makeModel() {
 	Mesh mesh;
 	
-	mesh.vertexPositions = {  
-        -1.0f,  1.0f, -1.0f,
-        -1.0f, -1.0f, -1.0f,
-         1.0f, -1.0f, -1.0f,
-         1.0f, -1.0f, -1.0f,
-         1.0f,  1.0f, -1.0f,
-        -1.0f,  1.0f, -1.0f,
-
-        -1.0f, -1.0f,  1.0f,
-        -1.0f, -1.0f, -1.0f,
-        -1.0f,  1.0f, -1.0f,
-        -1.0f,  1.0f, -1.0f,
-        -1.0f,  1.0f,  1.0f,
-        -1.0f, -1.0f,  1.0f,
-
+	mesh.vertexPositions = {
+        // right
          1.0f, -1.0f, -1.0f,
          1.0f, -1.0f,  1.0f,
          1.0f,  1.0f,  1.0f,
@@ -80,20 +61,39 @@ void SkyboxRenderer::makeModel() {
          1.0f,  1.0f, -1.0f,
          1.0f, -1.0f, -1.0f,
 
+        // left
         -1.0f, -1.0f,  1.0f,
+        -1.0f, -1.0f, -1.0f,
+        -1.0f,  1.0f, -1.0f,
+        -1.0f,  1.0f, -1.0f,
         -1.0f,  1.0f,  1.0f,
-         1.0f,  1.0f,  1.0f,
-         1.0f,  1.0f,  1.0f,
-         1.0f, -1.0f,  1.0f,
         -1.0f, -1.0f,  1.0f,
 
+        // top
         -1.0f,  1.0f, -1.0f,
          1.0f,  1.0f, -1.0f,
          1.0f,  1.0f,  1.0f,
          1.0f,  1.0f,  1.0f,
         -1.0f,  1.0f,  1.0f,
         -1.0f,  1.0f, -1.0f,
+        
+        // back
+        -1.0f, -1.0f,  1.0f,
+        -1.0f,  1.0f,  1.0f,
+        1.0f,  1.0f,  1.0f,
+        1.0f,  1.0f,  1.0f,
+        1.0f, -1.0f,  1.0f,
+        -1.0f, -1.0f,  1.0f,
 
+        // front
+        -1.0f,  1.0f, -1.0f,
+        -1.0f, -1.0f, -1.0f,
+         1.0f, -1.0f, -1.0f,
+         1.0f, -1.0f, -1.0f,
+         1.0f,  1.0f, -1.0f,
+        -1.0f,  1.0f, -1.0f,
+
+        // bottom
         -1.0f, -1.0f, -1.0f,
         -1.0f, -1.0f,  1.0f,
          1.0f, -1.0f, -1.0f,
@@ -102,5 +102,5 @@ void SkyboxRenderer::makeModel() {
          1.0f, -1.0f,  1.0f
     };
 
-	model.addMesh(mesh);
+	model.addMesh(mesh, 3);
 }
