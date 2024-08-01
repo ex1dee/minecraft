@@ -5,6 +5,7 @@
 #include "../textures/CubeTexture.h"
 #include "../shaders/Shader.h"
 #include "../player/Camera.h"
+#include "light/DirectLight.h"
 #include "Model.h"
 
 class SkyboxRenderer {
@@ -18,7 +19,7 @@ public:
 	SkyboxRenderer();
 	~SkyboxRenderer();
 
-	void render(Camera& camera, const glm::vec3& lightDir);
+	void render(Camera& camera, DirectLight* sunLight);
 };
 
 #endif

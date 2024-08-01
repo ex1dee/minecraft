@@ -16,10 +16,13 @@ class Window {
 	static void createWindow();
 	static void setCallbacks();
 	static void gladLoad();
+
+	static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
 public:
 	static void initialize();
 	static void finalize();
 	static void swapBuffers();
+	static void setWindowViewport();
 	static bool shouldClose();
 	static int getWidth();
 	static int getHeight();

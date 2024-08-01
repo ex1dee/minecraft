@@ -20,31 +20,48 @@ void ChunkRenderer::add(ChunkMeshCollection& chunk) {
 		waterMeshes.push_back(chunk.water);
 }
 
-void ChunkRenderer::render(Camera& camera, const glm::vec3& lightDir) {
-	if (solidMeshes.size()) {
-		updateSolidShader(camera, lightDir);
-		render(solidMeshes);
-	}
+void ChunkRenderer::render(Camera& camera, DirectLight* sunLight) {
+	updateSolidShader(camera, sunLight);
+	render(camera, solidMeshes);
 
-	render(waterMeshes);
+	//render(waterMeshes);
 
 	solidMeshes.clear();
 	waterMeshes.clear();
 }
 
-void ChunkRenderer::render(std::vector<ChunkMesh*>& meshes) {
+void ChunkRenderer::updateSolidShader(Camera& camera, DirectLight* sunLight) {
+	defShader->use();
+
+	defShader->setMat4("projView", camera.getProjView());
+
+	defShader->setInt("directLightCount", 1);
+	defShader->setMat4("directLight[0].shadow.projView", sunLight->getFramebuffer().getProjView());
+	defShader->setVec3("directLight[0].direction", sunLight->direction);
+	defShader->setVec3("directLight[0].color", sunLight->color);
+
+	TextureManager::bindTexture(BlocksDatabase::textureAtlas, *defShader, "tex", 0);
+	TextureManager::bindDepthMap(sunLight->getFramebuffer().getDepthMap(), *defShader, "directLight[0].shadow.depthMap", 1);
+}
+
+void ChunkRenderer::render(Camera& camera, std::vector<ChunkMesh*>& meshes) {
 	for (ChunkMesh* mesh : meshes) {
-		Renderer::drawElements(mesh->getModel().getRenderInfo());
+		if (camera.isAABBInFrustum(mesh->getModel().aabb))
+			Renderer::drawElements(mesh->getModel().getRenderInfo());
 	}
 }
 
-void ChunkRenderer::updateSolidShader(Camera& camera, const glm::vec3& lightDir) {
-	activeShader = defShader;
-	activeShader->use();
+void ChunkRenderer::renderLights(DirectLight* sunLight) {
+	renderLights(solidMeshes, sunLight);
+	//renderLights(waterMeshes, sunLight);
+}
 
-	activeShader->setMat4("view", camera.getView());
-	activeShader->setMat4("projection", camera.getProjection());
-	activeShader->setVec3("lightDir", lightDir);
+void ChunkRenderer::renderLights(std::vector<ChunkMesh*>& meshes, DirectLight* sunLight) {
+	sunLight->startRender();
 
-	TextureManager::bindTexture(BlocksDatabase::textureAtlas, *activeShader, "tex", 0);
+	for (ChunkMesh* mesh : meshes) {
+		Renderer::drawElements(mesh->getModel().getRenderInfo());
+	}
+
+	sunLight->finishRender();
 }

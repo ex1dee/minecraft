@@ -11,11 +11,12 @@ class ChunkMeshBuilder {
 	Chunk* chunk;
 
 	bool shouldAddFace(glm::vec3 adjacentDir, BlockType blockType);
-	void tryAddFace(const std::array<float, 12>& face,
-		glm::vec2& texCoords,
-		glm::vec3& localBlockPosition,
-		glm::vec3& adjacentDir,
-		BlockType blockType);
+	void tryAddFace(const std::array<float, 12>& vertices,
+		const glm::vec2& texCoords,
+		const glm::vec3& normal,
+		const glm::vec3& localBlockPosition,
+		const glm::vec3& adjacentDir,
+		const BlockType& blockType);
 	void setActiveMesh(Block& block);
 public:
 	ChunkMeshBuilder(Chunk* chunk);

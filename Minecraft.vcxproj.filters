@@ -98,6 +98,15 @@
     <ClCompile Include="src\render\SkyboxRenderer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\render\DepthFramebuffer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\Mesh.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\Sun.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\window\Window.h">
@@ -157,6 +166,16 @@
     <ClInclude Include="src\math\Frustum.h" />
     <ClInclude Include="src\math\Transform.h" />
     <ClInclude Include="src\render\SkyboxRenderer.h" />
+    <ClInclude Include="src\render\DepthFramebuffer.h" />
+    <ClInclude Include="src\render\light\Light.h" />
+    <ClInclude Include="src\render\light\DirectLight.h" />
+    <ClInclude Include="src\physics\GameObject.h" />
+    <ClInclude Include="src\math\Orientation.h" />
+    <ClInclude Include="src\physics\collider\Collider.h" />
+    <ClInclude Include="src\physics\RigidBody.h" />
+    <ClInclude Include="src\physics\collider\BoxCollider.h" />
+    <ClInclude Include="src\physics\PhysicsEngine.h" />
+    <ClInclude Include="src\render\Sun.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />
@@ -164,12 +183,13 @@
     <None Include="shaders\default.vs" />
     <None Include="shaders\default.fs" />
     <None Include="resources\blocks\grass.json" />
-    <None Include="packages.config" />
     <None Include="resources\blocks\air.json" />
     <None Include="resources\blocks\dirt.json" />
     <None Include="resources\blocks\stone.json" />
     <None Include="shaders\skybox.vs" />
     <None Include="shaders\skybox.fs" />
+    <None Include="shaders\framebuffer.vs" />
+    <None Include="shaders\framebuffer.fs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\blocks_atlas.png">
@@ -191,6 +211,9 @@
       <Filter>Файлы ресурсов</Filter>
     </Image>
     <Image Include="resources\textures\skybox\top.bmp">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\skybox\stars.jpg">
       <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>

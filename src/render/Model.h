@@ -4,6 +4,7 @@
 #include <glad/glad.h>
 #include <vector>
 
+#include "../math/AABB.h"
 #include "RenderInfo.h"
 #include "Mesh.h"
 
@@ -15,14 +16,15 @@ class Model {
 	std::vector<unsigned int> buffers;
 	RenderInfo renderInfo;
 	unsigned int EBO;
-	unsigned int FBO;
 public:
-	Model() = default;
+	AABB aabb;
+
+	Model() {}
 	~Model();
 
 	RenderInfo getRenderInfo();
-	void addMesh(Mesh& mesh, int dimensions);
 	void reset();
+	void addMesh(Mesh& mesh, int dimensions);
 };
 
 #endif

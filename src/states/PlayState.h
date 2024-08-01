@@ -7,10 +7,10 @@
 
 class PlayState : public BaseState {
 	World* world;
-	Player player;
-	Camera camera;
+	Player* player;
+	Camera* camera;
 public:
-	PlayState(Renderer* renderer, Player& player, Camera& camera);
+	PlayState(Renderer* renderer, Player* player, Camera* camera);
 	~PlayState();
 
 	void handleInput() override;

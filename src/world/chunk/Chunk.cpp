@@ -10,6 +10,7 @@ Chunk::Chunk(World* world, glm::vec2 pos)
 	}
 	
 	makeAABB();
+	meshes.setAABB(aabb);
 }
 
 void Chunk::makeAABB() {
@@ -50,6 +51,7 @@ void Chunk::makeMesh(Camera& camera) {
 void Chunk::bufferMesh() {
 	if (!hasBuffered()) {
 		meshes.createBuffers();
+
 		bHasBuffered = true;
 	}
 }

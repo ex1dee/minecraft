@@ -13,6 +13,7 @@ void Model::addMesh(Mesh &mesh, int dimensions) {
 
 	addVBO(dimensions, mesh.vertexPositions);
 	addVBO(2, mesh.textureCoords);
+	addVBO(dimensions, mesh.normals);
 	addEBO(mesh.indices);
 }
 
@@ -63,7 +64,6 @@ void Model::reset() {
 		glDeleteBuffers(buffers.size(), buffers.data());
 
 	glDeleteBuffers(1, &EBO);
-	glDeleteFramebuffers(1, &FBO);
 
 	EBO = 0;
 	buffers.clear();

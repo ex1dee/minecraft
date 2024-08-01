@@ -42,10 +42,6 @@ void Events::cursorPosCallback(GLFWwindow* window, double xpos, double ypos) {
 	cursorPos.delta = cursorPos.current - cursorPos.last;
 }
 
-void Events::framebufferSizeCallback(GLFWwindow* window, int width, int height) {
-	glViewport(0, 0, width, height);
-}
-
 CursorPos Events::getCursorPos() {
 	return cursorPos;
 }

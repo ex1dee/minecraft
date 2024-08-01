@@ -18,7 +18,7 @@ SkyboxRenderer::~SkyboxRenderer() {
 	delete texture;
 }
 
-void SkyboxRenderer::render(Camera& camera, const glm::vec3& lightDir) {
+void SkyboxRenderer::render(Camera& camera, DirectLight* sunLight) {
 	glDisable(GL_CULL_FACE);
 	glDepthMask(GL_FALSE);
     
@@ -26,10 +26,8 @@ void SkyboxRenderer::render(Camera& camera, const glm::vec3& lightDir) {
 
     TextureManager::bindTexture(*texture, *skyboxShader, "background", 0);
 
-    skyboxShader->setMat4("view", glm::mat4(glm::mat3(camera.getView())));
-    skyboxShader->setMat4("projection", camera.getProjection());
-    skyboxShader->setVec3("cameraPos", camera.transform->position);
-    skyboxShader->setVec3("lightDir", lightDir);
+    skyboxShader->setMat4("projView", camera.getSkyboxProjView());
+    skyboxShader->setVec3("lightDir", sunLight->direction);
 	
     Renderer::drawElements(model.getRenderInfo());
 

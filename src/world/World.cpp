@@ -2,6 +2,7 @@
 
 #include "../config/Config.h"
 #include "../utils/random/Random.h"
+#include "../render/Sun.h"
 
 World::World(TerrainGenerator* terrainGen, Player &player, Camera& camera)
 	: terrainGen(terrainGen) {
@@ -45,13 +46,13 @@ void World::setSpawnPoint(Player& player) {
 	}
 
 	glm::vec3 spawnPos = chunk->toWorldPosition(blockPos) + glm::vec3(0, 1, 0);
-	player.transform->position = spawnPos;
+	player.transform.position = spawnPos;
 	spawnPoint = spawnPos;
 }
 
 void World::loadChunks(Player& player, Camera& camera) {
 	while (isRunning) {
-		glm::vec2 playerPos = getChunkPosition(player.transform->position);
+		glm::vec2 playerPos = getChunkPosition(player.transform.position);
 		int loadDist = Config::settings["world"]["loadDistance"] - 1;
 
 		for (int i = 0; i <= loadDist; ++i) {
@@ -66,7 +67,7 @@ void World::loadChunks(Player& player, Camera& camera) {
 }
 
 void World::render(Renderer& renderer, Camera& camera) {
-	glm::vec2 cameraPos = getChunkPosition(camera.transform->position);
+	glm::vec2 cameraPos = getChunkPosition(camera.transform.position);
 	int loadDist = Config::settings["world"]["loadDistance"] - 1;
 
 	for (std::pair<glm::vec2, Chunk*> pair : chunkManager->chunks) {
@@ -79,10 +80,8 @@ void World::render(Renderer& renderer, Camera& camera) {
 		float maxZ = cameraPos.y + loadDist;
 
 		if (chunkPos.x >= minX && chunkPos.x <= maxX && chunkPos.y >= minZ && chunkPos.y <= maxZ) {
-			if (camera.isAABBInFrustum(chunk->getAABB())) {
-				if (chunk->hasMesh())
-					chunk->render(renderer);
-			}
+			if (chunk->hasMesh())
+				chunk->render(renderer);
 		}
 	}
 }
@@ -90,7 +89,7 @@ void World::render(Renderer& renderer, Camera& camera) {
 void World::update(Renderer& renderer, Player& player, Camera& camera) {
 	updateChunks(camera);
 
-	renderer.setTime(glfwGetTime() * 10);
+	Sun::setTime(glfwGetTime(), player);
 }
 
 void World::updateChunks(Camera& camera) {

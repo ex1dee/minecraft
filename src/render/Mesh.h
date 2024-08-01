@@ -10,6 +10,7 @@ struct Mesh {
 public:
 	std::vector<float> vertexPositions;
 	std::vector<float> textureCoords;
+	std::vector<float> normals;
 	std::vector<unsigned int> indices;
 
 	MeshType type;
@@ -18,11 +19,8 @@ public:
 	Mesh(MeshType type)
 		: type(type) {}
 
-	void reset() {
-		vertexPositions.clear();
-		textureCoords.clear();
-		indices.clear();
-	}
+	void calcNormals();
+	void reset();
 };
 
 #endif

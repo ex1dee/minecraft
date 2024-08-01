@@ -7,6 +7,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#include "../math/Orientation.h"
 #include "../math/Frustum.h"
 #include "Player.h"
 
@@ -14,8 +15,10 @@
 #define CAMERA_FAR 100.0f
 
 class Camera {
+	Orientation orientation;
 	glm::mat4 view;
 	glm::mat4 projView;
+	glm::mat4 skyboxProjView;
 	glm::mat4 projection;
 	Frustum frustum;
 	float aspect;
@@ -30,16 +33,19 @@ class Camera {
 	void updateView();
 	void updateProjection();
 public:
-	Transform* transform;
+	Transform transform;
 
 	Camera();
 	~Camera();
 
 	void update();
-	void hookPlayer(Player& player);
+	void hookPlayer(Player* player);
 	bool isAABBInFrustum(AABB& aabb);
-	glm::mat4& getView();
-	glm::mat4& getProjection();
+
+	glm::mat4& getView() { return view; }
+	glm::mat4& getProjView() { return projView; }
+	glm::mat4& getProjection() { return projection; }
+	glm::mat4& getSkyboxProjView() { return skyboxProjView; }
 };
 
 #endif

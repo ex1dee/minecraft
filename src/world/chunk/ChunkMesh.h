@@ -16,10 +16,11 @@ public:
 	ChunkMesh() {}
 	~ChunkMesh();
 
-	void addBlockFace(const std::array<float, 12>& face, 
-					  std::array<float, 8>& texCoords, 
-					  glm::vec2 localChunkPosition,
-					  glm::vec3 localBlockPosition);
+	void addBlockFace(const std::array<float, 12>& vertices, 
+		const std::array<float, 8>& texCoords, 
+		const glm::vec3& normal,
+		const glm::vec2& localChunkPosition,
+		const glm::vec3& localBlockPosition);
 	void createBuffers();
 
 	Model& getModel() { return model; }
@@ -42,6 +43,11 @@ struct ChunkMeshCollection {
 	void createBuffers() {
 		solid->createBuffers();
 		water->createBuffers();
+	}
+
+	void setAABB(const AABB& aabb) {
+		solid->getModel().aabb = aabb;
+		water->getModel().aabb = aabb;
 	}
 };
 

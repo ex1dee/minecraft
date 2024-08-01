@@ -140,9 +140,12 @@
   <ItemGroup>
     <ClCompile Include="src\math\Frustum.cpp" />
     <ClCompile Include="src\player\Player.cpp" />
+    <ClCompile Include="src\render\Mesh.cpp" />
     <ClCompile Include="src\render\SkyboxRenderer.cpp" />
+    <ClCompile Include="src\render\Sun.cpp" />
     <ClCompile Include="src\states\PlayState.cpp" />
     <ClCompile Include="src\render\ChunkRenderer.cpp" />
+    <ClCompile Include="src\render\DepthFramebuffer.cpp" />
     <ClCompile Include="src\world\chunk\Chunk.cpp" />
     <ClCompile Include="src\textures\CubeTexture.cpp" />
     <ClCompile Include="src\textures\BasicTexture.cpp" />
@@ -170,14 +173,24 @@
   <ItemGroup>
     <ClInclude Include="src\entity\Entity.h" />
     <ClInclude Include="src\math\Frustum.h" />
+    <ClInclude Include="src\math\Orientation.h" />
     <ClInclude Include="src\math\Plane.h" />
     <ClInclude Include="src\math\AABB.h" />
     <ClInclude Include="src\math\Transform.h" />
+    <ClInclude Include="src\physics\collider\BoxCollider.h" />
+    <ClInclude Include="src\physics\collider\Collider.h" />
+    <ClInclude Include="src\physics\GameObject.h" />
+    <ClInclude Include="src\physics\PhysicsEngine.h" />
+    <ClInclude Include="src\physics\RigidBody.h" />
     <ClInclude Include="src\player\Player.h" />
+    <ClInclude Include="src\render\light\DirectLight.h" />
+    <ClInclude Include="src\render\light\Light.h" />
     <ClInclude Include="src\render\SkyboxRenderer.h" />
+    <ClInclude Include="src\render\Sun.h" />
     <ClInclude Include="src\states\PlayState.h" />
     <ClInclude Include="src\render\ChunkRenderer.h" />
     <ClInclude Include="src\states\BaseState.h" />
+    <ClInclude Include="src\render\DepthFramebuffer.h" />
     <ClInclude Include="src\utils\random\BaseRandomGenerator.h" />
     <ClInclude Include="src\utils\random\Random.h" />
     <ClInclude Include="src\utils\random\RandomGenerator.h" />
@@ -223,13 +236,14 @@
   <ItemGroup>
     <None Include="config\config.json" />
     <None Include="config\settings.json" />
-    <None Include="packages.config" />
     <None Include="resources\blocks\air.json" />
     <None Include="resources\blocks\dirt.json" />
     <None Include="resources\blocks\grass.json" />
     <None Include="resources\blocks\stone.json" />
     <None Include="shaders\default.fs" />
     <None Include="shaders\default.vs" />
+    <None Include="shaders\framebuffer.fs" />
+    <None Include="shaders\framebuffer.vs" />
     <None Include="shaders\skybox.fs" />
     <None Include="shaders\skybox.vs" />
   </ItemGroup>
@@ -240,18 +254,17 @@
     <Image Include="resources\textures\skybox\front.bmp" />
     <Image Include="resources\textures\skybox\left.bmp" />
     <Image Include="resources\textures\skybox\right.bmp" />
+    <Image Include="resources\textures\skybox\stars.jpg" />
     <Image Include="resources\textures\skybox\top.bmp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\fluid.yaml-cpp.1.0.10\build\fluid.yaml-cpp.targets" Condition="Exists('..\packages\fluid.yaml-cpp.1.0.10\build\fluid.yaml-cpp.targets')" />
-    <Import Project="..\packages\glfw.3.4.0\build\native\glfw.targets" Condition="Exists('..\packages\glfw.3.4.0\build\native\glfw.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\fluid.yaml-cpp.1.0.10\build\fluid.yaml-cpp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\fluid.yaml-cpp.1.0.10\build\fluid.yaml-cpp.targets'))" />
-    <Error Condition="!Exists('..\packages\glfw.3.4.0\build\native\glfw.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glfw.3.4.0\build\native\glfw.targets'))" />
   </Target>
 </Project>

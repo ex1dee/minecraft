@@ -5,26 +5,16 @@
 #include "../config/Config.h"
 
 Camera::Camera() {
-	transform = new Transform;
-
 	pitch = 0;
 	yaw = -90;
 }
 
 Camera::~Camera() {
-	delete transform;
+	
 }
 
-void Camera::hookPlayer(Player& player) {
-	this->player = &player;
-}
-
-glm::mat4& Camera::getView() {
-	return view;
-}
-
-glm::mat4& Camera::getProjection() {
-	return projection;
+void Camera::hookPlayer(Player* player) {
+	this->player = player;
 }
 
 void Camera::update() {
@@ -37,6 +27,7 @@ void Camera::update() {
 	updateProjection();
 
 	projView = projection * view;
+	skyboxProjView = projection * glm::mat4(glm::mat3(view));
 	frustum.update(projView);
 }
 
@@ -44,9 +35,7 @@ void Camera::updatePosition() {
 	if (player == nullptr)
 		return;
 
-	glm::vec3 playerPos = player->transform->position;
-	
-	transform->position = glm::vec3(playerPos.x, playerPos.y + 1.5, playerPos.z);
+	transform.position = player->transform.position + glm::vec3(0, 1.5, 0);
 }
 
 void Camera::updateOrientation() {
@@ -62,13 +51,13 @@ void Camera::updateOrientation() {
 	if (pitch < -89.0f)
 		pitch = -89.0f;
 
-	transform->update(yaw, pitch);
+	orientation.update(yaw, pitch);
 }
 
 void Camera::updateView() {
 	view = glm::lookAt(
-		transform->position,
-		transform->position + transform->front,
+		transform.position,
+		transform.position + orientation.front,
 		glm::vec3(0, 1, 0)
 	);
 }

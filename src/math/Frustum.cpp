@@ -13,6 +13,9 @@ Frustum::~Frustum() {
 }
 
 bool Frustum::isAABBInFrustum(const AABB& aabb) {
+    if (aabb.min == glm::vec3(0) && aabb.extents == glm::vec3(0))
+        return true;
+
     for (Plane* plane : planes) {
         if (plane->distanceToPoint(aabb.getVP(plane->normal)) < 0) {
             return false;

@@ -2,10 +2,20 @@
 
 #include <glad/glad.h>
 
+#include "../world/WorldConstants.h"
 #include "../world/chunk/Chunk.h"
+#include "../window/Window.h"
+#include "Sun.h"
 
 Renderer::Renderer() {
-	lightDir = glm::vec3(0, -1, 0);
+	FBOShader = new Shader("shaders/framebuffer.vs", "shaders/framebuffer.fs");
+	Sun::initialize(FBOShader);
+}
+
+Renderer::~Renderer() {
+	Sun::finalize();
+
+	delete FBOShader;
 }
 
 void Renderer::renderChunk(Chunk* chunk) {
@@ -13,10 +23,13 @@ void Renderer::renderChunk(Chunk* chunk) {
 }
 
 void Renderer::finishRender(Player& player, Camera& camera) {
+	chunkRenderer.renderLights(Sun::light);
+
+	Window::setWindowViewport();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 
-	skyboxRenderer.render(camera, lightDir);
+	skyboxRenderer.render(camera, Sun::light);
 
 	if (!player.isFlying()) {
 		glEnable(GL_CULL_FACE);
@@ -26,13 +39,7 @@ void Renderer::finishRender(Player& player, Camera& camera) {
 		glDisable(GL_CULL_FACE);
 	}
 
-	chunkRenderer.render(camera, lightDir);
-}
-
-void Renderer::setTime(float time) {
-	time = glm::radians(time);
-	lightDir.x = -sin(time);
-	lightDir.y = -cos(time);
+	chunkRenderer.render(camera, Sun::light);
 }
 
 void Renderer::drawElements(const RenderInfo& rInfo) {

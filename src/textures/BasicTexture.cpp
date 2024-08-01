@@ -30,7 +30,7 @@ void BasicTexture::load(bool flip) {
 		GLenum format = TextureManager::getFormat(image.nchannels);
 
 		if (format) {
-			glTexImage2D(GL_TEXTURE_2D, 0, format, image.width, image.height, 0, format, GL_UNSIGNED_BYTE, NULL);
+			glTexImage2D(GL_TEXTURE_2D, 0, format, image.width, image.height, 0, format, GL_UNSIGNED_BYTE, image.data);
 			
 			glGenerateMipmap(type);
 		} else {

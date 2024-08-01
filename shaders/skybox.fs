@@ -13,7 +13,6 @@
 out vec4 FragColor;
 in vec3 FragPos;
 
-uniform vec3 cameraPos;
 uniform vec3 lightDir;
 uniform samplerCube background;
 
@@ -49,12 +48,13 @@ void main() {
 	float moon_mask = smoothstep(0.8, 1, mulDot_moon) * 10;
 
 	float light_mask = smoothstep(-1, 1, lightDir.y);
-	float horizon_mask = pow(smoothstep(0.40, 0.52, uv.y - 0.03), 2);
-	float horizon_activation = pow(smoothstep(0.25, 0, lightDir.y), 1) * pow(smoothstep(-0.2, 0.15, lightDir.y), 2);
-	float background_mask = max(0, lightDir.y - 0.5);
-	
+	float horizon_mask = pow(smoothstep(0.40, 0.52, uv.y - 0.02), 2);
+	float horizon_activation = pow(smoothstep(0.25, 0, lightDir.y * 0.5), 1) * pow(smoothstep(-0.2, 0.15, lightDir.y * 0.5), 1);
+	float background_mask = max(0, lightDir.y - 0.25);
+
 	vec3 clr = mix(dayColor, nightColor, light_mask);
-	clr = mix(clr, horizonColor, horizon_mask * dot_sun * 2);
+	if (sun_mask < 1)
+		clr = mix(clr, horizonColor, horizon_mask * horizon_activation * dot_sun * 5);
 	clr = mix(clr, sunColor, sun_mask);
 	clr = mix(clr, moonColor, moon_mask);
 
@@ -62,7 +62,7 @@ void main() {
 	if (lightDir.x > 0)
 		sgn = -1;
 
-	float ang_light = sgn * angV3(glm::vec3(0, 1, 0), lightDir);
+	float ang_light = sgn * angV3(vec3(0, 1, 0), lightDir) * 0.5;
 	vec3 rotBackPos = vec3(rotationMatrix(vec3(0, 0, 1), ang_light) * vec4(FragPos, 1));
 
 	if (ang_moon > 0.15)

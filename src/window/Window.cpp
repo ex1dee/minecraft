@@ -63,7 +63,18 @@ void Window::setCallbacks() {
     glfwSetKeyCallback(window, Events::keyCallback);
     glfwSetMouseButtonCallback(window, Events::mouseButtonCallback);
     glfwSetCursorPosCallback(window, Events::cursorPosCallback);
-    glfwSetFramebufferSizeCallback(window, Events::framebufferSizeCallback);
+    glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
+}
+
+void Window::framebufferSizeCallback(GLFWwindow* window, int width, int height) {
+    Window::width = width;
+    Window::height = height;
+
+    Window::setWindowViewport();
+}
+
+void Window::setWindowViewport() {
+    glViewport(0, 0, width, height);
 }
 
 void Window::gladLoad() {
