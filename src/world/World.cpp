@@ -87,7 +87,7 @@ void World::render(Renderer& renderer, Camera& camera) {
 }
 
 void World::update(Renderer& renderer, Player& player, Camera& camera) {
-	updateChunks(camera);
+	//updateChunks(camera);
 
 	Sun::setTime(glfwGetTime(), player);
 }

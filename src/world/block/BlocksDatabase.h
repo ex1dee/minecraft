@@ -3,13 +3,13 @@
 
 #define BLOCKS_DIR "resources/blocks"
 
-#include <map>
+#include <unordered_map>
 
 #include "../../textures/TextureAtlas.h"
 #include "BlockType.h"
 
 class BlocksDatabase {
-	static std::map<int, BlockType*> blocks;
+	static std::unordered_map<int, BlockType*> blocks;
 public:
 	static TextureAtlas textureAtlas;
 	static void initialize();

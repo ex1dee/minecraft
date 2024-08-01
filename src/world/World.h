@@ -8,6 +8,7 @@
 
 #include "generation/terrain/SuperFlatGenerator.h"
 #include "chunk/ChunkManager.h"
+#include "../world/World.h"
 #include "WorldPosition.h"
 
 class World {

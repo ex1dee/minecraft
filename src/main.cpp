@@ -35,7 +35,7 @@ int main() {
 
         return -1;
     }
-
+    
     Camera camera;
     camera.update();
 

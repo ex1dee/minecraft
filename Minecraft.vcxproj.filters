@@ -62,9 +62,6 @@
     <ClCompile Include="src\world\block\BlocksDatabase.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\block\Block.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="src\world\chunk\Chunk.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -107,6 +104,21 @@
     <ClCompile Include="src\render\Sun.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\physics\PhysicsEngine.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Time.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\physics\collision\CollisionDetector.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\physics\collision\CollisionHandler.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\physics\collision\BoxBoxCollision.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\window\Window.h">
@@ -138,13 +150,12 @@
     <ClInclude Include="src\world\block\BlockType.h" />
     <ClInclude Include="src\world\block\BlockID.h" />
     <ClInclude Include="src\render\Mesh.h" />
-    <ClInclude Include="src\render\MeshType.h" />
     <ClInclude Include="src\world\block\Block.h" />
     <ClInclude Include="src\world\chunk\Chunk.h" />
     <ClInclude Include="src\world\chunk\ChunkMesh.h" />
     <ClInclude Include="src\world\WorldConstants.h" />
     <ClInclude Include="src\world\chunk\ChunkMeshBuilder.h" />
-    <ClInclude Include="src\world\block\ShaderType.h" />
+    <ClInclude Include="src\world\block\BlockShaderType.h" />
     <ClInclude Include="src\world\block\BlockFaces.h" />
     <ClInclude Include="src\world\World.h" />
     <ClInclude Include="src\utils\VecMap.h" />
@@ -176,6 +187,13 @@
     <ClInclude Include="src\physics\collider\BoxCollider.h" />
     <ClInclude Include="src\physics\PhysicsEngine.h" />
     <ClInclude Include="src\render\Sun.h" />
+    <ClInclude Include="src\Time.h" />
+    <ClInclude Include="src\physics\collision\BoxBoxCollision.h" />
+    <ClInclude Include="src\physics\collision\CollisionHandler.h" />
+    <ClInclude Include="src\physics\collision\Collision.h" />
+    <ClInclude Include="src\physics\collision\CollisionDetector.h" />
+    <ClInclude Include="src\world\block\BlockColliders.h" />
+    <ClInclude Include="src\world\block\BlockColliderType.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />

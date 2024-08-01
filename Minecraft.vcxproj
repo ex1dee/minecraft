@@ -139,6 +139,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\math\Frustum.cpp" />
+    <ClCompile Include="src\physics\collision\BoxBoxCollision.cpp" />
+    <ClCompile Include="src\physics\collision\CollisionDetector.cpp" />
+    <ClCompile Include="src\physics\collision\CollisionHandler.cpp" />
+    <ClCompile Include="src\physics\PhysicsEngine.cpp" />
     <ClCompile Include="src\player\Player.cpp" />
     <ClCompile Include="src\render\Mesh.cpp" />
     <ClCompile Include="src\render\SkyboxRenderer.cpp" />
@@ -146,6 +150,7 @@
     <ClCompile Include="src\states\PlayState.cpp" />
     <ClCompile Include="src\render\ChunkRenderer.cpp" />
     <ClCompile Include="src\render\DepthFramebuffer.cpp" />
+    <ClCompile Include="src\Time.cpp" />
     <ClCompile Include="src\world\chunk\Chunk.cpp" />
     <ClCompile Include="src\textures\CubeTexture.cpp" />
     <ClCompile Include="src\textures\BasicTexture.cpp" />
@@ -162,7 +167,6 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\window\Window.cpp" />
     <ClCompile Include="src\textures\TextureAtlas.cpp" />
-    <ClCompile Include="src\world\block\Block.cpp" />
     <ClCompile Include="src\world\block\BlocksDatabase.cpp" />
     <ClCompile Include="src\world\chunk\ChunkManager.cpp" />
     <ClCompile Include="src\world\chunk\ChunkMesh.cpp" />
@@ -179,6 +183,10 @@
     <ClInclude Include="src\math\Transform.h" />
     <ClInclude Include="src\physics\collider\BoxCollider.h" />
     <ClInclude Include="src\physics\collider\Collider.h" />
+    <ClInclude Include="src\physics\collision\BoxBoxCollision.h" />
+    <ClInclude Include="src\physics\collision\CollisionDetector.h" />
+    <ClInclude Include="src\physics\collision\CollisionHandler.h" />
+    <ClInclude Include="src\physics\collision\Collision.h" />
     <ClInclude Include="src\physics\GameObject.h" />
     <ClInclude Include="src\physics\PhysicsEngine.h" />
     <ClInclude Include="src\physics\RigidBody.h" />
@@ -191,12 +199,15 @@
     <ClInclude Include="src\render\ChunkRenderer.h" />
     <ClInclude Include="src\states\BaseState.h" />
     <ClInclude Include="src\render\DepthFramebuffer.h" />
+    <ClInclude Include="src\Time.h" />
     <ClInclude Include="src\utils\random\BaseRandomGenerator.h" />
     <ClInclude Include="src\utils\random\Random.h" />
     <ClInclude Include="src\utils\random\RandomGenerator.h" />
     <ClInclude Include="src\utils\VecMap.h" />
+    <ClInclude Include="src\world\block\BlockColliders.h" />
+    <ClInclude Include="src\world\block\BlockColliderType.h" />
     <ClInclude Include="src\world\block\BlockFaces.h" />
-    <ClInclude Include="src\world\block\ShaderType.h" />
+    <ClInclude Include="src\world\block\BlockShaderType.h" />
     <ClInclude Include="src\world\chunk\Chunk.h" />
     <ClInclude Include="src\world\block\Block.h" />
     <ClInclude Include="src\world\block\BlockType.h" />
@@ -221,7 +232,6 @@
     <ClInclude Include="src\window\Window.h" />
     <ClInclude Include="src\textures\TextureAtlas.h" />
     <ClInclude Include="src\world\block\BlockID.h" />
-    <ClInclude Include="src\render\MeshType.h" />
     <ClInclude Include="src\world\block\BlocksDatabase.h" />
     <ClInclude Include="src\world\chunk\ChunkManager.h" />
     <ClInclude Include="src\world\chunk\ChunkMesh.h" />

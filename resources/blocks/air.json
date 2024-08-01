@@ -2,7 +2,9 @@
     "id": 0,
     "meshType": 0,
     "shaderType": 0,
+    "colliderType": 0,
     "opaque": false,
+    "solid": false,
 
     "texCoords": {
         "side": {

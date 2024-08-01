@@ -1,19 +1,13 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "../math/Transform.h"
+#include "../physics/GameObject.h"
 
-class Entity {
-protected:
-
+class Entity : public GameObject {
 public:
-	Transform* transform;
-
-	Entity() {
-		transform = new Transform();
-	}
-	~Entity() {
-		delete transform;
+	Entity() 
+		: GameObject(true, false, 1.0f) {
+		rigidBody.addForce(GRAVITY);
 	}
 };
 

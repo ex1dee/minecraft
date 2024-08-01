@@ -2,7 +2,7 @@
 
 #include "../../utils/Json.h"
 
-std::map<int, BlockType*> BlocksDatabase::blocks;
+std::unordered_map<int, BlockType*> BlocksDatabase::blocks;
 TextureAtlas BlocksDatabase::textureAtlas;
 
 void BlocksDatabase::initialize() {
@@ -15,9 +15,11 @@ void BlocksDatabase::initialize() {
 		type->texBottomCoords = glm::vec2(json["texCoords"]["bottom"]["x"], json["texCoords"]["bottom"]["y"]);
 		type->texSideCoords = glm::vec2(json["texCoords"]["side"]["x"], json["texCoords"]["side"]["y"]);
 		type->texTopCoords = glm::vec2(json["texCoords"]["top"]["x"], json["texCoords"]["top"]["y"]);
+		type->colliders = BlockColliders::get(json["colliderType"]);
 		type->shaderType = json["shaderType"];
 		type->meshType = json["meshType"];
 		type->isOpaque = json["opaque"];
+		type->isSolid = json["solid"];
 		type->id = json["id"];
 
 		blocks.emplace(type->id, type);
