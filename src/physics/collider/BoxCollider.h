@@ -33,11 +33,6 @@ public:
 
 	BoxCollider(const glm::vec3& extents, const Transform& transform = Transform())
 		: Collider(BOX, transform) {
-		
-		update(extents);
-	}
-
-	void update(const glm::vec3& extents) {
 		this->extents = extents;
 
 		calcVertices();

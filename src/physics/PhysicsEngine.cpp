@@ -1,6 +1,7 @@
 #include "PhysicsEngine.h"
 
 #include "collision/CollisionDetector.h"
+#include "../player/Player.h"
 #include "../Time.h"
 #include "GameObject.h"
 
@@ -11,17 +12,19 @@ void PhysicsEngine::initialize(World* world) {
 	PhysicsEngine::world = world;
 }
 
-void PhysicsEngine::finalize() { }
+void PhysicsEngine::finalize() { 
 
-void PhysicsEngine::updatePerTick() {
-	update(true);
 }
 
-void PhysicsEngine::updatePerFrame() {
-	update(false);
+void PhysicsEngine::updatePerTick(Player& player) {
+	update(player, true);
 }
 
-void PhysicsEngine::update(bool updatePerTick) {
+void PhysicsEngine::updatePerFrame(Player& player) {
+	update(player, false);
+}
+
+void PhysicsEngine::update(Player& player, bool updatePerTick) {
 	cullObjects();
 
 	for (GameObject* object : objects) {
@@ -51,7 +54,7 @@ void PhysicsEngine::prepare(GameObject* object) {
 
 	rb->acceleration = rb->force / rb->mass;
 	rb->newVelocity = rb->velocity + rb->acceleration * dt;
-	rb->newPosition = object->transform.position + rb->newVelocity * dt;
+	rb->deltaPosition = rb->newVelocity * dt;
 }
 
 void PhysicsEngine::updatePosition(GameObject* object) {
@@ -59,7 +62,7 @@ void PhysicsEngine::updatePosition(GameObject* object) {
 	float dt = getDeltaTime(object);
 
 	rb->velocity = rb->newVelocity;
-	object->transform.position += rb->velocity * dt;
+	object->transform.position += rb->deltaPosition;
 }
 
 float PhysicsEngine::getDeltaTime(GameObject* object) {

@@ -45,8 +45,8 @@ void World::setSpawnPoint(Player& player) {
 		blockPos.y = chunk->getHeightAt(blockPos);
 	}
 
-	glm::vec3 spawnPos = chunk->toWorldPosition(blockPos) + glm::vec3(0, 1, 0);
-	player.transform.position = spawnPos;
+	glm::vec3 spawnPos = chunk->toWorldPosition(blockPos) + glm::vec3(0, 5, 0);
+	player.transform.position = glm::vec3(5);
 	spawnPoint = spawnPos;
 }
 
@@ -89,7 +89,7 @@ void World::render(Renderer& renderer, Camera& camera) {
 void World::update(Renderer& renderer, Player& player, Camera& camera) {
 	//updateChunks(camera);
 
-	Sun::setTime(glfwGetTime(), player);
+	Sun::setTime(glfwGetTime() * 30);
 }
 
 void World::updateChunks(Camera& camera) {
@@ -123,6 +123,11 @@ Block& World::getHighestBlockAt(const glm::vec3& pos) {
 	return worldPos.chunk->getHighestBlockAt(worldPos.localBlockPos);
 }
 
+Chunk* World::getChunk(const glm::vec3& pos) {
+	WorldPosition worldPos = getWorldPosition(pos);
+	return worldPos.chunk;
+}
+
 Block& World::getBlock(const glm::vec3& pos) {
 	WorldPosition worldPos = getWorldPosition(pos);
 	return worldPos.chunk->getBlock(worldPos.localBlockPos);
@@ -130,14 +135,13 @@ Block& World::getBlock(const glm::vec3& pos) {
 
 void World::setBlock(const glm::vec3& pos, Block block) {
 	WorldPosition worldPos = getWorldPosition(pos);
-
 	return worldPos.chunk->setBlock(worldPos.localBlockPos, block);
 }
 
 WorldPosition World::getWorldPosition(const glm::vec3& pos) {
 	glm::vec2 chunkPos = getChunkPosition(pos);
 	glm::vec3 locBlockPos = getLocalBlockPosition(pos);
-
+	
 	WorldPosition worldPos;
 	worldPos.localBlockPos = locBlockPos;
 	worldPos.chunk = chunkManager->getChunk(chunkPos);

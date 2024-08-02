@@ -10,7 +10,7 @@ public:
 		std::vector<BoxCollider*> colliders;
 
 		if (type == FULL_SIZE) {
-			colliders.push_back(new BoxCollider(glm::vec3(1)));
+			colliders.push_back(new BoxCollider(glm::vec3(1, 1, 1)));
 		}
 
 		return colliders;

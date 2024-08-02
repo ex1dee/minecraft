@@ -3,6 +3,7 @@
 #include "../window/Window.h"
 #include "../window/Events.h"
 #include "../config/Config.h"
+#include "Player.h"
 
 Camera::Camera() {
 	pitch = 0;

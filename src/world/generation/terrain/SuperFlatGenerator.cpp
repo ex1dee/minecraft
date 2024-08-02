@@ -15,9 +15,10 @@ void SuperFlatGenerator::generateTerrain(Chunk* chunk) {
 			chunk->setBlock(glm::vec3(x, 3, z), Block(DIRT));
 			chunk->setBlock(glm::vec3(x, 4, z), Block(GRASS_BLOCK));
 
-			//if (gen.generateFloat() > 0.95) {
-			//	chunk->setBlock(glm::vec3(x, 7, z), Block(GRASS_BLOCK));
-			//}
+			if (gen.generateFloat() > 0.98) {
+				chunk->setBlock(glm::vec3(x, 6, z), Block(STONE));
+				chunk->setBlock(glm::vec3(x, 5, z), Block(STONE));
+			}
 		}
 	}
 }

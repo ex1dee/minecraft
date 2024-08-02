@@ -27,6 +27,7 @@ public:
 	~World();
 
 	int getHeightAt(const glm::vec3& pos);
+	Chunk* getChunk(const glm::vec3& pos);
 	Block& getBlock(const glm::vec3& pos);
 	Block& getHighestBlockAt(const glm::vec3& pos);
 	void loadChunks(Player& player, Camera& camera);

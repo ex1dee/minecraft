@@ -8,6 +8,10 @@
 class CollisionDetector {
 	static void detect(GameObject* obj1, GameObject* obj2);
 	static void detect(GameObject* obj, BoxCollider* box);
+
+	static void applyTransforms(std::vector<GameObject*>& objects);
+	static void detectO2O(std::vector<GameObject*>& objects);
+	static void detectO2B(std::vector<GameObject*>& objects, World* world);
 public:
 	static void detect(std::vector<GameObject*>& objects, World* world);
 };

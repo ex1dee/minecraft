@@ -1,9 +1,11 @@
 #include "BoxBoxCollision.h"
 #include <iostream>
 void BoxBoxCollision::detect(GameObject* obj1, GameObject* obj2) {
+	BoxCollider* box1 = (BoxCollider*)obj1->collider;
 	BoxCollider* box2 = (BoxCollider*)obj2->collider;
 
-	detect(obj1, box2);
+	Collision collision = detect(box1, box2);
+	CollisionHandler::handle(collision, obj1, obj2);
 }
 
 void BoxBoxCollision::detect(GameObject* obj1, BoxCollider* box2) {
@@ -19,7 +21,7 @@ Collision BoxBoxCollision::detect(BoxCollider* box1, BoxCollider* box2) {
 
 	glm::vec3 minDepthAxis(0);
 	float minDepth = FLT_MAX;
-
+	
 	for (glm::vec3& sepAxis : sepAxes) {
 		glm::vec2 section1 = projAxis(box1->globalVertices, sepAxis);
 		glm::vec2 section2 = projAxis(box2->globalVertices, sepAxis);
@@ -34,10 +36,10 @@ Collision BoxBoxCollision::detect(BoxCollider* box1, BoxCollider* box2) {
 		std::sort(std::begin(points), std::end(points));
 
 		float sum = section1[PROJECTION_MAX_INDEX] - section1[PROJECTION_MIN_INDEX]
-			+ section2[PROJECTION_MAX_INDEX] - section2[PROJECTION_MIN_INDEX];
+			   	  + section2[PROJECTION_MAX_INDEX] - section2[PROJECTION_MIN_INDEX];
 		float len = std::abs(points[3] - points[0]);
 
-		if (sum <= len) {
+		if (sum < len) {
 			collision.collided = false;
 
 			return collision;
@@ -54,7 +56,10 @@ Collision BoxBoxCollision::detect(BoxCollider* box1, BoxCollider* box2) {
 
 	collision.collided = true;
 	collision.depth = minDepth;
-	collision.normal = minDepthAxis;
+
+	glm::vec3 diff = box2->globalVertices[0] - box1->globalVertices[0];
+	float normSign = -glm::sign(glm::dot(diff, minDepthAxis));
+	collision.normal = normSign * minDepthAxis;
 
 	return collision;
 }

@@ -25,6 +25,11 @@ public:
 		aabb.min = transform.position;
 	}
 
+	void applyTransform() {
+		collider->applyTransform(transform);
+		aabb.min = transform.position;
+	}
+
 	~GameObject() {
 		delete collider;
 	}

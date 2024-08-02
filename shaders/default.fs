@@ -62,7 +62,7 @@ float calcSunLight() {
 }
 
 vec3 calcDirectLight(DirectLight light, vec3 normal) {
-	float diff = max(0, dot(normal, -light.direction));
+	float diff = max(0.5, dot(normal, -light.direction));
 	vec3 diffuse = diff * light.color;
 
 	return diffuse;

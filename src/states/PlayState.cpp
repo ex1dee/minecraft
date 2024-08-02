@@ -1,5 +1,6 @@
 #include "PlayState.h"
 
+#include "../player/input/MovementsHandler.h"
 #include "../physics/PhysicsEngine.h"
 #include "../Time.h"
 
@@ -19,7 +20,7 @@ PlayState::~PlayState() {
 }
 
 void PlayState::handleInput() {
-	
+	MovementsHandler::handle(player);
 }
 
 void PlayState::update() {
@@ -28,9 +29,9 @@ void PlayState::update() {
 	if (Time::needUpdate()) {
 		world->update(*renderer, *player, *camera);
 
-		PhysicsEngine::updatePerTick();
+		PhysicsEngine::updatePerTick(*player);
 	} else {
-		PhysicsEngine::updatePerFrame();
+		PhysicsEngine::updatePerFrame(*player);
 	}
 }
 

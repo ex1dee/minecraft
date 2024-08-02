@@ -5,7 +5,7 @@
 
 #include "../math/Transform.h"
 
-const glm::vec3 GRAVITY = glm::vec3(0.0f, -9.8f, 0.0f);
+const glm::vec3 GRAVITY = glm::vec3(0.0f, -15.0f, 0.0f);
 
 class RigidBody {
 public:
@@ -13,8 +13,8 @@ public:
 	glm::vec3 acceleration = glm::vec3(0);
 	glm::vec3 velocity = glm::vec3(0);
 
-	glm::vec3 newPosition = glm::vec3(0);
 	glm::vec3 newVelocity = glm::vec3(0);
+	glm::vec3 deltaPosition = glm::vec3(0);
 
 	bool updateEveryTick;
 	bool physics;
@@ -22,6 +22,14 @@ public:
 
 	RigidBody(bool physics, bool updateEveryTick, float mass)
 		: physics(physics), updateEveryTick(updateEveryTick), mass(mass) { }
+
+	void addVelocity(const glm::vec3& velocity) {
+		this->velocity += velocity;
+	}
+
+	void addGravity() {
+		addForce(GRAVITY);
+	}
 
 	void addForce(const glm::vec3& acceleration) {
 		force += mass * acceleration;

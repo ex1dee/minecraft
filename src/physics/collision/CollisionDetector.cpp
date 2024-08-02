@@ -1,13 +1,21 @@
 #include "CollisionDetector.h"
 
 void CollisionDetector::detect(std::vector<GameObject*>& objects, World* world) {
+	applyTransforms(objects);
+	detectO2O(objects);
+	detectO2B(objects, world);
+}
+
+void CollisionDetector::applyTransforms(std::vector<GameObject*>& objects) {
 	for (GameObject* obj : objects) {
 		Transform transform = obj->transform;
-		transform.position = obj->rigidBody.newPosition;
-		
+		transform.position = obj->transform.position + obj->rigidBody.deltaPosition;
+
 		obj->applyTransform(obj->transform);
 	}
-	
+}
+
+void CollisionDetector::detectO2O(std::vector<GameObject*>& objects) {
 	for (int i = 0; i < objects.size(); ++i) {
 		for (int j = i + 1; j < objects.size(); ++j) {
 			GameObject* obj1 = objects[i];
@@ -18,21 +26,29 @@ void CollisionDetector::detect(std::vector<GameObject*>& objects, World* world) 
 			}
 		}
 	}
-	
+}
+
+void CollisionDetector::detectO2B(std::vector<GameObject*>& objects, World* world) {
 	for (GameObject* obj : objects) {
-		glm::vec3 position = obj->transform.position;
+		glm::vec3 position = obj->transform.position + obj->rigidBody.deltaPosition;;
+		glm::vec3 chunkPos = glm::vec3(position.x, 0, position.z);
+
+		if (!world->getChunk(chunkPos)->isLoaded())
+			return;
 
 		for (float x = -1; x <= obj->aabb.extents.x + 1; ++x) {
 			for (float y = -1; y <= obj->aabb.extents.y + 1; ++y) {
 				for (float z = -1; z <= obj->aabb.extents.z + 1; ++z) {
 					glm::vec3 blockPosition = position + glm::vec3(x, y, z);
+					blockPosition = glm::vec3(floor(blockPosition.x), floor(blockPosition.y), floor(blockPosition.z));
+					Transform blockTrans = Transform(blockPosition);
+
 					Block block = world->getBlock(blockPosition);
 
 					if (block.type->isSolid) {
 						for (BoxCollider* blockCollider : block.type->colliders) {
-							Transform blockTrans = Transform(blockPosition);
 							blockCollider->applyTransform(blockTrans);
-							
+
 							detect(obj, blockCollider);
 						}
 					}

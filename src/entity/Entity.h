@@ -7,7 +7,7 @@ class Entity : public GameObject {
 public:
 	Entity() 
 		: GameObject(true, false, 1.0f) {
-		rigidBody.addForce(GRAVITY);
+		rigidBody.addGravity();
 	}
 };
 

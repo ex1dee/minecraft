@@ -42,6 +42,7 @@ public:
 	void hookPlayer(Player* player);
 	bool isAABBInFrustum(AABB& aabb);
 
+	const Orientation& getOrientation() { return orientation; }
 	glm::mat4& getView() { return view; }
 	glm::mat4& getProjView() { return projView; }
 	glm::mat4& getProjection() { return projection; }

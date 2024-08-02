@@ -73,12 +73,12 @@ void Chunk::load(TerrainGenerator& terrainGen) {
 }
 
 Block& Chunk::getBlock(const glm::vec3& pos) {
-	if (pos.y < 0) {
+	if (pos.y < 0 || ceil(pos.y) >= CHUNK_H) {
 		Block block(AIR);
-		
+
 		return block;
 	}
-	
+
 	if (outOfBounds(pos)) {
 		glm::vec3 worldPos = toWorldPosition(pos);
 
@@ -89,7 +89,7 @@ Block& Chunk::getBlock(const glm::vec3& pos) {
 }
 
 void Chunk::setBlock(const glm::vec3& pos, Block block) {
-	if (pos.y < 0)
+	if (pos.y < 0 || ceil(pos.y) >= CHUNK_H)
 		return;
 
 	if (outOfBounds(pos)) {
@@ -146,8 +146,8 @@ glm::vec3 Chunk::getLocalBlockPosition(int index) {
 }
 
 bool Chunk::outOfBounds(const glm::vec3& pos) {
-	return pos.x >= CHUNK_W || pos.y >= CHUNK_H || pos.z >= CHUNK_D
-		|| pos.x < 0 || pos.y < 0 || pos.z < 0;
+	return pos.x >= CHUNK_W || pos.z >= CHUNK_D
+		|| pos.x < 0 || pos.z < 0;
 }
 
 int Chunk::toBlockIndex(const glm::vec3& pos) {

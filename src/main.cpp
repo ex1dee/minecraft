@@ -40,7 +40,7 @@ int main() {
     camera.update();
 
     Renderer renderer;
-    Player player;
+    Player player(&camera);
 
     std::vector<BaseState*> states;
     states.push_back(new PlayState(&renderer, &player, &camera));

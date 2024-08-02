@@ -1,5 +1,8 @@
 #include "CollisionHandler.h"
+
+#include "../collider/BoxCollider.h"
 #include <iostream>
+
 void CollisionHandler::handle(const Collision& collision, GameObject* obj1, GameObject* obj2) {
 	if (!collision.collided)
 		return;
@@ -14,9 +17,18 @@ void CollisionHandler::handle(const Collision& collision, GameObject* obj) {
 
 	RigidBody* rb = &obj->rigidBody;
 
-	glm::vec3 velocity = rb->newVelocity;
-	float velLen = glm::length(velocity);
-	float dot = glm::dot(collision.normal, glm::normalize(velocity));
+	glm::vec3 deltaPos = rb->deltaPosition;
+	glm::vec3 normal = collision.normal;
+	float dot = glm::dot(normal, glm::normalize(deltaPos));
+	float dpLen = glm::length(deltaPos);
 
-	rb->newVelocity += collision.normal * -dot * velLen;
+	if (dpLen == 0 || dot >= 0)
+		return;
+
+	rb->deltaPosition += normal * (-dot * dpLen + collision.depth);
+
+	if (collision.normal.y == 1) {
+		float velLen = glm::length(rb->newVelocity);
+		rb->newVelocity += normal * (-dot * velLen + collision.depth);
+	}
 }
