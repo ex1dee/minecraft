@@ -27,7 +27,6 @@ int main() {
     try {
         Config::initialize();
         Window::initialize();
-        Events::initialize();
         BlocksDatabase::initialize();
     } catch (const char* message) {
         std::cout << "ERROR::INITIALIZE\n" << message << "\n";
@@ -53,8 +52,6 @@ int main() {
             state->update();
             state->render();
         }
-
-        renderer.finishRender(player, camera);
 
         Window::swapBuffers();
         Events::pollEvents();

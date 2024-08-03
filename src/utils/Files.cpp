@@ -7,36 +7,37 @@
 
 std::string Files::read(const char* path) {
 	std::string data;
-	std::ifstream file;
+	std::fstream file;
 	std::stringstream stream;
 
-	file.exceptions(std::ifstream::badbit | std::ifstream::failbit);
 	file.open(path);
 	stream << file.rdbuf();
-	file.close();
+	close(file);
 
 	return stream.str();
 }
 
-void Files::write(const char* path, std::string data) {
+void Files::write(const char* path, const std::string& data) {
 	std::fstream file;
 
-	file.exceptions(std::ifstream::badbit | std::ifstream::failbit);
-	file.open(path, std::ios::out);
+	open(file, path);
 	file << data;
-	file.close();
+	close(file);
 }
 
-bool Files::exists(const char* path) {
-	std::fstream file(path);
+void Files::open(std::fstream& file, const char* path) {
+	file.exceptions(std::ifstream::badbit | std::ifstream::failbit);
+	file.open(path, std::ios::out);
+}
 
-	return file.good();
+void Files::close(std::fstream& file) {
+	file.close();
 }
 
 std::vector<std::string> Files::getFolderFiles(const char* dirPath) {
 	std::vector<std::string> files;
 
-	if (std::filesystem::exists(dirPath) && std::filesystem::is_directory(dirPath)) {
+	if (isDirectory(dirPath)) {
 		for (const auto& entry : std::filesystem::directory_iterator(dirPath)) {
 			files.push_back(entry.path().string());
 		}
@@ -45,4 +46,12 @@ std::vector<std::string> Files::getFolderFiles(const char* dirPath) {
 	}
 	
 	return files;
+}
+
+bool Files::isDirectory(const char* path) {
+	return std::filesystem::is_directory(path);
+}
+
+bool Files::exists(const char* path) {
+	return std::filesystem::exists(path);
 }

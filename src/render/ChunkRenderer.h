@@ -4,8 +4,9 @@
 #include <vector>
 
 #include "../world/chunk/ChunkMesh.h"
-#include "../player/Camera.h"
 #include "../shaders/Shader.h"
+#include "../player/Camera.h"
+#include "../world/Sun.h"
 #include "light/DirectLight.h"
 
 class ChunkRenderer {
@@ -13,16 +14,16 @@ class ChunkRenderer {
 	std::vector<ChunkMesh*> waterMeshes;
 	Shader* defShader;
 
-	void updateSolidShader(Camera& camera);
-	void renderLights(std::vector<ChunkMesh*>& meshes);
-	void render(Camera& camera, std::vector<ChunkMesh*>& meshes);
+	void updateSolidShader(Camera* camera, const Sun& sun);
+	void renderLights(std::vector<ChunkMesh*>& meshes, const Sun& sun);
+	void render(std::vector<ChunkMesh*>& meshes, Camera* camera = nullptr, bool onlyVisible = false);
 public:
 	ChunkRenderer();
 	~ChunkRenderer();
 
-	void renderLights();
-	void render(Camera& camera);
-	void add(ChunkMeshCollection& chunk);
+	void renderLights(const Sun& sun);
+	void render(Camera* camera, const Sun& sun);
+	void add(const ChunkMeshCollection& chunk);
 };
 
 #endif

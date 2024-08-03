@@ -5,6 +5,7 @@
 #include "../textures/CubeTexture.h"
 #include "../shaders/Shader.h"
 #include "../player/Camera.h"
+#include "../world/Sun.h"
 #include "light/DirectLight.h"
 #include "Model.h"
 
@@ -19,7 +20,7 @@ public:
 	SkyboxRenderer();
 	~SkyboxRenderer();
 
-	void render(Camera& camera);
+	void render(Camera* camera, const Sun& sun);
 };
 
 #endif

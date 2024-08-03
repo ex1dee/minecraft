@@ -3,7 +3,8 @@
 
 #include <glm/glm.hpp>
 
-struct Orientation {
+class Orientation {
+public:
 	glm::vec3 front;
 	glm::vec3 right;
 	glm::vec3 up;
@@ -26,6 +27,14 @@ struct Orientation {
 			right = glm::normalize(glm::cross(this->front, glm::vec3(0, 1, 0)));
 			up = glm::normalize(glm::cross(right, this->front));
 		}
+	}
+
+	glm::vec3 getMovingFront() const {
+		return glm::normalize(glm::vec3(front.x, 0, front.z));
+	}
+
+	glm::vec3 getMovingRight() const {
+		return glm::normalize(glm::vec3(right.x, 0, right.z));
 	}
 };
 

@@ -11,6 +11,8 @@
 #include "../math/Frustum.h"
 #include "Player.h"
 
+#define CAMERA_OFFSET glm::vec3(0, 1.5f, 0)
+#define CAMERA_MAX_PITCH 89.0f
 #define CAMERA_NEAR 0.1f
 #define CAMERA_FAR 100.0f
 
@@ -26,6 +28,7 @@ class Camera {
 	float yaw;
 	float pitch;
 	Player* player;
+	Transform transform;
 
 	void updateFrustum();
 	void updatePosition();
@@ -33,14 +36,11 @@ class Camera {
 	void updateView();
 	void updateProjection();
 public:
-	Transform transform;
-
 	Camera();
-	~Camera();
 
 	void update();
 	void hookPlayer(Player* player);
-	bool isAABBInFrustum(AABB& aabb);
+	bool isAABBInFrustum(const AABB& aabb);
 
 	const Orientation& getOrientation() { return orientation; }
 	glm::mat4& getView() { return view; }

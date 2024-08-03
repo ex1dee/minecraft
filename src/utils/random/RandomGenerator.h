@@ -3,6 +3,8 @@
 
 #include "BaseRandomGenerator.h"
 
+#define SEED_CONSTANT 1812433253U
+
 class RandomGenerator : public BaseRandomGenerator { // XORshift
 public:
     RandomGenerator(const uint32_t& seed = time(0)) {
@@ -34,4 +36,4 @@ private:
     uint32_t x, y, z, w;
 };
 
-#endif // RANDOMGENERATOR_H
+#endif

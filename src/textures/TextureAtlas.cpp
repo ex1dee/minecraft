@@ -9,7 +9,7 @@ std::array<float, 8> TextureAtlas::getTexture(glm::vec2 coords) {
 	float xMin = coords.x * indvTextureSize.x;
 	float xMax = xMin + indvTextureSize.x;
 	
-	float yMin = coords.y * indvTextureSize.y + 0.001f;
+	float yMin = coords.y * indvTextureSize.y;
 	float yMax = yMin + indvTextureSize.y;
 
 	return {

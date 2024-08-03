@@ -10,10 +10,6 @@ Camera::Camera() {
 	yaw = -90;
 }
 
-Camera::~Camera() {
-	
-}
-
 void Camera::hookPlayer(Player* player) {
 	this->player = player;
 }
@@ -36,21 +32,20 @@ void Camera::updatePosition() {
 	if (player == nullptr)
 		return;
 
-	transform.position = player->transform.position + glm::vec3(0, 1.5, 0);
+	transform.position = player->transform.position + CAMERA_OFFSET;
 }
 
 void Camera::updateOrientation() {
 	CursorPos curPos = Events::getCursorPos();
 	curPos.delta *= Config::settings["camera"]["sensitivity"];
-	curPos.delta.y *= -1;
 
 	yaw += curPos.delta.x;
-	pitch += curPos.delta.y;
+	pitch -= curPos.delta.y;
 
-	if (pitch > 89.0f)
-		pitch = 89.0f;
-	if (pitch < -89.0f)
-		pitch = -89.0f;
+	if (pitch > CAMERA_MAX_PITCH)
+		pitch = CAMERA_MAX_PITCH;
+	if (pitch < -CAMERA_MAX_PITCH)
+		pitch = -CAMERA_MAX_PITCH;
 
 	orientation.update(yaw, pitch);
 }
@@ -72,6 +67,6 @@ void Camera::updateProjection() {
 	);
 }
 
-bool Camera::isAABBInFrustum(AABB& aabb) {
+bool Camera::isAABBInFrustum(const AABB& aabb) {
 	return frustum.isAABBInFrustum(aabb);
 }

@@ -26,7 +26,7 @@ void ChunkManager::makeMesh(const glm::vec2& pos, Camera& camera) {
 Chunk* ChunkManager::load(const glm::vec2& pos) {
 	Chunk* chunk = getChunk(pos);
 	chunk->load(world->getTerrainGenerator());
-	
+		
 	return chunk;
 }
 

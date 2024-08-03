@@ -5,12 +5,10 @@
 
 class DirectLight : public Light {
 public:
-	glm::vec3 direction;
+	glm::vec3 direction = glm::vec3(0, -1, 0);
 
 	DirectLight(Shader* FBOShader, const glm::vec3& color, const DFBConfig& DFBconfig = DEFAULT_DFB)
 		: Light(FBOShader, color, DFBconfig) {
-		direction = glm::vec3(0, -1, 0);
-	
 		framebuffers[0] = new DepthFramebuffer(FBOShader, DFBconfig);
 	}
 

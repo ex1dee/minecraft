@@ -3,7 +3,6 @@
 #include "../textures/TextureManager.h"
 #include "../world/WorldConstants.h"
 #include "Renderer.h"
-#include "Sun.h"
 
 SkyboxRenderer::SkyboxRenderer() {
 	skyboxShader = new Shader("shaders/skybox.vs", "shaders/skybox.fs");
@@ -19,7 +18,7 @@ SkyboxRenderer::~SkyboxRenderer() {
 	delete texture;
 }
 
-void SkyboxRenderer::render(Camera& camera) {
+void SkyboxRenderer::render(Camera* camera, const Sun& sun) {
 	glDisable(GL_CULL_FACE);
 	glDepthMask(GL_FALSE);
     
@@ -27,8 +26,8 @@ void SkyboxRenderer::render(Camera& camera) {
 
     TextureManager::bindTexture(*texture, *skyboxShader, "background", 0);
 
-    skyboxShader->setMat4("projView", camera.getSkyboxProjView());
-    skyboxShader->setVec3("lightDir", Sun::light->direction);
+    skyboxShader->setMat4("projView", camera->getSkyboxProjView());
+    skyboxShader->setVec3("lightDir", sun.getLight().direction);
 	
     Renderer::drawElements(model.getRenderInfo());
 

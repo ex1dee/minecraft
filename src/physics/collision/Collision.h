@@ -4,8 +4,8 @@
 #include <glm/glm.hpp>
 
 struct Collision {
-	bool collided;
 	glm::vec3 normal;
+	bool collided;
 	float depth;
 };
 

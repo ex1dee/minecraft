@@ -7,10 +7,6 @@ Button Events::keys[1024] = {};
 Button Events::mouse[12] = {};
 uint64_t Events::frame = 0;
 
-void Events::initialize() {
-	
-}
-
 void Events::pollEvents() {
 	cursorPos.delta = glm::vec2(0);
 	frame++;
@@ -40,10 +36,6 @@ void Events::cursorPosCallback(GLFWwindow* window, double xpos, double ypos) {
 	cursorPos.last = cursorPos.current;
 	cursorPos.current = glm::vec2(xpos, ypos);
 	cursorPos.delta = cursorPos.current - cursorPos.last;
-}
-
-CursorPos Events::getCursorPos() {
-	return cursorPos;
 }
 
 bool Events::pressed(int key) {

@@ -8,7 +8,7 @@ class BasicTexture : public Texture {
 
 	void load(bool flip);
 public:
-	BasicTexture() = default;
+	BasicTexture() {}
 	BasicTexture(const char* path, bool flip);
 };
 

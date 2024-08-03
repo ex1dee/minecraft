@@ -17,18 +17,15 @@ void Chunk::makeAABB() {
 	glm::vec3 wp1 = getWorldPosition(glm::vec3(0, 0, 0));
 	glm::vec3 wp2 = getWorldPosition(glm::vec3(CHUNK_W, CHUNK_H, CHUNK_D));
 
-	if (wp1.x < wp2.x)
-		aabb = AABB(wp1, wp2);
-	else
-		aabb = AABB(wp2, wp1);
-}
-
-int Chunk::getHeightAt(const glm::vec3& pos) {
-	return highestBlocks[glm::vec2(pos.x, pos.z)];
+	aabb = AABB(wp1, wp2);
 }
 
 Block& Chunk::getHighestBlockAt(const glm::vec3& pos) {
 	return getBlock(glm::vec3(pos.x, getHeightAt(pos), pos.z));
+}
+
+int Chunk::getHeightAt(const glm::vec3& pos) {
+	return highestBlocks[glm::vec2(pos.x, pos.z)];
 }
 
 void Chunk::render(Renderer& renderer) {
@@ -103,6 +100,19 @@ void Chunk::setBlock(const glm::vec3& pos, Block block) {
 	blocks[toBlockIndex(pos)] = block;
 }
 
+bool Chunk::outOfBounds(const glm::vec3& pos) {
+	return pos.x >= CHUNK_W || pos.z >= CHUNK_D
+		|| pos.x < 0 || pos.z < 0;
+}
+
+glm::vec3 Chunk::getWorldPosition(const glm::vec3& blockPos) {
+	return glm::vec3(
+		position.x * CHUNK_W + blockPos.x,
+		blockPos.y,
+		position.y * CHUNK_D + blockPos.z
+	);
+}
+
 void Chunk::updateHighestBlock(const glm::vec3& pos, Block& block) {
 	glm::vec2 posXZ = glm::vec2(pos.x, pos.z);
 	float y = pos.y;
@@ -127,14 +137,6 @@ void Chunk::updateHighestBlock(const glm::vec3& pos, Block& block) {
 	}
 }
 
-glm::vec3 Chunk::getWorldPosition(const glm::vec3& blockPos) {
-	return glm::vec3(
-		position.x * CHUNK_W + blockPos.x,
-		blockPos.y,
-		position.y * CHUNK_D + blockPos.z
-	);
-}
-
 glm::vec3 Chunk::getLocalBlockPosition(int index) {
 	glm::vec3 pos;
 
@@ -143,11 +145,6 @@ glm::vec3 Chunk::getLocalBlockPosition(int index) {
 	pos.z = (index / CHUNK_D) % CHUNK_D;
 	
 	return pos;
-}
-
-bool Chunk::outOfBounds(const glm::vec3& pos) {
-	return pos.x >= CHUNK_W || pos.z >= CHUNK_D
-		|| pos.x < 0 || pos.z < 0;
 }
 
 int Chunk::toBlockIndex(const glm::vec3& pos) {

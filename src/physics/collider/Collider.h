@@ -21,12 +21,12 @@ public:
 		scale = transform.scale;
 	}
 
-	virtual void applyTransform(Transform& transform) = 0;
-
 	ColliderType getType() { return type; }
 	glm::vec3 getPosition() { return position; }
 	glm::vec3 getRotation() { return rotation; }
 	glm::vec3 getScale() { return rotation; }
+
+	virtual void applyTransform(Transform& transform) = 0;
 };
 
 enum ColliderType {

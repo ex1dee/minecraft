@@ -66,6 +66,12 @@ void Window::setCallbacks() {
     glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
 }
 
+void Window::gladLoad() {
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+        throw "Failed to initialize GLAD";
+    }
+}
+
 void Window::framebufferSizeCallback(GLFWwindow* window, int width, int height) {
     Window::width = width;
     Window::height = height;
@@ -75,10 +81,4 @@ void Window::framebufferSizeCallback(GLFWwindow* window, int width, int height) 
 
 void Window::setWindowViewport() {
     glViewport(0, 0, width, height);
-}
-
-void Window::gladLoad() {
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-        throw "Failed to initialize GLAD";
-    }
 }

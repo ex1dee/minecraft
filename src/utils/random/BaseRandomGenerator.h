@@ -5,8 +5,6 @@
 #include <cstdint>
 #include <time.h>
 
-#define SEED_CONSTANT 1812433253U
-
 class BaseRandomGenerator {
 public:
     BaseRandomGenerator() {}

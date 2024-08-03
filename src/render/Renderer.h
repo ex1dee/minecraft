@@ -13,12 +13,9 @@ class Renderer {
 	SkyboxRenderer skyboxRenderer;
 	Shader* FBOShader;
 public:
-	Renderer();
-	~Renderer();
-
 	void setTime(float time, Player& player);
 	void renderChunk(Chunk* chunk);
-	void finishRender(Player& player, Camera& camera);
+	void finishRender(Player& player, Camera* camera, World& world);
 
 	static void drawElements(const RenderInfo& rInfo);
 };

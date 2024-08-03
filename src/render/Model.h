@@ -23,8 +23,8 @@ public:
 	~Model();
 
 	RenderInfo getRenderInfo();
-	void reset();
 	void addMesh(Mesh& mesh, int dimensions);
+	void reset();
 };
 
 #endif

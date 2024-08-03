@@ -6,7 +6,9 @@
 #include "AABB.h"
 #include "Plane.h"
 
-struct Frustum {
+class Frustum {
+	void normalizePlanes();
+public:
 	std::array<Plane*, 6> planes;
 
 	Frustum();

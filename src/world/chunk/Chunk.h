@@ -31,13 +31,13 @@ public:
 	bool hasBuffered() { return bHasBuffered; }
 	Block& firstBlock() { return blocks[0]; }
 	ChunkMeshCollection& getMeshes() { return meshes; }
-	glm::vec2& getLocalPosition() { return position; }
+	glm::vec2 getLocalPosition() { return position; }
 	AABB& getAABB() { return aabb; }
 
 	glm::vec3 getWorldPosition(const glm::vec3& blockPos);
-	int getHeightAt(const glm::vec3& pos);
 	Block& getBlock(const glm::vec3& pos);
 	Block& getHighestBlockAt(const glm::vec3& pos);
+	int getHeightAt(const glm::vec3& pos);
 	bool outOfBounds(const glm::vec3& pos);
 	void bufferMesh();
 	void resetMeshes();

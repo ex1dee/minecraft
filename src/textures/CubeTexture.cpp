@@ -6,9 +6,9 @@
 #include "Image.h"
 #include "TextureManager.h"
 
-CubeTexture::CubeTexture(std::array<const char*, 6>& filePaths, bool flip) {
+CubeTexture::CubeTexture(std::array<const char*, 6>& filePaths, bool flip)
+	: Texture(GL_TEXTURE_CUBE_MAP) {
 	this->filePaths = filePaths;
-	this->type = GL_TEXTURE_CUBE_MAP;
 	
 	load(flip);
 }

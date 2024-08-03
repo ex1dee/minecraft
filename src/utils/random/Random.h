@@ -3,11 +3,9 @@
 
 #include "RandomGenerator.h"
 
-inline float rangedRand(RandomGenerator& randGen, float min, float max) { // min <= x <= max
+inline float rangedRand(RandomGenerator& randGen, float min, float max) {
     if (max < min) {
-        float t = min;
-        min = max;
-        max = t;
+        std::swap(min, max);
     } else if (max == min) {
         return min;
     }
@@ -15,16 +13,14 @@ inline float rangedRand(RandomGenerator& randGen, float min, float max) { // min
     return randGen.generateFloat() * (max - min) + min;
 }
 
-inline int rangedRand(RandomGenerator& randGen, int min, int max) { // min <= x <= max
+inline int rangedRand(RandomGenerator& randGen, int min, int max) {
     if (max < min) {
-        int t = min;
-        min = max;
-        max = t;
+        std::swap(min, max);
     } else if (max == min) {
         return min;
     }
 
-    return randGen.generateUInt() % (max - min + 1) + min;
+    return randGen.generateUInt() % (max - min) + min;
 }
 
 #endif

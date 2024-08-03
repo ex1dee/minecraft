@@ -11,7 +11,7 @@ struct BlockFaces {
 	glm::vec3 front;
 	glm::vec3 back;
 
-	BlockFaces(glm::vec3& pos) {
+	BlockFaces(const glm::vec3& pos) {
 		top = glm::vec3(pos.x, pos.y + 1, pos.z);
 		bottom = glm::vec3(pos.x, pos.y - 1, pos.z);
 		right = glm::vec3(pos.x + 1, pos.y, pos.z);

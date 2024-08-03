@@ -62,6 +62,10 @@ void Frustum::update(const glm::mat4& pv) {
     planes[Planes::Far]->normal.z = pv[2][3] - pv[2][2];
     planes[Planes::Far]->distance = pv[3][3] - pv[3][2];
 
+    normalizePlanes();
+}
+
+void Frustum::normalizePlanes() {
     for (Plane* plane : planes) {
         float length = glm::length(plane->normal);
 

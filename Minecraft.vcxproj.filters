@@ -101,7 +101,7 @@
     <ClCompile Include="src\render\Mesh.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\render\Sun.cpp">
+    <ClCompile Include="src\world\Sun.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\physics\PhysicsEngine.cpp">
@@ -189,7 +189,7 @@
     <ClInclude Include="src\physics\RigidBody.h" />
     <ClInclude Include="src\physics\collider\BoxCollider.h" />
     <ClInclude Include="src\physics\PhysicsEngine.h" />
-    <ClInclude Include="src\render\Sun.h" />
+    <ClInclude Include="src\world\Sun.h" />
     <ClInclude Include="src\Time.h" />
     <ClInclude Include="src\physics\collision\BoxBoxCollision.h" />
     <ClInclude Include="src\physics\collision\CollisionHandler.h" />

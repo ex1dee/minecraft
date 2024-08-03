@@ -1,7 +1,6 @@
 #include "CollisionHandler.h"
 
 #include "../collider/BoxCollider.h"
-#include <iostream>
 
 void CollisionHandler::handle(const Collision& collision, GameObject* obj1, GameObject* obj2) {
 	if (!collision.collided)
@@ -29,6 +28,10 @@ void CollisionHandler::handle(const Collision& collision, GameObject* obj) {
 
 	if (collision.normal.y == 1) {
 		float velLen = glm::length(rb->newVelocity);
-		rb->newVelocity += normal * (-dot * velLen + collision.depth);
+
+		if (velLen == 0)
+			return;
+
+		rb->newVelocity += normal * (-dot * glm::length(rb->newVelocity) + collision.depth);
 	}
 }

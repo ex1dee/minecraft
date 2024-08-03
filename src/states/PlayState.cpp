@@ -36,5 +36,7 @@ void PlayState::update() {
 }
 
 void PlayState::render() {
-	world->render(*renderer, *camera);
+	world->render(*renderer, *player);
+
+	renderer->finishRender(*player, camera, *world);
 }

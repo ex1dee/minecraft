@@ -4,32 +4,17 @@
 
 #include "../world/WorldConstants.h"
 #include "../world/chunk/Chunk.h"
+#include "../world/World.h"
 #include "../window/Window.h"
-#include "Sun.h"
 
-Renderer::Renderer() {
-	FBOShader = new Shader("shaders/framebuffer.vs", "shaders/framebuffer.fs");
-	Sun::initialize(FBOShader);
-}
-
-Renderer::~Renderer() {
-	Sun::finalize();
-
-	delete FBOShader;
-}
-
-void Renderer::renderChunk(Chunk* chunk) {
-	chunkRenderer.add(chunk->getMeshes());
-}
-
-void Renderer::finishRender(Player& player, Camera& camera) {
-	chunkRenderer.renderLights();
+void Renderer::finishRender(Player& player, Camera* camera, World& world) {
+	chunkRenderer.renderLights(world.getSun());
 
 	Window::setWindowViewport();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 
-	skyboxRenderer.render(camera);
+	skyboxRenderer.render(camera, world.getSun());
 
 	if (!player.isFlying()) {
 		glEnable(GL_CULL_FACE);
@@ -39,7 +24,11 @@ void Renderer::finishRender(Player& player, Camera& camera) {
 		glDisable(GL_CULL_FACE);
 	}
 
-	chunkRenderer.render(camera);
+	chunkRenderer.render(camera, world.getSun());
+}
+
+void Renderer::renderChunk(Chunk* chunk) {
+	chunkRenderer.add(chunk->getMeshes());
 }
 
 void Renderer::drawElements(const RenderInfo& rInfo) {

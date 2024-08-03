@@ -19,7 +19,6 @@ public:
 	Mesh(MeshType type)
 		: type(type) {}
 
-	void calcNormals();
 	void reset();
 };
 

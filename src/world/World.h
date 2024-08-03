@@ -8,8 +8,10 @@
 
 #include "generation/terrain/SuperFlatGenerator.h"
 #include "chunk/ChunkManager.h"
+#include "../shaders/Shader.h"
 #include "../world/World.h"
 #include "WorldPosition.h"
+#include "Sun.h"
 
 class World {
 	ChunkManager* chunkManager;
@@ -19,28 +21,37 @@ class World {
 	glm::vec3 spawnPoint;
 	unsigned int seed;
 
+	Shader* FBOShader;
+	Sun* sun;
+
 	std::atomic<bool> isRunning;
 	std::mutex mainMutex;
+	std::mutex configMutex;
+
+	void makeSun();
+	void loadChunks(Player& player, Camera& camera);
+	void updateDefaultSpawnPoint(Player& player);
+	void addLoadChunksThread(Player& player, Camera& camera);
 public:
 	World() {}
 	World(TerrainGenerator* terrainGen, Player& player, Camera& camera);
 	~World();
 
+	Sun& getSun() const { return *sun; }
+	TerrainGenerator& getTerrainGenerator() { return *terrainGen; }
+
 	int getHeightAt(const glm::vec3& pos);
 	Chunk* getChunk(const glm::vec3& pos);
 	Block& getBlock(const glm::vec3& pos);
 	Block& getHighestBlockAt(const glm::vec3& pos);
-	void loadChunks(Player& player, Camera& camera);
 	void updateChunks(Camera& camera);
 	void updateChunk(const glm::vec3& pos);
-	void setSpawnPoint(Player& player);
-	void render(Renderer& renderer, Camera& camera);
+	void render(Renderer& renderer, Player& player);
 	void setBlock(const glm::vec3& pos, Block block);
 	void update(Renderer& renderer, Player& player, Camera& camera);
-	TerrainGenerator& getTerrainGenerator();
 	WorldPosition getWorldPosition(const glm::vec3& pos);
 	glm::vec3 getLocalBlockPosition(const glm::vec3& pos);
-	glm::vec2 getChunkPosition(const glm::vec3& pos);
+	glm::vec2 getLocalChunkPosition(const glm::vec3& pos);
 };
 
 #endif

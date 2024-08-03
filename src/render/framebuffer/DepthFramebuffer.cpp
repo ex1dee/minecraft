@@ -17,21 +17,21 @@ void DepthFramebuffer::genFBO() {
 }
 
 void DepthFramebuffer::createProjection() {
-	if (config.is_ortho)
+	if (config.isOrtho)
 		projection = glm::ortho(
-			-config.ortho_size, 
-			config.ortho_size, 
-			-config.ortho_size, 
-			config.ortho_size, 
-			config.ortho_near,
-			config.ortho_far
+			-config.orthoSize, 
+			config.orthoSize, 
+			-config.orthoSize, 
+			config.orthoSize, 
+			config.orthoNear,
+			config.orthoFar
 		);
 	else
 		projection = glm::perspective(
 			glm::radians(90.0f),
 			1.0f,
-			config.perspective_near,
-			config.perspective_far
+			config.perspectiveNear,
+			config.perspectiveFar
 		);
 }
 
@@ -47,7 +47,7 @@ void DepthFramebuffer::createDepthMap() {
 	float borderColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, borderColor);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, config.buffer_size, config.buffer_size, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, config.bufferSize, config.bufferSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
 
 	glBindFramebuffer(GL_FRAMEBUFFER, FBO);
 	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
@@ -63,7 +63,7 @@ void DepthFramebuffer::startRender(const glm::vec3& front, const glm::vec3& posi
 	shader->setMat4("projView", projView);
 	
 	glBindFramebuffer(GL_FRAMEBUFFER, FBO);
-	glViewport(0, 0, config.buffer_size, config.buffer_size);
+	glViewport(0, 0, config.bufferSize, config.bufferSize);
 	glClear(GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_CULL_FACE);
@@ -77,6 +77,12 @@ void DepthFramebuffer::finishRender() {
 	glClear(GL_DEPTH_BUFFER_BIT);
 }
 
+void DepthFramebuffer::updateProjView(const glm::vec3& front, const glm::vec3& position) {
+	updateView(front, position);
+
+	projView = projection * view;
+}
+
 void DepthFramebuffer::updateView(const glm::vec3& front, const glm::vec3& position) {
 	Orientation orientation;
 	orientation.update(front);
@@ -86,10 +92,4 @@ void DepthFramebuffer::updateView(const glm::vec3& front, const glm::vec3& posit
 		position + front,
 		orientation.up
 	);
-}
-
-void DepthFramebuffer::updateProjView(const glm::vec3& front, const glm::vec3& position) {
-	updateView(front, position);
-
-	projView = projection * view;
 }

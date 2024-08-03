@@ -27,26 +27,24 @@ void ChunkMeshBuilder::build() {
 
 	for (int i = 0; i < CHUNK_VOL; ++i) {
 		Block block = *(curBlock++);
+		BlockType* blockType = block.type;
 
-		if (block.type->id == AIR)
+		if (blockType->id == AIR)
 			continue;
 
 		setActiveMesh(block);
 
-		glm::vec3 pos = Chunk::getLocalBlockPosition(i);
-
-		BlockType blockType = *block.type;
-		BlockFaces blockFaces(pos);
+		glm::vec3 blockPos = Chunk::getLocalBlockPosition(i);
+		BlockFaces blockFaces(blockPos);
 		
-		if (pos.y >= 0)
-			tryAddFace(bottomFace, blockType.texBottomCoords, bottomFaceNormal, pos, blockFaces.bottom, blockType);
-		tryAddFace(topFace, blockType.texTopCoords, topFaceNormal, pos, blockFaces.top, blockType);
+		tryAddFace(bottomFace, blockType->texBottomCoords, bottomFaceNormal, blockPos, blockFaces.bottom, *blockType);
+		tryAddFace(topFace, blockType->texTopCoords, topFaceNormal, blockPos, blockFaces.top, *blockType);
 
-		tryAddFace(rightFace, blockType.texSideCoords, rightFaceNormal, pos, blockFaces.right, blockType);
-		tryAddFace(leftFace, blockType.texSideCoords, leftFaceNormal, pos, blockFaces.left, blockType);
+		tryAddFace(rightFace, blockType->texSideCoords, rightFaceNormal, blockPos, blockFaces.right, *blockType);
+		tryAddFace(leftFace, blockType->texSideCoords, leftFaceNormal, blockPos, blockFaces.left, *blockType);
 
-		tryAddFace(frontFace, blockType.texSideCoords, frontFaceNormal, pos, blockFaces.front, blockType);
-		tryAddFace(backFace, blockType.texSideCoords, backFaceNormal, pos, blockFaces.back, blockType);
+		tryAddFace(frontFace, blockType->texSideCoords, frontFaceNormal, blockPos, blockFaces.front, *blockType);
+		tryAddFace(backFace, blockType->texSideCoords, backFaceNormal, blockPos, blockFaces.back, *blockType);
 	}
 }
 
@@ -64,6 +62,9 @@ void ChunkMeshBuilder::tryAddFace(const std::array<float, 12>& vertices,
 	const glm::vec3& adjacentDir,
 	const BlockType& blockType) {
 	
+	if (localBlockPosition.y < 0)
+		return;
+
 	if (shouldAddFace(adjacentDir, blockType)) {
 		std::array<float, 8> fTexCoords = BlocksDatabase::textureAtlas.getTexture(texCoords);
 
@@ -72,13 +73,10 @@ void ChunkMeshBuilder::tryAddFace(const std::array<float, 12>& vertices,
 }
 
 bool ChunkMeshBuilder::shouldAddFace(glm::vec3 adjacentDir, BlockType blockType) {
-	BlockType adjBlockType = *chunk->getBlock(adjacentDir).type;
-	
-	if (adjBlockType.id == BlockID::AIR) {
-		return true;
-	}
-	
-	if (!adjBlockType.isOpaque && blockType.id != adjBlockType.id) {
+	BlockType* adjBlockType = chunk->getBlock(adjacentDir).type;
+
+	if (adjBlockType->id == BlockID::AIR 
+		|| (!adjBlockType->isOpaque && blockType.id != adjBlockType->id)) {
 		return true;
 	}
 

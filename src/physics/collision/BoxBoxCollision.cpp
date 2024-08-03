@@ -1,5 +1,5 @@
 #include "BoxBoxCollision.h"
-#include <iostream>
+
 void BoxBoxCollision::detect(GameObject* obj1, GameObject* obj2) {
 	BoxCollider* box1 = (BoxCollider*)obj1->collider;
 	BoxCollider* box2 = (BoxCollider*)obj2->collider;
@@ -17,11 +17,11 @@ void BoxBoxCollision::detect(GameObject* obj1, BoxCollider* box2) {
 
 Collision BoxBoxCollision::detect(BoxCollider* box1, BoxCollider* box2) {
 	Collision collision;
-	std::vector<glm::vec3> sepAxes = calcBoxSepAxes(box1, box2);
-
 	glm::vec3 minDepthAxis(0);
 	float minDepth = FLT_MAX;
 	
+	std::vector<glm::vec3> sepAxes = calcBoxSepAxes(box1, box2);
+
 	for (glm::vec3& sepAxis : sepAxes) {
 		glm::vec2 section1 = projAxis(box1->globalVertices, sepAxis);
 		glm::vec2 section2 = projAxis(box2->globalVertices, sepAxis);

@@ -6,26 +6,22 @@ void MovementsHandler::handle(Player* player) {
 	RigidBody* rb = &player->rigidBody;
 
 	const Orientation orientation = player->getOrientation();
-	glm::vec3 front = glm::normalize(glm::vec3(orientation.front.x, 0, orientation.front.z));
-	glm::vec3 right = glm::normalize(glm::vec3(orientation.right.x, 0, orientation.right.z));
-	bool jumping = player->isJumping();
+	glm::vec3 front = orientation.getMovingFront();
+	glm::vec3 right = orientation.getMovingRight();
 	float speed = calcSpeed(player);
-
-	if (Events::pressed(GLFW_KEY_0)) {
-		if (player->rigidBody.force.y != 0)
-			player->rigidBody.force = glm::vec3(0);
-		else
-			player->rigidBody.addGravity();
-	}
 
 	check(GLFW_KEY_W, rb, front * speed);
 	check(GLFW_KEY_S, rb, -front * speed);
 	check(GLFW_KEY_A, rb, -right * speed * PLAYER_SIDE_COEF);
 	check(GLFW_KEY_D, rb, right * speed * PLAYER_SIDE_COEF);
 
+	checkJumping(player);
+}
+
+void MovementsHandler::checkJumping(Player* player) {
 	if (Events::pressed(GLFW_KEY_SPACE)) {
-		if (!jumping) {
-			rb->addVelocity(glm::vec3(0, 1, 0) * player->getJumpForce());
+		if (!player->isJumping()) {
+			player->rigidBody.addVelocity(glm::vec3(0, 1, 0) * player->getJumpForce());
 		}
 	}
 }
@@ -38,8 +34,7 @@ float MovementsHandler::calcSpeed(Player* player) {
 
 	if (player->bIsSneaking) {
 		speed *= PLAYER_SNEAKING_COEF;
-	}
-	else if (player->bIsSprinting) {
+	} else if (player->bIsSprinting) {
 		speed *= PLAYER_SPRINT_COEF;
 	}
 

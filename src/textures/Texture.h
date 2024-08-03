@@ -8,6 +8,10 @@ protected:
 	unsigned int ID;
 	GLenum type;
 public:
+	Texture() {}
+	Texture(GLenum type)
+		: type(type) {}
+
 	unsigned int getID() {
 		return ID;
 	}

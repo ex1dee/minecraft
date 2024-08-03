@@ -2,27 +2,27 @@
 #define DFBConfig_H
 
 struct DFBConfig {
-	float buffer_size;
-	bool is_ortho;
+	float bufferSize;
+	bool isOrtho;
 
-	float perspective_near;
-	float perspective_far;
+	float perspectiveNear;
+	float perspectiveFar;
 
-	float ortho_near;
-	float ortho_far;
-	float ortho_size;
+	float orthoNear;
+	float orthoFar;
+	float orthoSize;
 
 	DFBConfig() {}
 
-	DFBConfig(float ortho_near, float ortho_far, float ortho_size, float buffer_size)
-		: ortho_near(ortho_near), ortho_far(ortho_far), 
-		  ortho_size(ortho_size), buffer_size(buffer_size) {
-		is_ortho = true;
+	DFBConfig(float orthoNear, float orthoFar, float orthoSize, float bufferSize)
+		: orthoNear(orthoNear), orthoFar(orthoFar), 
+		  orthoSize(orthoSize), bufferSize(bufferSize) {
+		isOrtho = true;
 	}
 
-	DFBConfig(float buffer_size, float perspective_near, float perspective_far)
-		: buffer_size(buffer_size), perspective_near(perspective_near), perspective_far(perspective_far) {
-		is_ortho = false;
+	DFBConfig(float bufferSize, float perspectiveNear, float perspectiveFar)
+		: bufferSize(bufferSize), perspectiveNear(perspectiveNear), perspectiveFar(perspectiveFar) {
+		isOrtho = false;
 	}
 };
 

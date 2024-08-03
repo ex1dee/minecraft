@@ -13,12 +13,10 @@ class PointLight : public Light {
 		{0, -1, 0}
 	};
 public:
-	float radius;
+	float radius = 1.0f;
 
 	PointLight(Shader* FBOShader, const glm::vec3& color, const DFBConfig& DFBconfig = DEFAULT_DFB)
 		: Light(FBOShader, color, DFBconfig) {
-		radius = 1.0f;
-
 		for (int i = 0; i < 6; ++i) {
 			framebuffers[i] = new DepthFramebuffer(FBOShader, DFBconfig);
 		}

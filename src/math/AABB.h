@@ -2,13 +2,20 @@
 #define AABB_H
 
 #include <glm/glm.hpp>
-
-struct AABB {
-	glm::vec3 min;
-	glm::vec3 extents;
+#include <iostream>
+class AABB {
+public:
+	glm::vec3 min = glm::vec3(0);
+	glm::vec3 extents = glm::vec3(1);
 
 	AABB() {}
 	AABB(const glm::vec3& min, const glm::vec3& max) {
+		if (glm::length(min) > glm::length(max)) {
+			AABB(max, min);
+
+			return;
+		}
+
 		this->min = min;
 		this->extents = max - min;
 	}
