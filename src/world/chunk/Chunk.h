@@ -34,7 +34,7 @@ public:
 	glm::vec2& getLocalPosition() { return position; }
 	AABB& getAABB() { return aabb; }
 
-	glm::vec3 toWorldPosition(const glm::vec3& blockPos);
+	glm::vec3 getWorldPosition(const glm::vec3& blockPos);
 	int getHeightAt(const glm::vec3& pos);
 	Block& getBlock(const glm::vec3& pos);
 	Block& getHighestBlockAt(const glm::vec3& pos);

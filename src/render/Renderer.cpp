@@ -23,13 +23,13 @@ void Renderer::renderChunk(Chunk* chunk) {
 }
 
 void Renderer::finishRender(Player& player, Camera& camera) {
-	chunkRenderer.renderLights(Sun::light);
+	chunkRenderer.renderLights();
 
 	Window::setWindowViewport();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 
-	skyboxRenderer.render(camera, Sun::light);
+	skyboxRenderer.render(camera);
 
 	if (!player.isFlying()) {
 		glEnable(GL_CULL_FACE);
@@ -39,7 +39,7 @@ void Renderer::finishRender(Player& player, Camera& camera) {
 		glDisable(GL_CULL_FACE);
 	}
 
-	chunkRenderer.render(camera, Sun::light);
+	chunkRenderer.render(camera);
 }
 
 void Renderer::drawElements(const RenderInfo& rInfo) {

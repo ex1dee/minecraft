@@ -45,8 +45,8 @@ void World::setSpawnPoint(Player& player) {
 		blockPos.y = chunk->getHeightAt(blockPos);
 	}
 
-	glm::vec3 spawnPos = chunk->toWorldPosition(blockPos) + glm::vec3(0, 5, 0);
-	player.transform.position = glm::vec3(5);
+	glm::vec3 spawnPos = chunk->getWorldPosition(blockPos) + glm::vec3(0, 1, 0);
+	player.transform.position = spawnPos;
 	spawnPoint = spawnPos;
 }
 
@@ -89,7 +89,7 @@ void World::render(Renderer& renderer, Camera& camera) {
 void World::update(Renderer& renderer, Player& player, Camera& camera) {
 	//updateChunks(camera);
 
-	Sun::setTime(glfwGetTime() * 30);
+	Sun::setTime(45, player, this);
 }
 
 void World::updateChunks(Camera& camera) {

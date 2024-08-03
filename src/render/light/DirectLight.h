@@ -7,13 +7,21 @@ class DirectLight : public Light {
 public:
 	glm::vec3 direction;
 
-	DirectLight(Shader* FBOShader, const glm::vec3& color)
-		: Light(FBOShader, color) {
+	DirectLight(Shader* FBOShader, const glm::vec3& color, const DFBConfig& DFBconfig = DEFAULT_DFB)
+		: Light(FBOShader, color, DFBconfig) {
 		direction = glm::vec3(0, -1, 0);
+	
+		framebuffers[0] = new DepthFramebuffer(FBOShader, DFBconfig);
 	}
 
-	void startRender() override {
-		framebuffer->startRender(direction, position);
+	DepthFramebuffer& getFramebuffer() { return *framebuffers[0]; }
+
+	void startRender() {
+		getFramebuffer().startRender(direction, position);
+	}
+
+	void finishRender() {
+		getFramebuffer().finishRender();
 	}
 };
 

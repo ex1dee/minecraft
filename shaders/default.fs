@@ -1,14 +1,26 @@
 #version 330 core
 
-#define SUN_INDEX 0
-#define MIN_SUN_LIGHT 0.15
+#define MIN_SUN_LIGHT 0.25
 #define MAX_LIGHTS 16
 #define MIN_SHADOW_BIAS 0.005
-#define MAX_SHADOW_BIAS 0.05
+#define MAX_SHADOW_BIAS 0.0385
+
+#define POINT_LIGHT_CONSTANT 1.0
+#define POINT_LIGHT_LINEAR 1.0
 
 struct LightShadow {
 	mat4 projView;
 	sampler2D depthMap;
+};
+
+struct PointLight {
+	LightShadow shadow;
+	vec3 position;
+	vec3 color;
+
+	float constant;
+	float linear;
+	float quadratic;
 };
 
 struct DirectLight {
@@ -24,22 +36,24 @@ in vec2 TexCoord;
 
 uniform sampler2D tex;
 
-uniform int directLightCount;
-uniform DirectLight directLight[MAX_LIGHTS];
+uniform DirectLight sun;
 
-float calcDirectShadow(DirectLight light) {
-	vec4 lightFragPos = light.shadow.projView * vec4(FragPos, 1);
+uniform int pointLightCount;
+uniform PointLight pointLight[MAX_LIGHTS];
+
+float calcShadow(LightShadow lightShadow, vec3 lightDir) {
+	vec4 lightFragPos = lightShadow.projView * vec4(FragPos, 1);
 	vec3 projCoords = lightFragPos.xyz / lightFragPos.w;
 	projCoords = (projCoords + 1) * 0.5;
 
 	if (projCoords.z > 1)
 		return 1;
 
-	float closestDepth = texture(light.shadow.depthMap, projCoords.xy).r;
+	float closestDepth = texture(lightShadow.depthMap, projCoords.xy).r;
 	float currentDepth = projCoords.z;
 
-	vec2 texelSize = 1 / textureSize(light.shadow.depthMap, 0);
-	float bias = max(MIN_SHADOW_BIAS, MAX_SHADOW_BIAS * (1 - dot(vec3(0, -1, 0), light.direction)));
+	vec2 texelSize = 1 / textureSize(lightShadow.depthMap, 0);
+	float bias = max(MIN_SHADOW_BIAS, MAX_SHADOW_BIAS * (1 - dot(vec3(0, -1, 0), lightDir)));;
 	float shadow = currentDepth - bias > closestDepth ? 0 : 1;
 
 	//for (int x = -1; x <= 1; ++x) {
@@ -55,30 +69,42 @@ float calcDirectShadow(DirectLight light) {
 }
 
 float calcSunLight() {
-	vec3 sunLightDir = directLight[SUN_INDEX].direction;
-	float sunLight = clamp(0.5 - sunLightDir.y, MIN_SUN_LIGHT, 1);
+	float sunLight = clamp(0.15 - sun.direction.y, MIN_SUN_LIGHT, 1);
 
 	return sunLight;
 }
 
-vec3 calcDirectLight(DirectLight light, vec3 normal) {
-	float diff = max(0.5, dot(normal, -light.direction));
-	vec3 diffuse = diff * light.color;
+vec3 calcDiffuse(vec3 lightDir, vec3 lightColor, vec3 normal) {
+	float diff = max(0.6, dot(normal, -lightDir));
+	vec3 diffuse = diff * lightColor;
 
 	return diffuse;
+}
+
+float calcAttenuation(PointLight light, float distance) {
+	 return 1.0 / (light.constant + light.linear * distance + 
+  			       light.quadratic * (distance * distance));
 }
 
 void main() {
 	vec3 normal = normalize(Normal);
 	vec3 result = vec3(0);
 	float shadow = 1;
-	
-	for (int i = 0; i < directLightCount; ++i) {
-		result += calcDirectLight(directLight[i], normal);
-		shadow = min(shadow, calcDirectShadow(directLight[i]));
-	}
 
 	float sunLight = calcSunLight();
+	result += calcDiffuse(sun.direction, sun.color, normal);
+	shadow = min(shadow, calcShadow(sun.shadow, sun.direction));
+
+	for (int i = 0; i < pointLightCount; ++i) {
+		//PointLight light = pointLight[i];
+		//vec3 lightDir = normalize(light.position - FragPos);
+		//float distance = length(light.position - FragPos);
+
+		//result += calcDiffuse(lightDir, light.color, normal);
+		//result *= calcAttenuation(light, distance);
+
+		//shadow = min(shadow, calcShadow(light.shadow, lightDir));
+	}
 
 	vec3 lighting = shadow * result;
 	lighting = max(lighting, MIN_SUN_LIGHT);

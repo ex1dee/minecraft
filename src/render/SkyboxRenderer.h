@@ -19,7 +19,7 @@ public:
 	SkyboxRenderer();
 	~SkyboxRenderer();
 
-	void render(Camera& camera, DirectLight* sunLight);
+	void render(Camera& camera);
 };
 
 #endif

@@ -14,8 +14,8 @@ Chunk::Chunk(World* world, glm::vec2 pos)
 }
 
 void Chunk::makeAABB() {
-	glm::vec3 wp1 = toWorldPosition(glm::vec3(0, 0, 0));
-	glm::vec3 wp2 = toWorldPosition(glm::vec3(CHUNK_W, CHUNK_H, CHUNK_D));
+	glm::vec3 wp1 = getWorldPosition(glm::vec3(0, 0, 0));
+	glm::vec3 wp2 = getWorldPosition(glm::vec3(CHUNK_W, CHUNK_H, CHUNK_D));
 
 	if (wp1.x < wp2.x)
 		aabb = AABB(wp1, wp2);
@@ -80,7 +80,7 @@ Block& Chunk::getBlock(const glm::vec3& pos) {
 	}
 
 	if (outOfBounds(pos)) {
-		glm::vec3 worldPos = toWorldPosition(pos);
+		glm::vec3 worldPos = getWorldPosition(pos);
 
 		return world->getBlock(worldPos);
 	}
@@ -93,7 +93,7 @@ void Chunk::setBlock(const glm::vec3& pos, Block block) {
 		return;
 
 	if (outOfBounds(pos)) {
-		glm::vec3 worldPos = toWorldPosition(pos);
+		glm::vec3 worldPos = getWorldPosition(pos);
 
 		world->setBlock(worldPos, block);
 	}
@@ -127,7 +127,7 @@ void Chunk::updateHighestBlock(const glm::vec3& pos, Block& block) {
 	}
 }
 
-glm::vec3 Chunk::toWorldPosition(const glm::vec3& blockPos) {
+glm::vec3 Chunk::getWorldPosition(const glm::vec3& blockPos) {
 	return glm::vec3(
 		position.x * CHUNK_W + blockPos.x,
 		blockPos.y,

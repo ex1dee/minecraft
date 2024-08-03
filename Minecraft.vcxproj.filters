@@ -95,7 +95,7 @@
     <ClCompile Include="src\render\SkyboxRenderer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\render\framebufffer\DepthFramebuffer.cpp">
+    <ClCompile Include="src\render\framebuffer\DepthFramebuffer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\render\Mesh.cpp">
@@ -120,9 +120,6 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\player\input\MovementsHandler.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="src\render\framebufffer\DepthCubeFramebuffer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -183,7 +180,7 @@
     <ClInclude Include="src\math\Frustum.h" />
     <ClInclude Include="src\math\Transform.h" />
     <ClInclude Include="src\render\SkyboxRenderer.h" />
-    <ClInclude Include="src\render\framebufffer\DepthFramebuffer.h" />
+    <ClInclude Include="src\render\framebuffer\DepthFramebuffer.h" />
     <ClInclude Include="src\render\light\Light.h" />
     <ClInclude Include="src\render\light\DirectLight.h" />
     <ClInclude Include="src\physics\GameObject.h" />
@@ -201,8 +198,8 @@
     <ClInclude Include="src\world\block\BlockColliders.h" />
     <ClInclude Include="src\world\block\BlockColliderType.h" />
     <ClInclude Include="src\player\input\MovementsHandler.h" />
-    <ClInclude Include="src\render\framebufffer\DFBConfig.h" />
-    <ClInclude Include="src\render\framebufffer\DepthCubeFramebuffer.h" />
+    <ClInclude Include="src\render\framebuffer\DFBConfig.h" />
+    <ClInclude Include="src\render\light\PointLight.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />
@@ -217,6 +214,7 @@
     <None Include="shaders\skybox.fs" />
     <None Include="shaders\framebuffer.vs" />
     <None Include="shaders\framebuffer.fs" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\blocks_atlas.png">

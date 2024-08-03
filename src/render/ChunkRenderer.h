@@ -13,16 +13,16 @@ class ChunkRenderer {
 	std::vector<ChunkMesh*> waterMeshes;
 	Shader* defShader;
 
+	void updateSolidShader(Camera& camera);
+	void renderLights(std::vector<ChunkMesh*>& meshes);
 	void render(Camera& camera, std::vector<ChunkMesh*>& meshes);
-	void updateSolidShader(Camera& camera, DirectLight* sunLight);
-	void renderLights(std::vector<ChunkMesh*>& meshes, DirectLight* sunLight);
 public:
 	ChunkRenderer();
 	~ChunkRenderer();
 
+	void renderLights();
+	void render(Camera& camera);
 	void add(ChunkMeshCollection& chunk);
-	void renderLights(DirectLight* sunLight);
-	void render(Camera& camera, DirectLight* sunLight);
 };
 
 #endif
