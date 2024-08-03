@@ -9,7 +9,7 @@ class BasicTexture : public Texture {
 	void load(bool flip);
 public:
 	BasicTexture() {}
-	BasicTexture(const char* path, bool flip);
+	BasicTexture(const char* path, bool flip, TextureType type);
 };
 
 #endif

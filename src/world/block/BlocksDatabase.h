@@ -10,11 +10,13 @@
 
 class BlocksDatabase {
 	static std::unordered_map<int, BlockType*> blocks;
-public:
 	static TextureAtlas textureAtlas;
+public:
 	static void initialize();
 	static void finalize();
-	static BlockType* get(int id);
+
+	static const TextureAtlas& getTextureAtlas() { return textureAtlas; }
+	static BlockType* get(int id) { return blocks[id]; }
 };
 
 #endif

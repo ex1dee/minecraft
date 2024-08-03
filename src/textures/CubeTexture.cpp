@@ -7,7 +7,7 @@
 #include "TextureManager.h"
 
 CubeTexture::CubeTexture(std::array<const char*, 6>& filePaths, bool flip)
-	: Texture(GL_TEXTURE_CUBE_MAP) {
+	: Texture(GL_TEXTURE_CUBE_MAP, CUBEMAP) {
 	this->filePaths = filePaths;
 	
 	load(flip);
@@ -15,13 +15,13 @@ CubeTexture::CubeTexture(std::array<const char*, 6>& filePaths, bool flip)
 
 void CubeTexture::load(bool flip) {
 	glGenTextures(1, &ID);
-	glBindTexture(type, ID);
+	glBindTexture(target, ID);
 
-	glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(type, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(type, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
-	glTexParameteri(type, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameteri(target, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(target, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(target, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+	glTexParameteri(target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri(target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 	for (int i = 0; i < 6; ++i) {
 		Image image(filePaths[i], flip);

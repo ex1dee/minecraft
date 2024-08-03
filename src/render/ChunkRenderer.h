@@ -12,6 +12,7 @@
 class ChunkRenderer {
 	std::vector<ChunkMesh*> solidMeshes;
 	std::vector<ChunkMesh*> waterMeshes;
+	Shader* activeShader;
 	Shader* defShader;
 
 	void updateSolidShader(Camera* camera, const Sun& sun);

@@ -6,7 +6,7 @@ std::unordered_map<int, BlockType*> BlocksDatabase::blocks;
 TextureAtlas BlocksDatabase::textureAtlas;
 
 void BlocksDatabase::initialize() {
-	textureAtlas = TextureAtlas("resources/textures/blocks_atlas.png", glm::vec2(16, 16), true);
+	textureAtlas = TextureAtlas("resources/textures/blocks_atlas.png", glm::vec2(16, 16), true, DIFFUSE);
 
 	for (std::string path : Files::getFolderFiles(BLOCKS_DIR)) {
 		nlohmann::json json = Json::parse(path.c_str());
@@ -30,8 +30,4 @@ void BlocksDatabase::finalize() {
 	for (int i = 0; i < blocks.size(); ++i) {
 		delete blocks[i];
 	}
-}
-
-BlockType* BlocksDatabase::get(int id) {
-	return blocks[id];
 }

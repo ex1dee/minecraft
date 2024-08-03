@@ -29,7 +29,7 @@
     <ClCompile Include="src\shaders\Shader.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\render\Model.cpp">
+    <ClCompile Include="src\render\model\Model.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\player\Camera.cpp">
@@ -98,7 +98,7 @@
     <ClCompile Include="src\render\framebuffer\DepthFramebuffer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\render\Mesh.cpp">
+    <ClCompile Include="src\render\model\Mesh.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\world\Sun.cpp">
@@ -136,8 +136,7 @@
     <ClInclude Include="src\window\CursorPos.h" />
     <ClInclude Include="dependencies\stb_image.h" />
     <ClInclude Include="src\shaders\Shader.h" />
-    <ClInclude Include="src\render\Model.h" />
-    <ClInclude Include="src\render\RenderInfo.h" />
+    <ClInclude Include="src\render\model\Model.h" />
     <ClInclude Include="src\player\Camera.h" />
     <ClInclude Include="src\utils\Files.h" />
     <ClInclude Include="src\utils\Json.h" />
@@ -152,7 +151,7 @@
     <ClInclude Include="src\world\block\BlocksDatabase.h" />
     <ClInclude Include="src\world\block\BlockType.h" />
     <ClInclude Include="src\world\block\BlockID.h" />
-    <ClInclude Include="src\render\Mesh.h" />
+    <ClInclude Include="src\render\model\Mesh.h" />
     <ClInclude Include="src\world\block\Block.h" />
     <ClInclude Include="src\world\chunk\Chunk.h" />
     <ClInclude Include="src\world\chunk\ChunkMesh.h" />
@@ -200,6 +199,8 @@
     <ClInclude Include="src\player\input\MovementsHandler.h" />
     <ClInclude Include="src\render\framebuffer\DFBConfig.h" />
     <ClInclude Include="src\render\light\PointLight.h" />
+    <ClInclude Include="src\textures\TextureType.h" />
+    <ClInclude Include="src\render\model\MeshData.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />

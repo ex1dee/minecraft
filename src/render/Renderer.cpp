@@ -30,13 +30,3 @@ void Renderer::finishRender(Player& player, Camera* camera, World& world) {
 void Renderer::renderChunk(Chunk* chunk) {
 	chunkRenderer.add(chunk->getMeshes());
 }
-
-void Renderer::drawElements(const RenderInfo& rInfo) {
-	glBindVertexArray(rInfo.VAO);
-
-	if (rInfo.indicesCount) {
-		glDrawElements(GL_TRIANGLES, rInfo.indicesCount, GL_UNSIGNED_INT, 0);
-	} else if (rInfo.vertexCount) {
-		glDrawArrays(GL_TRIANGLES, 0, rInfo.vertexCount);
-	}
-}

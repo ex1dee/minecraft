@@ -14,7 +14,7 @@
 
 #include "player/Camera.h"
 #include "shaders/Shader.h"
-#include "render/Model.h"
+#include "render/model/Model.h"
 #include "render/Renderer.h"
 #include <vector>
 #include "textures/BasicTexture.h"

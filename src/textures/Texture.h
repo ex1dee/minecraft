@@ -3,22 +3,23 @@
 
 #include <glad/glad.h>
 
+#include "TextureType.h"
+
 class Texture {
 protected:
 	unsigned int ID;
-	GLenum type;
+	TextureType type;
+	GLenum target;
 public:
 	Texture() {}
-	Texture(GLenum type)
-		: type(type) {}
+	Texture(GLenum target, TextureType type)
+		: target(target), type(type) {}
 
-	unsigned int getID() {
-		return ID;
-	}
+	unsigned int getID() const { return ID; }
 
-	GLenum getType() {
-		return type;
-	}
+	TextureType getType() const { return type; }
+
+	GLenum getTarget() const { return target; }
 };
 
 #endif

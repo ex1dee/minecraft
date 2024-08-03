@@ -6,8 +6,8 @@
 #include "Image.h"
 #include "TextureManager.h"
 
-BasicTexture::BasicTexture(const char* path, bool flip)
-	: Texture(GL_TEXTURE_2D) {
+BasicTexture::BasicTexture(const char* path, bool flip, TextureType type)
+	: Texture(GL_TEXTURE_2D, type) {
 	this->path = path;
 
 	load(flip);
@@ -15,14 +15,13 @@ BasicTexture::BasicTexture(const char* path, bool flip)
 
 void BasicTexture::load(bool flip) {
 	glGenTextures(1, &ID);
-	glBindTexture(type, ID);
-	glActiveTexture(GL_TEXTURE0);
+	glBindTexture(target, ID);
 
-	glTexParameteri(type, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(type, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(type, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(type, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
-	glTexParameteri(type, GL_TEXTURE_MAX_LEVEL, 1);
+	glTexParameteri(target, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+	glTexParameteri(target, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+	glTexParameteri(target, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(target, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+	glTexParameteri(target, GL_TEXTURE_MAX_LEVEL, 1);
 
 	Image image(path, flip);
 
@@ -31,7 +30,7 @@ void BasicTexture::load(bool flip) {
 
 		if (format) {
 			glTexImage2D(GL_TEXTURE_2D, 0, format, image.width, image.height, 0, format, GL_UNSIGNED_BYTE, image.data);
-			glGenerateMipmap(type);
+			glGenerateMipmap(target);
 		} else {
 			std::cout << "Unsupported number of channels " << image.nchannels << " in file \"" << path << "\"\n";
 		}

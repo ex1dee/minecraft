@@ -1,0 +1,88 @@
+﻿  Frustum.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\math\AABB.h(4,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  BoxBoxCollision.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\physics\collider\Collider.h(4,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  CollisionDetector.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\VecMap.h(7,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  CollisionHandler.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\math\Transform.h(4,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  PhysicsEngine.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\VecMap.h(7,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  MovementsHandler.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\window\Events.h(6,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  Player.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\math\Orientation.h(4,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  Mesh.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\model\Mesh.h(4,10): fatal  error C1083: Не удается открыть файл включение: glad/glad.h: No such file or directory,
+  SkyboxRenderer.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\textures\Texture.h(4,10): fatal  error C1083: Не удается открыть файл включение: glad/glad.h: No such file or directory,
+  Sun.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\framebuffer\DepthFramebuffer.h(4,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  PlayState.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\math\Orientation.h(4,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  ChunkRenderer.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\ChunkMesh.h(4,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  DepthFramebuffer.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\framebuffer\DepthFramebuffer.h(4,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  Time.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\Time.cpp(14,25): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\Time.cpp(18,27): warning C4244: =: преобразование "double" в "float", возможна потеря данных
+  Chunk.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\framebuffer\DepthFramebuffer.h(4,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  CubeTexture.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\textures\Texture.h(4,10): fatal  error C1083: Не удается открыть файл включение: glad/glad.h: No such file or directory,
+  BasicTexture.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\textures\Texture.h(4,10): fatal  error C1083: Не удается открыть файл включение: glad/glad.h: No such file or directory,
+  Config.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Json.h(4,10): fatal  error C1083: Не удается открыть файл включение: nlohmann/json.hpp: No such file or directory,
+  stb_image.cpp
+  Renderer.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\framebuffer\DepthFramebuffer.h(4,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  Компиляция...
+  TextureManager.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\textures\TextureManager.h(4,10): fatal  error C1083: Не удается открыть файл включение: glad/glad.h: No such file or directory,
+  Json.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Json.h(4,10): fatal  error C1083: Не удается открыть файл включение: nlohmann/json.hpp: No such file or directory,
+  Camera.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\player\Camera.h(4,10): fatal  error C1083: Не удается открыть файл включение: glad/glad.h: No such file or directory,
+  Model.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\model\Model.h(4,10): fatal  error C1083: Не удается открыть файл включение: glad/glad.h: No such file or directory,
+  Shader.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\shaders\Shader.h(4,10): fatal  error C1083: Не удается открыть файл включение: glad/glad.h: No such file or directory,
+  Files.cpp
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\filesystem(13): warning STL4038: The contents of <filesystem> are available only with C++17 or later.
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Files.cpp(41,33): error C3083: filesystem: символ слева от "::" должен представлять тип
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Files.cpp(41,45): error C2039: "directory_iterator": не является членом "std".
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\iostream(19,1): message : см. объявление "std"
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Files.cpp(41,3): error C2530: entry: ссылки должны быть инициализированы
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Files.cpp(41,3): error C3531: entry: символ, тип которого содержит спецификатор 'auto' должен иметь инициализатор
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Files.cpp(41,26): error C2143: синтаксическая ошибка: отсутствие ";" перед ":"
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Files.cpp(41,3): error C3861: directory_iterator: идентификатор не найден
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Files.cpp(41,72): error C2143: синтаксическая ошибка: отсутствие ";" перед ")"
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Files.cpp(52,14): error C3083: filesystem: символ слева от "::" должен представлять тип
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Files.cpp(52,26): error C2039: "is_directory": не является членом "std".
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\iostream(19,1): message : см. объявление "std"
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Files.cpp(52,38): error C3861: is_directory: идентификатор не найден
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Files.cpp(56,14): error C3083: filesystem: символ слева от "::" должен представлять тип
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Files.cpp(56,26): error C2039: "exists": не является членом "std".
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\iostream(19,1): message : см. объявление "std"
+  Events.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\window\Events.h(6,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  main.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\main.cpp(1,10): fatal  error C1083: Не удается открыть файл включение: glad/glad.c: No such file or directory,
+  Window.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\window\Window.h(4,10): fatal  error C1083: Не удается открыть файл включение: glad/glad.h: No such file or directory,
+  TextureAtlas.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\textures\Texture.h(4,10): fatal  error C1083: Не удается открыть файл включение: glad/glad.h: No such file or directory,
+  BlocksDatabase.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\textures\Texture.h(4,10): fatal  error C1083: Не удается открыть файл включение: glad/glad.h: No such file or directory,
+  ChunkManager.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\VecMap.h(7,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  ChunkMesh.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\ChunkMesh.h(4,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  ChunkMeshBuilder.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\block\BlockType.h(4,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  SuperFlatGenerator.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\framebuffer\DepthFramebuffer.h(4,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,
+  World.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\VecMap.h(7,10): fatal  error C1083: Не удается открыть файл включение: glm/glm.hpp: No such file or directory,

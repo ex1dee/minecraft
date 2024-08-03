@@ -30,7 +30,6 @@ class Camera {
 	Player* player;
 	Transform transform;
 
-	void updateFrustum();
 	void updatePosition();
 	void updateOrientation();
 	void updateView();
@@ -43,10 +42,11 @@ public:
 	bool isAABBInFrustum(const AABB& aabb);
 
 	const Orientation& getOrientation() { return orientation; }
-	glm::mat4& getView() { return view; }
-	glm::mat4& getProjView() { return projView; }
-	glm::mat4& getProjection() { return projection; }
-	glm::mat4& getSkyboxProjView() { return skyboxProjView; }
+	const glm::vec3& getPosition() { return transform.position; }
+	const glm::mat4& getView() { return view; }
+	const glm::mat4& getProjView() { return projView; }
+	const glm::mat4& getProjection() { return projection; }
+	const glm::mat4& getSkyboxProjView() { return skyboxProjView; }
 };
 
 #endif

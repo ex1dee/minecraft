@@ -10,9 +10,9 @@ class TextureAtlas : public BasicTexture {
 	glm::vec2 indvTextureSize;
 public:
 	TextureAtlas() {}
-	TextureAtlas(const char* path, glm::vec2 imagesCount, bool flip);
+	TextureAtlas(const char* path, glm::vec2 imagesCount, bool flip, TextureType type);
 
-	std::array<float, 8> getTexture(glm::vec2 coords);
+	std::array<float, 8> getTexture(glm::vec2 coords) const;
 };
 
 #endif

@@ -24,8 +24,6 @@ void PlayState::handleInput() {
 }
 
 void PlayState::update() {
-	world->updateChunks(*camera);
-
 	if (Time::needUpdate()) {
 		world->update(*renderer, *player, *camera);
 

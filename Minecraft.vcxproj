@@ -145,7 +145,7 @@
     <ClCompile Include="src\physics\PhysicsEngine.cpp" />
     <ClCompile Include="src\player\input\MovementsHandler.cpp" />
     <ClCompile Include="src\player\Player.cpp" />
-    <ClCompile Include="src\render\Mesh.cpp" />
+    <ClCompile Include="src\render\model\Mesh.cpp" />
     <ClCompile Include="src\render\SkyboxRenderer.cpp" />
     <ClCompile Include="src\world\Sun.cpp" />
     <ClCompile Include="src\states\PlayState.cpp" />
@@ -161,7 +161,7 @@
     <ClCompile Include="src\textures\TextureManager.cpp" />
     <ClCompile Include="src\utils\Json.cpp" />
     <ClCompile Include="src\player\Camera.cpp" />
-    <ClCompile Include="src\render\Model.cpp" />
+    <ClCompile Include="src\render\model\Model.cpp" />
     <ClCompile Include="src\shaders\Shader.cpp" />
     <ClCompile Include="src\utils\Files.cpp" />
     <ClCompile Include="src\window\Events.cpp" />
@@ -197,7 +197,9 @@
     <ClInclude Include="src\render\light\Light.h" />
     <ClInclude Include="src\render\framebuffer\DFBConfig.h" />
     <ClInclude Include="src\render\light\PointLight.h" />
+    <ClInclude Include="src\render\model\MeshData.h" />
     <ClInclude Include="src\render\SkyboxRenderer.h" />
+    <ClInclude Include="src\textures\TextureType.h" />
     <ClInclude Include="src\world\Sun.h" />
     <ClInclude Include="src\states\PlayState.h" />
     <ClInclude Include="src\render\ChunkRenderer.h" />
@@ -225,9 +227,8 @@
     <ClInclude Include="src\textures\TextureManager.h" />
     <ClInclude Include="src\utils\Json.h" />
     <ClInclude Include="src\player\Camera.h" />
-    <ClInclude Include="src\render\Model.h" />
-    <ClInclude Include="src\render\Mesh.h" />
-    <ClInclude Include="src\render\RenderInfo.h" />
+    <ClInclude Include="src\render\model\Model.h" />
+    <ClInclude Include="src\render\model\Mesh.h" />
     <ClInclude Include="src\shaders\Shader.h" />
     <ClInclude Include="src\utils\Files.h" />
     <ClInclude Include="src\window\Button.h" />

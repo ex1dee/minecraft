@@ -3,7 +3,7 @@
 
 #include <glm/glm.hpp>
 
-#include "../../render/Mesh.h"
+#include "../../render/model/Mesh.h"
 #include "BlockColliders.h"
 #include "BlockShaderType.h"
 #include "BlockID.h"

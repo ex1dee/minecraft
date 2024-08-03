@@ -4,7 +4,6 @@
 #include <array>
 
 #include "../framebuffer/DepthFramebuffer.h"
-#include "../RenderInfo.h"
 #include "../framebuffer/DFBConfig.h"
 
 class Light {

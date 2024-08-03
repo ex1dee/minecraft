@@ -24,12 +24,12 @@ void SkyboxRenderer::render(Camera* camera, const Sun& sun) {
     
 	skyboxShader->use();
 
-    TextureManager::bindTexture(*texture, *skyboxShader, "background", 0);
+    TextureManager::bindTexture(*texture, *skyboxShader, "background");
 
     skyboxShader->setMat4("projView", camera->getSkyboxProjView());
     skyboxShader->setVec3("lightDir", sun.getLight().direction);
 	
-    Renderer::drawElements(model.getRenderInfo());
+    model.draw(skyboxShader);
 
 	glDepthMask(GL_TRUE);
 }
@@ -48,9 +48,9 @@ void SkyboxRenderer::loadTexture() {
 }
 
 void SkyboxRenderer::makeModel() {
-	Mesh mesh;
+	MeshData meshData(CUBE, 3);
 	
-	mesh.vertexPositions = {
+	meshData.vertexPositions = {
         // right
          1.0f, -1.0f, -1.0f,
          1.0f, -1.0f,  1.0f,
@@ -100,5 +100,5 @@ void SkyboxRenderer::makeModel() {
          1.0f, -1.0f,  1.0f
     };
 
-	model.addMesh(mesh, 3);
+	model.addMesh(meshData);
 }

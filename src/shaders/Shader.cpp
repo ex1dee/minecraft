@@ -80,11 +80,17 @@ void Shader::deleteProgram() {
 }
 
 void Shader::use() {
+	currentTextureID = 0;
+
 	glUseProgram(programID);
 }
 
 void Shader::setBool(const char* uniform, bool value) const {
 	glUniform1i(glGetUniformLocation(programID, uniform), value);
+}
+
+void Shader::setSampler(const char* uniform, int value) {
+	setInt(uniform, value);
 }
 
 void Shader::setInt(const char* uniform, int value) const {
@@ -105,8 +111,4 @@ void Shader::setVec3(const char* uniform, const glm::vec3& value) const {
 
 void Shader::setVec4(const char* uniform, const glm::vec4& value) const {
 	glUniform4f(glGetUniformLocation(programID, uniform), value.x, value.y, value.z, value.w);
-}
-
-unsigned int Shader::getProgramID() {
-	return programID;
 }

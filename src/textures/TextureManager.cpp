@@ -9,18 +9,22 @@ GLenum TextureManager::getFormat(int nchannels) {
 		return NULL;
 }
 
-void TextureManager::bindTexture(Texture& texture, Shader& shader, const char* uniform, int id) {
-	shader.use();
-	shader.setInt(uniform, id);
-
-	glActiveTexture(GL_TEXTURE0 + id);
-	glBindTexture(texture.getType(), texture.getID());
+void TextureManager::bindTexture(const Texture& texture, Shader& shader, std::string uniform) {
+	bindTexture(texture.getID(), shader, uniform, texture.getTarget());
 }
 
-void TextureManager::bindDepthMap(unsigned int depthMap, Shader& shader, const char* uniform, int id) {
+void TextureManager::bindDepthMap(unsigned int depthMap, Shader& shader, std::string uniform) {
+	bindTexture(depthMap, shader, uniform, GL_TEXTURE_2D);
+}
+
+void TextureManager::bindTexture(unsigned int textureID, Shader& shader, std::string uniform, GLenum target) {
+	int id = shader.getCurrentTextureID();
+
 	shader.use();
-	shader.setInt(uniform, id);
+	shader.setSampler(uniform.c_str(), id);
 
 	glActiveTexture(GL_TEXTURE0 + id);
-	glBindTexture(GL_TEXTURE_2D, depthMap);
+	glBindTexture(target, textureID);
+
+	shader.incrementCurrentTextureID();
 }

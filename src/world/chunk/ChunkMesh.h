@@ -4,18 +4,15 @@
 #include <glm/glm.hpp>
 #include <array>
 
-#include "../../render/Model.h"
+#include "../../render/model/Model.h"
 #include "../WorldConstants.h"
 
 class ChunkMesh {
+	MeshData meshData = MeshData(CUBE, 3);
 	Model model;
-	Mesh mesh;
 	int vertIndex;
 	int faces;
 public:
-	ChunkMesh() {}
-	~ChunkMesh();
-
 	void addBlockFace(const std::array<float, 12>& vertices, 
 		const std::array<float, 8>& texCoords, 
 		const glm::vec3& normal,

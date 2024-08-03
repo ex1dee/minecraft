@@ -7,7 +7,7 @@
 #include "../player/Camera.h"
 #include "../world/Sun.h"
 #include "light/DirectLight.h"
-#include "Model.h"
+#include "model/Model.h"
 
 class SkyboxRenderer {
 	Model model;

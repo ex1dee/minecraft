@@ -66,7 +66,7 @@ void ChunkMeshBuilder::tryAddFace(const std::array<float, 12>& vertices,
 		return;
 
 	if (shouldAddFace(adjacentDir, blockType)) {
-		std::array<float, 8> fTexCoords = BlocksDatabase::textureAtlas.getTexture(texCoords);
+		std::array<float, 8> fTexCoords = BlocksDatabase::getTextureAtlas().getTexture(texCoords);
 
 		activeMesh->addBlockFace(vertices, fTexCoords, normal, chunk->getLocalPosition(), localBlockPosition);
 	}
