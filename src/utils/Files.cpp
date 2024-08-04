@@ -5,6 +5,24 @@
 #include <iostream>
 #include <filesystem>
 
+std::string Files::getFullPath(const char* dirPath, const char* fileName) {
+	std::string path = dirPath;
+	path += "/";
+	path += fileName;
+
+	return path;
+}
+
+std::string Files::getDirectory(const char* path) {
+	std::string strPath = path;
+
+	return getDirectory(strPath);
+}
+
+std::string Files::getDirectory(const std::string& path) {
+	return path.substr(0, path.find_last_of('/'));
+}
+
 std::string Files::read(const char* path) {
 	std::string data;
 	std::fstream file;

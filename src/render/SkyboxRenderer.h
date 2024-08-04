@@ -1,8 +1,7 @@
 #ifndef SKYBOXRENDERER_H
 #define SKYBOXRENDERER_H
 
-#include "../textures/BasicTexture.h"
-#include "../textures/CubeTexture.h"
+#include "../textures/TextureLoader.h"
 #include "../shaders/Shader.h"
 #include "../player/Camera.h"
 #include "../world/Sun.h"

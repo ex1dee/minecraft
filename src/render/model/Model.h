@@ -21,6 +21,7 @@ public:
 
 	void draw(Shader* shader);
 	void addMesh(const MeshData& data);
+	void addMesh(Mesh* mesh);
 	void reset();
 };
 

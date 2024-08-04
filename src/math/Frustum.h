@@ -14,7 +14,7 @@ public:
 	Frustum();
 	~Frustum();
 
-	void update(const glm::mat4& pv);
+	void update(const glm::mat4& projView);
 	bool isAABBInFrustum(const AABB& aabb);
 };
 

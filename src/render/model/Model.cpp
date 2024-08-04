@@ -13,6 +13,10 @@ void Model::addMesh(const MeshData& data) {
 	Mesh* mesh = new Mesh(data);
 	mesh->setup();
 
+	addMesh(mesh);
+}
+
+void Model::addMesh(Mesh* mesh) {
 	meshes.push_back(mesh);
 }
 

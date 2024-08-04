@@ -77,6 +77,10 @@
     <LibraryWPath />
     <IntDir>$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>C:\Qt\6.4.3\mingw_64\include</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -147,6 +151,8 @@
     <ClCompile Include="src\player\Player.cpp" />
     <ClCompile Include="src\render\model\Mesh.cpp" />
     <ClCompile Include="src\render\SkyboxRenderer.cpp" />
+    <ClCompile Include="src\textures\TextureLoader.cpp" />
+    <ClCompile Include="src\utils\AssimpLoader.cpp" />
     <ClCompile Include="src\world\Sun.cpp" />
     <ClCompile Include="src\states\PlayState.cpp" />
     <ClCompile Include="src\render\ChunkRenderer.cpp" />
@@ -197,6 +203,8 @@
     <ClInclude Include="src\render\light\Light.h" />
     <ClInclude Include="src\render\framebuffer\DFBConfig.h" />
     <ClInclude Include="src\render\light\PointLight.h" />
+    <ClInclude Include="src\textures\TextureLoader.h" />
+    <ClInclude Include="src\utils\AssimpLoader.h" />
     <ClInclude Include="src\render\model\MeshData.h" />
     <ClInclude Include="src\render\SkyboxRenderer.h" />
     <ClInclude Include="src\textures\TextureType.h" />
@@ -280,6 +288,8 @@
   <ImportGroup Label="ExtensionTargets">
     <Import Project="..\packages\fluid.yaml-cpp.1.0.10\build\fluid.yaml-cpp.targets" Condition="Exists('..\packages\fluid.yaml-cpp.1.0.10\build\fluid.yaml-cpp.targets')" />
     <Import Project="..\packages\glfw.3.4.0\build\native\glfw.targets" Condition="Exists('..\packages\glfw.3.4.0\build\native\glfw.targets')" />
+    <Import Project="..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets" Condition="Exists('..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets')" />
+    <Import Project="..\packages\Assimp.3.0.0\build\native\Assimp.targets" Condition="Exists('..\packages\Assimp.3.0.0\build\native\Assimp.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -287,5 +297,7 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\fluid.yaml-cpp.1.0.10\build\fluid.yaml-cpp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\fluid.yaml-cpp.1.0.10\build\fluid.yaml-cpp.targets'))" />
     <Error Condition="!Exists('..\packages\glfw.3.4.0\build\native\glfw.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glfw.3.4.0\build\native\glfw.targets'))" />
+    <Error Condition="!Exists('..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets'))" />
+    <Error Condition="!Exists('..\packages\Assimp.3.0.0\build\native\Assimp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Assimp.3.0.0\build\native\Assimp.targets'))" />
   </Target>
 </Project>

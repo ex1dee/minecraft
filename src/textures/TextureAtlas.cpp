@@ -1,11 +1,11 @@
 #include "TextureAtlas.h"
 
-TextureAtlas::TextureAtlas(const char* path, glm::vec2 imagesCount, bool flip, TextureType type)
+TextureAtlas::TextureAtlas(const char* path, const glm::vec2& imagesCount, bool flip, TextureType type)
 	: BasicTexture(path, flip, type) {
 	this->indvTextureSize = 1.0f / imagesCount;
 }
 
-std::array<float, 8> TextureAtlas::getTexture(glm::vec2 coords) const {
+std::array<float, 8> TextureAtlas::getTexture(const glm::vec2& coords) const {
 	float xMin = coords.x * indvTextureSize.x;
 	float xMax = xMin + indvTextureSize.x;
 	

@@ -36,15 +36,15 @@ void SkyboxRenderer::render(Camera* camera, const Sun& sun) {
 
 void SkyboxRenderer::loadTexture() {
 	std::array<const char*, 6> files{
-		"resources/textures/skybox/stars.jpg", 
-        "resources/textures/skybox/stars.jpg",
-        "resources/textures/skybox/stars.jpg",
-        "resources/textures/skybox/stars.jpg",
-        "resources/textures/skybox/stars.jpg",
-        "resources/textures/skybox/stars.jpg"
+		"stars.jpg", 
+        "stars.jpg",
+        "stars.jpg",
+        "stars.jpg",
+        "stars.jpg",
+        "stars.jpg"
 	};
 
-	texture = new CubeTexture(files, false);
+    texture = TextureLoader::loadCube("resources/textures/skybox", files, false);
 }
 
 void SkyboxRenderer::makeModel() {

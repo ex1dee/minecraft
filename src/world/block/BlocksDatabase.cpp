@@ -3,10 +3,10 @@
 #include "../../utils/Json.h"
 
 std::unordered_map<int, BlockType*> BlocksDatabase::blocks;
-TextureAtlas BlocksDatabase::textureAtlas;
+TextureAtlas* BlocksDatabase::textureAtlas;
 
 void BlocksDatabase::initialize() {
-	textureAtlas = TextureAtlas("resources/textures/blocks_atlas.png", glm::vec2(16, 16), true, DIFFUSE);
+	textureAtlas = TextureLoader::loadAtlas("resources/textures/blocks_atlas.png", glm::vec2(16, 16), true, DIFFUSE);
 
 	for (std::string path : Files::getFolderFiles(BLOCKS_DIR)) {
 		nlohmann::json json = Json::parse(path.c_str());

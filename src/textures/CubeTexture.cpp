@@ -1,15 +1,19 @@
 #include "CubeTexture.h"
 
 #include <glad/glad.h>
-#include <iostream>
 
-#include "Image.h"
+#include "../utils/Files.h"
 #include "TextureManager.h"
+#include "Image.h"
 
-CubeTexture::CubeTexture(std::array<const char*, 6>& filePaths, bool flip)
+CubeTexture::CubeTexture(const char* directory, std::array<const char*, 6>& fileNames, bool flip)
 	: Texture(GL_TEXTURE_CUBE_MAP, CUBEMAP) {
 	this->filePaths = filePaths;
 	
+	for (int i = 0; i < fileNames.size(); ++i) {
+		filePaths[i] = Files::getFullPath(directory, fileNames[i]);
+	}
+
 	load(flip);
 }
 
@@ -24,7 +28,7 @@ void CubeTexture::load(bool flip) {
 	glTexParameteri(target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 	for (int i = 0; i < 6; ++i) {
-		Image image(filePaths[i], flip);
+		Image image(filePaths[i].c_str(), flip);
 
 		if (image.data) {
 			GLenum format = TextureManager::getFormat(image.nchannels);

@@ -5,17 +5,17 @@
 
 #include <unordered_map>
 
-#include "../../textures/TextureAtlas.h"
+#include "../../textures/TextureLoader.h"
 #include "BlockType.h"
 
 class BlocksDatabase {
 	static std::unordered_map<int, BlockType*> blocks;
-	static TextureAtlas textureAtlas;
+	static TextureAtlas* textureAtlas;
 public:
 	static void initialize();
 	static void finalize();
 
-	static const TextureAtlas& getTextureAtlas() { return textureAtlas; }
+	static const TextureAtlas& getTextureAtlas() { return *textureAtlas; }
 	static BlockType* get(int id) { return blocks[id]; }
 };
 
