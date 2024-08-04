@@ -1,0 +1,23 @@
+{
+    "id": 4,
+    "meshType": 1,
+    "shaderType": 2,
+    "colliderType": 1,
+    "opaque": false,
+    "solid": false,
+
+    "texCoords": {
+        "side": {
+            "x": 11,
+            "y": 15
+        },
+        "top": {
+            "x": 11,
+            "y": 15
+        },
+        "bottom": {
+            "x": 11,
+            "y": 15
+        }
+    }
+}

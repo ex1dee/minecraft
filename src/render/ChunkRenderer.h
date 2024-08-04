@@ -12,10 +12,13 @@
 class ChunkRenderer {
 	std::vector<ChunkMesh*> solidMeshes;
 	std::vector<ChunkMesh*> waterMeshes;
+	std::vector<ChunkMesh*> floraMeshes;
 	Shader* activeShader;
 	Shader* defShader;
+	Shader* floraShader;
 
 	void updateSolidShader(Camera* camera, const Sun& sun);
+	void updateFloraShader(Camera* camera, const Sun& sun);
 	void renderLights(std::vector<ChunkMesh*>& meshes, const Sun& sun);
 	void render(std::vector<ChunkMesh*>& meshes, Camera* camera = nullptr, bool onlyVisible = false);
 public:

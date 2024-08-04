@@ -2,9 +2,9 @@
 
 void ChunkMesh::addBlockFace(const std::array<float, 12>& vertices,
 	const std::array<float, 8>& texCoords,
-	const glm::vec3& normal,
 	const glm::vec2& localChunkPosition,
-	const glm::vec3& localBlockPosition) {
+	const glm::vec3& localBlockPosition,
+	const glm::vec3& normal) {
 
 	int index = 0;
 
@@ -13,9 +13,11 @@ void ChunkMesh::addBlockFace(const std::array<float, 12>& vertices,
 		meshData.vertexPositions.push_back(vertices[index++] + localBlockPosition.y);
 		meshData.vertexPositions.push_back(vertices[index++] + localChunkPosition.y * CHUNK_D + localBlockPosition.z);
 
-		meshData.normals.push_back(normal.x);
-		meshData.normals.push_back(normal.y);
-		meshData.normals.push_back(normal.z);
+		if (glm::length(normal) != 0) {
+			meshData.normals.push_back(normal.x);
+			meshData.normals.push_back(normal.y);
+			meshData.normals.push_back(normal.z);
+		}
 	}
 
 	meshData.textureCoords.insert(meshData.textureCoords.end(), texCoords.begin(), texCoords.end());

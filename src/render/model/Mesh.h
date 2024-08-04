@@ -33,7 +33,7 @@ public:
 
 enum MeshType {
 	CUBE = 0,
-	OTHER = 1
+	X = 1
 };
 
 #endif

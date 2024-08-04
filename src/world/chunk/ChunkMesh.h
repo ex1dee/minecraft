@@ -15,9 +15,9 @@ class ChunkMesh {
 public:
 	void addBlockFace(const std::array<float, 12>& vertices, 
 		const std::array<float, 8>& texCoords, 
-		const glm::vec3& normal,
 		const glm::vec2& localChunkPosition,
-		const glm::vec3& localBlockPosition);
+		const glm::vec3& localBlockPosition,
+		const glm::vec3& normal = glm::vec3(0));
 	void createBuffers();
 
 	Model& getModel() { return model; }
@@ -27,24 +27,28 @@ public:
 struct ChunkMeshCollection {
 	ChunkMesh* solid;
 	ChunkMesh* water;
+	ChunkMesh* flora;
 
 	ChunkMeshCollection() {
 		solid = new ChunkMesh();
 		water = new ChunkMesh();
+		flora = new ChunkMesh();
 	}
 
 	~ChunkMeshCollection() {
-		delete solid, water;
+		delete solid, water, flora;
 	}
 
 	void createBuffers() {
 		solid->createBuffers();
 		water->createBuffers();
+		flora->createBuffers();
 	}
 
 	void setAABB(const AABB& aabb) {
 		solid->getModel().aabb = aabb;
 		water->getModel().aabb = aabb;
+		flora->getModel().aabb = aabb;
 	}
 };
 

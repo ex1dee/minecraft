@@ -30,3 +30,14 @@ void Renderer::finishRender(Player& player, Camera* camera, World& world) {
 void Renderer::renderChunk(Chunk* chunk) {
 	chunkRenderer.add(chunk->getMeshes());
 }
+
+void Renderer::startTransparentRender() {
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glDepthMask(GL_FALSE);
+}
+
+void Renderer::finishTransparentRender() {
+	glDepthMask(GL_TRUE);
+	glDisable(GL_BLEND);
+}

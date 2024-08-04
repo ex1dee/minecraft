@@ -11,6 +11,8 @@ class ChunkMeshBuilder {
 	Chunk* chunk;
 
 	bool shouldAddFace(glm::vec3 adjacentDir, BlockType blockType);
+	void addCube(const glm::vec3& blockPos, BlockType* blockType);
+	void addX(const glm::vec3& blockPos, BlockType* blockType);
 	void tryAddFace(const std::array<float, 12>& vertices,
 		const glm::vec2& texCoords,
 		const glm::vec3& normal,

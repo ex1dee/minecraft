@@ -10,6 +10,9 @@ const std::array<float, 12> rightFace{ 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, };
 const std::array<float, 12> topFace{ 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, };
 const std::array<GLfloat, 12> bottomFace{ 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1 };
 
+const std::array<float, 12> xSide1{ 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, };
+const std::array<float, 12> xSide2{ 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, };
+
 const glm::vec3 frontFaceNormal{ 0, 0, 1 };
 const glm::vec3 backFaceNormal{ 0, 0, -1 };
 const glm::vec3 leftFaceNormal{ -1, 0, 0 };
@@ -35,16 +38,12 @@ void ChunkMeshBuilder::build() {
 		setActiveMesh(block);
 
 		glm::vec3 blockPos = Chunk::getLocalBlockPosition(i);
-		BlockFaces blockFaces(blockPos);
-		
-		tryAddFace(bottomFace, blockType->texBottomCoords, bottomFaceNormal, blockPos, blockFaces.bottom, *blockType);
-		tryAddFace(topFace, blockType->texTopCoords, topFaceNormal, blockPos, blockFaces.top, *blockType);
 
-		tryAddFace(rightFace, blockType->texSideCoords, rightFaceNormal, blockPos, blockFaces.right, *blockType);
-		tryAddFace(leftFace, blockType->texSideCoords, leftFaceNormal, blockPos, blockFaces.left, *blockType);
-
-		tryAddFace(frontFace, blockType->texSideCoords, frontFaceNormal, blockPos, blockFaces.front, *blockType);
-		tryAddFace(backFace, blockType->texSideCoords, backFaceNormal, blockPos, blockFaces.back, *blockType);
+		if (blockType->meshType == CUBE) {
+			addCube(blockPos, blockType);
+		} else if (blockType->meshType == X) {
+			addX(blockPos, blockType);
+		}
 	}
 }
 
@@ -53,6 +52,28 @@ void ChunkMeshBuilder::setActiveMesh(Block& block) {
 		activeMesh = chunk->getMeshes().solid;
 	else if (block.type->shaderType == WATER)
 		activeMesh = chunk->getMeshes().water;
+	else if (block.type->shaderType == FLORA)
+		activeMesh = chunk->getMeshes().flora;
+}
+
+void ChunkMeshBuilder::addX(const glm::vec3& blockPos, BlockType* blockType) {
+	std::array<float, 8> fTexCoords = BlocksDatabase::getTextureAtlas().getTexture(blockType->texSideCoords);
+
+	activeMesh->addBlockFace(xSide1, fTexCoords, chunk->getLocalPosition(), blockPos);
+	activeMesh->addBlockFace(xSide2, fTexCoords, chunk->getLocalPosition(), blockPos);
+}
+
+void ChunkMeshBuilder::addCube(const glm::vec3& blockPos, BlockType* blockType) {
+	BlockFaces blockFaces(blockPos);
+
+	tryAddFace(bottomFace, blockType->texBottomCoords, bottomFaceNormal, blockPos, blockFaces.bottom, *blockType);
+	tryAddFace(topFace, blockType->texTopCoords, topFaceNormal, blockPos, blockFaces.top, *blockType);
+
+	tryAddFace(rightFace, blockType->texSideCoords, rightFaceNormal, blockPos, blockFaces.right, *blockType);
+	tryAddFace(leftFace, blockType->texSideCoords, leftFaceNormal, blockPos, blockFaces.left, *blockType);
+
+	tryAddFace(frontFace, blockType->texSideCoords, frontFaceNormal, blockPos, blockFaces.front, *blockType);
+	tryAddFace(backFace, blockType->texSideCoords, backFaceNormal, blockPos, blockFaces.back, *blockType);
 }
 
 void ChunkMeshBuilder::tryAddFace(const std::array<float, 12>& vertices,
@@ -68,7 +89,7 @@ void ChunkMeshBuilder::tryAddFace(const std::array<float, 12>& vertices,
 	if (shouldAddFace(adjacentDir, blockType)) {
 		std::array<float, 8> fTexCoords = BlocksDatabase::getTextureAtlas().getTexture(texCoords);
 
-		activeMesh->addBlockFace(vertices, fTexCoords, normal, chunk->getLocalPosition(), localBlockPosition);
+		activeMesh->addBlockFace(vertices, fTexCoords, chunk->getLocalPosition(), localBlockPosition, normal);
 	}
 }
 

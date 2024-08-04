@@ -254,10 +254,13 @@
     <None Include="packages.config" />
     <None Include="resources\blocks\air.json" />
     <None Include="resources\blocks\dirt.json" />
-    <None Include="resources\blocks\grass.json" />
+    <None Include="resources\blocks\grass_block.json" />
+    <None Include="resources\blocks\short_grass.json" />
     <None Include="resources\blocks\stone.json" />
     <None Include="shaders\default.fs" />
     <None Include="shaders\default.vs" />
+    <None Include="shaders\flora.fs" />
+    <None Include="shaders\flora.vs" />
     <None Include="shaders\framebuffer.fs" />
     <None Include="shaders\framebuffer.vs" />
     <None Include="shaders\skybox.fs" />

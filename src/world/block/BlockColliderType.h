@@ -2,7 +2,8 @@
 #define BLOCKCOLLIDERTYPE_H
 
 enum BlockColliderType {
-	FULL_SIZE = 0
+	FULL_SIZE = 0,
+	NONE = 1
 };
 
 #endif
