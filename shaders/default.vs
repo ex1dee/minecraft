@@ -9,11 +9,12 @@ out vec3 FragPos;
 out vec3 Normal;
 
 uniform mat4 projView;
+uniform mat4 model;
 
 void main() {
 	FragPos = aPos;
-	Normal = aNormal;
+	Normal = normalize(aNormal);
 	TexCoords = aTexCoords;
 
-	gl_Position = projView * vec4(aPos, 1);
+	gl_Position = projView * model * vec4(aPos, 1);
 }

@@ -32,7 +32,7 @@ void Chunk::render(Renderer& renderer) {
 	if (hasMesh()) {
 		bufferMesh();
 
-		renderer.renderChunk(this);
+		renderer.addChunk(this);
 	}
 }
 

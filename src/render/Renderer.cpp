@@ -1,20 +1,23 @@
 #include "Renderer.h"
 
-#include <glad/glad.h>
-
 #include "../world/WorldConstants.h"
 #include "../world/chunk/Chunk.h"
 #include "../world/World.h"
 #include "../window/Window.h"
 
 void Renderer::finishRender(Player& player, Camera* camera, World& world) {
-	chunkRenderer.renderLights(world.getSun());
+	Sun* sun = world.getSun();
+
+	sun->getLight().startRender();
+	chunkRenderer.renderLights(*sun);
+	entityRenderer.renderLights(*sun);
+	sun->getLight().finishRender();
 
 	Window::setWindowViewport();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glEnable(GL_DEPTH_TEST);
 
-	skyboxRenderer.render(camera, world.getSun());
+	skyboxRenderer.render(camera, *sun);
 
 	if (!player.isFlying()) {
 		glEnable(GL_CULL_FACE);
@@ -24,17 +27,22 @@ void Renderer::finishRender(Player& player, Camera* camera, World& world) {
 		glDisable(GL_CULL_FACE);
 	}
 
-	chunkRenderer.render(camera, world.getSun());
+	entityRenderer.render(camera, *sun);
+	chunkRenderer.render(camera, *sun);
 }
 
-void Renderer::renderChunk(Chunk* chunk) {
+void Renderer::addChunk(Chunk* chunk) {
 	chunkRenderer.add(chunk->getMeshes());
+}
+
+void Renderer::addEntity(Entity* entity) {
+	entityRenderer.add(entity);
 }
 
 void Renderer::startTransparentRender() {
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glDepthMask(GL_FALSE);
+	//glDepthMask(GL_FALSE);
 }
 
 void Renderer::finishTransparentRender() {

@@ -20,8 +20,8 @@ public:
 	bool physics;
 	float mass;
 
-	RigidBody(bool physics, bool updateEveryTick, float mass)
-		: physics(physics), updateEveryTick(updateEveryTick), mass(mass) { }
+	RigidBody(bool updateEveryTick)
+		: updateEveryTick(updateEveryTick) {}
 
 	void addVelocity(const glm::vec3& velocity) {
 		this->velocity += velocity;

@@ -13,7 +13,7 @@ Frustum::~Frustum() {
 }
 
 bool Frustum::isAABBInFrustum(const AABB& aabb) {
-    if (aabb.min == glm::vec3(0) && aabb.extents == glm::vec3(0))
+    if (glm::length(aabb.extents) == 0)
         return true;
 
     for (Plane* plane : planes) {

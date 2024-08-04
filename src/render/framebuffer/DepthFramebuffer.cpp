@@ -1,7 +1,5 @@
 #include "DepthFramebuffer.h"
 
-#include <glad/glad.h>
-
 #include "../../math/Orientation.h"
 
 DepthFramebuffer::DepthFramebuffer(Shader* shader, const DFBConfig& config)

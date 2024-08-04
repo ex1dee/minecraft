@@ -1,7 +1,5 @@
 #include "CubeTexture.h"
 
-#include <glad/glad.h>
-
 #include "../utils/Files.h"
 #include "TextureManager.h"
 #include "Image.h"
@@ -11,6 +9,8 @@ CubeTexture::CubeTexture(const char* directory, std::array<const char*, 6>& file
 	this->filePaths = filePaths;
 	
 	for (int i = 0; i < fileNames.size(); ++i) {
+		std::string filePath = Files::getFullPath(directory, fileNames[i]);
+
 		filePaths[i] = Files::getFullPath(directory, fileNames[i]);
 	}
 

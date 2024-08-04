@@ -1,0 +1,10 @@
+#ifndef CAMERAVIEWMODE_H
+#define CAMERAVIEWMODE_H
+
+enum CameraViewMode {
+	FIRST_PERSON,
+	THIRD_PERSON_BACK,
+	THIRD_PERSON_FRONT
+};
+
+#endif

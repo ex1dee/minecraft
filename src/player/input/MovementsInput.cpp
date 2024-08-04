@@ -1,11 +1,13 @@
-#include "MovementsHandler.h"
+#include "MovementsInput.h"
 
-std::unordered_map<int, glm::vec3> MovementsHandler::keys;
+#include "../../window/Events.h"
 
-void MovementsHandler::handle(Player* player) {
+std::unordered_map<int, glm::vec3> MovementsInput::keys;
+
+void MovementsInput::handle(Player* player) {
 	RigidBody* rb = &player->rigidBody;
 
-	const Orientation orientation = player->getOrientation();
+	Orientation orientation = player->orientation;
 	glm::vec3 front = orientation.getMovingFront();
 	glm::vec3 right = orientation.getMovingRight();
 	float speed = calcSpeed(player);
@@ -18,7 +20,7 @@ void MovementsHandler::handle(Player* player) {
 	checkJumping(player);
 }
 
-void MovementsHandler::checkJumping(Player* player) {
+void MovementsInput::checkJumping(Player* player) {
 	if (Events::pressed(GLFW_KEY_SPACE)) {
 		if (!player->isJumping()) {
 			player->rigidBody.addVelocity(glm::vec3(0, 1, 0) * player->getJumpForce());
@@ -26,7 +28,7 @@ void MovementsHandler::checkJumping(Player* player) {
 	}
 }
 
-float MovementsHandler::calcSpeed(Player* player) {
+float MovementsInput::calcSpeed(Player* player) {
 	float speed = player->getWalkSpeed();
 
 	player->bIsSprinting = Events::pressed(GLFW_KEY_LEFT_CONTROL);
@@ -41,7 +43,7 @@ float MovementsHandler::calcSpeed(Player* player) {
 	return speed;
 }
 
-void MovementsHandler::check(int key, RigidBody* rigidBody, const glm::vec3& velocity) {
+void MovementsInput::check(int key, RigidBody* rigidBody, const glm::vec3& velocity) {
 	if (keys.find(key) != keys.end()) {
 		if (!Events::pressed(key)) {
 			rigidBody->addVelocity(-keys[key]);

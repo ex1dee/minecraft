@@ -28,6 +28,8 @@ void Sun::setTime(float time, Player& player) {
 	light->direction.x = -sin(sunAngle);
 	light->direction.y = -cos(sunAngle);
 
+	light->direction = glm::normalize(light->direction);
+
 	light->position = getFocus(player) - light->direction * (float)CHUNK_H;
 }
 

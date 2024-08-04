@@ -1,6 +1,8 @@
 #ifndef CUBETEXTURE_H
 #define CUBETEXTURE_H
 
+#include <glad/glad.h>
+
 #include <string>
 #include <array>
 

@@ -2,7 +2,7 @@
 
 #include "../../utils/Json.h"
 
-std::unordered_map<int, BlockType*> BlocksDatabase::blocks;
+std::unordered_map<BlockID, BlockType*> BlocksDatabase::blocks;
 TextureAtlas* BlocksDatabase::textureAtlas;
 
 void BlocksDatabase::initialize() {
@@ -27,7 +27,7 @@ void BlocksDatabase::initialize() {
 }
 
 void BlocksDatabase::finalize() {
-	for (int i = 0; i < blocks.size(); ++i) {
-		delete blocks[i];
+	for (std::pair<int, BlockType*> pair : blocks) {
+		delete pair.second;
 	}
 }

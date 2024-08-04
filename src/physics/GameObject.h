@@ -1,6 +1,8 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
+#include "../render/model/Model.h"
+#include "../math/Orientation.h"
 #include "../math/Transform.h"
 #include "../math/AABB.h"
 #include "collider/Collider.h"
@@ -9,25 +11,25 @@
 
 class GameObject {
 public:
+	Orientation orientation;
 	Transform transform;
 	RigidBody rigidBody;
 	Collider* collider;
-	AABB aabb;
+	Model* model;
 
-	GameObject(bool physics = false, bool updateEveryTick = true, float mass = 1.0f)
-		: rigidBody(physics, updateEveryTick, mass) {
+	GameObject(bool updateEveryTick)
+		: rigidBody(updateEveryTick) {
 
-		PhysicsEngine::addObject(this);
 	}
 
 	void applyTransform(Transform& transform) {
 		collider->applyTransform(transform);
-		aabb.min = transform.position;
+		model->aabb.applyTransform(transform);
 	}
 
 	void applyTransform() {
 		collider->applyTransform(transform);
-		aabb.min = transform.position;
+		model->aabb.applyTransform(transform);
 	}
 
 	~GameObject() {

@@ -2,11 +2,10 @@
 
 #include "../textures/TextureManager.h"
 #include "../world/WorldConstants.h"
+#include "../shaders/ShadersDatabase.h"
 #include "Renderer.h"
 
 SkyboxRenderer::SkyboxRenderer() {
-	skyboxShader = new Shader("shaders/skybox.vs", "shaders/skybox.fs");
-
 	loadTexture();
 	makeModel();
 }
@@ -14,7 +13,6 @@ SkyboxRenderer::SkyboxRenderer() {
 SkyboxRenderer::~SkyboxRenderer() {
 	model.reset();
 
-	delete skyboxShader;
 	delete texture;
 }
 
@@ -22,6 +20,7 @@ void SkyboxRenderer::render(Camera* camera, const Sun& sun) {
 	glDisable(GL_CULL_FACE);
 	glDepthMask(GL_FALSE);
     
+    Shader* skyboxShader = ShadersDatabase::get(SKYBOX);
 	skyboxShader->use();
 
     TextureManager::bindTexture(*texture, *skyboxShader, "background");

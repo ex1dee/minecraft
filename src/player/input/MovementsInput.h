@@ -1,12 +1,11 @@
-#ifndef MOVEMENTSHANDLER_H
-#define MOVEMENTSHANDLER_H
+#ifndef MOVEMENTSINPUT_H
+#define MOVEMENTSINPUT_H
 
 #include <unordered_map>
 
-#include "../../window/Events.h"
 #include "../Player.h"
 
-class MovementsHandler {
+class MovementsInput {
 	static std::unordered_map<int, glm::vec3> keys;
 
 	static void check(int key, RigidBody* rigidBody, const glm::vec3& velocity);

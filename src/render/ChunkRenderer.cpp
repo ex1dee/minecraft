@@ -2,16 +2,8 @@
 
 #include "../textures/TextureManager.h"
 #include "../world/block/BlocksDatabase.h"
+#include "../shaders/ShadersDatabase.h"
 #include "Renderer.h"
-
-ChunkRenderer::ChunkRenderer() {
-	defShader = new Shader("shaders/default.vs", "shaders/default.fs");
-	floraShader = new Shader("shaders/flora.vs", "shaders/flora.fs");
-}
-
-ChunkRenderer::~ChunkRenderer() {
-	delete defShader;
-}
 
 void ChunkRenderer::add(const ChunkMeshCollection& chunk) {
 	if (!chunk.solid->getModel().isEmpty())
@@ -32,6 +24,8 @@ void ChunkRenderer::render(Camera* camera, const Sun& sun) {
 		solidMeshes.clear();
 	}
 
+	updateFloraShader(camera, sun);
+
 	if (floraMeshes.size()) {
 		updateFloraShader(camera, sun);
 
@@ -48,27 +42,36 @@ void ChunkRenderer::render(Camera* camera, const Sun& sun) {
 }
 
 void ChunkRenderer::updateSolidShader(Camera* camera, const Sun& sun) {
-	activeShader = defShader;
+	activeShader = ShadersDatabase::get(DEFAULT);
 	activeShader->use();
 
 	//defShader->setMat4("projView", sun.getLight().getFramebuffer().getProjView())
 	activeShader->setMat4("projView", camera->getProjView());
+	activeShader->setMat4("model", glm::mat4(1));
 	activeShader->setVec3("cameraPos", camera->getPosition());
-	activeShader->setInt("pointLightCount", 0);
+
+	activeShader->setBool("material.shadow", true);
+	activeShader->setBool("material.lighting", true);
 
 	activeShader->setMat4("sun.shadow.projView", sun.getLight().getFramebuffer().getProjView());
 	activeShader->setVec3("sun.direction", sun.getLight().direction);
 	activeShader->setVec3("sun.color", sun.getLight().color);
 	
+	activeShader->setInt("pointLightCount", 0);
+
 	TextureManager::bindTexture(BlocksDatabase::getTextureAtlas(), *activeShader, "tex");
 	TextureManager::bindDepthMap(sun.getLight().getFramebuffer().getDepthMap(), *activeShader, "sun.shadow.depthMap");
 }
 
 void ChunkRenderer::updateFloraShader(Camera* camera, const Sun& sun) {
-	activeShader = defShader;
+	activeShader = ShadersDatabase::get(DEFAULT);
 	activeShader->use();
 
 	activeShader->setMat4("projView", camera->getProjView());
+	activeShader->setMat4("model", glm::mat4(1));
+
+	activeShader->setBool("material.shadow", false);
+	activeShader->setBool("material.lighting", false);
 
 	activeShader->setVec3("sun.direction", sun.getLight().direction);
 	activeShader->setVec3("sun.color", sun.getLight().color);
@@ -94,7 +97,5 @@ void ChunkRenderer::renderLights(std::vector<ChunkMesh*>& meshes, const Sun& sun
 
 	activeShader = sun.getLight().getFramebuffer().getShader();
 
-	sun.getLight().startRender();
 	render(meshes);
-	sun.getLight().finishRender();
 }

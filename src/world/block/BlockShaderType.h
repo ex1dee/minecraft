@@ -1,5 +1,5 @@
-#ifndef SHADERTYPE_H
-#define SHADERTYPE_H
+#ifndef BLOCKSHADERTYPE_H
+#define BLOCKSHADERTYPE_H
 
 enum BlockShaderType {
 	SOLID = 0,

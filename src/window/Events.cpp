@@ -1,5 +1,6 @@
 #include "Events.h"
 
+#include <GLFW/glfw3.h>
 #include <iostream>
 
 CursorPos Events::cursorPos;

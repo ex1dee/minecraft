@@ -10,7 +10,6 @@
 
 class SkyboxRenderer {
 	Model model;
-	Shader* skyboxShader;
 	CubeTexture* texture;
 
 	void loadTexture();

@@ -1,7 +1,10 @@
 #include "World.h"
 
+#include <GLFW/glfw3.h>
+
 #include "../config/Config.h"
 #include "../utils/random/Random.h"
+#include "../shaders/ShadersDatabase.h"
 
 World::World(TerrainGenerator* terrainGen, Player &player, Camera& camera)
 	: terrainGen(terrainGen) {
@@ -27,8 +30,7 @@ World::~World() {
 }
 
 void World::makeSun() {
-	FBOShader = new Shader("shaders/framebuffer.vs", "shaders/framebuffer.fs");
-	sun = new Sun(FBOShader, this);
+	sun = new Sun(ShadersDatabase::get(FRAMEBUFFER), this);
 }
 
 void World::addLoadChunksThread(Player& player, Camera& camera) {
@@ -82,6 +84,15 @@ void World::loadChunks(Player& player, Camera& camera) {
 }
 
 void World::render(Renderer& renderer, Player& player) {
+	renderEntities(renderer, player);
+	renderChunks(renderer, player);
+}
+
+void World::renderEntities(Renderer& renderer, Player& player) {
+	renderer.addEntity(&player);
+}
+
+void World::renderChunks(Renderer& renderer, Player& player) {
 	glm::vec2 cameraPos = getLocalChunkPosition(player.transform.position);
 	int loadDist = Config::settings["world"]["loadDistance"] - 1;
 

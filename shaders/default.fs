@@ -38,6 +38,9 @@ struct Material {
 	sampler2D specular[16];
 
 	float shininess;
+
+	bool shadow;
+	bool lighting;
 };
 
 out vec4 FragColor;
@@ -55,24 +58,27 @@ uniform PointLight pointLight[MAX_LIGHTS];
 
 float calcShadow(LightShadow lightShadow, vec3 lightDir);
 float calcAttenuation(PointLight light, float distance);
-vec3 calcPointLight (PointLight light, vec3 normal);
-vec3 calcSunDiffuse(DirectLight sun, vec3 normal);
+vec3 calcPointLight (PointLight light);
+vec3 calcSunDiffuse(DirectLight sun);
 float calcSunLight();
 
 void main() {
-	vec3 normal = normalize(Normal);
 	vec3 result = vec3(0);
 	float shadow = 1;
 
 	float sunLight = calcSunLight();
-	result += calcSunDiffuse(sun, normal);
-	shadow = min(shadow, calcShadow(sun.shadow, sun.direction));
+	result += calcSunDiffuse(sun);
 
-	for (int i = 0; i < pointLightCount; ++i) {
-		//PointLight light = pointLight[i];
+	if (material.shadow)
+		shadow = min(shadow, calcShadow(sun.shadow, sun.direction));
 
-		//result += calcPointLight(light, normal);
-		//shadow = min(shadow, calcShadow(light.shadow, lightDir));
+	if (material.lighting) {
+		for (int i = 0; i < pointLightCount; ++i) {
+			//PointLight light = pointLight[i];
+
+			//result += calcPointLight(light);
+			//shadow = min(shadow, calcShadow(light.shadow, lightDir));
+		}
 	}
 
 	vec3 lighting = shadow * result;
@@ -104,8 +110,10 @@ float calcShadow(LightShadow lightShadow, vec3 lightDir) {
 
 	//for (int x = -1; x <= 1; ++x) {
 	//	for (int y = -1; y <= 1; ++y) {
-	//		float pcfDepth = texture(lightShadow.depthMap, projCoords.xy + vec2(x, y) * texelSize).r;
-	//		shadow += currentDepth - bias > pcfDepth ? 0 : 1;
+	//		float pcfDepth = texture(lightShadow/.depthMap, projCoords.xy + vec2(x, y) * texelSize).r;
+	//
+	//		if (material.shadow)
+	//			shadow += currentDepth - bias > pcfDepth ? 0 : 1;
 	//	}
 	//}
 
@@ -114,14 +122,14 @@ float calcShadow(LightShadow lightShadow, vec3 lightDir) {
 	return shadow;
 }
 
-vec3 calcPointLight (PointLight light, vec3 normal) {
+vec3 calcPointLight (PointLight light) {
 	vec3 lightDir = normalize(light.position - FragPos);
 	vec3 ambient, diffuse, specular;
 
 	ambient = light.color;
 
 	if (material.diffuseCount > 0) {
-		float diff = max(0, dot(normal, lightDir));
+		float diff = max(0, dot(Normal, lightDir));
 		diffuse = light.color * diff;
 
 		for (int i = 0; i < material.diffuseCount; ++i) {
@@ -131,7 +139,7 @@ vec3 calcPointLight (PointLight light, vec3 normal) {
 	}
 
 	if (material.specularCount > 0) {
-		vec3 reflectDir = reflect(-lightDir, normal);
+		vec3 reflectDir = reflect(-lightDir, Normal);
 		float spec = pow(max(0, dot(cameraPos, reflectDir)), material.shininess);
 		specular = light.color * spec;
 
@@ -148,8 +156,8 @@ float calcAttenuation(PointLight light, float distance) {
   			       light.quadratic * (distance * distance));
 }
 
-vec3 calcSunDiffuse(DirectLight sun, vec3 normal) {
-	float diff = max(MIN_SUN_DIFFUSE, dot(normal, -sun.direction));
+vec3 calcSunDiffuse(DirectLight sun) {
+	float diff = max(MIN_SUN_DIFFUSE, dot(Normal, -sun.direction));
 	vec3 diffuse = diff * sun.color;
 
 	return diffuse;

@@ -113,7 +113,8 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>
+      </PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Users\User\source\repos\Minecraft\Minecraft\dependencies\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
@@ -131,7 +132,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>
+      </PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
@@ -142,15 +144,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\entity\EntitiesDatabase.cpp" />
+    <ClCompile Include="src\entity\Entity.cpp" />
     <ClCompile Include="src\math\Frustum.cpp" />
+    <ClCompile Include="src\math\Orientation.cpp" />
     <ClCompile Include="src\physics\collision\BoxBoxCollision.cpp" />
     <ClCompile Include="src\physics\collision\CollisionDetector.cpp" />
     <ClCompile Include="src\physics\collision\CollisionHandler.cpp" />
     <ClCompile Include="src\physics\PhysicsEngine.cpp" />
-    <ClCompile Include="src\player\input\MovementsHandler.cpp" />
+    <ClCompile Include="src\player\input\CameraInput.cpp" />
+    <ClCompile Include="src\player\input\MovementsInput.cpp" />
     <ClCompile Include="src\player\Player.cpp" />
+    <ClCompile Include="src\render\EntityRenderer.cpp" />
     <ClCompile Include="src\render\model\Mesh.cpp" />
     <ClCompile Include="src\render\SkyboxRenderer.cpp" />
+    <ClCompile Include="src\shaders\ShadersDatabase.cpp" />
     <ClCompile Include="src\textures\TextureLoader.cpp" />
     <ClCompile Include="src\utils\AssimpLoader.cpp" />
     <ClCompile Include="src\world\Sun.cpp" />
@@ -182,8 +190,12 @@
     <ClCompile Include="src\world\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\entity\EntitiesDatabase.h" />
     <ClInclude Include="src\entity\Entity.h" />
+    <ClInclude Include="src\entity\EntityID.h" />
+    <ClInclude Include="src\entity\EntityType.h" />
     <ClInclude Include="src\math\Frustum.h" />
+    <ClInclude Include="src\math\Math.h" />
     <ClInclude Include="src\math\Orientation.h" />
     <ClInclude Include="src\math\Plane.h" />
     <ClInclude Include="src\math\AABB.h" />
@@ -197,17 +209,23 @@
     <ClInclude Include="src\physics\GameObject.h" />
     <ClInclude Include="src\physics\PhysicsEngine.h" />
     <ClInclude Include="src\physics\RigidBody.h" />
-    <ClInclude Include="src\player\input\MovementsHandler.h" />
+    <ClInclude Include="src\player\CameraViewMode.h" />
+    <ClInclude Include="src\player\input\CameraInput.h" />
+    <ClInclude Include="src\player\input\MovementsInput.h" />
     <ClInclude Include="src\player\Player.h" />
+    <ClInclude Include="src\render\EntityRenderer.h" />
     <ClInclude Include="src\render\light\DirectLight.h" />
     <ClInclude Include="src\render\light\Light.h" />
     <ClInclude Include="src\render\framebuffer\DFBConfig.h" />
     <ClInclude Include="src\render\light\PointLight.h" />
+    <ClInclude Include="src\shaders\ShadersDatabase.h" />
+    <ClInclude Include="src\shaders\ShaderType.h" />
     <ClInclude Include="src\textures\TextureLoader.h" />
     <ClInclude Include="src\utils\AssimpLoader.h" />
     <ClInclude Include="src\render\model\MeshData.h" />
     <ClInclude Include="src\render\SkyboxRenderer.h" />
     <ClInclude Include="src\textures\TextureType.h" />
+    <ClInclude Include="src\world\block\BlockShaderType.h" />
     <ClInclude Include="src\world\Sun.h" />
     <ClInclude Include="src\states\PlayState.h" />
     <ClInclude Include="src\render\ChunkRenderer.h" />
@@ -221,7 +239,6 @@
     <ClInclude Include="src\world\block\BlockColliders.h" />
     <ClInclude Include="src\world\block\BlockColliderType.h" />
     <ClInclude Include="src\world\block\BlockFaces.h" />
-    <ClInclude Include="src\world\block\BlockShaderType.h" />
     <ClInclude Include="src\world\chunk\Chunk.h" />
     <ClInclude Include="src\world\block\Block.h" />
     <ClInclude Include="src\world\block\BlockType.h" />
@@ -265,16 +282,17 @@
     <None Include="resources\blocks\grass_block.json" />
     <None Include="resources\blocks\short_grass.json" />
     <None Include="resources\blocks\stone.json" />
+    <None Include="resources\entities\player.json" />
+    <None Include="resources\models\player\model.gltf" />
     <None Include="shaders\default.fs" />
     <None Include="shaders\default.vs" />
-    <None Include="shaders\flora.fs" />
-    <None Include="shaders\flora.vs" />
     <None Include="shaders\framebuffer.fs" />
     <None Include="shaders\framebuffer.vs" />
     <None Include="shaders\skybox.fs" />
     <None Include="shaders\skybox.vs" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\models\player\textures\gltf_embedded_0.png" />
     <Image Include="resources\textures\blocks_atlas.png" />
     <Image Include="resources\textures\skybox\back.bmp" />
     <Image Include="resources\textures\skybox\bottom.bmp" />

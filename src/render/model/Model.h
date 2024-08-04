@@ -1,7 +1,6 @@
 #ifndef MODEL_H
 #define MODEL_H
 
-#include <glad/glad.h>
 #include <vector>
 
 #include "../../math/AABB.h"
@@ -19,10 +18,10 @@ public:
 
 	bool isEmpty() { return meshes.empty(); }
 
-	void draw(Shader* shader);
-	void addMesh(const MeshData& data);
-	void addMesh(Mesh* mesh);
 	void reset();
+	void draw(Shader* shader);
+	void addMesh(Mesh* mesh);
+	void addMesh(const MeshData& data);
 };
 
 #endif

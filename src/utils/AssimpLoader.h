@@ -11,20 +11,19 @@
 #include "../render/model/Model.h"
 
 class AssimpLoader {
-	std::vector<Mesh*> meshes;
-	std::string directory;
-	Model* model;
+	static std::string directory;
+	static Model* model;
 
-	TextureType getTextureTypeBy(aiTextureType type);
-	void addVertices(const aiMesh* mesh, MeshData& meshData);
-	void addIndices(const aiMesh* mesh, MeshData& meshData);
-	void addMaterial(const aiScene* scene, const aiMesh* mesh, MeshData& meshData);
-	void addVertex(const aiMesh* mesh, MeshData& meshData, int i);
-	void addMesh(const aiScene* scene, const aiMesh* mesh);
-	void processNode(const aiScene* scene, const aiNode* node);
-	void loadMaterialTextures(MeshData& meshData, aiMaterial* material, aiTextureType type);
+	static TextureType getTextureTypeBy(aiTextureType type);
+	static void addVertices(const aiMesh* mesh, MeshData& meshData);
+	static void addIndices(const aiMesh* mesh, MeshData& meshData);
+	static void addMaterial(const aiScene* scene, const aiMesh* mesh, MeshData& meshData);
+	static void addVertex(const aiMesh* mesh, MeshData& meshData, int i);
+	static void addMesh(const aiScene* scene, const aiMesh* mesh);
+	static void processNode(const aiScene* scene, const aiNode* node);
+	static void loadMaterialTextures(MeshData& meshData, aiMaterial* material, aiTextureType type);
 public:
-	Model* load(const std::string& path);
+	static Model* load(const std::string& path);
 };
 
 #endif

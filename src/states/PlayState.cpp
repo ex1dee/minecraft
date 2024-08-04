@@ -1,16 +1,18 @@
 #include "PlayState.h"
 
-#include "../player/input/MovementsHandler.h"
+#include "../player/input/MovementsInput.h"
+#include "../player/input/CameraInput.h"
 #include "../physics/PhysicsEngine.h"
 #include "../Time.h"
 
 PlayState::PlayState(Renderer* renderer, Player* player, Camera* camera)
 	: BaseState(renderer), player(player), camera(camera) {
-	
-	camera->hookPlayer(player);
+
 	world = new World(new SuperFlatGenerator, *player, *camera);
 
 	PhysicsEngine::initialize(world);
+	camera->hookPlayer(player);
+	camera->hookWorld(world);
 }
 
 PlayState::~PlayState() {
@@ -20,7 +22,8 @@ PlayState::~PlayState() {
 }
 
 void PlayState::handleInput() {
-	MovementsHandler::handle(player);
+	MovementsInput::handle(player);
+	CameraInput::handle(player);
 }
 
 void PlayState::update() {

@@ -1,6 +1,7 @@
 #ifndef EVENTS_H
 #define EVENTS_H
 
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 #include <glm/glm.hpp>
@@ -9,6 +10,8 @@
 
 #include "CursorPos.h"
 #include "Button.h"
+
+class GLFWwindow;
 
 class Events {
 	static CursorPos cursorPos;

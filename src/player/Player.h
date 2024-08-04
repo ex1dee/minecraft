@@ -13,7 +13,7 @@
 class Camera;
 
 class Player : public Entity {
-	friend class MovementsHandler;
+	friend class MovementsInput;
 
 	bool bIsSprinting = false;
 	bool bIsSneaking = false;
@@ -30,10 +30,9 @@ public:
 	bool isFlying() { return bIsFlying; }
 	bool isSneaking() { return bIsSneaking; }
 	bool isSprinting() { return bIsSprinting; }
-	Camera& getCamera() { return *camera; }
+	Camera* getCamera() { return camera; }
 
 	bool isJumping();
-	const Orientation& getOrientation();
 };
 
 #endif

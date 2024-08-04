@@ -119,13 +119,31 @@
     <ClCompile Include="src\physics\collision\BoxBoxCollision.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\player\input\MovementsHandler.cpp">
+    <ClCompile Include="src\player\input\MovementsInput.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\utils\AssimpLoader.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\textures\TextureLoader.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\player\input\CameraInput.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\EntityRenderer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entity\EntitiesDatabase.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\entity\Entity.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\shaders\ShadersDatabase.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\Orientation.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -163,7 +181,6 @@
     <ClInclude Include="src\world\chunk\ChunkMesh.h" />
     <ClInclude Include="src\world\WorldConstants.h" />
     <ClInclude Include="src\world\chunk\ChunkMeshBuilder.h" />
-    <ClInclude Include="src\world\block\BlockShaderType.h" />
     <ClInclude Include="src\world\block\BlockFaces.h" />
     <ClInclude Include="src\world\World.h" />
     <ClInclude Include="src\utils\VecMap.h" />
@@ -202,13 +219,23 @@
     <ClInclude Include="src\physics\collision\CollisionDetector.h" />
     <ClInclude Include="src\world\block\BlockColliders.h" />
     <ClInclude Include="src\world\block\BlockColliderType.h" />
-    <ClInclude Include="src\player\input\MovementsHandler.h" />
+    <ClInclude Include="src\player\input\MovementsInput.h" />
     <ClInclude Include="src\render\framebuffer\DFBConfig.h" />
     <ClInclude Include="src\render\light\PointLight.h" />
     <ClInclude Include="src\textures\TextureType.h" />
     <ClInclude Include="src\render\model\MeshData.h" />
     <ClInclude Include="src\utils\AssimpLoader.h" />
     <ClInclude Include="src\textures\TextureLoader.h" />
+    <ClInclude Include="src\player\input\CameraInput.h" />
+    <ClInclude Include="src\player\CameraViewMode.h" />
+    <ClInclude Include="src\math\Math.h" />
+    <ClInclude Include="src\render\EntityRenderer.h" />
+    <ClInclude Include="src\entity\EntityType.h" />
+    <ClInclude Include="src\entity\EntitiesDatabase.h" />
+    <ClInclude Include="src\entity\EntityID.h" />
+    <ClInclude Include="src\shaders\ShadersDatabase.h" />
+    <ClInclude Include="src\shaders\ShaderType.h" />
+    <ClInclude Include="src\world\block\BlockShaderType.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />
@@ -225,8 +252,8 @@
     <None Include="shaders\framebuffer.fs" />
     <None Include="packages.config" />
     <None Include="resources\blocks\short_grass.json" />
-    <None Include="shaders\flora.vs" />
-    <None Include="shaders\flora.fs" />
+    <None Include="resources\models\player\model.gltf" />
+    <None Include="resources\entities\player.json" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\blocks_atlas.png">
@@ -251,6 +278,9 @@
       <Filter>Файлы ресурсов</Filter>
     </Image>
     <Image Include="resources\textures\skybox\stars.jpg">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\models\player\textures\gltf_embedded_0.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>

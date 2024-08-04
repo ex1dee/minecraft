@@ -3,23 +3,27 @@
 #include "../window/Window.h"
 #include "../window/Events.h"
 #include "../config/Config.h"
-#include "Player.h"
 
 Camera::Camera() {
-	pitch = 0;
-	yaw = -90;
+	orientation.update(-90.0f, 0.0f);
+
+	zoom = 0;
 }
 
 void Camera::hookPlayer(Player* player) {
 	this->player = player;
 }
 
+void Camera::hookWorld(World* world) {
+	this->world = world;
+}
+
 void Camera::update() {
 	fov = Config::settings["camera"]["fov"];
 	aspect = (float)Window::getWidth() / (float)Window::getHeight();
 
-	updatePosition();
 	updateOrientation();
+	updatePosition();
 	updateView();
 	updateProjection();
 
@@ -29,18 +33,26 @@ void Camera::update() {
 }
 
 void Camera::updatePosition() {
-	if (player == nullptr)
-		return;
+	transform.position = player->transform.position + getOffset();
+}
 
-	transform.position = player->transform.position + CAMERA_OFFSET;
+glm::vec3 Camera::getOffset() {
+	glm::vec3 offset = CAMERA_OFFSET;
+
+	if (viewMode == THIRD_PERSON_BACK)
+		offset -= orientation.front * CAMERA_TPS_COEF;
+	else if (viewMode == THIRD_PERSON_FRONT)
+		offset += orientation.front * CAMERA_TPS_COEF;
+
+	return offset;
 }
 
 void Camera::updateOrientation() {
 	CursorPos curPos = Events::getCursorPos();
 	curPos.delta *= Config::settings["camera"]["sensitivity"];
 
-	yaw += curPos.delta.x;
-	pitch -= curPos.delta.y;
+	float yaw	= orientation.getYaw() + curPos.delta.x;
+	float pitch = orientation.getPitch() - curPos.delta.y;
 
 	if (pitch > CAMERA_MAX_PITCH)
 		pitch = CAMERA_MAX_PITCH;
@@ -48,19 +60,22 @@ void Camera::updateOrientation() {
 		pitch = -CAMERA_MAX_PITCH;
 
 	orientation.update(yaw, pitch);
+	player->orientation = orientation;
 }
 
 void Camera::updateView() {
+	float frontSign = (viewMode == THIRD_PERSON_FRONT) ? -1.0f : 1.0f;
+	
 	view = glm::lookAt(
 		transform.position,
-		transform.position + orientation.front,
+		transform.position + frontSign * orientation.front,
 		glm::vec3(0, 1, 0)
 	);
 }
 
 void Camera::updateProjection() {
 	projection = glm::perspective(
-		glm::radians(fov),
+		glm::radians(fov - glm::clamp(zoom, 0.0f, CAMERA_MAX_ZOOM)),
 		aspect,
 		CAMERA_NEAR,
 		CAMERA_FAR

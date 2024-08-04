@@ -1,11 +1,12 @@
 #include <glad/glad.c>
-#include <GLFW/glfw3.h>
 
 #include <iostream>
 
 #include "window/Window.h"
 #include "window/Events.h"
 #include "config/Config.h"
+#include "shaders/ShadersDatabase.h"
+#include "entity/EntitiesDatabase.h"
 #include "world/block/BlocksDatabase.h"
 #include "world/World.h"
 #include "render/ChunkRenderer.h"
@@ -28,6 +29,8 @@ int main() {
         Config::initialize();
         Window::initialize();
         BlocksDatabase::initialize();
+        EntitiesDatabase::initialize();
+        ShadersDatabase::initialize();
     } catch (const char* message) {
         std::cout << "ERROR::INITIALIZE\n" << message << "\n";
         glfwTerminate();
@@ -36,7 +39,6 @@ int main() {
     }
 
     Camera camera;
-    camera.update();
 
     Renderer renderer;
     Player player(&camera);
@@ -63,4 +65,6 @@ int main() {
 
     Window::finalize();
     BlocksDatabase::finalize();
+    EntitiesDatabase::finalize();
+    ShadersDatabase::finalize();
 }

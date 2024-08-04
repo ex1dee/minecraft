@@ -9,14 +9,14 @@
 #include "BlockType.h"
 
 class BlocksDatabase {
-	static std::unordered_map<int, BlockType*> blocks;
+	static std::unordered_map<BlockID, BlockType*> blocks;
 	static TextureAtlas* textureAtlas;
 public:
 	static void initialize();
 	static void finalize();
 
 	static const TextureAtlas& getTextureAtlas() { return *textureAtlas; }
-	static BlockType* get(int id) { return blocks[id]; }
+	static BlockType* get(BlockID id) { return blocks[id]; }
 };
 
 #endif

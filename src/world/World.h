@@ -8,8 +8,9 @@
 
 #include "generation/terrain/SuperFlatGenerator.h"
 #include "chunk/ChunkManager.h"
-#include "../shaders/Shader.h"
 #include "../world/World.h"
+#include "../entity/Entity.h"
+#include "../entity/EntitiesDatabase.h"
 #include "WorldPosition.h"
 #include "Sun.h"
 
@@ -18,10 +19,11 @@ class World {
 	TerrainGenerator* terrainGen;
 	std::vector<Chunk*> chunkUpdates;
 	std::vector<std::thread> loadThreads;
+	std::vector<Entity*> entities;
+
 	glm::vec3 spawnPoint;
 	unsigned int seed;
 
-	Shader* FBOShader;
 	Sun* sun;
 
 	std::atomic<bool> isRunning;
@@ -29,6 +31,8 @@ class World {
 	std::mutex configMutex;
 
 	void makeSun();
+	void renderChunks(Renderer& renderer, Player& player);
+	void renderEntities(Renderer& renderer, Player& player);
 	void loadChunks(Player& player, Camera& camera);
 	void updateDefaultSpawnPoint(Player& player);
 	void addLoadChunksThread(Player& player, Camera& camera);
@@ -37,7 +41,7 @@ public:
 	World(TerrainGenerator* terrainGen, Player& player, Camera& camera);
 	~World();
 
-	Sun& getSun() const { return *sun; }
+	Sun* getSun() const { return sun; }
 	TerrainGenerator& getTerrainGenerator() { return *terrainGen; }
 
 	int getHeightAt(const glm::vec3& pos);

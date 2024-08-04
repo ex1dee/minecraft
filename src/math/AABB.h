@@ -1,7 +1,7 @@
 #ifndef AABB_H
 #define AABB_H
 
-#include <glm/glm.hpp>
+#include "../math/Transform.h"
 
 class AABB {
 public:
@@ -28,6 +28,10 @@ public:
 		}
 
 		return res;
+	}
+
+	void applyTransform(const Transform& transform) {
+		min = transform.position;
 	}
 };
 

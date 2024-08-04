@@ -27,9 +27,9 @@ void CollisionDetector::detectO2B(std::vector<GameObject*>& objects, World* worl
 	for (GameObject* obj : objects) {
 		glm::vec3 position = obj->transform.position + obj->rigidBody.deltaPosition;
 
-		for (float x = -1; x <= obj->aabb.extents.x + 1; ++x) {
-			for (float y = -1; y <= obj->aabb.extents.y + 1; ++y) {
-				for (float z = -1; z <= obj->aabb.extents.z + 1; ++z) {
+		for (float x = -1; x <= obj->model->aabb.extents.x + 1; ++x) {
+			for (float y = -1; y <= obj->model->aabb.extents.y + 1; ++y) {
+				for (float z = -1; z <= obj->model->aabb.extents.z + 1; ++z) {
 					glm::vec3 blockPosition = glm::floor(position + glm::vec3(x, y, z));
 					Transform blockTrans = Transform(blockPosition);
 					Block block = world->getBlock(blockPosition);

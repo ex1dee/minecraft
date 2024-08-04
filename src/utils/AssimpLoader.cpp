@@ -3,6 +3,9 @@
 #include "../textures/TextureLoader.h"
 #include "Files.h"
 
+std::string AssimpLoader::directory;
+Model* AssimpLoader::model;
+
 Model* AssimpLoader::load(const std::string& path) {
 	Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
