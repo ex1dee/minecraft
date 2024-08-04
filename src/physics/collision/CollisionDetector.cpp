@@ -26,10 +26,6 @@ void CollisionDetector::detectO2O(std::vector<GameObject*>& objects) {
 void CollisionDetector::detectO2B(std::vector<GameObject*>& objects, World* world) {
 	for (GameObject* obj : objects) {
 		glm::vec3 position = obj->transform.position + obj->rigidBody.deltaPosition;
-		glm::vec3 chunkPos = glm::vec3(position.x, 0, position.z);
-
-		if (!world->getChunk(chunkPos)->isLoaded())
-			return;
 
 		for (float x = -1; x <= obj->aabb.extents.x + 1; ++x) {
 			for (float y = -1; y <= obj->aabb.extents.y + 1; ++y) {

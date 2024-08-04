@@ -116,16 +116,16 @@ glm::vec3 Chunk::getWorldPosition(const glm::vec3& blockPos) {
 void Chunk::updateHighestBlock(const glm::vec3& pos, Block& block) {
 	glm::vec2 posXZ = glm::vec2(pos.x, pos.z);
 	float y = pos.y;
-	
+
 	if (highestBlocks.find(posXZ) == highestBlocks.end()) {
 		highestBlocks.emplace(posXZ, y);
 	}
 	else {
-		if (block.type->id == AIR) {
+		if (!block.type->colliders.size()) {
 			if (y == highestBlocks[pos]) {
 				Block block = getBlock(glm::vec3(pos.x, y--, pos.z));
 
-				while (!block.type->isOpaque) {
+				while (!block.type->colliders.size()) {
 					block = getBlock(glm::vec3(pos.x, y--, pos.z));
 				}
 			}

@@ -25,6 +25,12 @@ void PhysicsEngine::updatePerFrame(Player& player) {
 }
 
 void PhysicsEngine::update(Player& player, bool updatePerTick) {
+	glm::vec3 position = player.transform.position;
+	glm::vec3 chunkPos = glm::vec3(position.x, 0, position.z);
+
+	if (!world->getChunk(chunkPos)->isLoaded())
+		return;
+
 	cullObjects();
 
 	for (GameObject* object : objects) {

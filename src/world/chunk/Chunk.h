@@ -16,10 +16,11 @@ class Chunk {
 	ChunkMeshCollection meshes;
 	glm::vec2 position;
 	World* world;
-	bool bHasMesh;
-	bool bHasBuffered;
-	bool bIsLoaded;
 	AABB aabb;
+
+	bool bHasMesh = false;
+	bool bHasBuffered = false;
+	bool bIsLoaded = false;
 
 	void makeAABB();
 public:

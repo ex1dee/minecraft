@@ -78,9 +78,8 @@ void ChunkRenderer::updateFloraShader(Camera* camera, const Sun& sun) {
 
 void ChunkRenderer::render(std::vector<ChunkMesh*>& meshes, Camera* camera, bool onlyVisible) {
 	for (ChunkMesh* mesh : meshes) {
-		if (!onlyVisible || camera->isAABBInFrustum(mesh->getModel().aabb)) {
+		if (!onlyVisible || camera->isAABBInFrustum(mesh->getModel().aabb))
 			mesh->getModel().draw(activeShader);
-		}
 	}
 }
 
