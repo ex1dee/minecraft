@@ -12,6 +12,8 @@ World::World(TerrainGenerator* terrainGen, Player &player, Camera& camera)
 	isRunning = true;
 	seed = time(0);
 
+	player.hookWorld(this);
+
 	makeSun();
 	updateDefaultSpawnPoint(player);
 	addLoadChunksThread(player, camera);
@@ -114,7 +116,7 @@ void World::renderChunks(Renderer& renderer, Player& player) {
 void World::update(Renderer& renderer, Player& player, Camera& camera) {
 	updateChunks(camera);
 
-	sun->setTime(glfwGetTime() * 10, player);
+	sun->setTime(0, player);
 }
 
 void World::updateChunk(const glm::vec3& pos) {
@@ -160,7 +162,7 @@ WorldPosition World::getWorldPosition(const glm::vec3& pos) {
 	return worldPos;
 }
 
-Chunk* World::getChunk(const glm::vec3& pos) {
+Chunk* const World::getChunk(const glm::vec3& pos) {
 	glm::vec2 locChunkPos = getLocalChunkPosition(pos);
 	return chunkManager->getChunk(locChunkPos);
 }

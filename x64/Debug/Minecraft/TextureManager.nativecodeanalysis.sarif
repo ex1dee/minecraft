@@ -38,6 +38,37 @@
         {
           "ruleId": "C26495",
           "message": {
+            "text": "Переменная \"Shader::programID\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/shaders/Shader.h"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 2,
+                  "endLine": 27,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Shader::{ctor}",
+                  "decoratedName": "??0Shader@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Shader::programID"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
             "text": "Переменная \"Shader::fragmentPath\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
           },
           "locations": [
@@ -69,32 +100,125 @@
         {
           "ruleId": "C26495",
           "message": {
-            "text": "Переменная \"Shader::programID\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+            "text": "Переменная \"Texture::ID\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
           },
           "locations": [
             {
               "physicalLocation": {
                 "artifactLocation": {
-                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/shaders/Shader.h"
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/textures/Texture.h"
                 },
                 "region": {
-                  "startLine": 27,
+                  "startLine": 14,
                   "startColumn": 2,
-                  "endLine": 27,
+                  "endLine": 14,
                   "endColumn": 2
                 }
               },
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "Shader::{ctor}",
-                  "decoratedName": "??0Shader@@QEAA@XZ",
+                  "fullyQualifiedName": "Texture::{ctor}",
+                  "decoratedName": "??0Texture@@QEAA@XZ",
                   "kind": "function"
                 }
               ]
             }
           ],
           "properties": {
-            "targetSymbol": "Shader::programID"
+            "targetSymbol": "Texture::ID"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Texture::target\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/textures/Texture.h"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 2,
+                  "endLine": 14,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Texture::{ctor}",
+                  "decoratedName": "??0Texture@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Texture::target"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Texture::type\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/textures/Texture.h"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 2,
+                  "endLine": 14,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Texture::{ctor}",
+                  "decoratedName": "??0Texture@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Texture::type"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Texture::ID\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/textures/Texture.h"
+                },
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 2,
+                  "endLine": 15,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Texture::{ctor}",
+                  "decoratedName": "??0Texture@@QEAA@IW4TextureType@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Texture::ID"
           }
         }
       ],
@@ -120,7 +244,18 @@
             "resultFile"
           ],
           "hashes": {
-            "sha-256": "61dce8352804b87c400b25e56be9b01f76ee3fb23fa6a5f603b1114b89214e6e"
+            "sha-256": "0741bf0b7614d9dd366ead61ba34ac642cd104fa96fc526db6f0f243cb223835"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/textures/Texture.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "d23176cb1ac9a3641520dc989f548005d50bd531a59e3e25f3a09fc946d14431"
           }
         },
         {
@@ -131,7 +266,7 @@
             "analysisTarget"
           ],
           "hashes": {
-            "sha-256": "90d2e4c92376ce3666481ecc6155f04abbe0a87c0a6162edc86aaa9ab5e06671"
+            "sha-256": "4c19e1886298daa8cb4eeb9929a01bd258b50b3198903a996e7065b015f84c3e"
           }
         },
         {
@@ -139,7 +274,7 @@
             "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/textures/texturemanager.h"
           },
           "hashes": {
-            "sha-256": "869d020343e9a7f82b0abe4674cfd058f1d841863d6fb1a6e5e90572951c59a7"
+            "sha-256": "d00ec3b5f194888bc15fa818386bd11204f17998341b9454b878d63bbb3f0f88"
           }
         },
         {
@@ -156,14 +291,6 @@
           },
           "hashes": {
             "sha-256": "7b1e01aaa7ad8f6fc34b5c7bdf79ebf5189bb09e2c4d2e79fc5d350623d11e83"
-          }
-        },
-        {
-          "location": {
-            "uri": "file:///c:/users/user/source/repos/minecraft/packages/glfw.3.4.0/build/native/include/glfw/glfw3.h"
-          },
-          "hashes": {
-            "sha-256": "aa370985f6b493bbe0358a36ab49f5780a6397c0209c6d98a62143dea595b73c"
           }
         },
         {
@@ -1616,10 +1743,10 @@
         },
         {
           "location": {
-            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/textures/texture.h"
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/textures/texturetype.h"
           },
           "hashes": {
-            "sha-256": "19a6f461140c50db033e1d2afd0e1e89ec5f7ef5e106a46628220fc49baec715"
+            "sha-256": "14a4ce4246f8deab38037be0759c206865050939c165ef6b20f582c4e2d17ee1"
           }
         }
       ]

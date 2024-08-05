@@ -9,8 +9,8 @@
 #include "model/Model.h"
 
 class SkyboxRenderer {
+	const CubeTexture* texture;
 	Model model;
-	CubeTexture* texture;
 
 	void loadTexture();
 	void makeModel();

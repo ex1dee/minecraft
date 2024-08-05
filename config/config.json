@@ -3,5 +3,7 @@
         "width": 960,
         "height": 540,
         "title": "Minecraft"
-    }
+    },
+
+    "anti_aliasing": 0
 }

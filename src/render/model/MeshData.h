@@ -12,13 +12,15 @@ public:
 	std::vector<float> vertexPositions;
 	std::vector<float> textureCoords;
 	std::vector<float> normals;
+	std::vector<float> colors;
 
 	MeshType type;
 	int dimensions;
+	unsigned int mode;
 
 	MeshData() {}
-	MeshData(MeshType type, int dimensions)
-		: type(type), dimensions(dimensions) {}
+	MeshData(MeshType type, int dimensions, unsigned int mode = GL_TRIANGLES)
+		: type(type), dimensions(dimensions), mode(mode) {}
 
 	void reset() {
 		vertexPositions.clear();

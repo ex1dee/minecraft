@@ -5,7 +5,7 @@
 
 #include "../math/geometry/Transform.h"
 
-const glm::vec3 GRAVITY = glm::vec3(0.0f, -15.0f, 0.0f);
+const glm::vec3 GRAVITY = glm::vec3(0.0f, -20.0f, 0.0f);
 
 class RigidBody {
 public:

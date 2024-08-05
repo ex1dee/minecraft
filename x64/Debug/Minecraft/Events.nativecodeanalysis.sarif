@@ -26,7 +26,7 @@
             "analysisTarget"
           ],
           "hashes": {
-            "sha-256": "06d78cc8687a38ec34e367b5d7ac2983ec1b35e84ee4a3b081e985e7030c8b8c"
+            "sha-256": "17a7d366c795ba52d1f819c7f66d5ea395c21bca009fdf2c855b8346eefa708a"
           }
         },
         {
@@ -34,7 +34,23 @@
             "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/window/events.h"
           },
           "hashes": {
-            "sha-256": "8a081971d3bc2fb04f5be667a1f940034352dff21e6d93065b9160c111b24f1e"
+            "sha-256": "0e292313c8b22f0e7b32e550ae199a4120a17d673037c9d124f43d8d2635f58c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/opengl/includes/glad/glad.h"
+          },
+          "hashes": {
+            "sha-256": "127e616ec235e11b5fe945c89cdaa50d4c3b98c5ee79845deb7a54e7a7be8254"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/opengl/includes/khr/khrplatform.h"
+          },
+          "hashes": {
+            "sha-256": "7b1e01aaa7ad8f6fc34b5c7bdf79ebf5189bb09e2c4d2e79fc5d350623d11e83"
           }
         },
         {

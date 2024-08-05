@@ -6,7 +6,7 @@
 
 std::unordered_map<const char*, Texture*> TextureLoader::textures;
 
-TextureAtlas* TextureLoader::loadAtlas(const char* path, const glm::vec2& imagesCount, bool flip, TextureType type) {
+const TextureAtlas* const TextureLoader::loadAtlas(const char* path, const glm::vec2& imagesCount, bool flip, TextureType type) {
 	TextureAtlas* texture = getTexture<TextureAtlas>(path);
 
 	if (texture == nullptr)
@@ -15,7 +15,7 @@ TextureAtlas* TextureLoader::loadAtlas(const char* path, const glm::vec2& images
 	return texture;
 }
 
-BasicTexture* TextureLoader::loadBasic(const char* path, bool flip, TextureType type) {
+const BasicTexture* const TextureLoader::loadBasic(const char* path, bool flip, TextureType type) {
 	BasicTexture* texture = getTexture<BasicTexture>(path);
 
 	if (texture == nullptr)
@@ -24,7 +24,7 @@ BasicTexture* TextureLoader::loadBasic(const char* path, bool flip, TextureType 
 	return texture;
 }
 
-CubeTexture* TextureLoader::loadCube(const char* directory, std::array<const char*, 6>& fileNames, bool flip) {
+const CubeTexture* const TextureLoader::loadCube(const char* directory, std::array<const char*, 6>& fileNames, bool flip) {
 	CubeTexture* texture = getTexture<CubeTexture>(directory);
 
 	if (texture == nullptr)
@@ -34,7 +34,7 @@ CubeTexture* TextureLoader::loadCube(const char* directory, std::array<const cha
 }
 
 template<typename T> 
-static T* TextureLoader::getTexture(const char* key) {
+static T* const TextureLoader::getTexture(const char* key) {
 	if (textures.find(key) != textures.end()) {
 		return nullptr;
 	} else {

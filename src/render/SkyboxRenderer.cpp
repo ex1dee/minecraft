@@ -16,10 +16,7 @@ SkyboxRenderer::~SkyboxRenderer() {
 	delete texture;
 }
 
-void SkyboxRenderer::render(Camera* camera, const Sun& sun) {
-	glDisable(GL_CULL_FACE);
-	glDepthMask(GL_FALSE);
-    
+void SkyboxRenderer::render(Camera* camera, const Sun& sun) {    
     Shader* skyboxShader = ShadersDatabase::get(SKYBOX);
 	skyboxShader->use();
 
@@ -29,8 +26,6 @@ void SkyboxRenderer::render(Camera* camera, const Sun& sun) {
     skyboxShader->setVec3("lightDir", sun.getLight().direction);
 	
     model.draw(skyboxShader);
-
-	glDepthMask(GL_TRUE);
 }
 
 void SkyboxRenderer::loadTexture() {

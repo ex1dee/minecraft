@@ -9,7 +9,7 @@ void EntityRenderer::render(Camera* camera, const Sun& sun) {
 	updateShader(camera, sun);
 
 	for (Entity* entity : entities) {
-		render(entity, camera, true);
+		//render(entity, camera, true);
 	}
 
 	entities.clear();

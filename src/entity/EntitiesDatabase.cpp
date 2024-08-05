@@ -22,6 +22,8 @@ void EntitiesDatabase::initialize() {
 		type->offset.rotation = Json::toVec3(json["offset"]["rotation"]);
 		type->offset.scale = Json::toVec3(json["offset"]["scale"]);
 
+		type->eyesOffset = Json::toVec3(json["eyes_offset"]);
+
 		std::string modelPath = json["model"]["path"];
 		type->model = AssimpLoader::load(Files::getFullPath(MODELS_DIR, modelPath.c_str()));
 

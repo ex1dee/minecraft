@@ -16,14 +16,6 @@ bool Window::shouldClose() {
     return glfwWindowShouldClose(window);
 }
 
-int Window::getWidth() {
-    return width;
-}
-
-int Window::getHeight() {
-    return height;
-}
-
 void Window::initialize() {
     if (!glfwInit()) {
         throw "Failed to initialize GLFW";
@@ -57,6 +49,12 @@ void Window::createWindow() {
     }
 
     glfwMakeContextCurrent(window);
+    setupAntiAliasing();
+}
+
+void Window::setupAntiAliasing() {
+    int aax = Config::config["anti_aliasing"];
+    glfwWindowHint(GLFW_SAMPLES, aax);
 }
 
 void Window::setCallbacks() {

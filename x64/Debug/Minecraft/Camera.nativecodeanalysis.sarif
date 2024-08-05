@@ -3,7 +3,2054 @@
   "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
   "runs": [
     {
-      "results": [],
+      "results": [
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Triangle::a\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/math/shapes/Triangle.h"
+                },
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 2,
+                  "endLine": 12,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Triangle::{ctor}",
+                  "decoratedName": "??0Triangle@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Triangle::a"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Triangle::c\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/math/shapes/Triangle.h"
+                },
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 2,
+                  "endLine": 12,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Triangle::{ctor}",
+                  "decoratedName": "??0Triangle@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Triangle::c"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Triangle::b\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/math/shapes/Triangle.h"
+                },
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 2,
+                  "endLine": 12,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Triangle::{ctor}",
+                  "decoratedName": "??0Triangle@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Triangle::b"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Plane::normal\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/math/shapes/Plane.h"
+                },
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 2,
+                  "endLine": 12,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Plane::{ctor}",
+                  "decoratedName": "??0Plane@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Plane::normal"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Plane::distance\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/math/shapes/Plane.h"
+                },
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 2,
+                  "endLine": 12,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Plane::{ctor}",
+                  "decoratedName": "??0Plane@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Plane::distance"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Texture::ID\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/textures/Texture.h"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 2,
+                  "endLine": 14,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Texture::{ctor}",
+                  "decoratedName": "??0Texture@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Texture::ID"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Texture::target\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/textures/Texture.h"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 2,
+                  "endLine": 14,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Texture::{ctor}",
+                  "decoratedName": "??0Texture@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Texture::target"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Texture::type\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/textures/Texture.h"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 2,
+                  "endLine": 14,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Texture::{ctor}",
+                  "decoratedName": "??0Texture@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Texture::type"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Texture::ID\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/textures/Texture.h"
+                },
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 2,
+                  "endLine": 15,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Texture::{ctor}",
+                  "decoratedName": "??0Texture@@QEAA@IW4TextureType@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Texture::ID"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Shader::fragmentPath\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/shaders/Shader.h"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 2,
+                  "endLine": 27,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Shader::{ctor}",
+                  "decoratedName": "??0Shader@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Shader::fragmentPath"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Shader::vertexPath\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/shaders/Shader.h"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 2,
+                  "endLine": 27,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Shader::{ctor}",
+                  "decoratedName": "??0Shader@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Shader::vertexPath"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Shader::programID\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/shaders/Shader.h"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 2,
+                  "endLine": 27,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Shader::{ctor}",
+                  "decoratedName": "??0Shader@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Shader::programID"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"MeshData::type\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/model/MeshData.h"
+                },
+                "region": {
+                  "startLine": 19,
+                  "startColumn": 2,
+                  "endLine": 19,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "MeshData::{ctor}",
+                  "decoratedName": "??0MeshData@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "MeshData::type"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"MeshData::dimensions\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/model/MeshData.h"
+                },
+                "region": {
+                  "startLine": 19,
+                  "startColumn": 2,
+                  "endLine": 19,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "MeshData::{ctor}",
+                  "decoratedName": "??0MeshData@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "MeshData::dimensions"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Mesh::EBO\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/model/Mesh.h"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 2,
+                  "endLine": 24,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Mesh::{ctor}",
+                  "decoratedName": "??0Mesh@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Mesh::EBO"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Mesh::VAO\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/model/Mesh.h"
+                },
+                "region": {
+                  "startLine": 24,
+                  "startColumn": 2,
+                  "endLine": 24,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Mesh::{ctor}",
+                  "decoratedName": "??0Mesh@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Mesh::VAO"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Collider::type\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/physics/collider/Collider.h"
+                },
+                "region": {
+                  "startLine": 14,
+                  "startColumn": 2,
+                  "endLine": 14,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Collider::{ctor}",
+                  "decoratedName": "??0Collider@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Collider::type"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"RigidBody::mass\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/physics/RigidBody.h"
+                },
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 2,
+                  "endLine": 23,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RigidBody::{ctor}",
+                  "decoratedName": "??0RigidBody@@QEAA@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "RigidBody::mass"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"RigidBody::physics\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/physics/RigidBody.h"
+                },
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 2,
+                  "endLine": 23,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "RigidBody::{ctor}",
+                  "decoratedName": "??0RigidBody@@QEAA@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "RigidBody::physics"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"GameObject::orientation\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/physics/GameObject.h"
+                },
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 2,
+                  "endLine": 20,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "GameObject::{ctor}",
+                  "decoratedName": "??0GameObject@@QEAA@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "GameObject::orientation"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"GameObject::model\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/physics/GameObject.h"
+                },
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 2,
+                  "endLine": 20,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "GameObject::{ctor}",
+                  "decoratedName": "??0GameObject@@QEAA@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "GameObject::model"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"GameObject::collider\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/physics/GameObject.h"
+                },
+                "region": {
+                  "startLine": 20,
+                  "startColumn": 2,
+                  "endLine": 20,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "GameObject::{ctor}",
+                  "decoratedName": "??0GameObject@@QEAA@_N@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "GameObject::collider"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DFBConfig::perspectiveFar\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DFBConfig.h"
+                },
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 2,
+                  "endLine": 15,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DFBConfig::{ctor}",
+                  "decoratedName": "??0DFBConfig@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DFBConfig::perspectiveFar"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DFBConfig::bufferSize\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DFBConfig.h"
+                },
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 2,
+                  "endLine": 15,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DFBConfig::{ctor}",
+                  "decoratedName": "??0DFBConfig@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DFBConfig::bufferSize"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DFBConfig::isOrtho\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DFBConfig.h"
+                },
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 2,
+                  "endLine": 15,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DFBConfig::{ctor}",
+                  "decoratedName": "??0DFBConfig@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DFBConfig::isOrtho"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DFBConfig::perspectiveNear\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DFBConfig.h"
+                },
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 2,
+                  "endLine": 15,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DFBConfig::{ctor}",
+                  "decoratedName": "??0DFBConfig@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DFBConfig::perspectiveNear"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DFBConfig::orthoNear\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DFBConfig.h"
+                },
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 2,
+                  "endLine": 15,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DFBConfig::{ctor}",
+                  "decoratedName": "??0DFBConfig@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DFBConfig::orthoNear"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DFBConfig::orthoFar\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DFBConfig.h"
+                },
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 2,
+                  "endLine": 15,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DFBConfig::{ctor}",
+                  "decoratedName": "??0DFBConfig@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DFBConfig::orthoFar"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DFBConfig::orthoSize\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DFBConfig.h"
+                },
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 2,
+                  "endLine": 15,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DFBConfig::{ctor}",
+                  "decoratedName": "??0DFBConfig@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DFBConfig::orthoSize"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DFBConfig::perspectiveFar\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DFBConfig.h"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 2,
+                  "endLine": 17,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DFBConfig::{ctor}",
+                  "decoratedName": "??0DFBConfig@@QEAA@MMMM@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DFBConfig::perspectiveFar"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DFBConfig::perspectiveNear\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DFBConfig.h"
+                },
+                "region": {
+                  "startLine": 17,
+                  "startColumn": 2,
+                  "endLine": 17,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DFBConfig::{ctor}",
+                  "decoratedName": "??0DFBConfig@@QEAA@MMMM@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DFBConfig::perspectiveNear"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DFBConfig::orthoNear\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DFBConfig.h"
+                },
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 2,
+                  "endLine": 23,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DFBConfig::{ctor}",
+                  "decoratedName": "??0DFBConfig@@QEAA@MMM@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DFBConfig::orthoNear"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DFBConfig::orthoFar\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DFBConfig.h"
+                },
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 2,
+                  "endLine": 23,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DFBConfig::{ctor}",
+                  "decoratedName": "??0DFBConfig@@QEAA@MMM@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DFBConfig::orthoFar"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DFBConfig::orthoSize\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DFBConfig.h"
+                },
+                "region": {
+                  "startLine": 23,
+                  "startColumn": 2,
+                  "endLine": 23,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DFBConfig::{ctor}",
+                  "decoratedName": "??0DFBConfig@@QEAA@MMM@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DFBConfig::orthoSize"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DepthFramebuffer::shader\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DepthFramebuffer.h"
+                },
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 2,
+                  "endLine": 32,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DepthFramebuffer::{ctor}",
+                  "decoratedName": "??0DepthFramebuffer@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DepthFramebuffer::shader"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DepthFramebuffer::projection\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DepthFramebuffer.h"
+                },
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 2,
+                  "endLine": 32,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DepthFramebuffer::{ctor}",
+                  "decoratedName": "??0DepthFramebuffer@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DepthFramebuffer::projection"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DepthFramebuffer::projView\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DepthFramebuffer.h"
+                },
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 2,
+                  "endLine": 32,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DepthFramebuffer::{ctor}",
+                  "decoratedName": "??0DepthFramebuffer@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DepthFramebuffer::projView"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DepthFramebuffer::view\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DepthFramebuffer.h"
+                },
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 2,
+                  "endLine": 32,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DepthFramebuffer::{ctor}",
+                  "decoratedName": "??0DepthFramebuffer@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DepthFramebuffer::view"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DepthFramebuffer::depthMap\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DepthFramebuffer.h"
+                },
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 2,
+                  "endLine": 32,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DepthFramebuffer::{ctor}",
+                  "decoratedName": "??0DepthFramebuffer@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DepthFramebuffer::depthMap"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"DepthFramebuffer::FBO\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DepthFramebuffer.h"
+                },
+                "region": {
+                  "startLine": 32,
+                  "startColumn": 2,
+                  "endLine": 32,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DepthFramebuffer::{ctor}",
+                  "decoratedName": "??0DepthFramebuffer@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "DepthFramebuffer::FBO"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Light::framebuffers\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/light/Light.h"
+                },
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 2,
+                  "endLine": 16,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Light::{ctor}",
+                  "decoratedName": "??0Light@@QEAA@PEAVShader@@AEBU?$vec@$02M$0A@@glm@@AEBUDFBConfig@@@Z",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Light::framebuffers"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"BasicTexture::path\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/textures/BasicTexture.h"
+                },
+                "region": {
+                  "startLine": 11,
+                  "startColumn": 2,
+                  "endLine": 11,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "BasicTexture::{ctor}",
+                  "decoratedName": "??0BasicTexture@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "BasicTexture::path"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"TextureAtlas::indvTextureSize\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/textures/TextureAtlas.h"
+                },
+                "region": {
+                  "startLine": 12,
+                  "startColumn": 2,
+                  "endLine": 12,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "TextureAtlas::{ctor}",
+                  "decoratedName": "??0TextureAtlas@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "TextureAtlas::indvTextureSize"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"ChunkMesh::vertIndex\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/world/chunk/ChunkMesh.h"
+                },
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 1,
+                  "endLine": 25,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "ChunkMesh::{ctor}",
+                  "decoratedName": "??0ChunkMesh@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "ChunkMesh::vertIndex"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"ChunkMesh::faces\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/world/chunk/ChunkMesh.h"
+                },
+                "region": {
+                  "startLine": 25,
+                  "startColumn": 1,
+                  "endLine": 25,
+                  "endColumn": 1
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "ChunkMesh::{ctor}",
+                  "decoratedName": "??0ChunkMesh@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "ChunkMesh::faces"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Rect::d\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/math/shapes/Rect.h"
+                },
+                "region": {
+                  "startLine": 13,
+                  "startColumn": 2,
+                  "endLine": 13,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Rect::{ctor}",
+                  "decoratedName": "??0Rect@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Rect::d"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Block::type\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/world/block/Block.h"
+                },
+                "region": {
+                  "startLine": 15,
+                  "startColumn": 2,
+                  "endLine": 15,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Block::{ctor}",
+                  "decoratedName": "??0Block@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Block::type"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Chunk::world\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/world/chunk/Chunk.h"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 2,
+                  "endLine": 27,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Chunk::{ctor}",
+                  "decoratedName": "??0Chunk@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Chunk::world"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Chunk::position\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/world/chunk/Chunk.h"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 2,
+                  "endLine": 27,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Chunk::{ctor}",
+                  "decoratedName": "??0Chunk@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Chunk::position"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"ChunkManager::world\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/world/chunk/ChunkManager.h"
+                },
+                "region": {
+                  "startLine": 16,
+                  "startColumn": 2,
+                  "endLine": 16,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "ChunkManager::{ctor}",
+                  "decoratedName": "??0ChunkManager@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "ChunkManager::world"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"World::chunkManager\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/world/World.h"
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 2,
+                  "endLine": 40,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "World::{ctor}",
+                  "decoratedName": "??0World@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "World::chunkManager"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"World::terrainGen\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/world/World.h"
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 2,
+                  "endLine": 40,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "World::{ctor}",
+                  "decoratedName": "??0World@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "World::terrainGen"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"World::spawnPoint\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/world/World.h"
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 2,
+                  "endLine": 40,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "World::{ctor}",
+                  "decoratedName": "??0World@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "World::spawnPoint"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"World::seed\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/world/World.h"
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 2,
+                  "endLine": 40,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "World::{ctor}",
+                  "decoratedName": "??0World@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "World::seed"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"World::sun\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/world/World.h"
+                },
+                "region": {
+                  "startLine": 40,
+                  "startColumn": 2,
+                  "endLine": 40,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "World::{ctor}",
+                  "decoratedName": "??0World@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "World::sun"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Camera::view\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/player/Camera.cpp"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 9,
+                  "endLine": 8,
+                  "endColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Camera::{ctor}",
+                  "decoratedName": "??0Camera@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Camera::view"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Camera::projView\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/player/Camera.cpp"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 9,
+                  "endLine": 8,
+                  "endColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Camera::{ctor}",
+                  "decoratedName": "??0Camera@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Camera::projView"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Camera::skyboxProjView\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/player/Camera.cpp"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 9,
+                  "endLine": 8,
+                  "endColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Camera::{ctor}",
+                  "decoratedName": "??0Camera@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Camera::skyboxProjView"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Camera::projection\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/player/Camera.cpp"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 9,
+                  "endLine": 8,
+                  "endColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Camera::{ctor}",
+                  "decoratedName": "??0Camera@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Camera::projection"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Camera::viewPos\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/player/Camera.cpp"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 9,
+                  "endLine": 8,
+                  "endColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Camera::{ctor}",
+                  "decoratedName": "??0Camera@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Camera::viewPos"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Camera::viewDir\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/player/Camera.cpp"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 9,
+                  "endLine": 8,
+                  "endColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Camera::{ctor}",
+                  "decoratedName": "??0Camera@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Camera::viewDir"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Camera::viewMode\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/player/Camera.cpp"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 9,
+                  "endLine": 8,
+                  "endColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Camera::{ctor}",
+                  "decoratedName": "??0Camera@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Camera::viewMode"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Camera::player\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/player/Camera.cpp"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 9,
+                  "endLine": 8,
+                  "endColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Camera::{ctor}",
+                  "decoratedName": "??0Camera@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Camera::player"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Camera::world\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/player/Camera.cpp"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 9,
+                  "endLine": 8,
+                  "endColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Camera::{ctor}",
+                  "decoratedName": "??0Camera@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Camera::world"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Camera::aspect\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/player/Camera.cpp"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 9,
+                  "endLine": 8,
+                  "endColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Camera::{ctor}",
+                  "decoratedName": "??0Camera@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Camera::aspect"
+          }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Camera::fov\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/player/Camera.cpp"
+                },
+                "region": {
+                  "startLine": 8,
+                  "startColumn": 9,
+                  "endLine": 8,
+                  "endColumn": 9
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Camera::{ctor}",
+                  "decoratedName": "??0Camera@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Camera::fov"
+          }
+        }
+      ],
       "tool": {
         "driver": {
           "name": "PREfast",
@@ -20,13 +2067,234 @@
       "artifacts": [
         {
           "location": {
-            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/player/camera.cpp"
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/math/shapes/Triangle.h"
           },
           "roles": [
-            "analysisTarget"
+            "resultFile"
           ],
           "hashes": {
-            "sha-256": "f50c97d63cd6c2124820c588082dc5072ee75f4022ea55c06a173d19119a061c"
+            "sha-256": "c203a9b7b424072d2ef042cc0445477f195835bf5806911f54b3d342054f2208"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/math/shapes/Plane.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "1e9eb9a0ab8ebdf49ae295de21f96e3c1d329877d1f29b4c1257d5f8f8285f13"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/textures/Texture.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "d23176cb1ac9a3641520dc989f548005d50bd531a59e3e25f3a09fc946d14431"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/shaders/Shader.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "0741bf0b7614d9dd366ead61ba34ac642cd104fa96fc526db6f0f243cb223835"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/model/MeshData.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "c3381607cd0d53fd1f0c3242440e456c25249edae82dc5a7f2b23f8bf76aea45"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/model/Mesh.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "46bf461a36b5eddeced230d090618996d0aa2d10030d425b07f4d070d5da9080"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/physics/collider/Collider.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "c2b98d957d82e44f895df7d3452c8880b60ff3ad28c2ab2344179c851d0815a1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/physics/RigidBody.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "ecf4d1255299ead84bc3b62bdee1cd3830829c27bac2079bb23f3ba877ff2454"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/physics/GameObject.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "a6e670b21e88e6a410a13189267e7eb737bedcc5226c396599b12c26152291b0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DFBConfig.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "895050d8fab8af2256b3e4cbd5f61eff5aefddc828725cc5d571ccdb27b6159b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/framebuffer/DepthFramebuffer.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "ab65b9ad63565f1a20c4f4c3bc5491363778b6415fb1934de2842a3848c8d745"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/render/light/Light.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "24e52dc892f86732a5adea298f5ff986b4eddf84769dd26479c760a49380ca03"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/textures/BasicTexture.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "83f9c11bdd0e98bd6f097178af14a5f1219788b35daf3cbd7d05b29b00c06e42"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/textures/TextureAtlas.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "277211511c5e7914a3cdb58384e5a7e231366e087ca7ad3e754d4a43650110d8"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/world/chunk/ChunkMesh.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "ca554ed2e84ea6f356f2b737eaa4a743c56511ebb8b72e2b265bba83800d69d6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/math/shapes/Rect.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "1dc1a481d63027a4b8f9ab4d570e3149af1ab7503f07f8d99a3337fae8bbea8c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/world/block/Block.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "4d77ef335bcf11eec0e428f5b10ee529c5249880cdcba98d3720a0e0b4a2096c"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/world/chunk/Chunk.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "77fa84ce65f3f07958b877ee9edcea7e95d3e832be65291b0139bf5bf295a4a3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/world/chunk/ChunkManager.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "8270a1841d21ce382b7889c920a7779889e85cfd789fee1c30cf36264ca92f34"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/world/World.h"
+          },
+          "roles": [
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "e0166f151552876b0a1d23cd9cac071b3d32bb26a4ac7c9b646c2e2f4016a338"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/player/Camera.cpp"
+          },
+          "roles": [
+            "analysisTarget",
+            "resultFile"
+          ],
+          "hashes": {
+            "sha-256": "070686d8b6443791dea43c41792301d4147f25d4460cceff0b0886600a25d788"
           }
         },
         {
@@ -34,7 +2302,7 @@
             "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/player/camera.h"
           },
           "hashes": {
-            "sha-256": "645f8bad567536ad09cb387390db495939e6229413453927d69f432ebad9bfee"
+            "sha-256": "9b626b2802aa1aa9f0774a1a42c606a96ae1513f300680813495c941578bff09"
           }
         },
         {
@@ -51,6 +2319,14 @@
           },
           "hashes": {
             "sha-256": "7b1e01aaa7ad8f6fc34b5c7bdf79ebf5189bb09e2c4d2e79fc5d350623d11e83"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/math/geometry/orientation.h"
+          },
+          "hashes": {
+            "sha-256": "d0bd76b821df960d039b449b35691af40d2a2e0d5e1bbbc9496a9343aeea7c3c"
           }
         },
         {
@@ -1503,10 +3779,314 @@
         },
         {
           "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/math/shapes/frustum.h"
+          },
+          "hashes": {
+            "sha-256": "61f784f46642cc03a2f7a1f1baea6e2f9de8f8a92a6dfa85ff644c4a0aef8704"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/math/shapes/aabb.h"
+          },
+          "hashes": {
+            "sha-256": "6379c501ae5c195e80df316c3c1d32830457d14c1a4f371683420c750a5bc5ce"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/math/geometry/transform.h"
+          },
+          "hashes": {
+            "sha-256": "93af0822748cf1a1c78dd9e0bc60e33325530643bdd8b2113e87c645ea82b247"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/player/cameraviewmode.h"
+          },
+          "hashes": {
+            "sha-256": "e8856721a7bd3c9ce305cd16cf60e5543bfcb23a7d082fb89f0eca1323a860e1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/player/player.h"
+          },
+          "hashes": {
+            "sha-256": "e8adf74ff42f740f5e134b8048cacf36acea13355816a862c7a7976fc94bd968"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/entity/entity.h"
+          },
+          "hashes": {
+            "sha-256": "7c440867cbf5b9db206358178ba5faf4630007d4f379fb466a0e731675506348"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/render/model/model.h"
+          },
+          "hashes": {
+            "sha-256": "aa5aa0409632c3b0c2612eee66a00c5038e7f0827291c88e19cf134c7f869d12"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/textures/texturetype.h"
+          },
+          "hashes": {
+            "sha-256": "14a4ce4246f8deab38037be0759c206865050939c165ef6b20f582c4e2d17ee1"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/physics/physicsengine.h"
+          },
+          "hashes": {
+            "sha-256": "8eb30954e3ae3a3a6d442672e7b24db0faf0c7298156db0dd9ebd9e1aac0d635"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/entity/entitiesdatabase.h"
+          },
+          "hashes": {
+            "sha-256": "2683ef005d82f2a97046fa4e00c3fb5e7149151544b8d4c8fa40aebfa9f90ddb"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/entity/entitytype.h"
+          },
+          "hashes": {
+            "sha-256": "642719edfb121366b9b8e3ed1432b5d2e91291ad51d3aefcc601d7b15b657653"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/entity/entityid.h"
+          },
+          "hashes": {
+            "sha-256": "96be33710724f09ba287c6440f963db2fad509d4b0622ffd5dc744fed616ac73"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/world/raytracing.h"
+          },
+          "hashes": {
+            "sha-256": "311a11ebc1da11bab0a10986dfc645b55076fbe8daaf43387782e1b6fbc86954"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/math/shapes/ray.h"
+          },
+          "hashes": {
+            "sha-256": "25dd048352f38b3f3ab35d2dee40a195988654a599f7835293eae5c707fd85fd"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/world/generation/terrain/superflatgenerator.h"
+          },
+          "hashes": {
+            "sha-256": "ad0bb30af2ea6c78182f192f75571922c62bca0540e78c8946699ce161efbfd0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/world/generation/terrain/terraingenerator.h"
+          },
+          "hashes": {
+            "sha-256": "b0fb6ce153ef9385f169a08312089eafb20733ded97f8dc5d6ad151a55b09f8e"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/utils/vecmap.h"
+          },
+          "hashes": {
+            "sha-256": "f32b5f35a2272ad227da475fc33294a922a5e6d3828722c311dd9e1d1f667a83"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/render/renderer.h"
+          },
+          "hashes": {
+            "sha-256": "bfa0781eca3f4baa554d222c38a47255f213cd62c0261b9483d527510e9546bc"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/render/light/directlight.h"
+          },
+          "hashes": {
+            "sha-256": "d3042a9e62911a47bd1d6c37bf9a4f3952f36c89685d6e1088895a9acb81d4d5"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/world/worldconstants.h"
+          },
+          "hashes": {
+            "sha-256": "b85cf6020f9340e156ea6ac15883f37f7975989cc6c86fa32d96a09623823805"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/render/skyboxrenderer.h"
+          },
+          "hashes": {
+            "sha-256": "2cb0503c0c3300f817a4e5efc796813af783d02fe0b46f7424fa9757de9fba76"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/textures/textureloader.h"
+          },
+          "hashes": {
+            "sha-256": "c517352d01b4239379060f504049dfe41fcaecbeee20186ddb608d588051b70f"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/textures/cubetexture.h"
+          },
+          "hashes": {
+            "sha-256": "1bb79a90c2b9fb4361470fe4dbffba709fbe6a0c7d022963d7bcf50f22562852"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/world/sun.h"
+          },
+          "hashes": {
+            "sha-256": "c7235d23acd5a7bc611679398d8e9b0b797aa6848894cebece4735d1ab0eceb3"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/render/entityrenderer.h"
+          },
+          "hashes": {
+            "sha-256": "29d34e34be8a8d6c8d75a2633eeaf9a6f0d9754185ec1300b8b4bbe996c402f6"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/shaders/shadersdatabase.h"
+          },
+          "hashes": {
+            "sha-256": "848ec1159a27c2655cfd387074287cc9b58e2447efd482a64aba7a493b44c943"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/shaders/shadertype.h"
+          },
+          "hashes": {
+            "sha-256": "7b9e4061c9099005af6f3834b4a5caeff252b06a9bf4b56a280eb0a48721d1f7"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/render/chunkrenderer.h"
+          },
+          "hashes": {
+            "sha-256": "6db6562d4eba69d7ca25414da2557c3166684efc72597288d8251b2dd3813264"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/math/intersects/intersectlist.h"
+          },
+          "hashes": {
+            "sha-256": "fd38c3cee02370e0bbd12daa6503e85e24b3b96a0286addbfdeb7d63a25e176b"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/world/block/blocksdatabase.h"
+          },
+          "hashes": {
+            "sha-256": "0d9bfe7da983f5c50e5323ac48878fba53f8c6c2088863e9f8fec9ea4a31f982"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/world/block/blocktype.h"
+          },
+          "hashes": {
+            "sha-256": "73c1a0ff358116d46b2011f05f00413d4263f9c864cc21ba577d1b29f430a963"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/world/block/blockcolliders.h"
+          },
+          "hashes": {
+            "sha-256": "b635fbbb3937356ceec64e1541219940b458050b156ee55ad8effb987e54a1df"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/physics/collider/boxcollider.h"
+          },
+          "hashes": {
+            "sha-256": "156db9b9118ec8782594471f52e292554ec983d5abcec02b8fe0e20e56d259ba"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/math/mathf.h"
+          },
+          "hashes": {
+            "sha-256": "ae2ddc533c34b2943c9693baae1c298412b6853d3a4253835603376b43919824"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/world/block/blockcollidertype.h"
+          },
+          "hashes": {
+            "sha-256": "3df3d0db65d3185e479bace7ed932fc1cb8556597a647d49206698d07526a1e0"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/world/block/blockshadertype.h"
+          },
+          "hashes": {
+            "sha-256": "47dbc87c9f41fee3f5cf4f334212fc5a53c62a3269a4ed22541cd775503323c9"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/world/block/blockid.h"
+          },
+          "hashes": {
+            "sha-256": "b27ef18c73bf0079964b97e3101168ff002c6df84f38a00dd013ebf892185788"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/world/worldposition.h"
+          },
+          "hashes": {
+            "sha-256": "cf14b58c1719ec4d1ec34cda784c61288ec9825d34edadef34585ec2526672d0"
+          }
+        },
+        {
+          "location": {
             "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/window/window.h"
           },
           "hashes": {
-            "sha-256": "c25f402043ad13760205c00a38aa562a89db8cc0008b78895df494d4b9764955"
+            "sha-256": "6768858a4b4052819b605a1e7484d3c0840f0996ded1581fe4fb657923ddc145"
           }
         },
         {
@@ -1522,7 +4102,7 @@
             "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/window/events.h"
           },
           "hashes": {
-            "sha-256": "8a081971d3bc2fb04f5be667a1f940034352dff21e6d93065b9160c111b24f1e"
+            "sha-256": "0e292313c8b22f0e7b32e550ae199a4120a17d673037c9d124f43d8d2635f58c"
           }
         },
         {
@@ -1554,7 +4134,7 @@
             "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/utils/json.h"
           },
           "hashes": {
-            "sha-256": "50aefb5340322b733da6530d67dc8b83db5b7e6776e6a8732d227a2b0bd9afd4"
+            "sha-256": "725cd2bc90c49940c670a03bcec688c7ffc01956039056160b54b850dac613cd"
           }
         },
         {
@@ -1922,7 +4502,7 @@
             "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/utils/files.h"
           },
           "hashes": {
-            "sha-256": "1e046a7632f784ebbdab7b69e2b6cd1314caae2d841c26466eed3b769a574176"
+            "sha-256": "4cc5366facabc1eb177cabf7c406004f8c739f235b1a12ce4f19c6b6773188cb"
           }
         }
       ]

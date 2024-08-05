@@ -1,9 +1,11 @@
 #version 330 core
 
+#define SHADOW_INTERPOLATION false
+
 #define MIN_SUN_LIGHT 0.25
-#define MIN_SUN_DIFFUSE 0.6
+#define MIN_SUN_DIFFUSE 0.4
 #define MIN_SHADOW_BIAS 0.005
-#define MAX_SHADOW_BIAS 0.0125
+#define MAX_SHADOW_BIAS 0.008
 #define MAX_LIGHTS 16
 
 #define POINT_LIGHT_CONSTANT 1.0
@@ -62,8 +64,9 @@ vec3 calcPointLight (PointLight light);
 vec3 calcSunDiffuse(DirectLight sun);
 float calcSunLight();
 
+vec3 result = vec3(0);
+
 void main() {
-	vec3 result = vec3(0);
 	float shadow = 1;
 
 	float sunLight = calcSunLight();
@@ -105,19 +108,23 @@ float calcShadow(LightShadow lightShadow, vec3 lightDir) {
 	float currentDepth = projCoords.z;
 
 	vec2 texelSize = 1 / textureSize(lightShadow.depthMap, 0);
-	float bias = max(MIN_SHADOW_BIAS, MAX_SHADOW_BIAS * (1 - dot(vec3(0, -1, 0), lightDir)));
-	float shadow = currentDepth - bias > closestDepth ? 0 : 1;
+	float bias = max(MIN_SHADOW_BIAS, MAX_SHADOW_BIAS * (1 - max(0, dot(vec3(0, -1, 0), lightDir))));
+	float shadow = 0;
 
-	//for (int x = -1; x <= 1; ++x) {
-	//	for (int y = -1; y <= 1; ++y) {
-	//		float pcfDepth = texture(lightShadow/.depthMap, projCoords.xy + vec2(x, y) * texelSize).r;
-	//
-	//		if (material.shadow)
-	//			shadow += currentDepth - bias > pcfDepth ? 0 : 1;
-	//	}
-	//}
+	if (SHADOW_INTERPOLATION) {
+		for (int x = -1; x <= 1; ++x) {
+			for (int y = -1; y <= 1; ++y) {
+				float pcfDepth = texture(lightShadow.depthMap, projCoords.xy + vec2(x, y) * texelSize).r;
+	
+				if (material.shadow)
+					shadow += currentDepth - bias > pcfDepth ? 0 : 1;
+			}
+		}
 
-	//shadow /= 9;
+		shadow /= 9;
+	} else {
+		shadow = currentDepth - bias > closestDepth ? 0 : 1;
+	}
 
 	return shadow;
 }

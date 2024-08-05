@@ -8,7 +8,6 @@
 #include "CameraViewMode.h"
 #include "Player.h"
 
-#define CAMERA_OFFSET glm::vec3(0, 1.5f, 0)
 #define CAMERA_TPS_COEF 5.0f
 #define CAMERA_MAX_PITCH 89.0f
 #define CAMERA_NEAR 0.1f
@@ -57,7 +56,7 @@ public:
 	const glm::mat4& getProjection() { return projection; }
 	const glm::mat4& getSkyboxProjView() { return skyboxProjView; }
 	void setViewMode(CameraViewMode viewMode) { this->viewMode = viewMode; }
-	void setZoom(float zoom) { this->zoom = zoom; }
+	void setZoom(float zoom);
 };
 
 #endif

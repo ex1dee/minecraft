@@ -38,37 +38,6 @@
         {
           "ruleId": "C26495",
           "message": {
-            "text": "Переменная \"Shader::fragmentPath\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
-          },
-          "locations": [
-            {
-              "physicalLocation": {
-                "artifactLocation": {
-                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/shaders/Shader.h"
-                },
-                "region": {
-                  "startLine": 27,
-                  "startColumn": 2,
-                  "endLine": 27,
-                  "endColumn": 2
-                }
-              },
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "Shader::{ctor}",
-                  "decoratedName": "??0Shader@@QEAA@XZ",
-                  "kind": "function"
-                }
-              ]
-            }
-          ],
-          "properties": {
-            "targetSymbol": "Shader::fragmentPath"
-          }
-        },
-        {
-          "ruleId": "C26495",
-          "message": {
             "text": "Переменная \"Shader::programID\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
           },
           "locations": [
@@ -96,6 +65,37 @@
           "properties": {
             "targetSymbol": "Shader::programID"
           }
+        },
+        {
+          "ruleId": "C26495",
+          "message": {
+            "text": "Переменная \"Shader::fragmentPath\" не инициализирована. Всегда инициализируйте переменную-член (type.6)."
+          },
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "file:///C:/Users/User/source/repos/Minecraft/Minecraft/src/shaders/Shader.h"
+                },
+                "region": {
+                  "startLine": 27,
+                  "startColumn": 2,
+                  "endLine": 27,
+                  "endColumn": 2
+                }
+              },
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "Shader::{ctor}",
+                  "decoratedName": "??0Shader@@QEAA@XZ",
+                  "kind": "function"
+                }
+              ]
+            }
+          ],
+          "properties": {
+            "targetSymbol": "Shader::fragmentPath"
+          }
         }
       ],
       "tool": {
@@ -120,7 +120,7 @@
             "resultFile"
           ],
           "hashes": {
-            "sha-256": "61dce8352804b87c400b25e56be9b01f76ee3fb23fa6a5f603b1114b89214e6e"
+            "sha-256": "0741bf0b7614d9dd366ead61ba34ac642cd104fa96fc526db6f0f243cb223835"
           }
         },
         {
@@ -131,7 +131,7 @@
             "analysisTarget"
           ],
           "hashes": {
-            "sha-256": "4366145d3ebc955413ed48562143d2b299cc60b790701065a678231bd667d0cd"
+            "sha-256": "e94011434f90ae80712d09e0605e482596a4bdf5bbfc0dc504e53ccaf5888ae3"
           }
         },
         {
@@ -148,14 +148,6 @@
           },
           "hashes": {
             "sha-256": "7b1e01aaa7ad8f6fc34b5c7bdf79ebf5189bb09e2c4d2e79fc5d350623d11e83"
-          }
-        },
-        {
-          "location": {
-            "uri": "file:///c:/users/user/source/repos/minecraft/packages/glfw.3.4.0/build/native/include/glfw/glfw3.h"
-          },
-          "hashes": {
-            "sha-256": "aa370985f6b493bbe0358a36ab49f5780a6397c0209c6d98a62143dea595b73c"
           }
         },
         {
@@ -1611,7 +1603,7 @@
             "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/utils/files.h"
           },
           "hashes": {
-            "sha-256": "1e046a7632f784ebbdab7b69e2b6cd1314caae2d841c26466eed3b769a574176"
+            "sha-256": "4cc5366facabc1eb177cabf7c406004f8c739f235b1a12ce4f19c6b6773188cb"
           }
         }
       ]

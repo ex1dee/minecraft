@@ -23,7 +23,7 @@ void ChunkManager::makeMesh(const glm::vec2& pos, Camera& camera) {
 	getChunk(pos)->makeMesh(camera);
 }
 
-Chunk* ChunkManager::load(const glm::vec2& pos) {
+Chunk* const ChunkManager::load(const glm::vec2& pos) {
 	Chunk* chunk = getChunk(pos);
 	chunk->load(world->getTerrainGenerator());
 		
@@ -34,7 +34,7 @@ void ChunkManager::unload(const glm::vec2& pos) {
 	chunks.erase(pos);
 }
 
-Chunk* ChunkManager::getChunk(const glm::vec2& pos) {
+Chunk* const ChunkManager::getChunk(const glm::vec2& pos) {
 	if (!chunkExistsAt(pos)) {
 		Chunk* chunk = new Chunk(world, pos);
 

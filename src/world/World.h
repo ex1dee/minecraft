@@ -41,11 +41,11 @@ public:
 	World(TerrainGenerator* terrainGen, Player& player, Camera& camera);
 	~World();
 
-	Sun* getSun() const { return sun; }
+	Sun* const getSun() const { return sun; }
 	TerrainGenerator& getTerrainGenerator() { return *terrainGen; }
 
 	int getHeightAt(const glm::vec3& pos);
-	Chunk* getChunk(const glm::vec3& pos);
+	Chunk* const getChunk(const glm::vec3& pos);
 	Block& getBlock(const glm::vec3& pos);
 	Block& getHighestBlockAt(const glm::vec3& pos);
 	void updateChunks(Camera& camera);

@@ -1,8 +1,10 @@
 #include "MovementsInput.h"
 
 #include "../../window/Events.h"
+#include "../../player/Camera.h"
 
 std::unordered_map<int, glm::vec3> MovementsInput::keys;
+ZoomHandler MovementsInput::runZoom = ZoomHandler(RUN_ZOOM_TIME_SEC, 0.0f, RUN_MIN_ZOOM);
 
 void MovementsInput::handle(Player* player) {
 	RigidBody* rb = &player->rigidBody;
@@ -18,14 +20,7 @@ void MovementsInput::handle(Player* player) {
 	check(GLFW_KEY_D, rb, right * speed * PLAYER_SIDE_COEF);
 
 	checkJumping(player);
-}
-
-void MovementsInput::checkJumping(Player* player) {
-	if (Events::pressed(GLFW_KEY_SPACE)) {
-		if (!player->isJumping()) {
-			player->rigidBody.addVelocity(glm::vec3(0, 1, 0) * player->getJumpForce());
-		}
-	}
+	checkRunZoom(player);
 }
 
 float MovementsInput::calcSpeed(Player* player) {
@@ -58,4 +53,22 @@ void MovementsInput::check(int key, RigidBody* rigidBody, const glm::vec3& veloc
 			keys.emplace(key, velocity);
 		}
 	}
+}
+
+void MovementsInput::checkJumping(Player* player) {
+	if (Events::pressed(GLFW_KEY_SPACE)) {
+		if (!player->isJumping()) {
+			player->rigidBody.addVelocity(glm::vec3(0, 1, 0) * player->getJumpForce());
+		}
+	}
+}
+
+void MovementsInput::checkRunZoom(Player* player) {
+	Camera* camera = player->getCamera();
+
+	if (camera->getZoom() <= 0)
+		runZoom.handle(
+			player->getCamera(),
+			Events::pressed(GLFW_KEY_W) && Events::pressed(GLFW_KEY_LEFT_CONTROL)
+		);
 }

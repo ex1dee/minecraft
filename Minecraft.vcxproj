@@ -158,7 +158,9 @@
     <ClCompile Include="src\physics\PhysicsEngine.cpp" />
     <ClCompile Include="src\player\input\CameraInput.cpp" />
     <ClCompile Include="src\player\input\MovementsInput.cpp" />
+    <ClCompile Include="src\player\input\ZoomHandler.cpp" />
     <ClCompile Include="src\player\Player.cpp" />
+    <ClCompile Include="src\render\BlockFrameRenderer.cpp" />
     <ClCompile Include="src\render\EntityRenderer.cpp" />
     <ClCompile Include="src\render\model\Mesh.cpp" />
     <ClCompile Include="src\render\SkyboxRenderer.cpp" />
@@ -225,7 +227,9 @@
     <ClInclude Include="src\player\CameraViewMode.h" />
     <ClInclude Include="src\player\input\CameraInput.h" />
     <ClInclude Include="src\player\input\MovementsInput.h" />
+    <ClInclude Include="src\player\input\ZoomHandler.h" />
     <ClInclude Include="src\player\Player.h" />
+    <ClInclude Include="src\render\BlockFrameRenderer.h" />
     <ClInclude Include="src\render\EntityRenderer.h" />
     <ClInclude Include="src\render\light\DirectLight.h" />
     <ClInclude Include="src\render\light\Light.h" />
@@ -302,6 +306,8 @@
     <None Include="shaders\default.vs" />
     <None Include="shaders\framebuffer.fs" />
     <None Include="shaders\framebuffer.vs" />
+    <None Include="shaders\line.fs" />
+    <None Include="shaders\line.vs" />
     <None Include="shaders\skybox.fs" />
     <None Include="shaders\skybox.vs" />
   </ItemGroup>

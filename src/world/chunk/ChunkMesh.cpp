@@ -19,7 +19,7 @@ void ChunkMesh::addBlockFace(const std::array<float, 12>& vertices,
 			meshData.normals.push_back(normal.z);
 		}
 	}
-
+	
 	meshData.textureCoords.insert(meshData.textureCoords.end(), texCoords.begin(), texCoords.end());
 
 	meshData.indices.push_back(vertIndex);

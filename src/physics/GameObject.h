@@ -9,7 +9,11 @@
 #include "PhysicsEngine.h"
 #include "RigidBody.h"
 
+class World;
+
 class GameObject {
+protected:
+	World* world;
 public:
 	Orientation orientation;
 	Transform transform;
@@ -17,8 +21,8 @@ public:
 	Collider* collider;
 	Model* model;
 
-	GameObject(bool updateEveryTick)
-		: rigidBody(updateEveryTick) {
+	GameObject(World* world, bool updateEveryTick)
+		: rigidBody(updateEveryTick), world(world) {
 
 	}
 
@@ -31,6 +35,9 @@ public:
 		collider->applyTransform(transform);
 		model->aabb.applyTransform(transform);
 	}
+
+	void hookWorld(World* world) { this->world = world; }
+	World* const getWorld() { return world; }
 
 	~GameObject() {
 		delete collider;

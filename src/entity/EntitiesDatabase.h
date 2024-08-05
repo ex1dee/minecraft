@@ -14,7 +14,7 @@ public:
 	static void initialize();
 	static void finalize();
 
-	static EntityType* get(EntityID id) { return entities[id]; }
+	static EntityType* const get(EntityID id) { return entities[id]; }
 };
 
 #endif

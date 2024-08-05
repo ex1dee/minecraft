@@ -19,6 +19,10 @@ void Camera::hookWorld(World* world) {
 	this->world = world;
 }
 
+void Camera::setZoom(float zoom) {
+	this->zoom = zoom;
+}
+
 void Camera::update() {
 	fov = Config::settings["camera"]["fov"];
 	aspect = (float)Window::getWidth() / (float)Window::getHeight();
@@ -49,7 +53,7 @@ void Camera::updateOrientation() {
 }
 
 void Camera::updateView() {
-	viewPos = player->transform.position + CAMERA_OFFSET;
+	viewPos = player->transform.position + player->getType()->eyesOffset;
 	viewDir = orientation.front;
 
 	if (viewMode != FIRST_PERSON) {
@@ -83,7 +87,7 @@ void Camera::updateTPSLook() {
 
 void Camera::updateProjection() {
 	projection = glm::perspective(
-		glm::radians(fov - glm::clamp(zoom, 0.0f, CAMERA_MAX_ZOOM)),
+		glm::radians(fov - glm::min(zoom, CAMERA_MAX_ZOOM)),
 		aspect,
 		CAMERA_NEAR,
 		CAMERA_FAR

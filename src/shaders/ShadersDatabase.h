@@ -12,7 +12,9 @@ public:
 	static void initialize();
 	static void finalize();
 
-	static Shader* get(ShaderType type) { return shaders[type]; }
+	static Shader* const get(ShaderType type) {
+		return shaders[type];
+	}
 };
 
 #endif

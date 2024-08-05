@@ -26,7 +26,7 @@
             "analysisTarget"
           ],
           "hashes": {
-            "sha-256": "a7d6094033bb6d54809e79c5731a51f168ff2d34030361c54086e62845e2aecb"
+            "sha-256": "376f47190d3d8747c96b8ef5f172d60ba1f8d83cc21fff1225a08dd93ba31f6a"
           }
         },
         {
@@ -34,7 +34,7 @@
             "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/utils/files.h"
           },
           "hashes": {
-            "sha-256": "1e046a7632f784ebbdab7b69e2b6cd1314caae2d841c26466eed3b769a574176"
+            "sha-256": "4cc5366facabc1eb177cabf7c406004f8c739f235b1a12ce4f19c6b6773188cb"
           }
         }
       ]

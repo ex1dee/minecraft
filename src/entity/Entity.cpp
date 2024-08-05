@@ -1,10 +1,12 @@
 #include "Entity.h"
 
 #include "../physics/collider/BoxCollider.h"
+#include "../world/RayTracing.h"
 
-Entity::Entity(EntityID id)
-	: GameObject(false) {
+Entity::Entity(EntityID id, World* world)
+	: GameObject(world, false) {
 	type = EntitiesDatabase::get(id);
+	GameObject::world = world;
 
 	initialize();
 }
@@ -25,4 +27,10 @@ void Entity::initialize() {
 		rigidBody.addGravity();
 
 	PhysicsEngine::addObject(this);
+}
+
+Block* Entity::getTargetBlock() {
+	Ray ray(transform.position + type->eyesOffset, orientation.front);
+	
+	return RayTracing::getNearestBlock(world, ray, ENTITY_MAX_TARGET_BLOCK_DIST);
 }

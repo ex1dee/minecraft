@@ -21,6 +21,7 @@ void Mesh::setup() {
 	genVAO();
 	
 	addVBO(data.dimensions, data.vertexPositions);
+	addVBO(3, data.colors);
 	addVBO(2, data.textureCoords);
 	addVBO(data.dimensions, data.normals);
 	addEBO();
@@ -62,11 +63,11 @@ void Mesh::draw(Shader* shader) {
 	bindTextures(shader);
 
 	glBindVertexArray(VAO);
-
+	
 	if (data.indices.size()) {
-		glDrawElements(GL_TRIANGLES, data.indices.size(), GL_UNSIGNED_INT, 0);
+		glDrawElements(data.mode, data.indices.size(), GL_UNSIGNED_INT, 0);
 	} else if (data.vertexPositions.size()) {
-		glDrawArrays(GL_TRIANGLES, 0, data.vertexPositions.size());
+		glDrawArrays(data.mode, 0, data.vertexPositions.size());
 	}
 }
 

@@ -14,6 +14,7 @@ public:
 	Transform offset;
 	glm::vec3 colliderPosition;
 	glm::vec3 colliderExtents;
+	glm::vec3 eyesOffset;
 };
 
 #endif

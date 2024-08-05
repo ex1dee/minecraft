@@ -4,6 +4,8 @@
 #include <glad/glad.h>
 
 #include "light/DirectLight.h"
+
+#include "BlockFrameRenderer.h"
 #include "SkyboxRenderer.h"
 #include "EntityRenderer.h"
 #include "ChunkRenderer.h"
@@ -11,9 +13,10 @@
 class Chunk;
 
 class Renderer {
-	ChunkRenderer chunkRenderer;
+	BlockFrameRenderer blockFrameRenderer;
 	SkyboxRenderer skyboxRenderer;
 	EntityRenderer entityRenderer;
+	ChunkRenderer chunkRenderer;
 	Shader* FBOShader;
 public:
 	void addChunk(Chunk* chunk);

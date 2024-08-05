@@ -26,7 +26,7 @@
             "analysisTarget"
           ],
           "hashes": {
-            "sha-256": "fb61e2a5797530e51228222e1642b0536d48482c32eb5c96495cce61c1b84ce2"
+            "sha-256": "9b15521d0b7054950f0a53bba6b9de5271bcae66c9310c0a769e93b9c092e39d"
           }
         },
         {
@@ -34,7 +34,7 @@
             "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/window/window.h"
           },
           "hashes": {
-            "sha-256": "c25f402043ad13760205c00a38aa562a89db8cc0008b78895df494d4b9764955"
+            "sha-256": "6768858a4b4052819b605a1e7484d3c0840f0996ded1581fe4fb657923ddc145"
           }
         },
         {
@@ -66,7 +66,7 @@
             "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/window/events.h"
           },
           "hashes": {
-            "sha-256": "8a081971d3bc2fb04f5be667a1f940034352dff21e6d93065b9160c111b24f1e"
+            "sha-256": "0e292313c8b22f0e7b32e550ae199a4120a17d673037c9d124f43d8d2635f58c"
           }
         },
         {
@@ -1546,7 +1546,7 @@
             "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/utils/json.h"
           },
           "hashes": {
-            "sha-256": "50aefb5340322b733da6530d67dc8b83db5b7e6776e6a8732d227a2b0bd9afd4"
+            "sha-256": "725cd2bc90c49940c670a03bcec688c7ffc01956039056160b54b850dac613cd"
           }
         },
         {
@@ -1914,7 +1914,7 @@
             "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/utils/files.h"
           },
           "hashes": {
-            "sha-256": "1e046a7632f784ebbdab7b69e2b6cd1314caae2d841c26466eed3b769a574176"
+            "sha-256": "4cc5366facabc1eb177cabf7c406004f8c739f235b1a12ce4f19c6b6773188cb"
           }
         }
       ]

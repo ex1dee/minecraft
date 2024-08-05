@@ -26,7 +26,7 @@ void BoxCollider::calcVertices() {
 		vertex = glm::vec3(model * glm::vec4(vertex, 1.0f));
 	}
 }
-#include <iostream>
+
 std::vector<Rect> BoxCollider::getRectangles(const Transform& transform) {
 	std::vector<Rect> rectangles;
 	applyTransform(transform);

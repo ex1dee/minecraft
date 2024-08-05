@@ -1,0 +1,51 @@
+{
+  "version": "2.1.0",
+  "$schema": "https://schemastore.azurewebsites.net/schemas/json/sarif-2.1.0-rtm.5.json",
+  "runs": [
+    {
+      "results": [],
+      "tool": {
+        "driver": {
+          "name": "PREfast",
+          "fullName": "PREfast Code Analysis",
+          "version": "14.34.31937.0",
+          "informationUri": "https://aka.ms/cpp/ca"
+        }
+      },
+      "invocations": [
+        {
+          "executionSuccessful": true
+        }
+      ],
+      "artifacts": [
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/time.cpp"
+          },
+          "roles": [
+            "analysisTarget"
+          ],
+          "hashes": {
+            "sha-256": "e29459d3520a3bb2976355cd2aff9307bd4d1b90612f58e9aaade01bb7de96be"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/minecraft/src/time.h"
+          },
+          "hashes": {
+            "sha-256": "09983bfade55a4dad8517ddeb17f516bd955f508c98752b0783fc66f79a902ba"
+          }
+        },
+        {
+          "location": {
+            "uri": "file:///c:/users/user/source/repos/minecraft/packages/glfw.3.4.0/build/native/include/glfw/glfw3.h"
+          },
+          "hashes": {
+            "sha-256": "aa370985f6b493bbe0358a36ab49f5780a6397c0209c6d98a62143dea595b73c"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -4,7 +4,8 @@
 enum ShaderType {
 	DEFAULT = 0,
 	FRAMEBUFFER = 1,
-	SKYBOX = 2
+	SKYBOX = 2,
+	LINE = 3
 };
 
 #endif

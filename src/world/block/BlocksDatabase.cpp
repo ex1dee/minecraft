@@ -3,7 +3,7 @@
 #include "../../utils/Json.h"
 
 std::unordered_map<BlockID, BlockType*> BlocksDatabase::blocks;
-TextureAtlas* BlocksDatabase::textureAtlas;
+const TextureAtlas* BlocksDatabase::textureAtlas;
 
 void BlocksDatabase::initialize() {
 	textureAtlas = TextureLoader::loadAtlas("resources/textures/blocks_atlas.png", glm::vec2(16, 16), true, DIFFUSE);

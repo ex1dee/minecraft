@@ -13,19 +13,22 @@ class Window {
 	static int width;
 	static int height;
 
+	static void gladLoad();
 	static void createWindow();
 	static void setCallbacks();
-	static void gladLoad();
+	static void setupAntiAliasing();
 
 	static void framebufferSizeCallback(GLFWwindow* window, int width, int height);
 public:
+	static int getWidth() { return width; }
+	static int getHeight() { return height; }
+
 	static void initialize();
 	static void finalize();
+
 	static void swapBuffers();
-	static void setWindowViewport();
 	static bool shouldClose();
-	static int getWidth();
-	static int getHeight();
+	static void setWindowViewport();
 };
 
 #endif

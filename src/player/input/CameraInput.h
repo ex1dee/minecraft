@@ -3,13 +3,13 @@
 
 #include "../CameraViewMode.h""
 #include "../Player.h"
+#include "ZoomHandler.h"
 
 #define ZOOM_TIME_SEC 0.15f
 
 class CameraInput {
-	static float zoomDuration;
+	static ZoomHandler zoom;
 
-	static float getZoom();
 	static CameraViewMode getNextViewMode(CameraViewMode currentMode);
 public:
 	static void handle(Player* player);

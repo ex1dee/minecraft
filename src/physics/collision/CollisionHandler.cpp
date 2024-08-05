@@ -26,12 +26,12 @@ void CollisionHandler::handle(const Collision& collision, GameObject* obj) {
 
 	rb->deltaPosition += normal * (-dot * dpLen + collision.depth);
 
-	if (collision.normal.y == 1) {
+	if (normal.y == 1) {
 		float velLen = glm::length(rb->newVelocity);
 
 		if (velLen == 0)
 			return;
 
-		rb->newVelocity += normal * (-dot * glm::length(rb->newVelocity) + collision.depth);
+		rb->newVelocity += normal * (-dot * velLen + collision.depth);
 	}
 }
