@@ -3,7 +3,7 @@
 
 #include <glm/glm.hpp>
 
-#include "../math/Transform.h"
+#include "../math/geometry/Transform.h"
 
 const glm::vec3 GRAVITY = glm::vec3(0.0f, -15.0f, 0.0f);
 

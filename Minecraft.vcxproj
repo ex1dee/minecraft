@@ -146,8 +146,12 @@
   <ItemGroup>
     <ClCompile Include="src\entity\EntitiesDatabase.cpp" />
     <ClCompile Include="src\entity\Entity.cpp" />
-    <ClCompile Include="src\math\Frustum.cpp" />
-    <ClCompile Include="src\math\Orientation.cpp" />
+    <ClCompile Include="src\math\geometry\Transform.cpp" />
+    <ClCompile Include="src\math\intersects\RayBoxIntersect.cpp" />
+    <ClCompile Include="src\math\intersects\RayRectIntersect.cpp" />
+    <ClCompile Include="src\math\shapes\Frustum.cpp" />
+    <ClCompile Include="src\math\geometry\Orientation.cpp" />
+    <ClCompile Include="src\physics\collider\BoxCollider.cpp" />
     <ClCompile Include="src\physics\collision\BoxBoxCollision.cpp" />
     <ClCompile Include="src\physics\collision\CollisionDetector.cpp" />
     <ClCompile Include="src\physics\collision\CollisionHandler.cpp" />
@@ -161,6 +165,8 @@
     <ClCompile Include="src\shaders\ShadersDatabase.cpp" />
     <ClCompile Include="src\textures\TextureLoader.cpp" />
     <ClCompile Include="src\utils\AssimpLoader.cpp" />
+    <ClCompile Include="src\world\block\Block.cpp" />
+    <ClCompile Include="src\world\RayTracing.cpp" />
     <ClCompile Include="src\world\Sun.cpp" />
     <ClCompile Include="src\states\PlayState.cpp" />
     <ClCompile Include="src\render\ChunkRenderer.cpp" />
@@ -194,12 +200,19 @@
     <ClInclude Include="src\entity\Entity.h" />
     <ClInclude Include="src\entity\EntityID.h" />
     <ClInclude Include="src\entity\EntityType.h" />
-    <ClInclude Include="src\math\Frustum.h" />
-    <ClInclude Include="src\math\Math.h" />
-    <ClInclude Include="src\math\Orientation.h" />
-    <ClInclude Include="src\math\Plane.h" />
-    <ClInclude Include="src\math\AABB.h" />
-    <ClInclude Include="src\math\Transform.h" />
+    <ClInclude Include="src\math\intersects\Intersect1P.h" />
+    <ClInclude Include="src\math\intersects\IntersectList.h" />
+    <ClInclude Include="src\math\intersects\RayBoxIntersect.h" />
+    <ClInclude Include="src\math\intersects\RayRectIntersect.h" />
+    <ClInclude Include="src\math\shapes\Frustum.h" />
+    <ClInclude Include="src\math\Mathf.h" />
+    <ClInclude Include="src\math\geometry\Orientation.h" />
+    <ClInclude Include="src\math\shapes\Plane.h" />
+    <ClInclude Include="src\math\shapes\AABB.h" />
+    <ClInclude Include="src\math\shapes\Ray.h" />
+    <ClInclude Include="src\math\geometry\Transform.h" />
+    <ClInclude Include="src\math\shapes\Rect.h" />
+    <ClInclude Include="src\math\shapes\Triangle.h" />
     <ClInclude Include="src\physics\collider\BoxCollider.h" />
     <ClInclude Include="src\physics\collider\Collider.h" />
     <ClInclude Include="src\physics\collision\BoxBoxCollision.h" />
@@ -226,6 +239,7 @@
     <ClInclude Include="src\render\SkyboxRenderer.h" />
     <ClInclude Include="src\textures\TextureType.h" />
     <ClInclude Include="src\world\block\BlockShaderType.h" />
+    <ClInclude Include="src\world\RayTracing.h" />
     <ClInclude Include="src\world\Sun.h" />
     <ClInclude Include="src\states\PlayState.h" />
     <ClInclude Include="src\render\ChunkRenderer.h" />

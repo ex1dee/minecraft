@@ -1,7 +1,7 @@
 #include "CameraInput.h"
 
 #include "../../window/Events.h"
-#include "../../math/Math.h"
+#include "../../math/Mathf.h"
 #include "../../Time.h"
 #include "../Camera.h"
 
@@ -30,7 +30,7 @@ void CameraInput::handle(Player* player) {
 }
 
 float CameraInput::getZoom() {
-	return bezcurve(0, CAMERA_MAX_ZOOM, zoomDuration / ZOOM_TIME_SEC);
+	return Mathf::bezcurve(0, CAMERA_MAX_ZOOM, zoomDuration / ZOOM_TIME_SEC);
 }
 
 CameraViewMode CameraInput::getNextViewMode(CameraViewMode currentMode) {

@@ -1,9 +1,7 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "../physics/collider/BoxCollider.h"
 #include "../physics/GameObject.h"
-#include "../math/Orientation.h"
 #include "EntitiesDatabase.h"
 
 class Entity : public GameObject {

@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "../../math/AABB.h"
+#include "../../math/shapes/AABB.h"
 #include "Mesh.h"
 
 class Model {

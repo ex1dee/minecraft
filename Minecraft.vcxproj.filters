@@ -89,7 +89,7 @@
     <ClCompile Include="src\player\Player.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\math\Frustum.cpp">
+    <ClCompile Include="src\math\shapes\Frustum.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\render\SkyboxRenderer.cpp">
@@ -143,7 +143,25 @@
     <ClCompile Include="src\shaders\ShadersDatabase.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\math\Orientation.cpp">
+    <ClCompile Include="src\math\geometry\Orientation.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\RayTracing.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\block\Block.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\physics\collider\BoxCollider.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\geometry\Transform.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\intersects\RayRectIntersect.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\intersects\RayBoxIntersect.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -197,16 +215,16 @@
     <ClInclude Include="src\states\PlayState.h" />
     <ClInclude Include="src\player\Player.h" />
     <ClInclude Include="src\entity\Entity.h" />
-    <ClInclude Include="src\math\AABB.h" />
-    <ClInclude Include="src\math\Plane.h" />
-    <ClInclude Include="src\math\Frustum.h" />
-    <ClInclude Include="src\math\Transform.h" />
+    <ClInclude Include="src\math\shapes\AABB.h" />
+    <ClInclude Include="src\math\shapes\Plane.h" />
+    <ClInclude Include="src\math\shapes\Frustum.h" />
+    <ClInclude Include="src\math\geometry\Transform.h" />
     <ClInclude Include="src\render\SkyboxRenderer.h" />
     <ClInclude Include="src\render\framebuffer\DepthFramebuffer.h" />
     <ClInclude Include="src\render\light\Light.h" />
     <ClInclude Include="src\render\light\DirectLight.h" />
     <ClInclude Include="src\physics\GameObject.h" />
-    <ClInclude Include="src\math\Orientation.h" />
+    <ClInclude Include="src\math\geometry\Orientation.h" />
     <ClInclude Include="src\physics\collider\Collider.h" />
     <ClInclude Include="src\physics\RigidBody.h" />
     <ClInclude Include="src\physics\collider\BoxCollider.h" />
@@ -228,7 +246,7 @@
     <ClInclude Include="src\textures\TextureLoader.h" />
     <ClInclude Include="src\player\input\CameraInput.h" />
     <ClInclude Include="src\player\CameraViewMode.h" />
-    <ClInclude Include="src\math\Math.h" />
+    <ClInclude Include="src\math\Mathf.h" />
     <ClInclude Include="src\render\EntityRenderer.h" />
     <ClInclude Include="src\entity\EntityType.h" />
     <ClInclude Include="src\entity\EntitiesDatabase.h" />
@@ -236,6 +254,14 @@
     <ClInclude Include="src\shaders\ShadersDatabase.h" />
     <ClInclude Include="src\shaders\ShaderType.h" />
     <ClInclude Include="src\world\block\BlockShaderType.h" />
+    <ClInclude Include="src\world\RayTracing.h" />
+    <ClInclude Include="src\math\shapes\Ray.h" />
+    <ClInclude Include="src\math\shapes\Triangle.h" />
+    <ClInclude Include="src\math\intersects\RayRectIntersect.h" />
+    <ClInclude Include="src\math\intersects\Intersect1P.h" />
+    <ClInclude Include="src\math\shapes\Rect.h" />
+    <ClInclude Include="src\math\intersects\RayBoxIntersect.h" />
+    <ClInclude Include="src\math\intersects\IntersectList.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />

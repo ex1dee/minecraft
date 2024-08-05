@@ -7,10 +7,10 @@
 #include <mutex>
 
 #include "generation/terrain/SuperFlatGenerator.h"
-#include "chunk/ChunkManager.h"
-#include "../world/World.h"
-#include "../entity/Entity.h"
 #include "../entity/EntitiesDatabase.h"
+#include "../entity/Entity.h"
+#include "../world/World.h"
+#include "chunk/ChunkManager.h"
 #include "WorldPosition.h"
 #include "Sun.h"
 

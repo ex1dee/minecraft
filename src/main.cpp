@@ -8,21 +8,8 @@
 #include "shaders/ShadersDatabase.h"
 #include "entity/EntitiesDatabase.h"
 #include "world/block/BlocksDatabase.h"
-#include "world/World.h"
-#include "render/ChunkRenderer.h"
 #include "states/PlayState.h"
-#include "states/BaseState.h"
-
 #include "player/Camera.h"
-#include "shaders/Shader.h"
-#include "render/model/Model.h"
-#include "render/Renderer.h"
-#include <vector>
-#include "textures/BasicTexture.h"
-#include "textures/TextureManager.h"
-#include "textures/TextureAtlas.h"
-
-#include "utils/VecMap.h"
 
 int main() {
     try {

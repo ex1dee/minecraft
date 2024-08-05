@@ -1,5 +1,6 @@
 #include "Camera.h"
 
+#include "../world/RayTracing.h"
 #include "../window/Window.h"
 #include "../window/Events.h"
 #include "../config/Config.h"
@@ -23,28 +24,12 @@ void Camera::update() {
 	aspect = (float)Window::getWidth() / (float)Window::getHeight();
 
 	updateOrientation();
-	updatePosition();
 	updateView();
 	updateProjection();
 
 	projView = projection * view;
 	skyboxProjView = projection * glm::mat4(glm::mat3(view));
 	frustum.update(projView);
-}
-
-void Camera::updatePosition() {
-	transform.position = player->transform.position + getOffset();
-}
-
-glm::vec3 Camera::getOffset() {
-	glm::vec3 offset = CAMERA_OFFSET;
-
-	if (viewMode == THIRD_PERSON_BACK)
-		offset -= orientation.front * CAMERA_TPS_COEF;
-	else if (viewMode == THIRD_PERSON_FRONT)
-		offset += orientation.front * CAMERA_TPS_COEF;
-
-	return offset;
 }
 
 void Camera::updateOrientation() {
@@ -64,13 +49,36 @@ void Camera::updateOrientation() {
 }
 
 void Camera::updateView() {
-	float frontSign = (viewMode == THIRD_PERSON_FRONT) ? -1.0f : 1.0f;
-	
+	viewPos = player->transform.position + CAMERA_OFFSET;
+	viewDir = orientation.front;
+
+	if (viewMode != FIRST_PERSON) {
+		updateTPSLook();
+	}
+
 	view = glm::lookAt(
-		transform.position,
-		transform.position + frontSign * orientation.front,
+		viewPos,
+		viewPos + viewDir,
 		glm::vec3(0, 1, 0)
 	);
+}
+
+void Camera::updateTPSLook() {
+	float viewSign = (viewMode == THIRD_PERSON_BACK) ? 1.0f : -1.0f;
+
+	Ray ray(viewPos, viewSign * -viewDir);
+	Block* block = RayTracing::getNearestBlock(world, ray, CAMERA_TPS_COEF + CAMERA_INTERSECT_OFFSET);
+
+	if (block != nullptr) {
+		IntersectList intersects = block->intersect(ray);
+		glm::vec3 pos = intersects.getNearestTo(viewPos);
+
+		viewDir = glm::normalize(viewPos - pos);
+		viewPos = pos + viewDir * CAMERA_INTERSECT_OFFSET;
+	} else {
+		viewPos += viewSign * -orientation.front * CAMERA_TPS_COEF;
+		viewDir *= viewSign;
+	}
 }
 
 void Camera::updateProjection() {

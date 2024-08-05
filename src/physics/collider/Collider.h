@@ -3,7 +3,7 @@
 
 #include <glm/glm.hpp>
 
-#include "../../math/Transform.h"
+#include "../../math/geometry/Transform.h"
 
 enum ColliderType;
 
@@ -26,7 +26,7 @@ public:
 	glm::vec3 getRotation() { return rotation; }
 	glm::vec3 getScale() { return rotation; }
 
-	virtual void applyTransform(Transform& transform) = 0;
+	virtual void applyTransform(const Transform& transform) = 0;
 };
 
 enum ColliderType {

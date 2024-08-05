@@ -1,7 +1,7 @@
 #ifndef AABB_H
 #define AABB_H
 
-#include "../math/Transform.h"
+#include "../geometry/Transform.h"
 
 class AABB {
 public:

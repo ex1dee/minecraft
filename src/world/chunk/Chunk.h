@@ -2,9 +2,9 @@
 #define INCL_CHUNK_H
 
 #include "../generation/terrain/TerrainGenerator.h"
+#include "../../math/shapes/AABB.h"
 #include "../../render/Renderer.h"
 #include "../../utils/VecMap.h"
-#include "../../math/AABB.h"
 #include "../block/Block.h"
 #include "ChunkMesh.h"
 

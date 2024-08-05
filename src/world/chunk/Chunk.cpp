@@ -89,9 +89,10 @@ void Chunk::setBlock(const glm::vec3& pos, Block block) {
 	if (pos.y < 0 || ceil(pos.y) >= CHUNK_H)
 		return;
 
-	if (outOfBounds(pos)) {
-		glm::vec3 worldPos = getWorldPosition(pos);
+	glm::vec3 worldPos = getWorldPosition(pos);
+	block.transform.position = worldPos;
 
+	if (outOfBounds(pos)) {
 		world->setBlock(worldPos, block);
 	}
 

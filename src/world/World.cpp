@@ -154,7 +154,7 @@ void World::setBlock(const glm::vec3& pos, Block block) {
 
 WorldPosition World::getWorldPosition(const glm::vec3& pos) {
 	WorldPosition worldPos;
-	worldPos.localBlockPos = getLocalBlockPosition(pos);
+	worldPos.localBlockPos = getLocalBlockPosition(floor(pos));
 	worldPos.chunk = getChunk(pos);
 
 	return worldPos;

@@ -2,9 +2,9 @@
 #define GAMEOBJECT_H
 
 #include "../render/model/Model.h"
-#include "../math/Orientation.h"
-#include "../math/Transform.h"
-#include "../math/AABB.h"
+#include "../math/geometry/Orientation.h"
+#include "../math/geometry/Transform.h"
+#include "../math/shapes/AABB.h"
 #include "collider/Collider.h"
 #include "PhysicsEngine.h"
 #include "RigidBody.h"

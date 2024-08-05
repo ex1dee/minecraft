@@ -3,8 +3,8 @@
 
 #include <glad/glad.h>
 
-#include "../math/Orientation.h"
-#include "../math/Frustum.h"
+#include "../math/geometry/Orientation.h"
+#include "../math/shapes/Frustum.h"
 #include "CameraViewMode.h"
 #include "Player.h"
 
@@ -14,12 +14,16 @@
 #define CAMERA_NEAR 0.1f
 #define CAMERA_FAR 500.0f
 #define CAMERA_MAX_ZOOM 30.0f
+#define CAMERA_INTERSECT_OFFSET 1.4f
 
 class Camera {
 	glm::mat4 view;
 	glm::mat4 projView;
 	glm::mat4 skyboxProjView;
 	glm::mat4 projection;
+
+	glm::vec3 viewPos;
+	glm::vec3 viewDir;
 
 	Orientation orientation;
 	CameraViewMode viewMode;
@@ -32,11 +36,10 @@ class Camera {
 	float fov;
 	float zoom;
 
-	void updatePosition();
+	void updateTPSLook();
 	void updateOrientation();
 	void updateView();
 	void updateProjection();
-	glm::vec3 getOffset();
 public:
 	Camera();
 

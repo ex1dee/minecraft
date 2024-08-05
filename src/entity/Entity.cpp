@@ -1,5 +1,7 @@
 #include "Entity.h"
 
+#include "../physics/collider/BoxCollider.h"
+
 Entity::Entity(EntityID id)
 	: GameObject(false) {
 	type = EntitiesDatabase::get(id);

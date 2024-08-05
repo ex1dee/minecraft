@@ -1,7 +1,7 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "../math/Orientation.h"
+#include "../math/geometry/Orientation.h"
 #include "../entity/Entity.h"
 
 #define PLAYER_DEFAULT_SPEED 3.0f

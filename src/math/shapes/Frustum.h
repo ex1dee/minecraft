@@ -3,8 +3,8 @@
 
 #include <array>
 
-#include "AABB.h"
 #include "Plane.h"
+#include "AABB.h"
 
 class Frustum {
 	void normalizePlanes();

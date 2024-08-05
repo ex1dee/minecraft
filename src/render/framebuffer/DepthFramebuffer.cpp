@@ -1,6 +1,6 @@
 #include "DepthFramebuffer.h"
 
-#include "../../math/Orientation.h"
+#include "../../math/geometry/Orientation.h"
 
 DepthFramebuffer::DepthFramebuffer(Shader* shader, const DFBConfig& config)
 	: shader(shader), config(config) {
