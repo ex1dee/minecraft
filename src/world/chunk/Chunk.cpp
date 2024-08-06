@@ -20,14 +20,6 @@ void Chunk::makeAABB() {
 	aabb = AABB(wp1, wp2);
 }
 
-Block& Chunk::getHighestBlockAt(const glm::vec3& pos) {
-	return getBlock(glm::vec3(pos.x, getHeightAt(pos), pos.z));
-}
-
-int Chunk::getHeightAt(const glm::vec3& pos) {
-	return highestBlocks[glm::vec2(pos.x, pos.z)];
-}
-
 void Chunk::render(Renderer& renderer) {
 	if (hasMesh()) {
 		bufferMesh();
@@ -40,8 +32,8 @@ void Chunk::makeMesh(Camera& camera) {
 	if (!hasMesh()) {
 		ChunkMeshBuilder(this).build();
 
-		bHasMesh = true;
-		bHasBuffered = false;
+		mesh = true;
+		buffered = false;
 	}
 }
 
@@ -49,31 +41,38 @@ void Chunk::bufferMesh() {
 	if (!hasBuffered()) {
 		meshes.createBuffers();
 
-		bHasBuffered = true;
+		buffered = true;
 	}
 }
 
 void Chunk::resetMeshes() {
-	bHasMesh = false;
-	bHasBuffered = false;
+	mesh = false;
+	buffered = false;
 
 	meshes.solid->getModel().reset();
 	meshes.water->getModel().reset();
 }
 
 void Chunk::load(TerrainGenerator& terrainGen) {
-	if (bIsLoaded)
+	if (loaded)
 		return;
 
 	terrainGen.generateTerrain(this);
-	bIsLoaded = true;
+	loaded = true;
 }
 
-Block& Chunk::getBlock(const glm::vec3& pos) {
-	if (pos.y < 0 || ceil(pos.y) >= CHUNK_H) {
-		Block block(AIR);
 
-		return block;
+Block* Chunk::getHighestBlockAt(const glm::vec3& pos) {
+	return getBlock(glm::vec3(pos.x, getHeightAt(pos), pos.z));
+}
+
+int Chunk::getHeightAt(const glm::vec3& pos) {
+	return highestBlocks[glm::vec2(pos.x, pos.z)];
+}
+
+Block* Chunk::getBlock(const glm::vec3& pos) {
+	if (pos.y < 0 || ceil(pos.y) >= CHUNK_H) {
+		return nullptr;
 	}
 
 	if (outOfBounds(pos)) {
@@ -82,7 +81,7 @@ Block& Chunk::getBlock(const glm::vec3& pos) {
 		return world->getBlock(worldPos);
 	}
 
-	return blocks[toBlockIndex(pos)];
+	return &blocks[toBlockIndex(pos)];
 }
 
 void Chunk::setBlock(const glm::vec3& pos, Block block) {
@@ -90,7 +89,7 @@ void Chunk::setBlock(const glm::vec3& pos, Block block) {
 		return;
 
 	glm::vec3 worldPos = getWorldPosition(pos);
-	block.transform.position = worldPos;
+	block.position = worldPos;
 
 	if (outOfBounds(pos)) {
 		world->setBlock(worldPos, block);
@@ -124,9 +123,9 @@ void Chunk::updateHighestBlock(const glm::vec3& pos, Block& block) {
 	else {
 		if (!block.type->colliders.size()) {
 			if (y == highestBlocks[pos]) {
-				Block block = getBlock(glm::vec3(pos.x, y--, pos.z));
+				Block* block = getBlock(glm::vec3(pos.x, y--, pos.z));
 
-				while (!block.type->colliders.size()) {
+				while (!block->type->colliders.size()) {
 					block = getBlock(glm::vec3(pos.x, y--, pos.z));
 				}
 			}

@@ -27,12 +27,15 @@ void PlayState::handleInput() {
 }
 
 void PlayState::update() {
-	if (Time::needUpdate()) {
+	Time::update();
+
+	if (Time::isTickElapsed()) {
 		world->update(*renderer, *player, *camera);
 
-		PhysicsEngine::updatePerTick(*player);
+		PhysicsEngine::updatePerLongTick(*player);
 	} else {
-		PhysicsEngine::updatePerFrame(*player);
+		if (Time::isPhysicsTickElapsed())
+			PhysicsEngine::updatePerTick(*player);
 	}
 }
 

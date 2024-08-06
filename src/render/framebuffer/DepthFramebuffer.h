@@ -11,6 +11,8 @@
 #include "../../shaders/Shader.h"
 #include "DFBConfig.h"
 
+constexpr float FRAMEBUFFER_BORDER_COLLOR[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+
 class DepthFramebuffer {
 	Shader* shader;
 	DFBConfig config;

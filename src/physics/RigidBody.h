@@ -16,12 +16,12 @@ public:
 	glm::vec3 newVelocity = glm::vec3(0);
 	glm::vec3 deltaPosition = glm::vec3(0);
 
-	bool updateEveryTick;
+	bool updatePerLongTick;
 	bool physics;
 	float mass;
 
-	RigidBody(bool updateEveryTick)
-		: updateEveryTick(updateEveryTick) {}
+	RigidBody(bool updatePerLongTick)
+		: updatePerLongTick(updatePerLongTick) {}
 
 	void addVelocity(const glm::vec3& velocity) {
 		this->velocity += velocity;

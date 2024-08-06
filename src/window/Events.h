@@ -11,8 +11,6 @@
 #include "CursorPos.h"
 #include "Button.h"
 
-class GLFWwindow;
-
 class Events {
 	static CursorPos cursorPos;
 	static Button keys[1024];

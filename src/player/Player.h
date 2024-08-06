@@ -15,9 +15,9 @@ class Camera;
 class Player : public Entity {
 	friend class MovementsInput;
 
-	bool bIsSprinting = false;
-	bool bIsSneaking = false;
-	bool bIsFlying = true;
+	bool sprinting = false;
+	bool sneaking = false;
+	bool flying = true;
 	float speed = PLAYER_DEFAULT_SPEED;
 	float jumpForce = PLAYER_JUMP_FORCE;
 
@@ -27,9 +27,9 @@ public:
 
 	float getWalkSpeed() { return speed; }
 	float getJumpForce() { return jumpForce; }
-	bool isFlying() { return bIsFlying; }
-	bool isSneaking() { return bIsSneaking; }
-	bool isSprinting() { return bIsSprinting; }
+	bool isFlying() { return flying; }
+	bool isSneaking() { return sneaking; }
+	bool isSprinting() { return sprinting; }
 	Camera* const getCamera() { return camera; }
 
 	bool isJumping();

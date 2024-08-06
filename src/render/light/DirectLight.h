@@ -12,13 +12,13 @@ public:
 		framebuffers[0] = new DepthFramebuffer(FBOShader, DFBconfig);
 	}
 
-	DepthFramebuffer& getFramebuffer() { return *framebuffers[0]; }
+	DepthFramebuffer& getFramebuffer() const { return *framebuffers[0]; }
 
-	void startRender() {
+	void startRender() const {
 		getFramebuffer().startRender(direction, position);
 	}
 
-	void finishRender() {
+	void finishRender() const {
 		getFramebuffer().finishRender();
 	}
 };

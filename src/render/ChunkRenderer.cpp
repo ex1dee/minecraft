@@ -45,7 +45,7 @@ void ChunkRenderer::updateSolidShader(Camera* camera, const Sun& sun) {
 	activeShader = ShadersDatabase::get(DEFAULT);
 	activeShader->use();
 
-	//defShader->setMat4("projView", sun.getLight().getFramebuffer().getProjView())
+	//activeShader->setMat4("projView", sun.getLight().getFramebuffer().getProjView());
 	activeShader->setMat4("projView", camera->getProjView());
 	activeShader->setMat4("model", glm::mat4(1));
 	activeShader->setVec3("cameraPos", camera->getPosition());
@@ -74,6 +74,7 @@ void ChunkRenderer::updateFloraShader(Camera* camera, const Sun& sun) {
 	activeShader->setBool("material.lighting", false);
 
 	activeShader->setVec3("sun.direction", sun.getLight().direction);
+	activeShader->setVec3("sun.position", sun.getLight().position);
 	activeShader->setVec3("sun.color", sun.getLight().color);
 
 	TextureManager::bindTexture(BlocksDatabase::getTextureAtlas(), *activeShader, "tex");

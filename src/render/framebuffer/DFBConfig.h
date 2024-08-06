@@ -20,7 +20,7 @@ struct DFBConfig {
 		isOrtho = true;
 	}
 
-	DFBConfig(float bufferSize, float perspectiveNear, float perspectiveFar)
+	DFBConfig(float perspectiveNear, float perspectiveFar, float bufferSize)
 		: bufferSize(bufferSize), perspectiveNear(perspectiveNear), perspectiveFar(perspectiveFar) {
 		isOrtho = false;
 	}

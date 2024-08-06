@@ -48,10 +48,13 @@ void BlockFrameRenderer::render(Camera* camera) {
 void BlockFrameRenderer::createModel(Block* block, Player& player) {
 	MeshData meshData(CUBE, 3, GL_LINES);
 
+	Transform transform;
+	transform.position = block->position;
+
 	for (BoxCollider* collider : block->type->colliders) {
 		int index = 0;
 
-		for (const Rect& rect : collider->getRectangles(block->transform)) {
+		for (const Rect& rect : collider->getRectangles(transform)) {
 			meshData.vertexPositions.push_back(rect.a.x);
 			meshData.vertexPositions.push_back(rect.a.y);
 			meshData.vertexPositions.push_back(rect.a.z);

@@ -26,7 +26,7 @@ ChunkMeshBuilder::ChunkMeshBuilder(Chunk* chunk)
 }
 
 void ChunkMeshBuilder::build() {
-	curBlock = &chunk->firstBlock();
+	curBlock = chunk->getFirstBlock();
 
 	for (int i = 0; i < CHUNK_VOL; ++i) {
 		Block block = *(curBlock++);
@@ -94,7 +94,11 @@ void ChunkMeshBuilder::tryAddFace(const std::array<float, 12>& vertices,
 }
 
 bool ChunkMeshBuilder::shouldAddFace(glm::vec3 adjacentDir, BlockType blockType) {
-	BlockType* adjBlockType = chunk->getBlock(adjacentDir).type;
+	Block* adjBlock = chunk->getBlock(adjacentDir);
+	if (adjBlock == nullptr)
+		return true;
+
+	BlockType* adjBlockType = adjBlock->type;
 
 	if (adjBlockType->id == BlockID::AIR 
 		|| (!adjBlockType->isOpaque && blockType.id != adjBlockType->id)) {

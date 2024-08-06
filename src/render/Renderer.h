@@ -23,6 +23,8 @@ public:
 	void addEntity(Entity* entity);
 	void finishRender(Player& player, Camera* camera, World& world);
 	
+	static void enableCullFace();
+	static void disableCullFace();
 	static void startTransparentRender();
 	static void finishTransparentRender();
 };

@@ -24,11 +24,9 @@ void Renderer::finishRender(Player& player, Camera* camera, World& world) {
 	skyboxRenderer.render(camera, *sun);
 
 	if (!player.isFlying()) {
-		glEnable(GL_CULL_FACE);
-		glCullFace(GL_FRONT);
-		glFrontFace(GL_CW);
+		enableCullFace();
 	} else {
-		glDisable(GL_CULL_FACE);
+		disableCullFace();
 	}
 
 	glEnable(GL_MULTISAMPLE);
@@ -45,6 +43,17 @@ void Renderer::addChunk(Chunk* chunk) {
 
 void Renderer::addEntity(Entity* entity) {
 	entityRenderer.add(entity);
+}
+
+void Renderer::enableCullFace() {
+	glEnable(GL_CULL_FACE);
+	glCullFace(GL_FRONT);
+	glFrontFace(GL_CW);
+}
+
+void Renderer::disableCullFace() {
+	glDisable(GL_CULL_FACE);
+	glCullFace(GL_FRONT_AND_BACK);
 }
 
 void Renderer::startTransparentRender() {

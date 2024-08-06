@@ -8,7 +8,10 @@ Block::Block(BlockID id) {
 
 IntersectList Block::intersect(const Ray& ray) const {
 	IntersectList intersects;
-	
+
+	Transform transform;
+	transform.position = position;
+
 	for (BoxCollider* collider : type->colliders) {
 		intersects.add(RayBoxIntersect::intersect(ray, collider, transform));
 	}

@@ -9,7 +9,7 @@
 
 class Block {
 public:
-	Transform transform;
+	glm::vec3 position;
 	BlockType* type;
 
 	Block() {}

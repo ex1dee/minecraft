@@ -1,11 +1,11 @@
 #version 330 core
 
 #define SHADOW_INTERPOLATION false
+#define SHADOW_BIAS 0.000175
+#define SHADOW_SHARPNESS 2.0
 
 #define MIN_SUN_LIGHT 0.25
 #define MIN_SUN_DIFFUSE 0.4
-#define MIN_SHADOW_BIAS 0.005
-#define MAX_SHADOW_BIAS 0.008
 #define MAX_LIGHTS 16
 
 #define POINT_LIGHT_CONSTANT 1.0
@@ -13,7 +13,7 @@
 
 struct LightShadow {
 	mat4 projView;
-	sampler2D depthMap;
+	sampler2DShadow depthMap;
 };
 
 struct PointLight {
@@ -28,6 +28,7 @@ struct PointLight {
 
 struct DirectLight {
 	LightShadow shadow;
+	vec3 position;
 	vec3 direction;
 	vec3 color;
 };
@@ -64,13 +65,11 @@ vec3 calcPointLight (PointLight light);
 vec3 calcSunDiffuse(DirectLight sun);
 float calcSunLight();
 
-vec3 result = vec3(0);
+vec3 result = vec3(1);
 
 void main() {
 	float shadow = 1;
-
 	float sunLight = calcSunLight();
-	result += calcSunDiffuse(sun);
 
 	if (material.shadow)
 		shadow = min(shadow, calcShadow(sun.shadow, sun.direction));
@@ -97,39 +96,41 @@ void main() {
 }
 
 float calcShadow(LightShadow lightShadow, vec3 lightDir) {
+	if (!material.shadow)
+		return 1;
+
 	vec4 lightFragPos = lightShadow.projView * vec4(FragPos, 1);
 	vec3 projCoords = lightFragPos.xyz / lightFragPos.w;
 	projCoords = (projCoords + 1) * 0.5;
 
 	if (projCoords.z > 1)
-		return 1;
+		return 0;
 
-	float closestDepth = texture(lightShadow.depthMap, projCoords.xy).r;
-	float currentDepth = projCoords.z;
+	float dt = dot(-Normal, normalize(lightDir));
+	float bias = SHADOW_BIAS / pow(dt + 0.1, SHADOW_SHARPNESS);
+	projCoords.z -= bias;
 
-	vec2 texelSize = 1 / textureSize(lightShadow.depthMap, 0);
-	float bias = max(MIN_SHADOW_BIAS, MAX_SHADOW_BIAS * (1 - max(0, dot(vec3(0, -1, 0), lightDir))));
 	float shadow = 0;
 
 	if (SHADOW_INTERPOLATION) {
+		vec2 texelSize = 1 / textureSize(lightShadow.depthMap, 0);
+
 		for (int x = -1; x <= 1; ++x) {
 			for (int y = -1; y <= 1; ++y) {
-				float pcfDepth = texture(lightShadow.depthMap, projCoords.xy + vec2(x, y) * texelSize).r;
-	
-				if (material.shadow)
-					shadow += currentDepth - bias > pcfDepth ? 0 : 1;
+				vec3 offset = vec3(vec2(x, y) * texelSize, 0);
+				shadow += texture(lightShadow.depthMap, projCoords.xyz + offset);
 			}
 		}
 
 		shadow /= 9;
 	} else {
-		shadow = currentDepth - bias > closestDepth ? 0 : 1;
+		shadow = texture(lightShadow.depthMap, projCoords.xyz);
 	}
 
 	return shadow;
 }
 
-vec3 calcPointLight (PointLight light) {
+vec3 calcPointLight(PointLight light) {
 	vec3 lightDir = normalize(light.position - FragPos);
 	vec3 ambient, diffuse, specular;
 
@@ -161,13 +162,6 @@ vec3 calcPointLight (PointLight light) {
 float calcAttenuation(PointLight light, float distance) {
 	 return 1.0 / (light.constant + light.linear * distance + 
   			       light.quadratic * (distance * distance));
-}
-
-vec3 calcSunDiffuse(DirectLight sun) {
-	float diff = max(MIN_SUN_DIFFUSE, dot(Normal, -sun.direction));
-	vec3 diffuse = diff * sun.color;
-
-	return diffuse;
 }
 
 float calcSunLight() {

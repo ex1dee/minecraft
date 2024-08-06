@@ -66,22 +66,53 @@ void World::updateDefaultSpawnPoint(Player& player) {
 
 void World::loadChunks(Player& player, Camera& camera) {
 	while (isRunning) {
-		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+		std::this_thread::sleep_for(std::chrono::milliseconds(5));
 
-		glm::vec2 chunkPos = getLocalChunkPosition(player.transform.position);
+		glm::vec2 playerPos = getLocalChunkPosition(player.transform.position);
 		int loadDist = Config::settings["world"]["loadDistance"] - 1;
 
 		std::unique_lock<std::mutex> mainLock(mainMutex, std::defer_lock);
-		
+
 		for (int i = 0; i <= loadDist; ++i) {
-			for (int x = chunkPos.x - i; x <= chunkPos.x + i; ++x) {
-				for (int z = chunkPos.y - i; z <= chunkPos.y + i; ++z) {
+			for (int x = playerPos.x - i; x <= playerPos.x + i; ++x) {
+				for (int z = playerPos.y - i; z <= playerPos.y + i; ++z) {
 					mainLock.lock();
 					chunkManager->makeMesh(glm::vec2(x, z), camera);
 					mainLock.unlock();
 				}
 			}
 		}
+
+		for (std::pair<glm::vec2, Chunk*> pair : chunkManager->loadedChunks) {
+			Chunk* chunk = pair.second;
+			if (chunk == nullptr)
+				continue;
+
+			glm::vec2 chunkPos = chunk->getLocalPosition();
+
+			float minX = playerPos.x - loadDist;
+			float maxX = playerPos.x + loadDist;
+			float minZ = playerPos.y - loadDist;
+			float maxZ = playerPos.y + loadDist;
+
+			if (chunkPos.x < minX || chunkPos.x > maxX || chunkPos.y < minZ || chunkPos.y > maxZ) { 
+				mainLock.lock();
+				chunkManager->unload(chunkPos);
+				mainLock.unlock();
+			}
+		}
+
+		for (const glm::vec2& chunkPos : chunkManager->unloadedChunks) {
+			mainLock.lock();
+			Chunk* chunk = chunkManager->getChunk(chunkPos);
+			chunkManager->loadedChunks.erase(chunkPos);
+			chunkManager->chunks.erase(chunkPos);
+			mainLock.unlock();
+
+			delete chunk;
+		}
+
+		chunkManager->unloadedChunks.clear();
 	}
 }
 
@@ -95,28 +126,19 @@ void World::renderEntities(Renderer& renderer, Player& player) {
 }
 
 void World::renderChunks(Renderer& renderer, Player& player) {
-	glm::vec2 cameraPos = getLocalChunkPosition(player.transform.position);
-	int loadDist = Config::settings["world"]["loadDistance"] - 1;
-
-	for (std::pair<glm::vec2, Chunk*> pair : chunkManager->chunks) {
+	for (std::pair<glm::vec2, Chunk*> pair : chunkManager->loadedChunks) {
 		Chunk* chunk = pair.second;
-		glm::vec2 chunkPos = chunk->getLocalPosition();
+		if (chunk == nullptr)
+			continue;
 
-		float minX = cameraPos.x - loadDist;
-		float maxX = cameraPos.x + loadDist;
-		float minZ = cameraPos.y - loadDist;
-		float maxZ = cameraPos.y + loadDist;
-
-		if (chunkPos.x >= minX && chunkPos.x <= maxX && chunkPos.y >= minZ && chunkPos.y <= maxZ) {
-			chunk->render(renderer);
-		}
+		chunk->render(renderer);
 	}
 }
 
 void World::update(Renderer& renderer, Player& player, Camera& camera) {
 	updateChunks(camera);
 
-	sun->setTime(0, player);
+	sun->setTime((float)glfwGetTime() * 30.0f, player);
 }
 
 void World::updateChunk(const glm::vec3& pos) {
@@ -139,13 +161,19 @@ int World::getHeightAt(const glm::vec3& pos) {
 	return worldPos.chunk->getHeightAt(worldPos.localBlockPos);
 }
 
-Block& World::getHighestBlockAt(const glm::vec3& pos) {
+Block* World::getHighestBlockAt(const glm::vec3& pos) {
 	WorldPosition worldPos = getWorldPosition(pos);
+	if (worldPos.chunk == nullptr)
+		return nullptr;
+
 	return worldPos.chunk->getHighestBlockAt(worldPos.localBlockPos);
 }
 
-Block& World::getBlock(const glm::vec3& pos) {
+Block* World::getBlock(const glm::vec3& pos) {
 	WorldPosition worldPos = getWorldPosition(pos);
+	if (worldPos.chunk == nullptr)
+		return nullptr;
+
 	return worldPos.chunk->getBlock(worldPos.localBlockPos);
 }
 

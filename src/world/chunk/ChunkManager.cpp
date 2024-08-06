@@ -14,24 +14,32 @@ ChunkManager::~ChunkManager() {
 }
 
 void ChunkManager::makeMesh(const glm::vec2& pos, Camera& camera) {
-	for (int dx = -1; dx <= 1; ++dx) {
-		for (int dz = -1; dz <= 1; ++dz) {
-			load(pos + glm::vec2(dx, dz));
-		}
-	}
+	Chunk* chunk = getChunk(pos);
 
-	getChunk(pos)->makeMesh(camera);
+	if (chunk == nullptr || !chunk->hasMesh()) {
+		load(pos);
+
+		chunk->makeMesh(camera);
+	}
 }
 
 Chunk* const ChunkManager::load(const glm::vec2& pos) {
 	Chunk* chunk = getChunk(pos);
+	if (chunk->isLoaded())
+		return chunk;
+
 	chunk->load(world->getTerrainGenerator());
-		
+	loadedChunks.emplace(pos, chunk);
+
 	return chunk;
 }
 
 void ChunkManager::unload(const glm::vec2& pos) {
-	chunks.erase(pos);
+	Chunk* chunk = getChunk(pos);
+	if (!chunk->isLoaded())
+		return;
+
+	unloadedChunks.insert(pos);
 }
 
 Chunk* const ChunkManager::getChunk(const glm::vec2& pos) {

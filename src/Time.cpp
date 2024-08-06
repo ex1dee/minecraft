@@ -5,28 +5,36 @@
 float Time::currentTime = 0;
 float Time::lastTime = 0;
 float Time::deltaTime = 0;
-float Time::tickDeltaTime = 0;
-float Time::lag = 0; 
+float Time::tickLag = 0; 
+float Time::physicsTickLag = 0;
+bool Time::physicsTickElapsed = false;
+bool Time::tickElapsed = false;
 bool Time::started = false;
-
-bool Time::needUpdate() {
+#include <iostream>
+void Time::update() {
 	if (!started) {
 		lastTime = glfwGetTime();
 		started = true;
 	}
 
+	tickElapsed = false;
+	physicsTickElapsed = false;
+
 	currentTime = glfwGetTime();
 	deltaTime = currentTime - lastTime;
 	lastTime = currentTime;
 
-	lag += deltaTime;
+	tickLag += deltaTime;
 
-	if (lag >= SEC_PER_TICK) {
-		tickDeltaTime = lag;
-		lag -= SEC_PER_TICK;
-
-		return true;
+	if (tickLag >= SEC_PER_TICK) {
+		tickElapsed = true;
+		tickLag = 0;
 	}
-	
-	return false;
+
+	physicsTickLag += deltaTime;
+
+	if (physicsTickLag >= SEC_PER_PHYSICS_TICK) {
+		physicsTickElapsed = true;
+		physicsTickLag = 0;
+	}
 }

@@ -26,12 +26,12 @@ void MovementsInput::handle(Player* player) {
 float MovementsInput::calcSpeed(Player* player) {
 	float speed = player->getWalkSpeed();
 
-	player->bIsSprinting = Events::pressed(GLFW_KEY_LEFT_CONTROL);
-	player->bIsSneaking = Events::pressed(GLFW_KEY_LEFT_SHIFT);
+	player->sprinting = Events::pressed(GLFW_KEY_LEFT_CONTROL);
+	player->sneaking = Events::pressed(GLFW_KEY_LEFT_SHIFT);
 
-	if (player->bIsSneaking) {
+	if (player->sneaking) {
 		speed *= PLAYER_SNEAKING_COEF;
-	} else if (player->bIsSprinting) {
+	} else if (player->sprinting) {
 		speed *= PLAYER_SPRINT_COEF;
 	}
 

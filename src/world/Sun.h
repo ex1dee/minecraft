@@ -4,7 +4,7 @@
 #include "../render/light/DirectLight.h"
 #include "../player/Player.h"
 
-#define CHANGE_FOCUS_DIST CHUNK_W * 4.0f
+#define CHANGE_FOCUS_DIST CHUNK_W * 1.5f
 
 class World;
 
@@ -19,7 +19,7 @@ public:
 	Sun(Shader* FBOShader, World* world);
 	~Sun();
 
-	DirectLight& getLight() const { return *light; }
+	const DirectLight& getLight() const { return *light; }
 
 	void setTime(float time, Player& player);
 };

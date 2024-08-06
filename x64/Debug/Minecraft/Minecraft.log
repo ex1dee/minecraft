@@ -1,5 +1,47 @@
-﻿  CameraInput.cpp
-C:\Users\User\source\repos\Minecraft\Minecraft\src\player\input\CameraInput.h(4,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
-C:\Users\User\source\repos\Minecraft\Minecraft\src\window\Events.h(14,17): warning C4099: GLFWwindow: имя типа, ранее отображенное с помощью "struct", теперь отображено с помощью "class"
-C:\Users\User\source\repos\Minecraft\packages\glfw.3.4.0\build\native\include\GLFW\glfw3.h(1403,16): message : см. объявление "GLFWwindow"
+﻿  Config.cpp
+  EntitiesDatabase.cpp
+  main.cpp
+  Camera.cpp
+  Json.cpp
+  Window.cpp
+  World.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(13,13): warning C4244: =: преобразование "time_t" в "unsigned int", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(53,26): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(54,26): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(55,26): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(56,26): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(59,34): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(77,15): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(78,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+  BlocksDatabase.cpp
+  Создание кода...
+C:\Users\User\source\repos\Minecraft\Minecraft\src\math\intersects\IntersectList.h(28): warning C4172: возвращение адреса локальной или временной переменной : minPoint
   Minecraft.vcxproj -> C:\Users\User\source\repos\Minecraft\x64\Debug\Minecraft.exe

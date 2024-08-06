@@ -16,15 +16,15 @@ void PhysicsEngine::finalize() {
 
 }
 
-void PhysicsEngine::updatePerTick(Player& player) {
+void PhysicsEngine::updatePerLongTick(Player& player) {
 	update(player, true);
 }
 
-void PhysicsEngine::updatePerFrame(Player& player) {
+void PhysicsEngine::updatePerTick(Player& player) {
 	update(player, false);
 }
 
-void PhysicsEngine::update(Player& player, bool updatePerTick) {
+void PhysicsEngine::update(Player& player, bool updatePerLongTick) {
 	glm::vec3 position = player.transform.position;
 	glm::vec3 chunkPos = glm::vec3(position.x, 0, position.z);
 
@@ -34,7 +34,7 @@ void PhysicsEngine::update(Player& player, bool updatePerTick) {
 	cullObjects();
 
 	for (GameObject* object : objects) {
-		if (updatePerTick || !object->rigidBody.updateEveryTick) {
+		if (updatePerLongTick || !object->rigidBody.updatePerLongTick) {
 			prepare(object);
 		}
 	}
@@ -72,8 +72,8 @@ void PhysicsEngine::updatePosition(GameObject* object) {
 }
 
 float PhysicsEngine::getDeltaTime(GameObject* object) {
-	if (object->rigidBody.updateEveryTick)
-		return Time::getTickDeltaTime();
+	if (object->rigidBody.updatePerLongTick)
+		return SEC_PER_PHYSICS_TICK;
 	else
 		return Time::getDeltaTime();
 }

@@ -46,8 +46,8 @@ public:
 
 	int getHeightAt(const glm::vec3& pos);
 	Chunk* const getChunk(const glm::vec3& pos);
-	Block& getBlock(const glm::vec3& pos);
-	Block& getHighestBlockAt(const glm::vec3& pos);
+	Block* getBlock(const glm::vec3& pos);
+	Block* getHighestBlockAt(const glm::vec3& pos);
 	void updateChunks(Camera& camera);
 	void updateChunk(const glm::vec3& pos);
 	void render(Renderer& renderer, Player& player);
