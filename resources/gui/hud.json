@@ -1,0 +1,12 @@
+{
+    "hasTexture": false,
+    "name": "hud",
+
+    "center": [ 0, 0 ],
+    "rotation": [ 0, 0 ],
+    "scale": [ 1, 1 ],
+
+    "children": [
+        "crosshair"
+    ]
+}

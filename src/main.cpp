@@ -10,6 +10,8 @@
 #include "world/block/BlocksDatabase.h"
 #include "states/PlayState.h"
 #include "player/Camera.h"
+#include "gui/GUIDatabase.h"
+#include "gui/GUI.h"
 
 int main() {
     try {
@@ -18,6 +20,8 @@ int main() {
         BlocksDatabase::initialize();
         EntitiesDatabase::initialize();
         ShadersDatabase::initialize();
+        GUIDatabase::initialize();
+        GUI::initialize();
     } catch (const char* message) {
         std::cout << "ERROR::INITIALIZE\n" << message << "\n";
         glfwTerminate();
@@ -54,4 +58,5 @@ int main() {
     BlocksDatabase::finalize();
     EntitiesDatabase::finalize();
     ShadersDatabase::finalize();
+    GUIDatabase::finalize();
 }

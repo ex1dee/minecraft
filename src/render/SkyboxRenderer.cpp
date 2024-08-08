@@ -17,7 +17,7 @@ SkyboxRenderer::~SkyboxRenderer() {
 }
 
 void SkyboxRenderer::render(Camera* camera, const Sun& sun) {    
-    Shader* skyboxShader = ShadersDatabase::get(SKYBOX);
+    Shader* skyboxShader = ShadersDatabase::get(ShaderType::SKYBOX);
 	skyboxShader->use();
 
     TextureManager::bindTexture(*texture, *skyboxShader, "background");

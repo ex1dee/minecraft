@@ -8,6 +8,7 @@
 Camera::Camera() {
 	orientation.update(-90.0f, 0.0f);
 
+	aspect = (float) Window::getScreenWidth() / (float) Window::getScreenHeight();
 	zoom = 0;
 }
 
@@ -25,7 +26,6 @@ void Camera::setZoom(float zoom) {
 
 void Camera::update() {
 	fov = Config::settings["camera"]["fov"];
-	aspect = (float)Window::getWidth() / (float)Window::getHeight();
 
 	updateOrientation();
 	updateView();

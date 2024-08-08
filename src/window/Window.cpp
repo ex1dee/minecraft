@@ -1,10 +1,18 @@
 #include "Window.h"
-#include "Events.h"
+
 #include <iostream>
 
 #include "../config/Config.h"
+#include "../gui/GUI.h"
+#include "Events.h"
 
-GLFWwindow* Window::window = nullptr;
+GLFWmonitor* Window::monitor;
+GLFWwindow* Window::window;
+bool Window::fullscreen = false;
+int Window::prevWidth = 0;
+int Window::prevHeight = 0;
+int Window::screenWidth;
+int Window::screenHeight;
 int Window::width;
 int Window::height;
 
@@ -38,11 +46,14 @@ void Window::createWindow() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, GL_VERSION_MAJOR);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    std::string title = Config::config["window"]["title"];
-    width = Config::config["window"]["width"];
-    height = Config::config["window"]["height"];
+    monitor = glfwGetPrimaryMonitor();
 
-    window = glfwCreateWindow(width, height, title.c_str(), nullptr, nullptr);
+    setupScreenSize();
+    setupDefaultWindowSize();
+
+    std::string title = Config::config["window"]["title"];
+
+    window = glfwCreateWindow(width, height, title.c_str(), 0, nullptr);
     
     if (window == NULL) {
         throw "Failed to create GLFW window";
@@ -50,6 +61,18 @@ void Window::createWindow() {
 
     glfwMakeContextCurrent(window);
     setupAntiAliasing();
+}
+
+void Window::setupScreenSize() {
+    const GLFWvidmode* vidmode = glfwGetVideoMode(monitor);
+
+    screenWidth = vidmode->width;
+    screenHeight = vidmode->height;
+}
+
+void Window::setupDefaultWindowSize() {
+    width = screenWidth * 0.5f;
+    height = screenHeight * 0.5f;
 }
 
 void Window::setupAntiAliasing() {
@@ -73,10 +96,36 @@ void Window::gladLoad() {
 void Window::framebufferSizeCallback(GLFWwindow* window, int width, int height) {
     Window::width = width;
     Window::height = height;
-
     Window::setWindowViewport();
+    
+    GUI::framebufferSizeCallback(window, width, height);
 }
 
 void Window::setWindowViewport() {
     glViewport(0, 0, width, height);
+}
+
+void Window::toggleFullscreen() {
+    fullscreen = !fullscreen;
+
+    if (fullscreen) {
+        prevWidth = width;
+        prevHeight = height;
+        
+        glfwSetWindowMonitor(window, monitor, 0, 0, screenWidth, screenHeight, GLFW_DONT_CARE);
+    } else {
+        int width, height;
+
+        if (prevWidth != 0) {
+            width = prevWidth;
+            height = prevHeight;
+        } else {
+            setupDefaultWindowSize();
+        }
+
+        int xpos = (screenWidth - width) * 0.5f;
+        int ypos = (screenHeight - height) * 0.5f;
+
+        glfwSetWindowMonitor(window, NULL, xpos, ypos, prevWidth, prevHeight, GLFW_DONT_CARE);
+    }
 }

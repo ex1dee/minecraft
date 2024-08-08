@@ -7,17 +7,8 @@
     "solid": true,
 
     "texCoords": {
-        "side": {
-            "x": 2,
-            "y": 15
-        },
-        "top": {
-            "x": 2,
-            "y": 15
-        },
-        "bottom": {
-            "x": 2,
-            "y": 15
-        }
+        "side": [ 2, 15 ],
+        "top": [ 2, 15 ],
+        "bottom": [ 2, 15 ]
     }
 }

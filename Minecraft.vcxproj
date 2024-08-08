@@ -153,6 +153,8 @@
   <ItemGroup>
     <ClCompile Include="src\entity\EntitiesDatabase.cpp" />
     <ClCompile Include="src\entity\Entity.cpp" />
+    <ClCompile Include="src\gui\GUI.cpp" />
+    <ClCompile Include="src\gui\GUIDatabase.cpp" />
     <ClCompile Include="src\math\geometry\Transform.cpp" />
     <ClCompile Include="src\math\intersects\RayBoxIntersect.cpp" />
     <ClCompile Include="src\math\intersects\RayRectIntersect.cpp" />
@@ -165,13 +167,18 @@
     <ClCompile Include="src\physics\PhysicsEngine.cpp" />
     <ClCompile Include="src\player\input\CameraInput.cpp" />
     <ClCompile Include="src\player\input\MovementsInput.cpp" />
+    <ClCompile Include="src\player\input\WindowInput.cpp" />
     <ClCompile Include="src\player\input\ZoomHandler.cpp" />
     <ClCompile Include="src\player\Player.cpp" />
     <ClCompile Include="src\render\BlockFrameRenderer.cpp" />
+    <ClCompile Include="src\render\Drawable.cpp" />
     <ClCompile Include="src\render\EntityRenderer.cpp" />
+    <ClCompile Include="src\render\GUIRenderer.cpp" />
     <ClCompile Include="src\render\model\Mesh.cpp" />
     <ClCompile Include="src\render\SkyboxRenderer.cpp" />
+    <ClCompile Include="src\render\sprite\Sprite.cpp" />
     <ClCompile Include="src\shaders\ShadersDatabase.cpp" />
+    <ClCompile Include="src\textures\Texture.cpp" />
     <ClCompile Include="src\textures\TextureLoader.cpp" />
     <ClCompile Include="src\utils\AssimpLoader.cpp" />
     <ClCompile Include="src\world\block\Block.cpp" />
@@ -209,6 +216,9 @@
     <ClInclude Include="src\entity\Entity.h" />
     <ClInclude Include="src\entity\EntityID.h" />
     <ClInclude Include="src\entity\EntityType.h" />
+    <ClInclude Include="src\gui\GUI.h" />
+    <ClInclude Include="src\gui\GUIDatabase.h" />
+    <ClInclude Include="src\gui\GUIElement.h" />
     <ClInclude Include="src\math\intersects\Intersect1P.h" />
     <ClInclude Include="src\math\intersects\IntersectList.h" />
     <ClInclude Include="src\math\intersects\RayBoxIntersect.h" />
@@ -234,14 +244,19 @@
     <ClInclude Include="src\player\CameraViewMode.h" />
     <ClInclude Include="src\player\input\CameraInput.h" />
     <ClInclude Include="src\player\input\MovementsInput.h" />
+    <ClInclude Include="src\player\input\WindowInput.h" />
     <ClInclude Include="src\player\input\ZoomHandler.h" />
     <ClInclude Include="src\player\Player.h" />
     <ClInclude Include="src\render\BlockFrameRenderer.h" />
     <ClInclude Include="src\render\EntityRenderer.h" />
+    <ClInclude Include="src\render\GUIRenderer.h" />
     <ClInclude Include="src\render\light\DirectLight.h" />
     <ClInclude Include="src\render\light\Light.h" />
     <ClInclude Include="src\render\framebuffer\DFBConfig.h" />
     <ClInclude Include="src\render\light\PointLight.h" />
+    <ClInclude Include="src\textures\AtlasCoords.h" />
+    <ClInclude Include="src\render\sprite\Sprite.h" />
+    <ClInclude Include="src\render\sprite\SpriteTexture.h" />
     <ClInclude Include="src\shaders\ShadersDatabase.h" />
     <ClInclude Include="src\shaders\ShaderType.h" />
     <ClInclude Include="src\textures\TextureLoader.h" />
@@ -308,6 +323,8 @@
     <None Include="resources\blocks\short_grass.json" />
     <None Include="resources\blocks\stone.json" />
     <None Include="resources\entities\player.json" />
+    <None Include="resources\gui\hud.json" />
+    <None Include="resources\gui\hud_crosshair.json" />
     <None Include="resources\models\player\model.gltf" />
     <None Include="shaders\default.fs" />
     <None Include="shaders\default.vs" />
@@ -317,10 +334,14 @@
     <None Include="shaders\line.vs" />
     <None Include="shaders\skybox.fs" />
     <None Include="shaders\skybox.vs" />
+    <None Include="shaders\sprite.fs" />
+    <None Include="shaders\sprite.vs" />
+    <None Include="src\render\Drawable.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\models\player\textures\gltf_embedded_0.png" />
     <Image Include="resources\textures\blocks_atlas.png" />
+    <Image Include="resources\textures\hud\icons.png" />
     <Image Include="resources\textures\skybox\back.bmp" />
     <Image Include="resources\textures\skybox\bottom.bmp" />
     <Image Include="resources\textures\skybox\front.bmp" />

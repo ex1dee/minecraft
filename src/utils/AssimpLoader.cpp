@@ -102,7 +102,7 @@ void AssimpLoader::loadMaterialTextures(MeshData& meshData, aiMaterial* material
 
 TextureType AssimpLoader::getTextureTypeBy(aiTextureType type) {
 	if (type == aiTextureType_DIFFUSE)
-		return DIFFUSE;
+		return TextureType::DIFFUSE;
 	else if (type == aiTextureType_SPECULAR)
-		return SPECULAR;
+		return TextureType::SPECULAR;
 }

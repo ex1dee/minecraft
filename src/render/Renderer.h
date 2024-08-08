@@ -9,6 +9,7 @@
 #include "SkyboxRenderer.h"
 #include "EntityRenderer.h"
 #include "ChunkRenderer.h"
+#include "GUIRenderer.h"
 
 class Chunk;
 
@@ -17,6 +18,7 @@ class Renderer {
 	SkyboxRenderer skyboxRenderer;
 	EntityRenderer entityRenderer;
 	ChunkRenderer chunkRenderer;
+	GUIRenderer guiRenderer;
 	Shader* FBOShader;
 public:
 	void addChunk(Chunk* chunk);

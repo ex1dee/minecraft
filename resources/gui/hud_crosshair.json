@@ -1,0 +1,23 @@
+{
+    "hasTexture": true,
+    "name": "crosshair",
+
+    "color": [ 1, 1, 1, 0.75 ],
+    "center": [ 0, 0 ],
+    "rotation": [ 0, 0 ],
+    "scale": [ 1.5, 1.5 ],
+
+    "children": [],
+
+    "texture": {
+        "path": "resources/textures/hud/icons.png",
+        "atlas": {
+            "use": true,
+            "exactCoords": true,
+
+            "imagesCount": [ 25, 25 ],
+            "bottomLeft": [ 2, 243 ],
+            "topRight": [ 12, 253 ]
+        }
+    }
+}

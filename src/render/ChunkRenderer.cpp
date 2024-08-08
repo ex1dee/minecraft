@@ -42,7 +42,7 @@ void ChunkRenderer::render(Camera* camera, const Sun& sun) {
 }
 
 void ChunkRenderer::updateSolidShader(Camera* camera, const Sun& sun) {
-	activeShader = ShadersDatabase::get(DEFAULT);
+	activeShader = ShadersDatabase::get(ShaderType::DEFAULT);
 	activeShader->use();
 
 	//activeShader->setMat4("projView", sun.getLight().getFramebuffer().getProjView());
@@ -64,7 +64,7 @@ void ChunkRenderer::updateSolidShader(Camera* camera, const Sun& sun) {
 }
 
 void ChunkRenderer::updateFloraShader(Camera* camera, const Sun& sun) {
-	activeShader = ShadersDatabase::get(DEFAULT);
+	activeShader = ShadersDatabase::get(ShaderType::DEFAULT);
 	activeShader->use();
 
 	activeShader->setMat4("projView", camera->getProjView());

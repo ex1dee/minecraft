@@ -6,15 +6,15 @@ std::unordered_map<BlockID, BlockType*> BlocksDatabase::blocks;
 const TextureAtlas* BlocksDatabase::textureAtlas;
 
 void BlocksDatabase::initialize() {
-	textureAtlas = TextureLoader::loadAtlas("resources/textures/blocks_atlas.png", glm::vec2(16, 16), true, DIFFUSE);
+	textureAtlas = TextureLoader::loadAtlas("resources/textures/blocks_atlas.png", glm::vec2(16, 16), true, TextureType::DIFFUSE);
 
 	for (std::string path : Files::getFolderFiles(BLOCKS_DIR)) {
 		nlohmann::json json = Json::parse(path.c_str());
-		
-		BlockType* type = new BlockType();
-		type->texBottomCoords = glm::vec2(json["texCoords"]["bottom"]["x"], json["texCoords"]["bottom"]["y"]);
-		type->texSideCoords = glm::vec2(json["texCoords"]["side"]["x"], json["texCoords"]["side"]["y"]);
-		type->texTopCoords = glm::vec2(json["texCoords"]["top"]["x"], json["texCoords"]["top"]["y"]);
+
+		BlockType* type = new BlockType;
+		type->texBottomCoords = Json::toVec2(json["texCoords"]["bottom"]);
+		type->texSideCoords = Json::toVec2(json["texCoords"]["side"]);
+		type->texTopCoords = Json::toVec2(json["texCoords"]["top"]);
 		type->colliders = BlockColliders::get(json["colliderType"]);
 		type->shaderType = json["shaderType"];
 		type->meshType = json["meshType"];

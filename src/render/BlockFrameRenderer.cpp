@@ -27,7 +27,7 @@ void BlockFrameRenderer::render(Camera* camera, Player& player) {
 }
 
 void BlockFrameRenderer::render(Camera* camera) {
-	Shader* shader = ShadersDatabase::get(LINE);
+	Shader* shader = ShadersDatabase::get(ShaderType::LINE);
 
 	glm::vec3 lineColor(
 		glm::abs(sin(glfwGetTime())) + 0.1,

@@ -1,11 +1,5 @@
 #include "BasicTexture.h"
 
-#include <glad/glad.h>
-#include <iostream>
-
-#include "Image.h"
-#include "TextureManager.h"
-
 BasicTexture::BasicTexture(const char* path, bool flip, TextureType type)
 	: Texture(GL_TEXTURE_2D, type) {
 	this->path = path;
@@ -23,18 +17,7 @@ void BasicTexture::load(bool flip) {
 	glTexParameteri(target, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
 	glTexParameteri(target, GL_TEXTURE_MAX_LEVEL, 1);
 
-	Image image(path, flip);
+	Texture::load(GL_TEXTURE_2D, path, flip);
 
-	if (image.data) {
-		GLenum format = TextureManager::getFormat(image.nchannels);
-
-		if (format) {
-			glTexImage2D(GL_TEXTURE_2D, 0, format, image.width, image.height, 0, format, GL_UNSIGNED_BYTE, image.data);
-			glGenerateMipmap(target);
-		} else {
-			std::cout << "Unsupported number of channels " << image.nchannels << " in file \"" << path << "\"\n";
-		}
-	} else {
-		std::cout << "Failed to load texture \"" << path << "\"\n";
-	}
+	glGenerateMipmap(target);
 }

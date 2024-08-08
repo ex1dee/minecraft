@@ -35,6 +35,7 @@ void Renderer::finishRender(Player& player, Camera* camera, World& world) {
 	entityRenderer.render(camera, *sun);
 	chunkRenderer.render(camera, *sun);
 	blockFrameRenderer.render(camera, player);
+	guiRenderer.render();
 }
 
 void Renderer::addChunk(Chunk* chunk) {

@@ -10,16 +10,20 @@ protected:
 	unsigned int ID;
 	TextureType type;
 	GLenum target;
+	int width;
+	int height;
+
+	void load(GLenum target, const char* path, bool flip);
 public:
 	Texture() {}
 	Texture(GLenum target, TextureType type)
 		: target(target), type(type) {}
 
+	int getWidth() const { return width; }
+	int getHeight() const { return height; }
 	unsigned int getID() const { return ID; }
-
-	TextureType getType() const { return type; }
-
 	GLenum getTarget() const { return target; }
+	TextureType getType() const { return type; }
 };
 
 #endif

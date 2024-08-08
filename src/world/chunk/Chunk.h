@@ -21,7 +21,7 @@ class Chunk {
 	World* world;
 	AABB aabb;
 
-	bool mesh = false;
+	bool bHasMesh = false;
 	bool buffered = false;
 	bool loaded = false;
 
@@ -40,7 +40,7 @@ public:
 	Chunk(World* world, glm::vec2 pos);
 
 	bool isLoaded() { return loaded; }
-	bool hasMesh() { return mesh; }
+	bool hasMesh() { return bHasMesh; }
 	bool hasBuffered() { return buffered; }
 	Block* getFirstBlock() { return &blocks[0]; }
 	ChunkMeshCollection& getMeshes() { return meshes; }

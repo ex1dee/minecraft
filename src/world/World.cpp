@@ -32,7 +32,7 @@ World::~World() {
 }
 
 void World::makeSun() {
-	sun = new Sun(ShadersDatabase::get(FRAMEBUFFER), this);
+	sun = new Sun(ShadersDatabase::get(ShaderType::FRAMEBUFFER), this);
 }
 
 void World::addLoadChunksThread(Player& player, Camera& camera) {

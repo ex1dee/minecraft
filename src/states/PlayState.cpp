@@ -2,7 +2,9 @@
 
 #include "../player/input/MovementsInput.h"
 #include "../player/input/CameraInput.h"
+#include "../player/input/WindowInput.h"
 #include "../physics/PhysicsEngine.h"
+#include "../gui/GUI.h"
 #include "../Time.h"
 
 PlayState::PlayState(Renderer* renderer, Player* player, Camera* camera)
@@ -24,6 +26,7 @@ PlayState::~PlayState() {
 void PlayState::handleInput() {
 	MovementsInput::handle(player);
 	CameraInput::handle(player);
+	WindowInput::handle();
 }
 
 void PlayState::update() {
@@ -37,6 +40,8 @@ void PlayState::update() {
 		if (Time::isPhysicsTickElapsed())
 			PhysicsEngine::updatePerTick(*player);
 	}
+
+	GUI::update();
 }
 
 void PlayState::render() {

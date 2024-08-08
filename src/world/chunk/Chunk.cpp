@@ -32,7 +32,7 @@ void Chunk::makeMesh(Camera& camera) {
 	if (!hasMesh()) {
 		ChunkMeshBuilder(this).build();
 
-		mesh = true;
+		bHasMesh = true;
 		buffered = false;
 	}
 }
@@ -46,7 +46,7 @@ void Chunk::bufferMesh() {
 }
 
 void Chunk::resetMeshes() {
-	mesh = false;
+	bHasMesh = false;
 	buffered = false;
 
 	meshes.solid->getModel().reset();

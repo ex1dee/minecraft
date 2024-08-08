@@ -1,23 +1,14 @@
 #ifndef MESH_H
 #define MESH_H
 
-#include <glad/glad.h>
-#include <vector>
-
 #include "../../textures/Texture.h"
-#include "../../shaders/Shader.h"
+#include "../Drawable.h"
 #include "MeshData.h"
 
 enum MeshType;
 
-struct Mesh {
-	void genVAO();
-	void addEBO();
-	void addVBO(int dimensions, const std::vector<float>& vertices);
+struct Mesh : public Drawable {
 	void bindTextures(Shader* shader);
-
-	std::vector<unsigned int> buffers;
-	unsigned int VAO, EBO;
 public:
 	MeshData data;
 
@@ -25,10 +16,9 @@ public:
 	Mesh(const MeshData& data);
 	~Mesh();
 
-	void setup();
-	void draw(Shader* shader);
-	void resetBuffers();
-	void reset();
+	void setup() override;
+	void reset() override;
+	void draw(Shader* shader) override;
 };
 
 enum MeshType {

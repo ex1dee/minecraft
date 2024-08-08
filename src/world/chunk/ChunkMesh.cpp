@@ -1,7 +1,7 @@
 #include "ChunkMesh.h"
 
 void ChunkMesh::addBlockFace(const std::array<float, 12>& vertices,
-	const std::array<float, 8>& texCoords,
+	const AtlasCoords& texCoords,
 	const glm::vec2& localChunkPosition,
 	const glm::vec3& localBlockPosition,
 	const glm::vec3& normal) {
@@ -20,7 +20,7 @@ void ChunkMesh::addBlockFace(const std::array<float, 12>& vertices,
 		}
 	}
 	
-	meshData.textureCoords.insert(meshData.textureCoords.end(), texCoords.begin(), texCoords.end());
+	texCoords.addToTexCoords(meshData.textureCoords);
 
 	meshData.indices.push_back(vertIndex);
 	meshData.indices.push_back(vertIndex + 1);

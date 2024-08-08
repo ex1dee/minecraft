@@ -12,3 +12,9 @@ glm::mat4 Transform::calcModel() const {
 
 	return model;
 }
+
+void Transform::add(const Transform& transform) {
+	position += transform.position;
+	rotation += transform.rotation;
+	scale *= transform.scale;
+}

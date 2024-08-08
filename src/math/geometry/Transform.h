@@ -16,6 +16,7 @@ public:
 		glm::vec3 scale = glm::vec3(1.0f, 1.0f, 1.0f));
 
 	glm::mat4 calcModel() const;
+	void add(const Transform& transform);
 };
 
 #endif

@@ -4,6 +4,7 @@
 #include <glm/glm.hpp>
 #include <array>
 
+#include "../../textures/AtlasCoords.h"
 #include "../../render/model/Model.h"
 #include "../WorldConstants.h"
 
@@ -14,7 +15,7 @@ class ChunkMesh {
 	int faces;
 public:
 	void addBlockFace(const std::array<float, 12>& vertices, 
-		const std::array<float, 8>& texCoords, 
+		const AtlasCoords& texCoords, 
 		const glm::vec2& localChunkPosition,
 		const glm::vec3& localBlockPosition,
 		const glm::vec3& normal = glm::vec3(0));

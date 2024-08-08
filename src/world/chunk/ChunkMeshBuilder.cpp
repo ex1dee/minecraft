@@ -57,10 +57,10 @@ void ChunkMeshBuilder::setActiveMesh(Block& block) {
 }
 
 void ChunkMeshBuilder::addX(const glm::vec3& blockPos, BlockType* blockType) {
-	std::array<float, 8> fTexCoords = BlocksDatabase::getTextureAtlas().getTexture(blockType->texSideCoords);
+	AtlasCoords atlasCoords = BlocksDatabase::getTextureAtlas().getTextureCoords(blockType->texSideCoords);
 
-	activeMesh->addBlockFace(xSide1, fTexCoords, chunk->getLocalPosition(), blockPos);
-	activeMesh->addBlockFace(xSide2, fTexCoords, chunk->getLocalPosition(), blockPos);
+	activeMesh->addBlockFace(xSide1, atlasCoords, chunk->getLocalPosition(), blockPos);
+	activeMesh->addBlockFace(xSide2, atlasCoords, chunk->getLocalPosition(), blockPos);
 }
 
 void ChunkMeshBuilder::addCube(const glm::vec3& blockPos, BlockType* blockType) {
@@ -87,9 +87,9 @@ void ChunkMeshBuilder::tryAddFace(const std::array<float, 12>& vertices,
 		return;
 
 	if (shouldAddFace(adjacentDir, blockType)) {
-		std::array<float, 8> fTexCoords = BlocksDatabase::getTextureAtlas().getTexture(texCoords);
+		AtlasCoords atlasCoords = BlocksDatabase::getTextureAtlas().getTextureCoords(texCoords);
 
-		activeMesh->addBlockFace(vertices, fTexCoords, chunk->getLocalPosition(), localBlockPosition, normal);
+		activeMesh->addBlockFace(vertices, atlasCoords, chunk->getLocalPosition(), localBlockPosition, normal);
 	}
 }
 

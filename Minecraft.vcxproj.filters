@@ -170,6 +170,27 @@
     <ClCompile Include="src\player\input\ZoomHandler.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\gui\GUIDatabase.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\sprite\Sprite.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\Drawable.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\textures\Texture.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\GUI.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\GUIRenderer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\player\input\WindowInput.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\window\Window.h">
@@ -270,6 +291,14 @@
     <ClInclude Include="src\math\intersects\IntersectList.h" />
     <ClInclude Include="src\render\BlockFrameRenderer.h" />
     <ClInclude Include="src\player\input\ZoomHandler.h" />
+    <ClInclude Include="src\gui\GUI.h" />
+    <ClInclude Include="src\gui\GUIDatabase.h" />
+    <ClInclude Include="src\gui\GUIElement.h" />
+    <ClInclude Include="src\render\sprite\Sprite.h" />
+    <ClInclude Include="src\render\sprite\SpriteTexture.h" />
+    <ClInclude Include="src\textures\AtlasCoords.h" />
+    <ClInclude Include="src\render\GUIRenderer.h" />
+    <ClInclude Include="src\player\input\WindowInput.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />
@@ -290,6 +319,11 @@
     <None Include="resources\entities\player.json" />
     <None Include="shaders\line.vs" />
     <None Include="shaders\line.fs" />
+    <None Include="resources\gui\hud_crosshair.json" />
+    <None Include="resources\gui\hud.json" />
+    <None Include="src\render\Drawable.h" />
+    <None Include="shaders\sprite.vs" />
+    <None Include="shaders\sprite.fs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\blocks_atlas.png">
@@ -317,6 +351,9 @@
       <Filter>Файлы ресурсов</Filter>
     </Image>
     <Image Include="resources\models\player\textures\gltf_embedded_0.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\hud\icons.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>

@@ -16,7 +16,7 @@ void EntityRenderer::render(Camera* camera, const Sun& sun) {
 }
 
 void EntityRenderer::updateShader(Camera* camera, const Sun& sun) {
-	activeShader = ShadersDatabase::get(DEFAULT);
+	activeShader = ShadersDatabase::get(ShaderType::DEFAULT);
 	activeShader->use();
 
 	activeShader->setMat4("projView", camera->getProjView());

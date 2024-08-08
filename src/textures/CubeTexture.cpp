@@ -5,7 +5,7 @@
 #include "Image.h"
 
 CubeTexture::CubeTexture(const char* directory, std::array<const char*, 6>& fileNames, bool flip)
-	: Texture(GL_TEXTURE_CUBE_MAP, CUBEMAP) {
+	: Texture(GL_TEXTURE_CUBE_MAP, TextureType::CUBEMAP) {
 	this->filePaths = filePaths;
 	
 	for (int i = 0; i < fileNames.size(); ++i) {
@@ -28,18 +28,6 @@ void CubeTexture::load(bool flip) {
 	glTexParameteri(target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 	for (int i = 0; i < 6; ++i) {
-		Image image(filePaths[i].c_str(), flip);
-
-		if (image.data) {
-			GLenum format = TextureManager::getFormat(image.nchannels);
-
-			if (format) {
-				glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, format, image.width, image.height, 0, format, GL_UNSIGNED_BYTE, image.data);
-			} else {
-				std::cout << "Unsupported number of channels " << image.nchannels << " in file \"" << filePaths[i] << "\"\n";
-			}
-		} else {
-			std::cout << "Failed to load texture \"" << filePaths[i] << "\"\n";
-		}
+		Texture::load(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, filePaths[i].c_str(), flip);
 	}
 }
