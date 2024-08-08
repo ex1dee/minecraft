@@ -10,10 +10,10 @@ namespace Mathf {
 		return a + t * (b - a);
 	}
 
-	inline float bezcurve(float a, float b, float t) {
+	inline float bezierCurve(float a, float b, float t, float c) {
 		t = glm::clamp(t, 0.0f, 1.0f);
 
-		return (1 - t) * a * a + 2 * (1 - t) * t * a + t * t * b;
+		return (1 - t) * a * a + 2 * (1 - t) * t * c + t * t * b;
 	}
 
 	inline bool equals(float a, float b, float epsilon) {

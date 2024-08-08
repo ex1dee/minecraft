@@ -3,8 +3,8 @@
 #include <iostream>
 
 #include "../config/Config.h"
+#include "../input/Input.h"
 #include "../gui/GUI.h"
-#include "Events.h"
 
 GLFWmonitor* Window::monitor;
 GLFWwindow* Window::window;
@@ -81,9 +81,9 @@ void Window::setupAntiAliasing() {
 }
 
 void Window::setCallbacks() {
-    glfwSetKeyCallback(window, Events::keyCallback);
-    glfwSetMouseButtonCallback(window, Events::mouseButtonCallback);
-    glfwSetCursorPosCallback(window, Events::cursorPosCallback);
+    glfwSetKeyCallback(window, Input::keyCallback);
+    glfwSetMouseButtonCallback(window, Input::mouseButtonCallback);
+    glfwSetCursorPosCallback(window, Input::cursorPosCallback);
     glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
 }
 

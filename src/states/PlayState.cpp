@@ -1,11 +1,11 @@
 #include "PlayState.h"
 
-#include "../player/input/MovementsInput.h"
-#include "../player/input/CameraInput.h"
-#include "../player/input/WindowInput.h"
+#include "../input/handlers/MovementsInput.h"
+#include "../input/handlers/CameraInput.h"
+#include "../input/handlers/WindowInput.h"
 #include "../physics/PhysicsEngine.h"
 #include "../gui/GUI.h"
-#include "../Time.h"
+#include "../utils/Time.h"
 
 PlayState::PlayState(Renderer* renderer, Player* player, Camera* camera)
 	: BaseState(renderer), player(player), camera(camera) {

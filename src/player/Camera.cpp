@@ -2,8 +2,8 @@
 
 #include "../world/RayTracing.h"
 #include "../window/Window.h"
-#include "../window/Events.h"
 #include "../config/Config.h"
+#include "../input/Input.h"
 
 Camera::Camera() {
 	orientation.update(-90.0f, 0.0f);
@@ -37,7 +37,7 @@ void Camera::update() {
 }
 
 void Camera::updateOrientation() {
-	CursorPos curPos = Events::getCursorPos();
+	CursorPos curPos = Input::getCursorPos();
 	curPos.delta *= Config::settings["camera"]["sensitivity"];
 
 	float yaw	= orientation.getYaw() + curPos.delta.x;

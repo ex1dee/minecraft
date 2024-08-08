@@ -1,10 +1,12 @@
 #ifndef INCL_CHUNK_H
 #define INCL_CHUNK_H
 
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/hash.hpp>
+
 #include "../generation/terrain/TerrainGenerator.h"
 #include "../../math/shapes/AABB.h"
 #include "../../render/Renderer.h"
-#include "../../utils/VecMap.h"
 #include "../block/Block.h"
 #include "ChunkMesh.h"
 
@@ -14,7 +16,7 @@ class Chunk {
 	friend class World;
 	friend class ChunkManager;
 
-	std::unordered_map<glm::vec2, int, Vec2Hash> highestBlocks;
+	std::unordered_map<glm::vec2, int> highestBlocks;
 	std::array<Block, CHUNK_VOL> blocks;
 	ChunkMeshCollection meshes;
 	glm::vec2 position;

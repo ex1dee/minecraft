@@ -20,7 +20,7 @@
     <ClCompile Include="src\window\Window.cpp">
       <Filter>Исходные файлы\Window</Filter>
     </ClCompile>
-    <ClCompile Include="src\window\Events.cpp">
+    <ClCompile Include="src\input\Input.cpp">
       <Filter>Исходные файлы\Window</Filter>
     </ClCompile>
     <ClCompile Include="dependencies\stb_image.cpp">
@@ -107,7 +107,7 @@
     <ClCompile Include="src\physics\PhysicsEngine.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\Time.cpp">
+    <ClCompile Include="src\utils\Time.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\physics\collision\CollisionDetector.cpp">
@@ -119,7 +119,7 @@
     <ClCompile Include="src\physics\collision\BoxBoxCollision.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\player\input\MovementsInput.cpp">
+    <ClCompile Include="src\input\handlers\MovementsInput.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\utils\AssimpLoader.cpp">
@@ -128,7 +128,7 @@
     <ClCompile Include="src\textures\TextureLoader.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\player\input\CameraInput.cpp">
+    <ClCompile Include="src\input\handlers\CameraInput.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\render\EntityRenderer.cpp">
@@ -167,7 +167,7 @@
     <ClCompile Include="src\render\BlockFrameRenderer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\player\input\ZoomHandler.cpp">
+    <ClCompile Include="src\input\handlers\ZoomHandler.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\gui\GUIDatabase.cpp">
@@ -188,7 +188,7 @@
     <ClCompile Include="src\render\GUIRenderer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\player\input\WindowInput.cpp">
+    <ClCompile Include="src\input\handlers\WindowInput.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -196,13 +196,13 @@
     <ClInclude Include="src\window\Window.h">
       <Filter>Исходные файлы\Window</Filter>
     </ClInclude>
-    <ClInclude Include="src\window\Events.h">
+    <ClInclude Include="src\input\Input.h">
       <Filter>Исходные файлы\Window</Filter>
     </ClInclude>
-    <ClInclude Include="src\window\Button.h">
+    <ClInclude Include="src\input\Button.h">
       <Filter>Исходные файлы\Window</Filter>
     </ClInclude>
-    <ClInclude Include="src\window\CursorPos.h" />
+    <ClInclude Include="src\input\CursorPos.h" />
     <ClInclude Include="dependencies\stb_image.h" />
     <ClInclude Include="src\shaders\Shader.h" />
     <ClInclude Include="src\render\model\Model.h" />
@@ -228,7 +228,6 @@
     <ClInclude Include="src\world\chunk\ChunkMeshBuilder.h" />
     <ClInclude Include="src\world\block\BlockFaces.h" />
     <ClInclude Include="src\world\World.h" />
-    <ClInclude Include="src\utils\VecMap.h" />
     <ClInclude Include="src\world\chunk\ChunkManager.h" />
     <ClInclude Include="src\world\generation\terrain\TerrainGenerator.h" />
     <ClInclude Include="src\world\generation\terrain\DefaultWorldGenerator.h" />
@@ -257,21 +256,21 @@
     <ClInclude Include="src\physics\collider\BoxCollider.h" />
     <ClInclude Include="src\physics\PhysicsEngine.h" />
     <ClInclude Include="src\world\Sun.h" />
-    <ClInclude Include="src\Time.h" />
+    <ClInclude Include="src\utils\Time.h" />
     <ClInclude Include="src\physics\collision\BoxBoxCollision.h" />
     <ClInclude Include="src\physics\collision\CollisionHandler.h" />
     <ClInclude Include="src\physics\collision\Collision.h" />
     <ClInclude Include="src\physics\collision\CollisionDetector.h" />
     <ClInclude Include="src\world\block\BlockColliders.h" />
     <ClInclude Include="src\world\block\BlockColliderType.h" />
-    <ClInclude Include="src\player\input\MovementsInput.h" />
+    <ClInclude Include="src\input\handlers\MovementsInput.h" />
     <ClInclude Include="src\render\framebuffer\DFBConfig.h" />
     <ClInclude Include="src\render\light\PointLight.h" />
     <ClInclude Include="src\textures\TextureType.h" />
     <ClInclude Include="src\render\model\MeshData.h" />
     <ClInclude Include="src\utils\AssimpLoader.h" />
     <ClInclude Include="src\textures\TextureLoader.h" />
-    <ClInclude Include="src\player\input\CameraInput.h" />
+    <ClInclude Include="src\input\handlers\CameraInput.h" />
     <ClInclude Include="src\player\CameraViewMode.h" />
     <ClInclude Include="src\math\Mathf.h" />
     <ClInclude Include="src\render\EntityRenderer.h" />
@@ -290,7 +289,7 @@
     <ClInclude Include="src\math\intersects\RayBoxIntersect.h" />
     <ClInclude Include="src\math\intersects\IntersectList.h" />
     <ClInclude Include="src\render\BlockFrameRenderer.h" />
-    <ClInclude Include="src\player\input\ZoomHandler.h" />
+    <ClInclude Include="src\input\handlers\ZoomHandler.h" />
     <ClInclude Include="src\gui\GUI.h" />
     <ClInclude Include="src\gui\GUIDatabase.h" />
     <ClInclude Include="src\gui\GUIElement.h" />
@@ -298,7 +297,7 @@
     <ClInclude Include="src\render\sprite\SpriteTexture.h" />
     <ClInclude Include="src\textures\AtlasCoords.h" />
     <ClInclude Include="src\render\GUIRenderer.h" />
-    <ClInclude Include="src\player\input\WindowInput.h" />
+    <ClInclude Include="src\input\handlers\WindowInput.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />

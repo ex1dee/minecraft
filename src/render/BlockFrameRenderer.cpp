@@ -3,7 +3,7 @@
 #include <GLFW/glfw3.h>
 
 #include "../shaders/ShadersDatabase.h"
-#include "../Time.h"
+#include "../utils/Time.h"
 
 BlockFrameRenderer::BlockFrameRenderer() {
 	model = new Model;

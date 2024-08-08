@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "window/Window.h"
-#include "window/Events.h"
+#include "input/Input.h"
 #include "config/Config.h"
 #include "shaders/ShadersDatabase.h"
 #include "entity/EntitiesDatabase.h"
@@ -47,7 +47,7 @@ int main() {
         }
 
         Window::swapBuffers();
-        Events::pollEvents();
+        Input::pollEvents();
     }
 
     for (BaseState* state : states) {

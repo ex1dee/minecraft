@@ -4,7 +4,6 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "../../utils/VecMap.h"
 #include "Chunk.h"
 
 class World;
@@ -12,9 +11,9 @@ class World;
 class ChunkManager {
 	World* world;
 public:
-	std::unordered_map<glm::vec2, Chunk*, Vec2Hash, Vec2Equal> chunks;
-	std::unordered_map<glm::vec2, Chunk*, Vec2Hash, Vec2Equal> loadedChunks;
-	std::unordered_set<glm::vec2, Vec2Hash> unloadedChunks;
+	std::unordered_map<glm::vec2, Chunk*> chunks;
+	std::unordered_map<glm::vec2, Chunk*> loadedChunks;
+	std::unordered_set<glm::vec2> unloadedChunks;
 
 	ChunkManager() {}
 	ChunkManager(World* world);
