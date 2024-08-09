@@ -4,7 +4,7 @@
 #include "../world/RayTracing.h"
 
 Entity::Entity(EntityID id, World* world)
-	: GameObject(world, false) {
+	: GameObject(world) {
 	type = EntitiesDatabase::get(id);
 	GameObject::world = world;
 
@@ -23,10 +23,17 @@ void Entity::initialize() {
 	rigidBody.physics = type->physics;
 	rigidBody.mass = type->mass;
 
-	if (type->gravity)
-		rigidBody.addGravity();
-
 	PhysicsEngine::addObject(this);
+}
+
+bool Entity::isOnGround() {
+	glm::vec3 extents = ((BoxCollider*) collider)->getExtents();
+	glm::vec3 colliderCenter = transform.position + collider->getPosition();
+
+	return world->getBlock(colliderCenter - glm::vec3(extents.x,  0.00001f, extents.z))->isCollidable()
+		|| world->getBlock(colliderCenter - glm::vec3(extents.x,  0.00001f, -extents.z))->isCollidable()
+		|| world->getBlock(colliderCenter - glm::vec3(-extents.x, 0.00001f, -extents.z))->isCollidable()
+		|| world->getBlock(colliderCenter - glm::vec3(-extents.x, 0.00001f, extents.z))->isCollidable();
 }
 
 Block* Entity::getTargetBlock() {

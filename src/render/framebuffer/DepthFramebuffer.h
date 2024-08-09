@@ -21,8 +21,8 @@ class DepthFramebuffer {
 	glm::mat4 projView;
 	glm::mat4 view;
 
-	unsigned int depthMap;
-	unsigned int FBO;
+	uint32_t depthMap;
+	uint32_t FBO;
 
 	void genFBO();
 	void createDepthMap();
@@ -35,7 +35,7 @@ public:
 	DepthFramebuffer(Shader* shader, const DFBConfig& config);
 
 	glm::mat4 getProjView() { return projView; }
-	unsigned int getDepthMap() { return depthMap; }
+	uint32_t getDepthMap() { return depthMap; }
 	Shader* const getShader() { return shader; }
 
 	void startRender(const glm::vec3& front, const glm::vec3& position);

@@ -8,7 +8,7 @@ enum MeshType;
 class MeshData {
 public:
 	std::vector<Texture> textures;
-	std::vector<unsigned int> indices;
+	std::vector<uint32_t> indices;
 	std::vector<float> vertexPositions;
 	std::vector<float> textureCoords;
 	std::vector<float> normals;
@@ -16,10 +16,10 @@ public:
 
 	MeshType type;
 	int dimensions;
-	unsigned int mode;
+	uint32_t mode;
 
 	MeshData() {}
-	MeshData(MeshType type, int dimensions, unsigned int mode = GL_TRIANGLES)
+	MeshData(MeshType type, int dimensions, uint32_t mode = GL_TRIANGLES)
 		: type(type), dimensions(dimensions), mode(mode) {}
 
 	void reset() {

@@ -123,11 +123,13 @@
       <AdditionalIncludeDirectories>C:\Users\User\source\repos\Minecraft\Minecraft\dependencies\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3.lib;glfw3_mt.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/Vm</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -141,6 +143,8 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,6 +152,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3.lib;glfw3_mt.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalOptions>/Vm</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -181,13 +186,15 @@
     <ClCompile Include="src\textures\Texture.cpp" />
     <ClCompile Include="src\textures\TextureLoader.cpp" />
     <ClCompile Include="src\utils\AssimpLoader.cpp" />
+    <ClCompile Include="src\utils\noise\PerlinNoise2D.cpp" />
     <ClCompile Include="src\world\block\Block.cpp" />
+    <ClCompile Include="src\world\generation\terrain\DefaultWorldGenerator.cpp" />
     <ClCompile Include="src\world\RayTracing.cpp" />
     <ClCompile Include="src\world\Sun.cpp" />
     <ClCompile Include="src\states\PlayState.cpp" />
     <ClCompile Include="src\render\ChunkRenderer.cpp" />
     <ClCompile Include="src\render\framebuffer\DepthFramebuffer.cpp" />
-    <ClCompile Include="src\utils\Time.cpp" />
+    <ClCompile Include="src\utils\Timer.cpp" />
     <ClCompile Include="src\world\chunk\Chunk.cpp" />
     <ClCompile Include="src\textures\CubeTexture.cpp" />
     <ClCompile Include="src\textures\BasicTexture.cpp" />
@@ -264,6 +271,7 @@
     <ClInclude Include="src\render\model\MeshData.h" />
     <ClInclude Include="src\render\SkyboxRenderer.h" />
     <ClInclude Include="src\textures\TextureType.h" />
+    <ClInclude Include="src\utils\noise\PerlinNoise2D.h" />
     <ClInclude Include="src\world\block\BlockShaderType.h" />
     <ClInclude Include="src\world\RayTracing.h" />
     <ClInclude Include="src\world\Sun.h" />
@@ -271,7 +279,7 @@
     <ClInclude Include="src\render\ChunkRenderer.h" />
     <ClInclude Include="src\states\BaseState.h" />
     <ClInclude Include="src\render\framebuffer\DepthFramebuffer.h" />
-    <ClInclude Include="src\utils\Time.h" />
+    <ClInclude Include="src\utils\Timer.h" />
     <ClInclude Include="src\utils\random\BaseRandomGenerator.h" />
     <ClInclude Include="src\utils\random\Random.h" />
     <ClInclude Include="src\utils\random\RandomGenerator.h" />
@@ -351,7 +359,6 @@
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="..\packages\fluid.yaml-cpp.1.0.10\build\fluid.yaml-cpp.targets" Condition="Exists('..\packages\fluid.yaml-cpp.1.0.10\build\fluid.yaml-cpp.targets')" />
     <Import Project="..\packages\glfw.3.4.0\build\native\glfw.targets" Condition="Exists('..\packages\glfw.3.4.0\build\native\glfw.targets')" />
     <Import Project="..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets" Condition="Exists('..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets')" />
     <Import Project="..\packages\Assimp.3.0.0\build\native\Assimp.targets" Condition="Exists('..\packages\Assimp.3.0.0\build\native\Assimp.targets')" />
@@ -360,7 +367,6 @@
     <PropertyGroup>
       <ErrorText>Данный проект ссылается на пакеты NuGet, отсутствующие на этом компьютере. Используйте восстановление пакетов NuGet, чтобы скачать их.  Дополнительную информацию см. по адресу: http://go.microsoft.com/fwlink/?LinkID=322105. Отсутствует следующий файл: {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\fluid.yaml-cpp.1.0.10\build\fluid.yaml-cpp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\fluid.yaml-cpp.1.0.10\build\fluid.yaml-cpp.targets'))" />
     <Error Condition="!Exists('..\packages\glfw.3.4.0\build\native\glfw.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glfw.3.4.0\build\native\glfw.targets'))" />
     <Error Condition="!Exists('..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets'))" />
     <Error Condition="!Exists('..\packages\Assimp.3.0.0\build\native\Assimp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Assimp.3.0.0\build\native\Assimp.targets'))" />

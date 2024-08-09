@@ -6,32 +6,26 @@ void CollisionHandler::handle(const Collision& collision, GameObject* obj1, Game
 	if (!collision.collided)
 		return;
 
-	handle(collision, obj1);
-	handle(collision, obj2);
+
 }
 
-void CollisionHandler::handle(const Collision& collision, GameObject* obj) {
+void CollisionHandler::handle(const Collision& collision, GameObject* obj, Block* block) {
 	if (!collision.collided)
 		return;
 
 	RigidBody* rb = &obj->rigidBody;
+	
+	rb->deltaPosition += getProjected(rb->deltaPosition, collision);
 
-	glm::vec3 deltaPos = rb->deltaPosition;
-	glm::vec3 normal = collision.normal;
-	float dot = glm::dot(normal, glm::normalize(deltaPos));
-	float dpLen = glm::length(deltaPos);
+	if (collision.normal.y == 1)
+		rb->newVelocity += getProjected(rb->newVelocity, collision);
+}
 
-	if (dpLen == 0 || dot >= 0)
-		return;
+glm::vec3 CollisionHandler::getProjected(const glm::vec3& v, const Collision& collision) {
+	float eps = glm::dot(collision.normal, v);
 
-	rb->deltaPosition += normal * (-dot * dpLen + collision.depth);
+	if (eps > 0)
+		return glm::vec3(0);
 
-	if (normal.y == 1) {
-		float velLen = glm::length(rb->newVelocity);
-
-		if (velLen == 0)
-			return;
-
-		rb->newVelocity += normal * (-dot * velLen + collision.depth);
-	}
+	return collision.normal * (-eps + collision.depth);
 }

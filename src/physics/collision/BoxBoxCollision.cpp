@@ -1,5 +1,7 @@
 #include "BoxBoxCollision.h"
 
+#include <algorithm>
+
 void BoxBoxCollision::detect(GameObject* obj1, GameObject* obj2) {
 	BoxCollider* box1 = (BoxCollider*)obj1->collider;
 	BoxCollider* box2 = (BoxCollider*)obj2->collider;
@@ -8,11 +10,16 @@ void BoxBoxCollision::detect(GameObject* obj1, GameObject* obj2) {
 	CollisionHandler::handle(collision, obj1, obj2);
 }
 
-void BoxBoxCollision::detect(GameObject* obj1, BoxCollider* box2) {
+void BoxBoxCollision::detect(GameObject* obj1, Block* block) {
 	BoxCollider* box1 = (BoxCollider*)obj1->collider;
+	Transform transform(block->getPosition());
 
-	Collision collision = detect(box1, box2);
-	CollisionHandler::handle(collision, obj1);
+	for (BoxCollider* box2 : block->type->colliders) {
+		box2->applyTransform(transform);
+
+		Collision collision = detect(box1, box2);
+		CollisionHandler::handle(collision, obj1, block);
+	}
 }
 
 Collision BoxBoxCollision::detect(BoxCollider* box1, BoxCollider* box2) {
@@ -59,7 +66,7 @@ Collision BoxBoxCollision::detect(BoxCollider* box1, BoxCollider* box2) {
 
 	glm::vec3 diff = box2->globalVertices[0] - box1->globalVertices[0];
 	float normSign = -glm::sign(glm::dot(diff, minDepthAxis));
-	collision.normal = normSign * minDepthAxis;
+	collision.normal = glm::normalize(normSign * minDepthAxis);
 
 	return collision;
 }

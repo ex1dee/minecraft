@@ -38,6 +38,9 @@ float Sun::calcAngle(float time) {
 
 glm::vec3& Sun::getFocus(Player& player) {
 	Chunk* chunk = world->getChunk(player.transform.position);
+	if (chunk == nullptr)
+		return prevFocus;
+
 	glm::vec3 chunkPos = chunk->getWorldPosition(glm::vec3(8, 0, 8));
 
 	if (glm::distance(chunkPos, prevFocus) > CHANGE_FOCUS_DIST) {

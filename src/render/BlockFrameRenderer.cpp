@@ -3,7 +3,6 @@
 #include <GLFW/glfw3.h>
 
 #include "../shaders/ShadersDatabase.h"
-#include "../utils/Time.h"
 
 BlockFrameRenderer::BlockFrameRenderer() {
 	model = new Model;
@@ -23,7 +22,9 @@ void BlockFrameRenderer::render(Camera* camera, Player& player) {
 		prevBlock = block;
 	}
 
-	render(camera);
+	if (block != nullptr) {
+		render(camera);
+	}
 }
 
 void BlockFrameRenderer::render(Camera* camera) {
@@ -47,9 +48,7 @@ void BlockFrameRenderer::render(Camera* camera) {
 
 void BlockFrameRenderer::createModel(Block* block, Player& player) {
 	MeshData meshData(CUBE, 3, GL_LINES);
-
-	Transform transform;
-	transform.position = block->position;
+	Transform transform(block->getPosition());
 
 	for (BoxCollider* collider : block->type->colliders) {
 		int index = 0;

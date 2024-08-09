@@ -8,13 +8,13 @@
 
 class Drawable {
 protected:
-	unsigned int VAO, VBO, EBO;
+	uint32_t VAO, VBO, EBO;
 
-	std::vector<unsigned int> buffers;
+	std::vector<uint32_t> buffers;
 
 	void genVAO();
 	void addVBO(int dimensions, const std::vector<float>& vertices);
-	void addEBO(const std::vector<unsigned int>& indices);
+	void addEBO(const std::vector<uint32_t>& indices);
 public:
 	virtual void setup();
 	virtual void reset() = 0;

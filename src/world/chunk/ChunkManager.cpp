@@ -35,14 +35,13 @@ Chunk* const ChunkManager::load(const glm::vec2& pos) {
 }
 
 void ChunkManager::unload(const glm::vec2& pos) {
-	Chunk* chunk = getChunk(pos);
-	if (!chunk->isLoaded())
-		return;
-
 	unloadedChunks.insert(pos);
 }
 
 Chunk* const ChunkManager::getChunk(const glm::vec2& pos) {
+	if (pos.x != pos.x || pos.y != pos.y)
+		return nullptr;
+
 	if (!chunkExistsAt(pos)) {
 		Chunk* chunk = new Chunk(world, pos);
 

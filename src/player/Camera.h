@@ -13,7 +13,7 @@
 #define CAMERA_NEAR 0.1f
 #define CAMERA_FAR 500.0f
 #define CAMERA_MAX_ZOOM 30.0f
-#define CAMERA_INTERSECT_OFFSET 1.4f
+#define CAMERA_INTERSECT_OFFSET 1.5f
 
 class Camera {
 	glm::mat4 view;

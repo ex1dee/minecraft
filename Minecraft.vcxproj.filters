@@ -191,6 +191,12 @@
     <ClCompile Include="src\input\handlers\WindowInput.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\utils\noise\PerlinNoise2D.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\generation\terrain\DefaultWorldGenerator.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\window\Window.h">
@@ -298,6 +304,7 @@
     <ClInclude Include="src\textures\AtlasCoords.h" />
     <ClInclude Include="src\render\GUIRenderer.h" />
     <ClInclude Include="src\input\handlers\WindowInput.h" />
+    <ClInclude Include="src\utils\noise\PerlinNoise2D.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />

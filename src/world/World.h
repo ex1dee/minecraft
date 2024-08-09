@@ -6,7 +6,7 @@
 #include <thread>
 #include <mutex>
 
-#include "generation/terrain/SuperFlatGenerator.h"
+#include "generation/terrain/DefaultWorldGenerator.h"
 #include "../entity/EntitiesDatabase.h"
 #include "../entity/Entity.h"
 #include "../world/World.h"
@@ -22,13 +22,12 @@ class World {
 	std::vector<Entity*> entities;
 
 	glm::vec3 spawnPoint;
-	unsigned int seed;
+	uint32_t seed;
 
 	Sun* sun;
 
 	std::atomic<bool> isRunning;
 	std::mutex mainMutex;
-	std::mutex configMutex;
 
 	void makeSun();
 	void renderChunks(Renderer& renderer, Player& player);
@@ -38,7 +37,7 @@ class World {
 	void addLoadChunksThread(Player& player, Camera& camera);
 public:
 	World() {}
-	World(TerrainGenerator* terrainGen, Player& player, Camera& camera);
+	World(Player& player, Camera& camera);
 	~World();
 
 	Sun* const getSun() const { return sun; }

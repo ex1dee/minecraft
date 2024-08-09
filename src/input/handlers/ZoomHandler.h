@@ -1,6 +1,8 @@
 #ifndef ZOOMHANDLER_H
 #define ZOOMHANDLER_H
 
+#define ZOOM_SPEED 0.006f
+
 class Camera;
 
 class ZoomHandler {
@@ -13,7 +15,7 @@ class ZoomHandler {
 public:
 	ZoomHandler(float timeSec, float minZoom, float maxZoom);
 
-	void handle(Camera* camera, bool zoom);
+	void handle(Camera* camera, bool zoom, float deltaTime);
 };
 
 #endif

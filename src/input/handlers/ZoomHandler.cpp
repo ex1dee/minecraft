@@ -3,7 +3,6 @@
 #include <glm/glm.hpp>
 
 #include "../../player/Camera.h"
-#include "../../utils/Time.h"
 #include "../../math/Mathf.h"
 #include "../Input.h"
 
@@ -12,16 +11,16 @@ ZoomHandler::ZoomHandler(float timeSec, float minZoom, float maxZoom)
 	duration = 0;
 }
 
-void ZoomHandler::handle(Camera* camera, bool zoom) {
+void ZoomHandler::handle(Camera* camera, bool zoom, float deltaTime) {
 	if (zoom) {
 		if (duration <= timeSec) {
-			duration = glm::min(timeSec, duration + Time::getDeltaTime());
+			duration = glm::min(timeSec, duration + ZOOM_SPEED);
 			
 			camera->setZoom(getZoom());
 		}
 	} else {
 		if (duration > 0) {
-			duration = glm::max(0.0f, duration - Time::getDeltaTime());
+			duration = glm::max(0.0f, duration - ZOOM_SPEED);
 
 			camera->setZoom(getZoom());
 		}

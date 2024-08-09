@@ -21,8 +21,8 @@ public:
 	Collider* collider;
 	Model* model;
 
-	GameObject(World* world, bool updateEveryTick)
-		: rigidBody(updateEveryTick), world(world) {
+	GameObject(World* world)
+		: world(world) {
 
 	}
 

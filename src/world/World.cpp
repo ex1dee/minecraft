@@ -6,11 +6,12 @@
 #include "../utils/random/Random.h"
 #include "../shaders/ShadersDatabase.h"
 
-World::World(TerrainGenerator* terrainGen, Player &player, Camera& camera)
-	: terrainGen(terrainGen) {
+World::World(Player &player, Camera& camera) {
 	chunkManager = new ChunkManager(this);
 	isRunning = true;
+
 	seed = time(0);
+	terrainGen = new DefaultWorldGenerator(seed);
 
 	player.hookWorld(this);
 
@@ -59,31 +60,27 @@ void World::updateDefaultSpawnPoint(Player& player) {
 		blockPos.y = chunk->getHeightAt(blockPos);
 	}
 
-	glm::vec3 spawnPos = chunk->getWorldPosition(blockPos) + glm::vec3(0, 1, 0);
+	glm::vec3 spawnPos = chunk->getWorldPosition(blockPos) + glm::vec3(0.5, 1, 0.5);
 	player.transform.position = spawnPos;
 	spawnPoint = spawnPos;
 }
 
 void World::loadChunks(Player& player, Camera& camera) {
 	while (isRunning) {
-		std::this_thread::sleep_for(std::chrono::milliseconds(5));
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
 		glm::vec2 playerPos = getLocalChunkPosition(player.transform.position);
-		int loadDist = Config::settings["world"]["loadDistance"] - 1;
-
-		std::unique_lock<std::mutex> mainLock(mainMutex, std::defer_lock);
+		int loadDist = Config::settings["world"]["loadDistance"];
 
 		for (int i = 0; i <= loadDist; ++i) {
 			for (int x = playerPos.x - i; x <= playerPos.x + i; ++x) {
 				for (int z = playerPos.y - i; z <= playerPos.y + i; ++z) {
-					mainLock.lock();
 					chunkManager->makeMesh(glm::vec2(x, z), camera);
-					mainLock.unlock();
 				}
 			}
 		}
 
-		for (std::pair<glm::vec2, Chunk*> pair : chunkManager->loadedChunks) {
+		for (std::pair<glm::vec2, Chunk*> pair : chunkManager->chunks) {
 			Chunk* chunk = pair.second;
 			if (chunk == nullptr)
 				continue;
@@ -96,18 +93,14 @@ void World::loadChunks(Player& player, Camera& camera) {
 			float maxZ = playerPos.y + loadDist;
 
 			if (chunkPos.x < minX || chunkPos.x > maxX || chunkPos.y < minZ || chunkPos.y > maxZ) { 
-				mainLock.lock();
 				chunkManager->unload(chunkPos);
-				mainLock.unlock();
 			}
 		}
 
 		for (const glm::vec2& chunkPos : chunkManager->unloadedChunks) {
-			mainLock.lock();
 			Chunk* chunk = chunkManager->getChunk(chunkPos);
 			chunkManager->loadedChunks.erase(chunkPos);
 			chunkManager->chunks.erase(chunkPos);
-			mainLock.unlock();
 
 			delete chunk;
 		}

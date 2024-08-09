@@ -7,7 +7,7 @@
 
 ZoomHandler CameraInput::zoom = ZoomHandler(ZOOM_TIME_SEC, 0, CAMERA_MAX_ZOOM);
 
-void CameraInput::handle(Player* player) {
+void CameraInput::handle(Player* player, float deltaTime) {
 	Camera* camera = player->getCamera();
 	
 	if (Input::justPressed(GLFW_KEY_F5)) {
@@ -15,7 +15,7 @@ void CameraInput::handle(Player* player) {
 	}
 
 	if (camera->getZoom() >= 0)
-		zoom.handle(camera, Input::pressed(GLFW_KEY_C) && !(Input::pressed(GLFW_KEY_W) && Input::pressed(GLFW_KEY_LEFT_CONTROL)));
+		zoom.handle(camera, Input::pressed(GLFW_KEY_C) && !(Input::pressed(GLFW_KEY_W) && Input::pressed(GLFW_KEY_LEFT_CONTROL)), deltaTime);
 }
 
 CameraViewMode CameraInput::getNextViewMode(CameraViewMode currentMode) {

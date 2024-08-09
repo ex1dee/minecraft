@@ -12,8 +12,8 @@ Shader::~Shader() {
 }
 
 void Shader::createProgram(const char* vertexPath, const char* fragmentPath) {
-	unsigned int vertexShader = createShader(GL_VERTEX_SHADER, vertexPath);
-	unsigned int fragmentShader = createShader(GL_FRAGMENT_SHADER, fragmentPath);
+	uint32_t vertexShader = createShader(GL_VERTEX_SHADER, vertexPath);
+	uint32_t fragmentShader = createShader(GL_FRAGMENT_SHADER, fragmentPath);
 
 	programID = glCreateProgram();
 
@@ -26,10 +26,10 @@ void Shader::createProgram(const char* vertexPath, const char* fragmentPath) {
 	glDeleteShader(fragmentShader);
 }
 
-unsigned int Shader::createShader(GLenum type, const char* path) {
+uint32_t Shader::createShader(GLenum type, const char* path) {
 	std::string sCode = readShaderCode(path);
 	const char* code = sCode.c_str();
-	unsigned int shader = glCreateShader(type);
+	uint32_t shader = glCreateShader(type);
 
 	glShaderSource(shader, 1, &code, NULL);
 	glCompileShader(shader);
@@ -50,7 +50,7 @@ std::string Shader::readShaderCode(const char* path) {
 	return data;
 }
 
-void Shader::shaderiv(unsigned int shader) {
+void Shader::shaderiv(uint32_t shader) {
 	int success;
 	char infoLog[512];
 
@@ -62,7 +62,7 @@ void Shader::shaderiv(unsigned int shader) {
 	}
 }
 
-void Shader::programiv(unsigned int program) {
+void Shader::programiv(uint32_t program) {
 	int success;
 	char infoLog[512];
 

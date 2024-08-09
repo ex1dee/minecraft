@@ -11,7 +11,7 @@
 class Sprite : public Drawable {
 	std::vector<float> vertexPositions;
 	std::vector<float> textureCoords;
-	std::vector<unsigned int> indices;
+	std::vector<uint32_t> indices;
 
 	void calcVertices();
 	void calcTextureCoords();

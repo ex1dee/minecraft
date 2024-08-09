@@ -4,8 +4,8 @@
 #include "../math/geometry/Orientation.h"
 #include "../entity/Entity.h"
 
-#define PLAYER_DEFAULT_SPEED 3.1f
-#define PLAYER_JUMP_FORCE 7.0f
+#define PLAYER_DEFAULT_SPEED 5.75f
+#define PLAYER_JUMP_FORCE 12.5f
 #define PLAYER_SPRINT_COEF 1.5f
 #define PLAYER_SIDE_COEF 0.5f
 #define PLAYER_SNEAKING_COEF 0.35f
@@ -31,8 +31,6 @@ public:
 	bool isSneaking() { return sneaking; }
 	bool isSprinting() { return sprinting; }
 	Camera* const getCamera() { return camera; }
-
-	bool isJumping();
 };
 
 #endif

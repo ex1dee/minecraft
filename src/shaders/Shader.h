@@ -14,13 +14,13 @@
 
 class Shader {
 	std::string readShaderCode(const char* path);
-	unsigned int createShader(GLenum type, const char* path);
+	uint32_t createShader(GLenum type, const char* path);
 	void createProgram(const char* vertexPath, const char* fragmentPath);
-	void shaderiv(unsigned int shader);
-	void programiv(unsigned int program);
+	void shaderiv(uint32_t shader);
+	void programiv(uint32_t program);
 
 	int currentTextureID = 0;
-	unsigned int programID;
+	uint32_t programID;
 	const char* vertexPath;
 	const char* fragmentPath;
 public:
@@ -28,7 +28,7 @@ public:
 	Shader(const char* vertexPath, const char* fragmentPath);
 	~Shader();
 
-	unsigned int getProgramID() { return programID; }
+	uint32_t getProgramID() { return programID; }
 	int getCurrentTextureID() { return currentTextureID; }
 	void incrementCurrentTextureID() { currentTextureID++; }
 

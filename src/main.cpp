@@ -13,6 +13,8 @@
 #include "gui/GUIDatabase.h"
 #include "gui/GUI.h"
 
+#include "../dependencies/stb_image.h"
+
 int main() {
     try {
         Config::initialize();

@@ -2,12 +2,13 @@
 #define TEXTURE_H
 
 #include <glad/glad.h>
+#include <cstdint>
 
 #include "TextureType.h"
 
 class Texture {
 protected:
-	unsigned int ID;
+	uint32_t ID;
 	TextureType type;
 	GLenum target;
 	int width;
@@ -21,7 +22,7 @@ public:
 
 	int getWidth() const { return width; }
 	int getHeight() const { return height; }
-	unsigned int getID() const { return ID; }
+	uint32_t getID() const { return ID; }
 	GLenum getTarget() const { return target; }
 	TextureType getType() const { return type; }
 };

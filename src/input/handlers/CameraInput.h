@@ -12,7 +12,7 @@ class CameraInput {
 
 	static CameraViewMode getNextViewMode(CameraViewMode currentMode);
 public:
-	static void handle(Player* player);
+	static void handle(Player* player, float deltaTime);
 };
 
 #endif

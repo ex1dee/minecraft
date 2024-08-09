@@ -2,10 +2,10 @@
 
 #include "collision/CollisionDetector.h"
 #include "../player/Player.h"
-#include "../utils/Time.h"
 #include "GameObject.h"
 
 std::vector<GameObject*> PhysicsEngine::objects;
+float PhysicsEngine::deltaTime;
 World* PhysicsEngine::world;
 
 void PhysicsEngine::initialize(World* world) { 
@@ -16,27 +16,22 @@ void PhysicsEngine::finalize() {
 
 }
 
-void PhysicsEngine::updatePerLongTick(Player& player) {
-	update(player, true);
-}
+void PhysicsEngine::update(Player& player, float deltaTime) {
+	PhysicsEngine::deltaTime = deltaTime;
+	if (deltaTime == 0)
+		return;
 
-void PhysicsEngine::updatePerTick(Player& player) {
-	update(player, false);
-}
-
-void PhysicsEngine::update(Player& player, bool updatePerLongTick) {
 	glm::vec3 position = player.transform.position;
 	glm::vec3 chunkPos = glm::vec3(position.x, 0, position.z);
+	Chunk* chunk = world->getChunk(chunkPos);
 
-	if (!world->getChunk(chunkPos)->isLoaded())
+	if (chunk == nullptr || !chunk->isLoaded())
 		return;
 
 	cullObjects();
 
 	for (GameObject* object : objects) {
-		if (updatePerLongTick || !object->rigidBody.updatePerLongTick) {
-			prepare(object);
-		}
+		prepare(object);
 	}
 
 	CollisionDetector::detect(objects, world);
@@ -47,35 +42,26 @@ void PhysicsEngine::update(Player& player, bool updatePerLongTick) {
 }
 
 void PhysicsEngine::cullObjects() {
-	for (auto it = objects.begin(); it != objects.end(); ++it) {
-		if (*it == nullptr) {
-			objects.erase(it);
-		}
-	}
+	objects.erase(std::remove(objects.begin(), objects.end(), nullptr), objects.end());
 }
 
 void PhysicsEngine::prepare(GameObject* object) {
 	RigidBody* rb = &object->rigidBody;
-	float dt = getDeltaTime(object);
+
+	rb->addGravity();
 
 	rb->acceleration = rb->force / rb->mass;
-	rb->newVelocity = rb->velocity + rb->acceleration * dt;
-	rb->deltaPosition = rb->newVelocity * dt;
+	rb->newVelocity = rb->velocity + rb->acceleration * deltaTime;
+	rb->deltaPosition = rb->newVelocity * deltaTime;
+
+	rb->force = glm::vec3(0);
 }
 
 void PhysicsEngine::updatePosition(GameObject* object) {
 	RigidBody* rb = &object->rigidBody;
-	float dt = getDeltaTime(object);
 
-	rb->velocity = rb->newVelocity;
 	object->transform.position += rb->deltaPosition;
-}
-
-float PhysicsEngine::getDeltaTime(GameObject* object) {
-	if (object->rigidBody.updatePerLongTick)
-		return SEC_PER_PHYSICS_TICK;
-	else
-		return Time::getDeltaTime();
+	rb->velocity = rb->newVelocity;
 }
 
 void PhysicsEngine::addObject(GameObject* object) {

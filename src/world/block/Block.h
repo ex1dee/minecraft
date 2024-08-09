@@ -8,12 +8,17 @@
 #include "BlockID.h"
 
 class Block {
-public:
+	friend class Chunk;
+	
 	glm::vec3 position;
+public:
 	BlockType* type;
 
 	Block() {}
 	Block(BlockID id);
+
+	const glm::vec3& getPosition() { return position; }
+	bool isCollidable() { return this != nullptr && type->colliders.size(); }
 
 	IntersectList intersect(const Ray& ray) const;
 };

@@ -15,7 +15,7 @@ class Input {
 	static CursorPos cursorPos;
 	static Button keys[1024];
 	static Button mouse[12];
-	static uint32_t frame;
+	static uint64_t frame;
 public:
 	static void pollEvents();
 

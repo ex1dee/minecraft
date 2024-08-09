@@ -6,7 +6,7 @@
 std::unordered_map<int, glm::vec3> MovementsInput::keys;
 ZoomHandler MovementsInput::runZoom = ZoomHandler(RUN_ZOOM_TIME_SEC, 0.0f, RUN_MIN_ZOOM);
 
-void MovementsInput::handle(Player* player) {
+void MovementsInput::handle(Player* player, float deltaTime) {
 	RigidBody* rb = &player->rigidBody;
 
 	Orientation orientation = player->orientation;
@@ -20,7 +20,7 @@ void MovementsInput::handle(Player* player) {
 	check(GLFW_KEY_D, rb, right * speed * PLAYER_SIDE_COEF);
 
 	checkJumping(player);
-	checkRunZoom(player);
+	checkRunZoom(player, deltaTime);
 }
 
 float MovementsInput::calcSpeed(Player* player) {
@@ -57,18 +57,19 @@ void MovementsInput::check(int key, RigidBody* rigidBody, const glm::vec3& veloc
 
 void MovementsInput::checkJumping(Player* player) {
 	if (Input::pressed(GLFW_KEY_SPACE)) {
-		if (!player->isJumping()) {
+		if (player->isOnGround() && player->rigidBody.velocity.y == 0) {
 			player->rigidBody.addVelocity(glm::vec3(0, 1, 0) * player->getJumpForce());
 		}
 	}
 }
 
-void MovementsInput::checkRunZoom(Player* player) {
+void MovementsInput::checkRunZoom(Player* player, float deltaTime) {
 	Camera* camera = player->getCamera();
 
 	if (camera->getZoom() <= 0)
 		runZoom.handle(
 			player->getCamera(),
-			Input::pressed(GLFW_KEY_W) && Input::pressed(GLFW_KEY_LEFT_CONTROL)
+			Input::pressed(GLFW_KEY_W) && Input::pressed(GLFW_KEY_LEFT_CONTROL),
+			deltaTime
 		);
 }

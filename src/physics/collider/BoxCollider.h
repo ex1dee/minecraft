@@ -16,6 +16,8 @@ public:
 
 	BoxCollider(const glm::vec3& extents, const Transform& transform = Transform());
 	
+	const glm::vec3& getExtents() { return extents; }
+
 	std::vector<Rect> getRectangles(const Transform& transform);
 	void applyTransform(const Transform& transform) override;
 };

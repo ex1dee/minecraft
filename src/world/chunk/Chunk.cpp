@@ -107,9 +107,9 @@ bool Chunk::outOfBounds(const glm::vec3& pos) {
 
 glm::vec3 Chunk::getWorldPosition(const glm::vec3& blockPos) {
 	return glm::vec3(
-		position.x * CHUNK_W + blockPos.x,
-		blockPos.y,
-		position.y * CHUNK_D + blockPos.z
+		position.x * CHUNK_W + floor(blockPos.x),
+		floor(blockPos.y),
+		position.y * CHUNK_D + floor(blockPos.z)
 	);
 }
 
@@ -125,7 +125,7 @@ void Chunk::updateHighestBlock(const glm::vec3& pos, Block& block) {
 			if (y == highestBlocks[pos]) {
 				Block* block = getBlock(glm::vec3(pos.x, y--, pos.z));
 
-				while (!block->type->colliders.size()) {
+				while (block != nullptr && !block->type->colliders.size()) {
 					block = getBlock(glm::vec3(pos.x, y--, pos.z));
 				}
 			}
@@ -148,5 +148,5 @@ glm::vec3 Chunk::getLocalBlockPosition(int index) {
 }
 
 int Chunk::toBlockIndex(const glm::vec3& pos) {
-	return (pos.y * CHUNK_AREA + pos.z * CHUNK_W + pos.x);
+	return (floor(pos.y) * CHUNK_AREA + floor(pos.z) * CHUNK_W + floor(pos.x));
 }

@@ -5,7 +5,7 @@
 CursorPos Input::cursorPos;
 Button Input::keys[1024] = {};
 Button Input::mouse[12] = {};
-uint32_t Input::frame = 0;
+uint64_t Input::frame = 0;
 
 void Input::pollEvents() {
 	cursorPos.delta = glm::vec2(0);

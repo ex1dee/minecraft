@@ -10,18 +10,16 @@ class GameObject;
 class PhysicsEngine {
 	static std::vector<GameObject*> objects;
 	static World* world;
+	static float deltaTime;
 
 	static void cullObjects();
 	static void prepare(GameObject* object);
 	static void updatePosition(GameObject* object);
-	static void update(Player& player, bool updatePerLongTick);
-	static float getDeltaTime(GameObject* object);
 public:
 	static void initialize(World* world);
 	static void finalize();
 
-	static void updatePerTick(Player& player);
-	static void updatePerLongTick(Player& player);
+	static void update(Player& player, float deltaTime);
 	static void addObject(GameObject* object);
 };
 

@@ -22,7 +22,8 @@ void Model::addMesh(Mesh* mesh) {
 
 void Model::draw(Shader* shader) {
 	for (Mesh* mesh : meshes) {
-		mesh->draw(shader);
+		if (mesh != nullptr)
+			mesh->draw(shader);
 	}
 }
 

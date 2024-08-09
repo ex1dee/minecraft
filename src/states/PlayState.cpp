@@ -5,40 +5,40 @@
 #include "../input/handlers/WindowInput.h"
 #include "../physics/PhysicsEngine.h"
 #include "../gui/GUI.h"
-#include "../utils/Time.h"
 
 PlayState::PlayState(Renderer* renderer, Player* player, Camera* camera)
 	: BaseState(renderer), player(player), camera(camera) {
 
-	world = new World(new SuperFlatGenerator, *player, *camera);
+	world = new World(*player, *camera);
 
 	PhysicsEngine::initialize(world);
 	camera->hookPlayer(player);
 	camera->hookWorld(world);
+
+	worldTickTimer.start(SEC_PER_WORLD_TICK, &isRunning);
+	physicsTickTimer.start(SEC_PER_PHYSICS_TICK, &isRunning);
 }
 
 PlayState::~PlayState() {
 	PhysicsEngine::finalize();
+	isRunning = false;
 
 	delete world;
 }
 
 void PlayState::handleInput() {
-	MovementsInput::handle(player);
-	CameraInput::handle(player);
+	MovementsInput::handle(player, physicsTickTimer.getSecPerTick());
+	CameraInput::handle(player, physicsTickTimer.getSecPerTick());
 	WindowInput::handle();
 }
 
 void PlayState::update() {
-	Time::update();
-
-	if (Time::isTickElapsed()) {
+	if (worldTickTimer.isTickElapsed()) {
 		world->update(*renderer, *player, *camera);
+	}
 
-		PhysicsEngine::updatePerLongTick(*player);
-	} else {
-		if (Time::isPhysicsTickElapsed())
-			PhysicsEngine::updatePerTick(*player);
+	if (physicsTickTimer.isTickElapsed()) {
+		PhysicsEngine::update(*player, physicsTickTimer.getSecPerTick());
 	}
 
 	GUI::update();

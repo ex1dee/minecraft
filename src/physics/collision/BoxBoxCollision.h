@@ -1,9 +1,8 @@
 #ifndef BOXBOXCOLLISION_H
 #define BOXBOXCOLLISION_H
 
-#include <algorithm>
-
 #include "../collider/BoxCollider.h"
+#include "../../world/block/Block.h"
 #include "../GameObject.h"
 #include "CollisionHandler.h"
 #include "Collision.h"
@@ -19,7 +18,7 @@ class BoxBoxCollision {
 	static Collision detect(BoxCollider* b1, BoxCollider* b2);
 public:
 	static void detect(GameObject* obj1, GameObject* obj2);
-	static void detect(GameObject* obj1, BoxCollider* box2);
+	static void detect(GameObject* obj1, Block* block);
 };
 
 #endif

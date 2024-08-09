@@ -18,6 +18,7 @@ public:
 
 	EntityType* const getType() { return type; }
 
+	bool isOnGround();
 	Block* getTargetBlock();
 };
 
