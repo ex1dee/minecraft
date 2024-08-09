@@ -34,6 +34,9 @@ void Renderer::finishRender(Player& player, Camera* camera, World& world) {
 
 	entityRenderer.render(camera, *sun);
 	chunkRenderer.render(camera, *sun);
+
+	disableCullFace();
+
 	blockFrameRenderer.render(camera, player);
 	guiRenderer.render();
 }
@@ -58,6 +61,8 @@ void Renderer::disableCullFace() {
 }
 
 void Renderer::startTransparentRender() {
+	disableCullFace();
+
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glDepthMask(GL_FALSE);
@@ -66,4 +71,6 @@ void Renderer::startTransparentRender() {
 void Renderer::finishTransparentRender() {
 	glDepthMask(GL_TRUE);
 	glDisable(GL_BLEND);
+
+	enableCullFace();
 }

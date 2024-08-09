@@ -27,6 +27,9 @@ void CollisionDetector::detectO2O(std::vector<GameObject*>& objects) {
 
 void CollisionDetector::detectO2B(std::vector<GameObject*>& objects, World* world) {
 	for (GameObject* obj : objects) {
+		if (obj->rigidBody.physicsType == PhysicsType::STATIC)
+			continue;
+
 		glm::vec3 newPosition = obj->transform.position + obj->rigidBody.deltaPosition;
 
 		for (float x = -1; x <= obj->model->aabb.extents.x + 1; ++x) {
@@ -53,7 +56,7 @@ void CollisionDetector::detect(GameObject* obj1, GameObject* obj2) {
 	ColliderType type1 = obj1->collider->getType();
 	ColliderType type2 = obj2->collider->getType();
 	
-	if (type1 == BOX && type2 == BOX) {
+	if (type1 == ColliderType::BOX && type2 == ColliderType::BOX) {
 		BoxBoxCollision::detect(obj1, obj2);
 	}
 }

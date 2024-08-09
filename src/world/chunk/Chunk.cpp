@@ -28,7 +28,7 @@ void Chunk::render(Renderer& renderer) {
 	}
 }
 
-void Chunk::makeMesh(Camera& camera) {
+void Chunk::makeMesh() {
 	if (!hasMesh()) {
 		ChunkMeshBuilder(this).build();
 
@@ -84,19 +84,22 @@ Block* Chunk::getBlock(const glm::vec3& pos) {
 	return &blocks[toBlockIndex(pos)];
 }
 
-void Chunk::setBlock(const glm::vec3& pos, Block block) {
+void Chunk::setBlock(const glm::vec3& pos, BlockID blockID) {
 	if (pos.y < 0 || ceil(pos.y) >= CHUNK_H)
 		return;
 
 	glm::vec3 worldPos = getWorldPosition(pos);
+
+	Block block = Block(blockID);
 	block.position = worldPos;
 
 	if (outOfBounds(pos)) {
-		world->setBlock(worldPos, block);
+		world->setBlock(worldPos, blockID);
+
+		return;
 	}
 
 	updateHighestBlock(pos, block);
-
 	blocks[toBlockIndex(pos)] = block;
 }
 

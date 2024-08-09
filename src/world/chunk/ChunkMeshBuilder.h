@@ -5,6 +5,8 @@
 #include "ChunkMesh.h"
 #include "Chunk.h"
 
+class ChunkMesh;
+
 class ChunkMeshBuilder {
 	ChunkMesh* activeMesh;
 	Block* curBlock;

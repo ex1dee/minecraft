@@ -5,8 +5,6 @@
 #include "../Drawable.h"
 #include "MeshData.h"
 
-enum MeshType;
-
 struct Mesh : public Drawable {
 	void bindTextures(Shader* shader);
 public:
@@ -19,12 +17,6 @@ public:
 	void setup() override;
 	void reset() override;
 	void draw(Shader* shader) override;
-};
-
-enum MeshType {
-	CUBE = 0,
-	X = 1,
-	ASSIMP = 2
 };
 
 #endif

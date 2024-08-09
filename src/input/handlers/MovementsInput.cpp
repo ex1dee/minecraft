@@ -21,6 +21,16 @@ void MovementsInput::handle(Player* player, float deltaTime) {
 
 	checkJumping(player);
 	checkRunZoom(player, deltaTime);
+
+	if (Input::justPressed(GLFW_KEY_F)) {
+		player->setFlying(!player->flying);
+		keys.clear();
+	}
+
+	if (player->flying) {
+		check(GLFW_KEY_SPACE, rb, glm::vec3(0, 1, 0) * speed);
+		check(GLFW_KEY_LEFT_SHIFT, rb, glm::vec3(0, -1, 0) * speed);
+	}
 }
 
 float MovementsInput::calcSpeed(Player* player) {
@@ -29,10 +39,14 @@ float MovementsInput::calcSpeed(Player* player) {
 	player->sprinting = Input::pressed(GLFW_KEY_LEFT_CONTROL);
 	player->sneaking = Input::pressed(GLFW_KEY_LEFT_SHIFT);
 
-	if (player->sneaking) {
-		speed *= PLAYER_SNEAKING_COEF;
-	} else if (player->sprinting) {
-		speed *= PLAYER_SPRINT_COEF;
+	if (player->flying) {
+		speed *= PLAYER_FLYING_COEF;
+	} else {
+		if (player->sneaking) {
+			speed *= PLAYER_SNEAKING_COEF;
+		} else if (player->sprinting) {
+			speed *= PLAYER_SPRINT_COEF;
+		}
 	}
 
 	return speed;
@@ -41,15 +55,15 @@ float MovementsInput::calcSpeed(Player* player) {
 void MovementsInput::check(int key, RigidBody* rigidBody, const glm::vec3& velocity) {
 	if (keys.find(key) != keys.end()) {
 		if (!Input::pressed(key)) {
-			rigidBody->addVelocity(-keys[key]);
+			rigidBody->velocity += -keys[key];
 			keys.erase(key);
 		} else {
-			rigidBody->addVelocity(-keys[key] + velocity);
+			rigidBody->velocity += -keys[key] + velocity;
 			keys[key] = velocity;
 		}
 	} else {
 		if (Input::pressed(key)) {
-			rigidBody->addVelocity(velocity);
+			rigidBody->velocity += velocity;
 			keys.emplace(key, velocity);
 		}
 	}
@@ -57,8 +71,8 @@ void MovementsInput::check(int key, RigidBody* rigidBody, const glm::vec3& veloc
 
 void MovementsInput::checkJumping(Player* player) {
 	if (Input::pressed(GLFW_KEY_SPACE)) {
-		if (player->isOnGround() && player->rigidBody.velocity.y == 0) {
-			player->rigidBody.addVelocity(glm::vec3(0, 1, 0) * player->getJumpForce());
+		if (!player->isFlying() && player->isOnGround() && player->rigidBody.velocity.y == 0) {
+			player->rigidBody.velocity += glm::vec3(0, 1, 0) * player->getJumpForce();
 		}
 	}
 }

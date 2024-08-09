@@ -34,7 +34,7 @@ void PlayState::handleInput() {
 
 void PlayState::update() {
 	if (worldTickTimer.isTickElapsed()) {
-		world->update(*renderer, *player, *camera);
+		world->update(*renderer, *player);
 	}
 
 	if (physicsTickTimer.isTickElapsed()) {

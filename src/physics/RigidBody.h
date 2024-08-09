@@ -4,33 +4,45 @@
 #include <glm/glm.hpp>
 
 #include "../math/geometry/Transform.h"
+#include "PhysicsType.h"
 
 const glm::vec3 GRAVITY = glm::vec3(0.0f, -50.0f, 0.0f);
 
 class RigidBody {
+	friend class PhysicsEngine;
+	friend class CollisionHandler;
+	friend class CollisionDetector;
+
+	glm::vec3 newVelocity = glm::vec3(0);
+	glm::vec3 deltaPosition = glm::vec3(0);
+	PhysicsType physicsType;
 public:
 	glm::vec3 force = glm::vec3(0);
 	glm::vec3 acceleration = glm::vec3(0);
 	glm::vec3 velocity = glm::vec3(0);
 
-	glm::vec3 newVelocity = glm::vec3(0);
-	glm::vec3 deltaPosition = glm::vec3(0);
-
-	bool physics;
 	float mass;
 
-	RigidBody() {}
+	RigidBody(float mass = 1.0f) 
+		: mass(mass) {}
 
-	void addVelocity(const glm::vec3& velocity) {
-		this->velocity += velocity;
-	}
+	PhysicsType getPhysicsType() { return physicsType; }
 
 	void addGravity() {
 		addForce(GRAVITY);
 	}
 
+	void setPhysicsType(PhysicsType type) {
+		this->physicsType = type;
+
+		if (type == PhysicsType::STATIC) {
+			acceleration = glm::vec3(0);
+			velocity = glm::vec3(0);
+		}
+	}
+
 	void addForce(const glm::vec3& acceleration) {
-		force += mass * acceleration;
+		this->force += mass * acceleration;
 	}
 };
 

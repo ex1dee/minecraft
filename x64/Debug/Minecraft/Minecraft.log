@@ -1,3 +1,3 @@
-﻿  CollisionDetector.cpp
+﻿  Renderer.cpp
 LINK : warning LNK4044: нераспознанный параметр "/Vm"; игнорируется
   Minecraft.vcxproj -> C:\Users\User\source\repos\Minecraft\x64\Debug\Minecraft.exe

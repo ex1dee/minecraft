@@ -107,9 +107,6 @@
     <ClCompile Include="src\physics\PhysicsEngine.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\utils\Time.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="src\physics\collision\CollisionDetector.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
@@ -197,6 +194,9 @@
     <ClCompile Include="src\world\generation\terrain\DefaultWorldGenerator.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\utils\Timer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\window\Window.h">
@@ -262,7 +262,6 @@
     <ClInclude Include="src\physics\collider\BoxCollider.h" />
     <ClInclude Include="src\physics\PhysicsEngine.h" />
     <ClInclude Include="src\world\Sun.h" />
-    <ClInclude Include="src\utils\Time.h" />
     <ClInclude Include="src\physics\collision\BoxBoxCollision.h" />
     <ClInclude Include="src\physics\collision\CollisionHandler.h" />
     <ClInclude Include="src\physics\collision\Collision.h" />
@@ -305,6 +304,10 @@
     <ClInclude Include="src\render\GUIRenderer.h" />
     <ClInclude Include="src\input\handlers\WindowInput.h" />
     <ClInclude Include="src\utils\noise\PerlinNoise2D.h" />
+    <ClInclude Include="src\utils\Timer.h" />
+    <ClInclude Include="src\render\model\MeshType.h" />
+    <ClInclude Include="src\physics\PhysicsType.h" />
+    <ClInclude Include="src\math\shapes\Planes.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />

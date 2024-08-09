@@ -3,7 +3,7 @@
 
 #include <vector>
 
-enum MeshType;
+#include "MeshType.h"
 
 class MeshData {
 public:

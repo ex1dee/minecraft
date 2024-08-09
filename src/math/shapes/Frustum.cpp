@@ -1,5 +1,7 @@
 #include "Frustum.h"
 
+#include "Planes.h"
+
 Frustum::Frustum() {
     for (int i = 0; i < 6; ++i) {
         planes[i] = new Plane;
@@ -27,40 +29,40 @@ bool Frustum::isAABBInFrustum(const AABB& aabb) {
 
 void Frustum::update(const glm::mat4& pv) {
     // left
-    planes[Planes::Left]->normal.x = pv[0][3] + pv[0][0];
-    planes[Planes::Left]->normal.y = pv[1][3] + pv[1][0];
-    planes[Planes::Left]->normal.z = pv[2][3] + pv[2][0];
-    planes[Planes::Left]->distance = pv[3][3] + pv[3][0];
+    planes[Planes::LEFT]->normal.x = pv[0][3] + pv[0][0];
+    planes[Planes::LEFT]->normal.y = pv[1][3] + pv[1][0];
+    planes[Planes::LEFT]->normal.z = pv[2][3] + pv[2][0];
+    planes[Planes::LEFT]->distance = pv[3][3] + pv[3][0];
 
     // right
-    planes[Planes::Right]->normal.x = pv[0][3] - pv[0][0];
-    planes[Planes::Right]->normal.y = pv[1][3] - pv[1][0];
-    planes[Planes::Right]->normal.z = pv[2][3] - pv[2][0];
-    planes[Planes::Right]->distance = pv[3][3] - pv[3][0];
+    planes[Planes::RIGHT]->normal.x = pv[0][3] - pv[0][0];
+    planes[Planes::RIGHT]->normal.y = pv[1][3] - pv[1][0];
+    planes[Planes::RIGHT]->normal.z = pv[2][3] - pv[2][0];
+    planes[Planes::RIGHT]->distance = pv[3][3] - pv[3][0];
 
     // bottom
-    planes[Planes::Bottom]->normal.x = pv[0][3] + pv[0][1];
-    planes[Planes::Bottom]->normal.y = pv[1][3] + pv[1][1];
-    planes[Planes::Bottom]->normal.z = pv[2][3] + pv[2][1];
-    planes[Planes::Bottom]->distance = pv[3][3] + pv[3][1];
+    planes[Planes::BOTTOM]->normal.x = pv[0][3] + pv[0][1];
+    planes[Planes::BOTTOM]->normal.y = pv[1][3] + pv[1][1];
+    planes[Planes::BOTTOM]->normal.z = pv[2][3] + pv[2][1];
+    planes[Planes::BOTTOM]->distance = pv[3][3] + pv[3][1];
 
     // top
-    planes[Planes::Top]->normal.x = pv[0][3] - pv[0][1];
-    planes[Planes::Top]->normal.y = pv[1][3] - pv[1][1];
-    planes[Planes::Top]->normal.z = pv[2][3] - pv[2][1];
-    planes[Planes::Top]->distance = pv[3][3] - pv[3][1];
+    planes[Planes::TOP]->normal.x = pv[0][3] - pv[0][1];
+    planes[Planes::TOP]->normal.y = pv[1][3] - pv[1][1];
+    planes[Planes::TOP]->normal.z = pv[2][3] - pv[2][1];
+    planes[Planes::TOP]->distance = pv[3][3] - pv[3][1];
 
     // near
-    planes[Planes::Near]->normal.x = pv[0][3] + pv[0][2];
-    planes[Planes::Near]->normal.y = pv[1][3] + pv[1][2];
-    planes[Planes::Near]->normal.z = pv[2][3] + pv[2][2];
-    planes[Planes::Near]->distance = pv[3][3] + pv[3][2];
+    planes[Planes::NEAR]->normal.x = pv[0][3] + pv[0][2];
+    planes[Planes::NEAR]->normal.y = pv[1][3] + pv[1][2];
+    planes[Planes::NEAR]->normal.z = pv[2][3] + pv[2][2];
+    planes[Planes::NEAR]->distance = pv[3][3] + pv[3][2];
 
     // far
-    planes[Planes::Far]->normal.x = pv[0][3] - pv[0][2];
-    planes[Planes::Far]->normal.y = pv[1][3] - pv[1][2];
-    planes[Planes::Far]->normal.z = pv[2][3] - pv[2][2];
-    planes[Planes::Far]->distance = pv[3][3] - pv[3][2];
+    planes[Planes::FAR]->normal.x = pv[0][3] - pv[0][2];
+    planes[Planes::FAR]->normal.y = pv[1][3] - pv[1][2];
+    planes[Planes::FAR]->normal.z = pv[2][3] - pv[2][2];
+    planes[Planes::FAR]->distance = pv[3][3] - pv[3][2];
 
     normalizePlanes();
 }

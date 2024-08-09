@@ -6,7 +6,7 @@ void CollisionHandler::handle(const Collision& collision, GameObject* obj1, Game
 	if (!collision.collided)
 		return;
 
-
+	//if (obj1->rigidBody.physicsType == PhysicsType::STATIC)
 }
 
 void CollisionHandler::handle(const Collision& collision, GameObject* obj, Block* block) {

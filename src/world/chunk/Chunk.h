@@ -31,9 +31,9 @@ class Chunk {
 	int getHeightAt(const glm::vec3& pos);
 	bool outOfBounds(const glm::vec3& pos);
 	void makeAABB();
+	void makeMesh();
 	void bufferMesh();
 	void resetMeshes();
-	void makeMesh(Camera& camera);
 	void render(Renderer& renderer);
 	void load(TerrainGenerator& terrainGen);
 	void updateHighestBlock(const glm::vec3& pos, Block& block);
@@ -50,7 +50,7 @@ public:
 	AABB& getAABB() { return aabb; }
 
 	Block* getBlock(const glm::vec3& pos);
-	void setBlock(const glm::vec3& pos, Block block);
+	void setBlock(const glm::vec3& pos, BlockID blockID);
 	glm::vec3 getWorldPosition(const glm::vec3& blockPos);
 
 	static glm::vec3 getLocalBlockPosition(int index);

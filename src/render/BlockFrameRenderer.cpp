@@ -47,7 +47,7 @@ void BlockFrameRenderer::render(Camera* camera) {
 }
 
 void BlockFrameRenderer::createModel(Block* block, Player& player) {
-	MeshData meshData(CUBE, 3, GL_LINES);
+	MeshData meshData(MeshType::CUBE, 3, GL_LINES);
 	Transform transform(block->getPosition());
 
 	for (BoxCollider* collider : block->type->colliders) {

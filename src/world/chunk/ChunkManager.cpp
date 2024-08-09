@@ -13,13 +13,17 @@ ChunkManager::~ChunkManager() {
 	}
 }
 
-void ChunkManager::makeMesh(const glm::vec2& pos, Camera& camera) {
+void ChunkManager::makeMesh(const glm::vec2& pos) {
 	Chunk* chunk = getChunk(pos);
 
 	if (chunk == nullptr || !chunk->hasMesh()) {
+		load(pos + glm::vec2(1, 0));
+		load(pos + glm::vec2(-1, 0));
+		load(pos + glm::vec2(0, 1));
+		load(pos + glm::vec2(0, -1));
 		load(pos);
 
-		chunk->makeMesh(camera);
+		chunk->makeMesh();
 	}
 }
 

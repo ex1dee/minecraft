@@ -145,6 +145,7 @@
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <EnableParallelCodeGeneration>true</EnableParallelCodeGeneration>
       <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -152,7 +153,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3.lib;glfw3_mt.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalOptions>/Vm</AdditionalOptions>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -235,6 +237,7 @@
     <ClInclude Include="src\math\geometry\Orientation.h" />
     <ClInclude Include="src\math\shapes\Plane.h" />
     <ClInclude Include="src\math\shapes\AABB.h" />
+    <ClInclude Include="src\math\shapes\Planes.h" />
     <ClInclude Include="src\math\shapes\Ray.h" />
     <ClInclude Include="src\math\geometry\Transform.h" />
     <ClInclude Include="src\math\shapes\Rect.h" />
@@ -247,6 +250,7 @@
     <ClInclude Include="src\physics\collision\Collision.h" />
     <ClInclude Include="src\physics\GameObject.h" />
     <ClInclude Include="src\physics\PhysicsEngine.h" />
+    <ClInclude Include="src\physics\PhysicsType.h" />
     <ClInclude Include="src\physics\RigidBody.h" />
     <ClInclude Include="src\player\CameraViewMode.h" />
     <ClInclude Include="src\input\handlers\CameraInput.h" />
@@ -261,6 +265,7 @@
     <ClInclude Include="src\render\light\Light.h" />
     <ClInclude Include="src\render\framebuffer\DFBConfig.h" />
     <ClInclude Include="src\render\light\PointLight.h" />
+    <ClInclude Include="src\render\model\MeshType.h" />
     <ClInclude Include="src\textures\AtlasCoords.h" />
     <ClInclude Include="src\render\sprite\Sprite.h" />
     <ClInclude Include="src\render\sprite\SpriteTexture.h" />

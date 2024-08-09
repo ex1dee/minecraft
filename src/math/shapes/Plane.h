@@ -17,7 +17,7 @@ struct Plane {
 	Plane(const Triangle& triangle) {
 		glm::vec3 ab = triangle.b - triangle.a;
 		glm::vec3 ac = triangle.c - triangle.a;
-
+		
 		normal = glm::cross(ab, ac);
 		distance = -glm::dot(normal, triangle.a);
 	}
@@ -26,14 +26,5 @@ struct Plane {
 		return glm::abs(glm::dot(normal, point) + distance);
 	}
 }; 
-
-enum Planes {
-	Near,
-	Far,
-	Left,
-	Right,
-	Top,
-	Bottom,
-};
 
 #endif

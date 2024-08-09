@@ -5,7 +5,7 @@
 
 #include "../../math/geometry/Transform.h"
 
-enum ColliderType;
+enum class ColliderType;
 
 class Collider : protected Transform {
 private:
@@ -29,7 +29,7 @@ public:
 	virtual void applyTransform(const Transform& transform) = 0;
 };
 
-enum ColliderType {
+enum class ColliderType {
 	BOX
 };
 

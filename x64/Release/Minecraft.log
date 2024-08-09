@@ -1,29 +1,121 @@
 ﻿  Entity.cpp
+  RayRectIntersect.cpp
+  Frustum.cpp
+  CollisionDetector.cpp
+  PhysicsEngine.cpp
   CameraInput.cpp
-C:\Users\User\source\repos\Minecraft\Minecraft\src\input\handlers\CameraInput.h(4,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
   MovementsInput.cpp
   ZoomHandler.cpp
-  main.cpp
-  PhysicsEngine.cpp
-  CollisionDetector.cpp
-  Camera.cpp
   Player.cpp
   BlockFrameRenderer.cpp
-  ChunkRenderer.cpp
   EntityRenderer.cpp
   GUIRenderer.cpp
-  Renderer.cpp
   SkyboxRenderer.cpp
+  DefaultWorldGenerator.cpp
+  RayTracing.cpp
+  Sun.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\input\handlers\CameraInput.h(4,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline (компилируется исходный файл src\input\handlers\CameraInput.cpp)
+  GLM: GLM_GTX_hash is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to use it.
+  GLM: GLM_GTX_hash is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to use it.
+  GLM: GLM_GTX_hash is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to use it.
+  PlayState.cpp
+  ChunkRenderer.cpp
   DepthFramebuffer.cpp
+  Chunk.cpp
+  Renderer.cpp
+  GLM: GLM_GTX_hash extension included
+  Camera.cpp
+  main.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\input\handlers\CameraInput.h(4,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline (компилируется исходный файл src\states\PlayState.cpp)
 C:\Users\User\source\repos\Minecraft\Minecraft\src\render\framebuffer\DepthFramebuffer.cpp(49,78): warning C4244: аргумент: преобразование "float" в "GLsizei", возможна потеря данных
 C:\Users\User\source\repos\Minecraft\Minecraft\src\render\framebuffer\DepthFramebuffer.cpp(49,59): warning C4244: аргумент: преобразование "float" в "GLsizei", возможна потеря данных
 C:\Users\User\source\repos\Minecraft\Minecraft\src\render\framebuffer\DepthFramebuffer.cpp(65,44): warning C4244: аргумент: преобразование "float" в "GLsizei", возможна потеря данных
 C:\Users\User\source\repos\Minecraft\Minecraft\src\render\framebuffer\DepthFramebuffer.cpp(65,25): warning C4244: аргумент: преобразование "float" в "GLsizei", возможна потеря данных
-  PlayState.cpp
-C:\Users\User\source\repos\Minecraft\Minecraft\src\input\handlers\CameraInput.h(4,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline
-  RayTracing.cpp
-  Sun.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(137,28): warning C4244: =: преобразование "float" в "int", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(146,16): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(147,16): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(148,28): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(154,61): warning C4244: return: преобразование "float" в "int", возможна потеря данных
+  ChunkManager.cpp
+  ChunkMeshBuilder.cpp
+  SuperFlatGenerator.cpp
   World.cpp
+  GLM: GLM_GTX_hash is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to use it.
+  GLM: GLM_GTX_hash extension included
+  GLM: GLM_GTX_hash is an experimental extension and may change in the future. Use #define GLM_ENABLE_EXPERIMENTAL before including it, if you really want to use it.
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\utility(172,54): warning C4244: инициализация: преобразование "float" в "_Ty2", возможна потеря данных
+          with
+          [
+              _Ty2=int
+          ] (компилируется исходный файл src\world\chunk\Chunk.cpp)
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(673,1): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<const glm::vec2,int>::pair<glm::vec2&,float&,0>(_Other1,_Other2) noexcept"
+          with
+          [
+              _Other1=glm::vec2 &,
+              _Other2=float &
+          ] (компилируется исходный файл src\world\chunk\Chunk.cpp)
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(680,47): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<const glm::vec2,int>::pair<glm::vec2&,float&,0>(_Other1,_Other2) noexcept"
+          with
+          [
+              _Other1=glm::vec2 &,
+              _Other2=float &
+          ] (компилируется исходный файл src\world\chunk\Chunk.cpp)
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\list(584,1): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Default_allocator_traits<_Alloc>::construct<_Ty,glm::vec2&,float&>(_Alloc &,_Objty *const ,glm::vec2 &,float &)"
+          with
+          [
+              _Alloc=std::allocator<std::_List_node<std::pair<const glm::vec2,int>,std::_Default_allocator_traits<std::allocator<std::pair<const glm::vec2,int>>>::void_pointer>>,
+              _Ty=std::pair<const glm::vec2,int>,
+              _Objty=std::pair<const glm::vec2,int>
+          ] (компилируется исходный файл src\world\chunk\Chunk.cpp)
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\list(586,34): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Default_allocator_traits<_Alloc>::construct<_Ty,glm::vec2&,float&>(_Alloc &,_Objty *const ,glm::vec2 &,float &)"
+          with
+          [
+              _Alloc=std::allocator<std::_List_node<std::pair<const glm::vec2,int>,std::_Default_allocator_traits<std::allocator<std::pair<const glm::vec2,int>>>::void_pointer>>,
+              _Ty=std::pair<const glm::vec2,int>,
+              _Objty=std::pair<const glm::vec2,int>
+          ] (компилируется исходный файл src\world\chunk\Chunk.cpp)
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xhash(588,52): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::_List_node_emplace_op2<std::allocator<std::_List_node<std::pair<const glm::vec2,int>,std::_Default_allocator_traits<_Alloc>::void_pointer>>>::_List_node_emplace_op2<glm::vec2&,float&>(_Alnode &,glm::vec2 &,float &)"
+          with
+          [
+              _Alloc=std::allocator<std::pair<const glm::vec2,int>>,
+              _Alnode=std::allocator<std::_List_node<std::pair<const glm::vec2,int>,std::_Default_allocator_traits<std::allocator<std::pair<const glm::vec2,int>>>::void_pointer>>
+          ] (компилируется исходный файл src\world\chunk\Chunk.cpp)
+C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xhash(612,53): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::_List_node_emplace_op2<std::allocator<std::_List_node<std::pair<const glm::vec2,int>,std::_Default_allocator_traits<_Alloc>::void_pointer>>>::_List_node_emplace_op2<glm::vec2&,float&>(_Alnode &,glm::vec2 &,float &)"
+          with
+          [
+              _Alloc=std::allocator<std::pair<const glm::vec2,int>>,
+              _Alnode=std::allocator<std::_List_node<std::pair<const glm::vec2,int>,std::_Default_allocator_traits<std::allocator<std::pair<const glm::vec2,int>>>::void_pointer>>
+          ] (компилируется исходный файл src\world\chunk\Chunk.cpp)
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(124,33): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<std::_List_iterator<std::_List_val<std::_List_simple_types<_Ty>>>,bool> std::_Hash<std::_Umap_traits<_Kty,int,std::_Uhash_compare<_Kty,_Hasher,_Keyeq>,_Alloc,false>>::emplace<glm::vec2&,float&>(glm::vec2 &,float &)"
+          with
+          [
+              _Ty=std::pair<const glm::vec2,int>,
+              _Kty=glm::vec2,
+              _Hasher=std::hash<glm::vec2>,
+              _Keyeq=std::equal_to<glm::vec2>,
+              _Alloc=std::allocator<std::pair<const glm::vec2,int>>
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(124,24): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<std::_List_iterator<std::_List_val<std::_List_simple_types<_Ty>>>,bool> std::_Hash<std::_Umap_traits<_Kty,int,std::_Uhash_compare<_Kty,_Hasher,_Keyeq>,_Alloc,false>>::emplace<glm::vec2&,float&>(glm::vec2 &,float &)"
+          with
+          [
+              _Ty=std::pair<const glm::vec2,int>,
+              _Kty=glm::vec2,
+              _Hasher=std::hash<glm::vec2>,
+              _Keyeq=std::equal_to<glm::vec2>,
+              _Alloc=std::allocator<std::pair<const glm::vec2,int>>
+          ]
 C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(13,13): warning C4244: =: преобразование "time_t" в "uint32_t", возможна потеря данных
 C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(54,26): warning C4244: =: преобразование "int" в "T", возможна потеря данных
           with
@@ -50,107 +142,24 @@ C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(60,34): warni
           [
               T=float
           ]
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(76,15): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(83,14): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
           with
           [
               T=float
           ]
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(77,16): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(87,14): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
           with
           [
               T=float
           ]
-  Компиляция...
-  Chunk.cpp
-  GLM: GLM_GTX_hash extension included
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(134,28): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(143,16): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(92,14): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
           with
           [
               T=float
           ]
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(144,16): warning C4244: =: преобразование "int" в "T", возможна потеря данных
-          with
-          [
-              T=float
-          ]
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(145,28): warning C4244: =: преобразование "int" в "T", возможна потеря данных
-          with
-          [
-              T=float
-          ]
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(151,61): warning C4244: return: преобразование "float" в "int", возможна потеря данных
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\utility(172,54): warning C4244: инициализация: преобразование "float" в "_Ty2", возможна потеря данных
-          with
-          [
-              _Ty2=int
-          ]
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(673,1): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<const glm::vec2,int>::pair<glm::vec2&,float&,0>(_Other1,_Other2) noexcept"
-          with
-          [
-              _Other1=glm::vec2 &,
-              _Other2=float &
-          ]
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xmemory(680,47): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<const glm::vec2,int>::pair<glm::vec2&,float&,0>(_Other1,_Other2) noexcept"
-          with
-          [
-              _Other1=glm::vec2 &,
-              _Other2=float &
-          ]
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\list(584,1): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Default_allocator_traits<_Alloc>::construct<_Ty,glm::vec2&,float&>(_Alloc &,_Objty *const ,glm::vec2 &,float &)"
-          with
-          [
-              _Alloc=std::allocator<std::_List_node<std::pair<const glm::vec2,int>,std::_Default_allocator_traits<std::allocator<std::pair<const glm::vec2,int>>>::void_pointer>>,
-              _Ty=std::pair<const glm::vec2,int>,
-              _Objty=std::pair<const glm::vec2,int>
-          ]
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\list(586,34): message : выполняется компиляция ссылки на экземпляр шаблон функции "void std::_Default_allocator_traits<_Alloc>::construct<_Ty,glm::vec2&,float&>(_Alloc &,_Objty *const ,glm::vec2 &,float &)"
-          with
-          [
-              _Alloc=std::allocator<std::_List_node<std::pair<const glm::vec2,int>,std::_Default_allocator_traits<std::allocator<std::pair<const glm::vec2,int>>>::void_pointer>>,
-              _Ty=std::pair<const glm::vec2,int>,
-              _Objty=std::pair<const glm::vec2,int>
-          ]
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xhash(588,52): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::_List_node_emplace_op2<std::allocator<std::_List_node<std::pair<const glm::vec2,int>,std::_Default_allocator_traits<_Alloc>::void_pointer>>>::_List_node_emplace_op2<glm::vec2&,float&>(_Alnode &,glm::vec2 &,float &)"
-          with
-          [
-              _Alloc=std::allocator<std::pair<const glm::vec2,int>>,
-              _Alnode=std::allocator<std::_List_node<std::pair<const glm::vec2,int>,std::_Default_allocator_traits<std::allocator<std::pair<const glm::vec2,int>>>::void_pointer>>
-          ]
-C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\include\xhash(612,53): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::_List_node_emplace_op2<std::allocator<std::_List_node<std::pair<const glm::vec2,int>,std::_Default_allocator_traits<_Alloc>::void_pointer>>>::_List_node_emplace_op2<glm::vec2&,float&>(_Alnode &,glm::vec2 &,float &)"
-          with
-          [
-              _Alloc=std::allocator<std::pair<const glm::vec2,int>>,
-              _Alnode=std::allocator<std::_List_node<std::pair<const glm::vec2,int>,std::_Default_allocator_traits<std::allocator<std::pair<const glm::vec2,int>>>::void_pointer>>
-          ]
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(121,33): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<std::_List_iterator<std::_List_val<std::_List_simple_types<_Ty>>>,bool> std::_Hash<std::_Umap_traits<_Kty,int,std::_Uhash_compare<_Kty,_Hasher,_Keyeq>,_Alloc,false>>::emplace<glm::vec2&,float&>(glm::vec2 &,float &)"
-          with
-          [
-              _Ty=std::pair<const glm::vec2,int>,
-              _Kty=glm::vec2,
-              _Hasher=std::hash<glm::vec2>,
-              _Keyeq=std::equal_to<glm::vec2>,
-              _Alloc=std::allocator<std::pair<const glm::vec2,int>>
-          ]
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(121,24): message : выполняется компиляция ссылки на экземпляр шаблон функции "std::pair<std::_List_iterator<std::_List_val<std::_List_simple_types<_Ty>>>,bool> std::_Hash<std::_Umap_traits<_Kty,int,std::_Uhash_compare<_Kty,_Hasher,_Keyeq>,_Alloc,false>>::emplace<glm::vec2&,float&>(glm::vec2 &,float &)"
-          with
-          [
-              _Ty=std::pair<const glm::vec2,int>,
-              _Kty=glm::vec2,
-              _Hasher=std::hash<glm::vec2>,
-              _Keyeq=std::equal_to<glm::vec2>,
-              _Alloc=std::allocator<std::pair<const glm::vec2,int>>
-          ]
-  ChunkManager.cpp
-  GLM: GLM_GTX_hash extension included
-  ChunkMeshBuilder.cpp
-  DefaultWorldGenerator.cpp
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\generation\terrain\DefaultWorldGenerator.cpp(20,15): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
-  SuperFlatGenerator.cpp
-LINK : warning LNK4044: нераспознанный параметр "/Vm"; игнорируется
   Создание кода
-  53 of 5005 functions ( 1.1%) were compiled, the rest were copied from previous compilation.
-    2 functions were new in current compilation
-    33 functions had inline decision re-evaluated but remain unchanged
+  443 of 5126 functions ( 8.6%) were compiled, the rest were copied from previous compilation.
+    156 functions were new in current compilation
+    593 functions had inline decision re-evaluated but remain unchanged
   Создание кода завершено
   Minecraft.vcxproj -> C:\Users\User\source\repos\Minecraft\x64\Release\Minecraft.exe

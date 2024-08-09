@@ -32,7 +32,7 @@ void EntitiesDatabase::initialize() {
 }
 
 void EntitiesDatabase::finalize() {
-	for (std::pair<int, EntityType*> pair : entities) {
+	for (std::pair<EntityID, EntityType*> pair : entities) {
 		delete pair.second;
 	}
 }

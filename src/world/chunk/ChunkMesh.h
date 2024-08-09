@@ -9,7 +9,7 @@
 #include "../WorldConstants.h"
 
 class ChunkMesh {
-	MeshData meshData = MeshData(CUBE, 3);
+	MeshData meshData = MeshData(MeshType::CUBE, 3);
 	Model model;
 	int vertIndex;
 	int faces;

@@ -21,7 +21,7 @@ public:
 
 	Chunk* const load(const glm::vec2& pos);
 	void unload(const glm::vec2& pos);
-	void makeMesh(const glm::vec2& pos, Camera& camera);
+	void makeMesh(const glm::vec2& pos);
 	Chunk* const getChunk(const glm::vec2& pos);
 	bool chunkExistsAt(const glm::vec2& pos);
 };

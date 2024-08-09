@@ -42,7 +42,7 @@ void SkyboxRenderer::loadTexture() {
 }
 
 void SkyboxRenderer::makeModel() {
-	MeshData meshData(CUBE, 3);
+	MeshData meshData(MeshType::CUBE, 3);
 	
 	meshData.vertexPositions = {
         // right

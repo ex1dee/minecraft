@@ -34,6 +34,11 @@ float PerlinNoise2D::noise(float x, float y, int octaves, float persistance) {
 }
 
 float PerlinNoise2D::noise(float x, float y) {
+	glm::vec2 point(x, y);
+
+	if (noiseCache.find(point) != noiseCache.end())
+		return noiseCache[point];
+
 	int left = (int)floor(x);
 	int top = (int)floor(y);
 
@@ -61,7 +66,10 @@ float PerlinNoise2D::noise(float x, float y) {
 	float topLerp = Mathf::lerp(topLeftDot, topRightDot, pointX);
 	float bottomLerp = Mathf::lerp(bottomLeftDot, bottomRightDot, pointX);
 
-	return Mathf::lerp(topLerp, bottomLerp, pointY);
+	float result = Mathf::lerp(topLerp, bottomLerp, pointY);
+	noiseCache.emplace(point, result);
+
+	return result;
 }
 
 glm::vec2 PerlinNoise2D::getGradient(int x, int y) {

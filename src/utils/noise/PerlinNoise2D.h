@@ -1,6 +1,7 @@
 #ifndef PERLINNOISE2D_H
 #define PERLINNOISE2D_H
 
+#include <glm/gtx/hash.hpp>
 #include <glm/glm.hpp>
 #include <vector>
 
@@ -9,6 +10,7 @@
 #define PERLIN_NOISE_SIZE 1024
 
 class PerlinNoise2D {
+	std::unordered_map<glm::vec2, float> noiseCache;
 	std::vector<uint8_t> permutations;
 
 	glm::vec2 getGradient(int x, int y);

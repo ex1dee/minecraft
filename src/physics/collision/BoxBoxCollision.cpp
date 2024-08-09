@@ -3,6 +3,9 @@
 #include <algorithm>
 
 void BoxBoxCollision::detect(GameObject* obj1, GameObject* obj2) {
+	if (obj1->rigidBody.getPhysicsType() == PhysicsType::STATIC && obj2->rigidBody.getPhysicsType() == PhysicsType::STATIC)
+		return;
+
 	BoxCollider* box1 = (BoxCollider*)obj1->collider;
 	BoxCollider* box2 = (BoxCollider*)obj2->collider;
 
@@ -10,15 +13,18 @@ void BoxBoxCollision::detect(GameObject* obj1, GameObject* obj2) {
 	CollisionHandler::handle(collision, obj1, obj2);
 }
 
-void BoxBoxCollision::detect(GameObject* obj1, Block* block) {
-	BoxCollider* box1 = (BoxCollider*)obj1->collider;
+void BoxBoxCollision::detect(GameObject* obj, Block* block) {
+	if (obj->rigidBody.getPhysicsType()  == PhysicsType::STATIC)
+		return;
+
+	BoxCollider* box = (BoxCollider*)obj->collider;
 	Transform transform(block->getPosition());
 
 	for (BoxCollider* box2 : block->type->colliders) {
 		box2->applyTransform(transform);
 
-		Collision collision = detect(box1, box2);
-		CollisionHandler::handle(collision, obj1, block);
+		Collision collision = detect(box, box2);
+		CollisionHandler::handle(collision, obj, block);
 	}
 }
 

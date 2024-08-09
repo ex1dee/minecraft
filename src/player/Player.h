@@ -8,6 +8,7 @@
 #define PLAYER_JUMP_FORCE 12.5f
 #define PLAYER_SPRINT_COEF 1.5f
 #define PLAYER_SIDE_COEF 0.5f
+#define PLAYER_FLYING_COEF 10.0f
 #define PLAYER_SNEAKING_COEF 0.35f
 
 class Camera;
@@ -17,7 +18,7 @@ class Player : public Entity {
 
 	bool sprinting = false;
 	bool sneaking = false;
-	bool flying = true;
+	bool flying = false;
 	float speed = PLAYER_DEFAULT_SPEED;
 	float jumpForce = PLAYER_JUMP_FORCE;
 
@@ -31,6 +32,8 @@ public:
 	bool isSneaking() { return sneaking; }
 	bool isSprinting() { return sprinting; }
 	Camera* const getCamera() { return camera; }
+
+	void setFlying(bool flying);
 };
 
 #endif

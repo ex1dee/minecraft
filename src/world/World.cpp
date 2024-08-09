@@ -72,41 +72,58 @@ void World::loadChunks(Player& player, Camera& camera) {
 		glm::vec2 playerPos = getLocalChunkPosition(player.transform.position);
 		int loadDist = Config::settings["world"]["loadDistance"];
 
-		for (int i = 0; i <= loadDist; ++i) {
-			for (int x = playerPos.x - i; x <= playerPos.x + i; ++x) {
-				for (int z = playerPos.y - i; z <= playerPos.y + i; ++z) {
-					chunkManager->makeMesh(glm::vec2(x, z), camera);
-				}
-			}
-		}
-
-		for (std::pair<glm::vec2, Chunk*> pair : chunkManager->chunks) {
-			Chunk* chunk = pair.second;
-			if (chunk == nullptr)
-				continue;
-
-			glm::vec2 chunkPos = chunk->getLocalPosition();
-
-			float minX = playerPos.x - loadDist;
-			float maxX = playerPos.x + loadDist;
-			float minZ = playerPos.y - loadDist;
-			float maxZ = playerPos.y + loadDist;
-
-			if (chunkPos.x < minX || chunkPos.x > maxX || chunkPos.y < minZ || chunkPos.y > maxZ) { 
-				chunkManager->unload(chunkPos);
-			}
-		}
-
-		for (const glm::vec2& chunkPos : chunkManager->unloadedChunks) {
-			Chunk* chunk = chunkManager->getChunk(chunkPos);
-			chunkManager->loadedChunks.erase(chunkPos);
-			chunkManager->chunks.erase(chunkPos);
-
-			delete chunk;
-		}
-
-		chunkManager->unloadedChunks.clear();
+		makeMeshes(playerPos, loadDist);
+		unloadNotVisibleChunks(playerPos, loadDist);
+		deleteUnloadedChunks();
 	}
+}
+
+void World::makeMeshes(const glm::vec2& playerPos, int loadDist) {
+	for (int i = 0; i <= loadDist; ++i) {
+		for (int x = playerPos.x - i; x <= playerPos.x + i; ++x) {
+			chunkManager->makeMesh(glm::vec2(x, playerPos.y - i));
+		}
+
+		for (int z = playerPos.y - i + 1; z <= playerPos.y + i - 1; ++z) {
+			chunkManager->makeMesh(glm::vec2(playerPos.x - i, z));
+			chunkManager->makeMesh(glm::vec2(playerPos.x + i, z));
+		}
+
+		for (int x = playerPos.x - i; x <= playerPos.x + i; ++x) {
+			chunkManager->makeMesh(glm::vec2(x, playerPos.y + i));
+		}
+	}
+}
+
+void World::unloadNotVisibleChunks(const glm::vec2& playerPos, int loadDist) {
+	for (std::pair<glm::vec2, Chunk*> pair : chunkManager->chunks) {
+		Chunk* chunk = pair.second;
+		if (chunk == nullptr)
+			continue;
+
+		glm::vec2 chunkPos = chunk->getLocalPosition();
+
+		float minX = playerPos.x - loadDist;
+		float maxX = playerPos.x + loadDist;
+		float minZ = playerPos.y - loadDist;
+		float maxZ = playerPos.y + loadDist;
+
+		if (chunkPos.x < minX || chunkPos.x > maxX || chunkPos.y < minZ || chunkPos.y > maxZ) {
+			chunkManager->unload(chunkPos);
+		}
+	}
+}
+
+void World::deleteUnloadedChunks() {
+	for (const glm::vec2& chunkPos : chunkManager->unloadedChunks) {
+		Chunk* chunk = chunkManager->getChunk(chunkPos);
+		chunkManager->loadedChunks.erase(chunkPos);
+		chunkManager->chunks.erase(chunkPos);
+
+		delete chunk;
+	}
+
+	chunkManager->unloadedChunks.clear();
 }
 
 void World::render(Renderer& renderer, Player& player) {
@@ -128,8 +145,8 @@ void World::renderChunks(Renderer& renderer, Player& player) {
 	}
 }
 
-void World::update(Renderer& renderer, Player& player, Camera& camera) {
-	updateChunks(camera);
+void World::update(Renderer& renderer, Player& player) {
+	updateChunks();
 
 	sun->setTime((float)glfwGetTime() * 30.0f, player);
 }
@@ -139,11 +156,11 @@ void World::updateChunk(const glm::vec3& pos) {
 	chunkUpdates.push_back(chunk);
 }
 
-void World::updateChunks(Camera& camera) {
+void World::updateChunks() {
 	for (Chunk* chunk : chunkUpdates) {
 		chunk->resetMeshes();
 		std::unique_lock<std::mutex> lock(mainMutex);
-		chunk->makeMesh(camera);
+		chunk->makeMesh();
 	}
 
 	chunkUpdates.clear();
@@ -170,9 +187,9 @@ Block* World::getBlock(const glm::vec3& pos) {
 	return worldPos.chunk->getBlock(worldPos.localBlockPos);
 }
 
-void World::setBlock(const glm::vec3& pos, Block block) {
+void World::setBlock(const glm::vec3& pos, BlockID blockID) {
 	WorldPosition worldPos = getWorldPosition(pos);
-	return worldPos.chunk->setBlock(worldPos.localBlockPos, block);
+	return worldPos.chunk->setBlock(worldPos.localBlockPos, blockID);
 }
 
 WorldPosition World::getWorldPosition(const glm::vec3& pos) {

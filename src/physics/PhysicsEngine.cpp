@@ -48,7 +48,10 @@ void PhysicsEngine::cullObjects() {
 void PhysicsEngine::prepare(GameObject* object) {
 	RigidBody* rb = &object->rigidBody;
 
-	rb->addGravity();
+	if (rb->physicsType == PhysicsType::STATIC)
+		rb->force = glm::vec3(0);
+	else
+		rb->addGravity();
 
 	rb->acceleration = rb->force / rb->mass;
 	rb->newVelocity = rb->velocity + rb->acceleration * deltaTime;
@@ -65,6 +68,5 @@ void PhysicsEngine::updatePosition(GameObject* object) {
 }
 
 void PhysicsEngine::addObject(GameObject* object) {
-	if (object->rigidBody.physics)
-		objects.push_back(object);
+	objects.push_back(object);
 }

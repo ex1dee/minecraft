@@ -20,10 +20,12 @@ void Entity::initialize() {
 	model = type->model;
 	model->aabb.extents = type->colliderExtents;
 
-	rigidBody.physics = type->physics;
-	rigidBody.mass = type->mass;
+	if (type->physics) {
+		rigidBody.setPhysicsType(PhysicsType::DYNAMIC);
+		rigidBody.mass = type->mass;
 
-	PhysicsEngine::addObject(this);
+		PhysicsEngine::addObject(this);
+	}
 }
 
 bool Entity::isOnGround() {

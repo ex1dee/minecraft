@@ -37,7 +37,7 @@ void AssimpLoader::processNode(const aiScene* scene, const aiNode* node) {
 }
 
 void AssimpLoader::addMesh(const aiScene* scene, const aiMesh* mesh) {
-	MeshData meshData(ASSIMP, 3);
+	MeshData meshData(MeshType::ASSIMP, 3);
 
 	addVertices(mesh, meshData);
 	addIndices(mesh, meshData);

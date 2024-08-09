@@ -39,9 +39,9 @@ void ChunkMeshBuilder::build() {
 
 		glm::vec3 blockPos = Chunk::getLocalBlockPosition(i);
 
-		if (blockType->meshType == CUBE) {
+		if (blockType->meshType == MeshType::CUBE) {
 			addCube(blockPos, blockType);
-		} else if (blockType->meshType == X) {
+		} else if (blockType->meshType == MeshType::X) {
 			addX(blockPos, blockType);
 		}
 	}

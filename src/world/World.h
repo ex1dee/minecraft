@@ -35,6 +35,10 @@ class World {
 	void loadChunks(Player& player, Camera& camera);
 	void updateDefaultSpawnPoint(Player& player);
 	void addLoadChunksThread(Player& player, Camera& camera);
+
+	void makeMeshes(const glm::vec2& playerPos, int loadDist);
+	void unloadNotVisibleChunks(const glm::vec2& playerPos, int loadDist);
+	void deleteUnloadedChunks();
 public:
 	World() {}
 	World(Player& player, Camera& camera);
@@ -47,11 +51,11 @@ public:
 	Chunk* const getChunk(const glm::vec3& pos);
 	Block* getBlock(const glm::vec3& pos);
 	Block* getHighestBlockAt(const glm::vec3& pos);
-	void updateChunks(Camera& camera);
+	void updateChunks();
 	void updateChunk(const glm::vec3& pos);
 	void render(Renderer& renderer, Player& player);
-	void setBlock(const glm::vec3& pos, Block block);
-	void update(Renderer& renderer, Player& player, Camera& camera);
+	void update(Renderer& renderer, Player& player);
+	void setBlock(const glm::vec3& pos, BlockID blockID);
 	WorldPosition getWorldPosition(const glm::vec3& pos);
 	glm::vec3 getLocalBlockPosition(const glm::vec3& pos);
 	glm::vec2 getLocalChunkPosition(const glm::vec3& pos);

@@ -1,7 +1,7 @@
 #include "BoxCollider.h"
 
 BoxCollider::BoxCollider(const glm::vec3& extents, const Transform& transform)
-	: Collider(BOX, transform) {
+	: Collider(ColliderType::BOX, transform) {
 	this->extents = extents;
 
 	calcVertices();
