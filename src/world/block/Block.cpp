@@ -4,6 +4,13 @@
 
 Block::Block(BlockID id) {
 	type = BlocksDatabase::get(id);
+
+	if (type->meta != nullptr)
+		meta = type->meta->clone();
+}
+
+Block::~Block() {
+	delete meta;
 }
 
 IntersectList Block::intersect(const Ray& ray) const {
@@ -17,4 +24,8 @@ IntersectList Block::intersect(const Ray& ray) const {
 	}
 
 	return intersects;
+}
+
+bool Block::isCollidable() const { 
+	return this != nullptr && type->colliders.size(); 
 }

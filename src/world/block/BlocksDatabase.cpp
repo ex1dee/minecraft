@@ -2,6 +2,8 @@
 
 #include "../../utils/Json.h"
 
+#include "meta/BlockMetaLoader.h"
+
 std::unordered_map<BlockID, BlockType*> BlocksDatabase::blocks;
 const TextureAtlas* BlocksDatabase::textureAtlas;
 
@@ -21,6 +23,10 @@ void BlocksDatabase::initialize() {
 		type->isOpaque = json["opaque"];
 		type->isSolid = json["solid"];
 		type->id = json["id"];
+
+		if (json.find("meta") != json.end()) {
+			type->meta = BlockMetaLoader::load(json["meta"]["id"], json);
+		}
 
 		blocks.emplace(type->id, type);
 	}

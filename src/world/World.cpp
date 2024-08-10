@@ -148,7 +148,7 @@ void World::renderChunks(Renderer& renderer, Player& player) {
 void World::update(Renderer& renderer, Player& player) {
 	updateChunks();
 
-	sun->setTime((float)glfwGetTime() * 30.0f, player);
+	//sun->setTime((float)glfwGetTime() * 30.0f, player);
 }
 
 void World::updateChunk(const glm::vec3& pos) {

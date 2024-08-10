@@ -15,7 +15,10 @@ void CameraInput::handle(Player* player, float deltaTime) {
 	}
 
 	if (camera->getZoom() >= 0)
-		zoom.handle(camera, Input::pressed(GLFW_KEY_C) && !(Input::pressed(GLFW_KEY_W) && Input::pressed(GLFW_KEY_LEFT_CONTROL)), deltaTime);
+		zoom.handle(camera,
+			Input::pressed(GLFW_KEY_C) && !(Input::pressed(GLFW_KEY_W) && Input::pressed(GLFW_KEY_LEFT_CONTROL)), 
+			deltaTime
+		);
 }
 
 CameraViewMode CameraInput::getNextViewMode(CameraViewMode currentMode) {

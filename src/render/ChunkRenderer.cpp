@@ -17,67 +17,66 @@ void ChunkRenderer::add(const ChunkMeshCollection& chunk) {
 }
 
 void ChunkRenderer::render(Camera* camera, const Sun& sun) {
+	updateDefaultShader(camera, sun);
+
 	if (solidMeshes.size()) {
-		updateSolidShader(camera, sun);
+		updateSolidShader();
 		render(solidMeshes, camera, true);
 
 		solidMeshes.clear();
 	}
 
-	updateFloraShader(camera, sun);
+	Renderer::startTransparentRender();
 
 	if (floraMeshes.size()) {
-		updateFloraShader(camera, sun);
-
-		Renderer::startTransparentRender();
+		updateFloraShader();
 		render(floraMeshes, camera, true);
-		Renderer::finishTransparentRender();
 
 		floraMeshes.clear();
 	}
+	
+	if (waterMeshes.size()) {
+		updateWaterShader();
+		render(waterMeshes, camera, true);
 
-	//render(waterMeshes);
+		waterMeshes.clear();
+	}
 
-	waterMeshes.clear();
+	Renderer::finishTransparentRender();
 }
 
-void ChunkRenderer::updateSolidShader(Camera* camera, const Sun& sun) {
+void ChunkRenderer::updateDefaultShader(Camera* camera, const Sun& sun) {
 	activeShader = ShadersDatabase::get(ShaderType::DEFAULT);
 	activeShader->use();
 
-	//activeShader->setMat4("projView", sun.getLight().getFramebuffer().getProjView());
+	activeShader->setVec3("cameraPos", camera->getPosition());
 	activeShader->setMat4("projView", camera->getProjView());
 	activeShader->setMat4("model", glm::mat4(1));
-	activeShader->setVec3("cameraPos", camera->getPosition());
-
-	activeShader->setBool("material.shadow", true);
-	activeShader->setBool("material.lighting", true);
 
 	activeShader->setMat4("sun.shadow.projView", sun.getLight().getFramebuffer().getProjView());
 	activeShader->setVec3("sun.direction", sun.getLight().direction);
 	activeShader->setVec3("sun.color", sun.getLight().color);
-	
+
 	activeShader->setInt("pointLightCount", 0);
 
 	TextureManager::bindTexture(BlocksDatabase::getTextureAtlas(), *activeShader, "tex");
 	TextureManager::bindDepthMap(sun.getLight().getFramebuffer().getDepthMap(), *activeShader, "sun.shadow.depthMap");
 }
 
-void ChunkRenderer::updateFloraShader(Camera* camera, const Sun& sun) {
-	activeShader = ShadersDatabase::get(ShaderType::DEFAULT);
-	activeShader->use();
 
-	activeShader->setMat4("projView", camera->getProjView());
-	activeShader->setMat4("model", glm::mat4(1));
+void ChunkRenderer::updateSolidShader() {
+	activeShader->setBool("material.shadow", true);
+	activeShader->setBool("material.lighting", true);
+}
 
+void ChunkRenderer::updateFloraShader() {
 	activeShader->setBool("material.shadow", false);
 	activeShader->setBool("material.lighting", false);
+}
 
-	activeShader->setVec3("sun.direction", sun.getLight().direction);
-	activeShader->setVec3("sun.position", sun.getLight().position);
-	activeShader->setVec3("sun.color", sun.getLight().color);
-
-	TextureManager::bindTexture(BlocksDatabase::getTextureAtlas(), *activeShader, "tex");
+void ChunkRenderer::updateWaterShader() {
+	activeShader->setBool("material.shadow", true);
+	activeShader->setBool("material.lighting", false);
 }
 
 void ChunkRenderer::render(std::vector<ChunkMesh*>& meshes, Camera* camera, bool onlyVisible) {

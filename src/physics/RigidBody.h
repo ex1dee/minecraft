@@ -6,8 +6,6 @@
 #include "../math/geometry/Transform.h"
 #include "PhysicsType.h"
 
-const glm::vec3 GRAVITY = glm::vec3(0.0f, -50.0f, 0.0f);
-
 class RigidBody {
 	friend class PhysicsEngine;
 	friend class CollisionHandler;
@@ -27,10 +25,6 @@ public:
 		: mass(mass) {}
 
 	PhysicsType getPhysicsType() { return physicsType; }
-
-	void addGravity() {
-		addForce(GRAVITY);
-	}
 
 	void setPhysicsType(PhysicsType type) {
 		this->physicsType = type;

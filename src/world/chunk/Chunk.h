@@ -15,9 +15,10 @@ class World;
 class Chunk {
 	friend class World;
 	friend class ChunkManager;
+	friend class ChunkMeshBuilder;
 
 	std::unordered_map<glm::vec2, int> highestBlocks;
-	std::array<Block, CHUNK_VOL> blocks;
+	std::array<Block*, CHUNK_VOL> blocks;
 	ChunkMeshCollection meshes;
 	glm::vec2 position;
 	World* world;
@@ -36,7 +37,7 @@ class Chunk {
 	void resetMeshes();
 	void render(Renderer& renderer);
 	void load(TerrainGenerator& terrainGen);
-	void updateHighestBlock(const glm::vec3& pos, Block& block);
+	void updateHighestBlock(const glm::vec3& pos, Block* block);
 public:
 	Chunk() {}
 	Chunk(World* world, glm::vec2 pos);
@@ -44,7 +45,6 @@ public:
 	bool isLoaded() { return loaded; }
 	bool hasMesh() { return bHasMesh; }
 	bool hasBuffered() { return buffered; }
-	Block* getFirstBlock() { return &blocks[0]; }
 	ChunkMeshCollection& getMeshes() { return meshes; }
 	glm::vec2 getLocalPosition() { return position; }
 	AABB& getAABB() { return aabb; }

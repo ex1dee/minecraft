@@ -29,7 +29,7 @@ void ChunkManager::makeMesh(const glm::vec2& pos) {
 
 Chunk* const ChunkManager::load(const glm::vec2& pos) {
 	Chunk* chunk = getChunk(pos);
-	if (chunk->isLoaded())
+	if (chunk != nullptr && chunk->isLoaded())
 		return chunk;
 
 	chunk->load(world->getTerrainGenerator());

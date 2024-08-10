@@ -129,7 +129,8 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>glfw3.lib;glfw3_mt.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <AdditionalOptions>/Vm</AdditionalOptions>
+      <AdditionalOptions>
+      </AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -176,6 +177,7 @@
     <ClCompile Include="src\input\handlers\MovementsInput.cpp" />
     <ClCompile Include="src\input\handlers\WindowInput.cpp" />
     <ClCompile Include="src\input\handlers\ZoomHandler.cpp" />
+    <ClCompile Include="src\physics\GameObject.cpp" />
     <ClCompile Include="src\player\Player.cpp" />
     <ClCompile Include="src\render\BlockFrameRenderer.cpp" />
     <ClCompile Include="src\render\Drawable.cpp" />
@@ -190,6 +192,7 @@
     <ClCompile Include="src\utils\AssimpLoader.cpp" />
     <ClCompile Include="src\utils\noise\PerlinNoise2D.cpp" />
     <ClCompile Include="src\world\block\Block.cpp" />
+    <ClCompile Include="src\world\block\meta\BlockMetaLoader.cpp" />
     <ClCompile Include="src\world\generation\terrain\DefaultWorldGenerator.cpp" />
     <ClCompile Include="src\world\RayTracing.cpp" />
     <ClCompile Include="src\world\Sun.cpp" />
@@ -249,6 +252,7 @@
     <ClInclude Include="src\physics\collision\CollisionHandler.h" />
     <ClInclude Include="src\physics\collision\Collision.h" />
     <ClInclude Include="src\physics\GameObject.h" />
+    <ClInclude Include="src\physics\PhysicsConstants.h" />
     <ClInclude Include="src\physics\PhysicsEngine.h" />
     <ClInclude Include="src\physics\PhysicsType.h" />
     <ClInclude Include="src\physics\RigidBody.h" />
@@ -277,7 +281,10 @@
     <ClInclude Include="src\render\SkyboxRenderer.h" />
     <ClInclude Include="src\textures\TextureType.h" />
     <ClInclude Include="src\utils\noise\PerlinNoise2D.h" />
+    <ClInclude Include="src\world\block\meta\BlockMetaLoader.h" />
     <ClInclude Include="src\world\block\BlockShaderType.h" />
+    <ClInclude Include="src\world\block\meta\BlockMeta.h" />
+    <ClInclude Include="src\world\block\meta\Liquid.h" />
     <ClInclude Include="src\world\RayTracing.h" />
     <ClInclude Include="src\world\Sun.h" />
     <ClInclude Include="src\states\PlayState.h" />
@@ -334,6 +341,7 @@
     <None Include="resources\blocks\grass_block.json" />
     <None Include="resources\blocks\short_grass.json" />
     <None Include="resources\blocks\stone.json" />
+    <None Include="resources\blocks\water.json" />
     <None Include="resources\entities\player.json" />
     <None Include="resources\gui\hud.json" />
     <None Include="resources\gui\hud_crosshair.json" />

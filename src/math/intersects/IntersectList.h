@@ -12,7 +12,7 @@ public:
 		list.insert(list.end(), other.list.begin(), other.list.end());
 	}
 
-	glm::vec3& getNearestTo(const glm::vec3& position) {
+	glm::vec3 getNearestTo(const glm::vec3& position) {
 		float minDistance = FLT_MAX;
 		glm::vec3 minPoint;
 

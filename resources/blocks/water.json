@@ -1,0 +1,19 @@
+{
+    "id": 5,
+    "meshType": 0,
+    "shaderType": 1,
+    "colliderType": 1,
+    "opaque": false,
+    "solid": false,
+
+    "texCoords": {
+        "side": [ 8, 15 ],
+        "top": [ 8, 15 ],
+        "bottom": [ 8, 15 ]
+    },
+
+    "meta": {
+        "id": 0,
+        "viscosity": 6.0
+    }
+}

@@ -197,6 +197,12 @@
     <ClCompile Include="src\utils\Timer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\physics\GameObject.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\block\meta\BlockMetaLoader.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\window\Window.h">
@@ -308,6 +314,10 @@
     <ClInclude Include="src\render\model\MeshType.h" />
     <ClInclude Include="src\physics\PhysicsType.h" />
     <ClInclude Include="src\math\shapes\Planes.h" />
+    <ClInclude Include="src\world\block\meta\BlockMeta.h" />
+    <ClInclude Include="src\world\block\meta\Liquid.h" />
+    <ClInclude Include="src\world\block\meta\BlockMetaLoader.h" />
+    <ClInclude Include="src\physics\PhysicsConstants.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />
@@ -333,6 +343,7 @@
     <None Include="src\render\Drawable.h" />
     <None Include="shaders\sprite.vs" />
     <None Include="shaders\sprite.fs" />
+    <None Include="resources\blocks\water.json" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\blocks_atlas.png">

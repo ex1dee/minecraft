@@ -6,7 +6,7 @@
 Chunk::Chunk(World* world, glm::vec2 pos)
 	: world(world), position(pos) {
 	for (int i = 0; i < CHUNK_VOL; ++i) {
-		blocks[i] = Block(AIR);
+		blocks[i] = new Block(AIR);
 	}
 	
 	makeAABB();
@@ -81,7 +81,7 @@ Block* Chunk::getBlock(const glm::vec3& pos) {
 		return world->getBlock(worldPos);
 	}
 
-	return &blocks[toBlockIndex(pos)];
+	return blocks[toBlockIndex(pos)];
 }
 
 void Chunk::setBlock(const glm::vec3& pos, BlockID blockID) {
@@ -90,8 +90,8 @@ void Chunk::setBlock(const glm::vec3& pos, BlockID blockID) {
 
 	glm::vec3 worldPos = getWorldPosition(pos);
 
-	Block block = Block(blockID);
-	block.position = worldPos;
+	Block* block = new Block(blockID);
+	block->position = worldPos;
 
 	if (outOfBounds(pos)) {
 		world->setBlock(worldPos, blockID);
@@ -100,7 +100,11 @@ void Chunk::setBlock(const glm::vec3& pos, BlockID blockID) {
 	}
 
 	updateHighestBlock(pos, block);
-	blocks[toBlockIndex(pos)] = block;
+
+	int blockIndex = toBlockIndex(pos);
+
+	delete blocks[blockIndex];
+	blocks[blockIndex] = block;
 }
 
 bool Chunk::outOfBounds(const glm::vec3& pos) {
@@ -116,7 +120,7 @@ glm::vec3 Chunk::getWorldPosition(const glm::vec3& blockPos) {
 	);
 }
 
-void Chunk::updateHighestBlock(const glm::vec3& pos, Block& block) {
+void Chunk::updateHighestBlock(const glm::vec3& pos, Block* block) {
 	glm::vec2 posXZ = glm::vec2(pos.x, pos.z);
 	float y = pos.y;
 
@@ -124,12 +128,12 @@ void Chunk::updateHighestBlock(const glm::vec3& pos, Block& block) {
 		highestBlocks.emplace(posXZ, y);
 	}
 	else {
-		if (!block.type->colliders.size()) {
+		if (!block->type->colliders.size()) {
 			if (y == highestBlocks[pos]) {
-				Block* block = getBlock(glm::vec3(pos.x, y--, pos.z));
+				Block* blockBelow = getBlock(glm::vec3(pos.x, y--, pos.z));
 
-				while (block != nullptr && !block->type->colliders.size()) {
-					block = getBlock(glm::vec3(pos.x, y--, pos.z));
+				while (blockBelow != nullptr && !blockBelow->type->colliders.size()) {
+					blockBelow = getBlock(glm::vec3(pos.x, y--, pos.z));
 				}
 			}
 		} else {

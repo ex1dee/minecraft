@@ -1,27 +1,27 @@
 #ifndef CHUNKMESHBUILDER_H
 #define CHUNKMESHBUILDER_H
 
-#include "../block/Block.h"
 #include "ChunkMesh.h"
 #include "Chunk.h"
 
 class ChunkMesh;
+class BlockType;
+class Block;
 
 class ChunkMeshBuilder {
 	ChunkMesh* activeMesh;
-	Block* curBlock;
 	Chunk* chunk;
 
-	bool shouldAddFace(glm::vec3 adjacentDir, BlockType blockType);
-	void addCube(const glm::vec3& blockPos, BlockType* blockType);
-	void addX(const glm::vec3& blockPos, BlockType* blockType);
+	bool shouldAddFace(glm::vec3 adjacentDir, const BlockType* blockType);
+	void addCube(const glm::vec3& blockPos, const BlockType* blockType);
+	void addX(const glm::vec3& blockPos, const BlockType* blockType);
 	void tryAddFace(const std::array<float, 12>& vertices,
 		const glm::vec2& texCoords,
 		const glm::vec3& normal,
 		const glm::vec3& localBlockPosition,
 		const glm::vec3& adjacentDir,
-		const BlockType& blockType);
-	void setActiveMesh(Block& block);
+		const BlockType* blockType);
+	void setActiveMesh(const BlockType* blockType);
 public:
 	ChunkMeshBuilder(Chunk* chunk);
 

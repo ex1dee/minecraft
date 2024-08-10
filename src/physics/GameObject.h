@@ -1,10 +1,11 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-#include "../render/model/Model.h"
+#include "../world/block/meta/Liquid.h"
 #include "../math/geometry/Orientation.h"
 #include "../math/geometry/Transform.h"
 #include "../math/shapes/AABB.h"
+#include "../render/model/Model.h"
 #include "collider/Collider.h"
 #include "PhysicsEngine.h"
 #include "RigidBody.h"
@@ -21,27 +22,15 @@ public:
 	Collider* collider;
 	Model* model;
 
-	GameObject(World* world)
-		: world(world) {
-
-	}
-
-	void applyTransform(Transform& transform) {
-		collider->applyTransform(transform);
-		model->aabb.applyTransform(transform);
-	}
-
-	void applyTransform() {
-		collider->applyTransform(transform);
-		model->aabb.applyTransform(transform);
-	}
+	GameObject(World* world);
+	~GameObject();
 
 	void hookWorld(World* world) { this->world = world; }
 	World* const getWorld() { return world; }
 
-	~GameObject() {
-		delete collider;
-	}
+	Liquid* getLiquidAtObject();
+	void applyTransform();
+	void applyTransform(Transform& transform);
 };
 
 #endif

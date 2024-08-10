@@ -17,11 +17,11 @@ void DefaultWorldGenerator::generateTerrain(Chunk* chunk) {
 
 			for (int y = 0; y <= (int)height; y++) {
 				if (y == (int)height) {
-					chunk->setBlock(glm::vec3(x, y, z), GRASS_BLOCK);
-				} else if (y < (int)height - 3) {
-					chunk->setBlock(glm::vec3(x, y, z), STONE);
+					chunk->setBlock(glm::vec3(x, y, z), BlockID::GRASS_BLOCK);
+				} else if (y < (int)height - 5) {
+					chunk->setBlock(glm::vec3(x, y, z), BlockID::STONE);
 				} else {
-					chunk->setBlock(glm::vec3(x, y, z), DIRT);
+					chunk->setBlock(glm::vec3(x, y, z), BlockID::DIRT);
 				}
 			}
 		}

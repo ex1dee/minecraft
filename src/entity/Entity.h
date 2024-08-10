@@ -10,9 +10,9 @@ class World;
 class Block;
 
 class Entity : public GameObject {
-	EntityType* type;
-
 	void initialize();
+protected:
+	EntityType* type;
 public:
 	Entity(EntityID id, World* world = nullptr);
 

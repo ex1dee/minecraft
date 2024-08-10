@@ -1,7 +1,9 @@
 #ifndef PERLINNOISE2D_H
 #define PERLINNOISE2D_H
 
+#define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/hash.hpp>
+
 #include <glm/glm.hpp>
 #include <vector>
 

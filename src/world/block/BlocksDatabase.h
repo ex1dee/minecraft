@@ -16,7 +16,7 @@ public:
 	static void finalize();
 
 	static const TextureAtlas& getTextureAtlas() { return *textureAtlas; }
-	static BlockType* const get(BlockID id) { return blocks[id]; }
+	static const BlockType* const get(BlockID id) { return blocks[id]; }
 };
 
 #endif

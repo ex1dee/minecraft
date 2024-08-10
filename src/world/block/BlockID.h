@@ -6,7 +6,8 @@ enum BlockID {
 	GRASS_BLOCK = 1,
 	DIRT = 2,
 	STONE = 3,
-	SHORT_GRASS = 4
+	SHORT_GRASS = 4,
+	WATER = 5
 };
 
 #endif
