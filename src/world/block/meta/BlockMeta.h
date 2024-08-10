@@ -3,9 +3,7 @@
 
 class BlockMeta {
 public:
-	virtual BlockMeta* clone() const {
-		return new BlockMeta(*this);
-	}
+	
 };
 
 enum class BlockMetaID {

@@ -14,6 +14,8 @@
 
     "meta": {
         "id": 0,
-        "viscosity": 6.0
+        "viscosity": 6.0,
+        "fog_color": [ 0.1, 0.29, 0.86, 1.0 ],
+        "fog_density": 0.1
     }
 }

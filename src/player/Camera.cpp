@@ -32,7 +32,7 @@ void Camera::update() {
 	updateProjection();
 
 	projView = projection * view;
-	skyboxProjView = projection * glm::mat4(glm::mat3(view));
+	skyboxView = glm::mat4(glm::mat3(view));
 	frustum.update(projView);
 }
 
@@ -53,7 +53,7 @@ void Camera::updateOrientation() {
 }
 
 void Camera::updateView() {
-	viewPos = player->transform.position + player->getType()->eyesOffset;
+	viewPos = player->transform.position + player->type->eyesOffset;
 	viewDir = orientation.front;
 
 	if (viewMode != FIRST_PERSON) {

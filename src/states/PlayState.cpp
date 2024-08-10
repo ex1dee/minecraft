@@ -9,7 +9,7 @@
 PlayState::PlayState(Renderer* renderer, Player* player, Camera* camera)
 	: BaseState(renderer), player(player), camera(camera) {
 
-	world = new World(*player, *camera);
+	world = new World(*player);
 
 	PhysicsEngine::initialize(world);
 	camera->hookPlayer(player);

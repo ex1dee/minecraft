@@ -7,6 +7,7 @@
 #include "../world/Sun.h"
 #include "light/DirectLight.h"
 #include "model/Model.h"
+#include "fog/Fog.h"
 
 class SkyboxRenderer {
 	const CubeTexture* texture;
@@ -18,7 +19,7 @@ public:
 	SkyboxRenderer();
 	~SkyboxRenderer();
 
-	void render(Camera* camera, const Sun& sun);
+	void render(Camera* camera, const Sun& sun, const Fog& fog);
 };
 
 #endif

@@ -11,15 +11,14 @@ class Block;
 
 class Entity : public GameObject {
 	void initialize();
-protected:
-	EntityType* type;
 public:
-	Entity(EntityID id, World* world = nullptr);
+	const EntityType* type;
 
-	EntityType* const getType() { return type; }
+	Entity(EntityID id, World* world = nullptr);
 
 	bool isOnGround();
 	Block* getTargetBlock();
+	Liquid* getLiquidAtEyes();
 };
 
 #endif

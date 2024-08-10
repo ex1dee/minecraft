@@ -43,3 +43,12 @@ Block* Entity::getTargetBlock() {
 	
 	return RayTracing::getNearestBlock(world, ray, ENTITY_MAX_TARGET_BLOCK_DIST);
 }
+
+Liquid* Entity::getLiquidAtEyes() {
+	Block* block = world->getBlock(transform.position + type->eyesOffset);
+
+	if (block != nullptr)
+		return ((Liquid*)block->type->meta);
+
+	return nullptr;
+}

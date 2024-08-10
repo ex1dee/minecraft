@@ -4,34 +4,35 @@
 #define dPI 2 * PI
 #define hPI 0.5 * PI
 
-#define dayColor vec3(0.3, 0.52, 0.68)
-#define nightColor vec3(0, 0, 0)
-#define horizonColor vec3(0.949, 0.49, 0)
-#define sunColor vec3(1, 1, 0.8)
-#define moonColor vec3(0.6, 0.6, 0.6)
+#define DAY_COLOR vec3(0.3, 0.52, 0.68)
+#define NIGHT_COLOR vec3(0, 0, 0)
+#define HORIZON_COLOR vec3(0.949, 0.49, 0)
+#define SUN_COLOR vec3(1, 1, 0.8)
+#define MOON_COLOR vec3(0.6, 0.6, 0.6)
+
+#define FOG_ZSTART 0.0
+#define FOG_ZEND 3.0
+
+struct Fog {
+	bool enabled;
+	int type;
+
+	float density;
+	float zStart;
+	float zEnd;
+	vec4 color;
+};
 
 out vec4 FragColor;
 in vec3 FragPos;
 
-uniform vec3 lightDir;
 uniform samplerCube background;
+uniform vec3 lightDir;
+uniform Fog fog;
 
-float angV3(vec3 v1, vec3 v2) { 
-	return acos(dot(normalize(v1), normalize(v2)));
-}
-
-mat4 rotationMatrix(vec3 axis, float angle)
-{
-    axis = normalize(axis);
-    float s = sin(angle);
-    float c = cos(angle);
-    float oc = 1.0 - c;
-    
-    return mat4(oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,  0.0,
-                oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,  0.0,
-                oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c,           0.0,
-                0.0,                                0.0,                                0.0,                                1.0);
-}
+mat4 rotationMatrix(vec3 axis, float angle);
+float angV3(vec3 v1, vec3 v2);
+float calcFogFactor();
 
 void main() {
 	vec3 rp = normalize(-FragPos);
@@ -52,11 +53,11 @@ void main() {
 	float horizon_activation = pow(smoothstep(0.25, 0, lightDir.y * 0.5), 1) * pow(smoothstep(-0.2, 0.15, lightDir.y * 0.5), 1);
 	float background_mask = max(0, lightDir.y - 0.25);
 
-	vec3 clr = mix(dayColor, nightColor, light_mask);
+	vec3 clr = mix(DAY_COLOR, NIGHT_COLOR, light_mask);
 	if (sun_mask < 1)
-		clr = mix(clr, horizonColor, horizon_mask * horizon_activation * dot_sun * 5);
-	clr = mix(clr, sunColor, sun_mask);
-	clr = mix(clr, moonColor, moon_mask);
+		clr = mix(clr, HORIZON_COLOR, horizon_mask * horizon_activation * dot_sun * 5);
+	clr = mix(clr, SUN_COLOR, sun_mask);
+	clr = mix(clr, MOON_COLOR, moon_mask);
 
 	float sgn = 1;
 	if (lightDir.x > 0)
@@ -69,4 +70,27 @@ void main() {
 		clr = mix(clr, vec3(texture(background, rotBackPos)), background_mask);
 
 	FragColor = vec4(clr, 1);
+	
+	if (fog.enabled)
+		FragColor = mix(FragColor, fog.color, calcFogFactor());
+}
+
+float calcFogFactor() {
+	return fog.type != 0 ? 1.0 : 0.0;
+}
+
+mat4 rotationMatrix(vec3 axis, float angle) {
+    axis = normalize(axis);
+    float s = sin(angle);
+    float c = cos(angle);
+    float oc = 1.0 - c;
+    
+    return mat4(oc * axis.x * axis.x + c,           oc * axis.x * axis.y - axis.z * s,  oc * axis.z * axis.x + axis.y * s,  0.0,
+                oc * axis.x * axis.y + axis.z * s,  oc * axis.y * axis.y + c,           oc * axis.y * axis.z - axis.x * s,  0.0,
+                oc * axis.z * axis.x - axis.y * s,  oc * axis.y * axis.z + axis.x * s,  oc * axis.z * axis.z + c,           0.0,
+                0.0,                                0.0,                                0.0,                                1.0);
+}
+
+float angV3(vec3 v1, vec3 v2) { 
+	return acos(dot(normalize(v1), normalize(v2)));
 }

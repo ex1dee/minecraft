@@ -318,6 +318,8 @@
     <ClInclude Include="src\world\block\meta\Liquid.h" />
     <ClInclude Include="src\world\block\meta\BlockMetaLoader.h" />
     <ClInclude Include="src\physics\PhysicsConstants.h" />
+    <ClInclude Include="src\render\fog\Fog.h" />
+    <ClInclude Include="src\render\fog\FogType.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />

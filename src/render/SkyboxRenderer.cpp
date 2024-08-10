@@ -16,15 +16,18 @@ SkyboxRenderer::~SkyboxRenderer() {
 	delete texture;
 }
 
-void SkyboxRenderer::render(Camera* camera, const Sun& sun) {    
+void SkyboxRenderer::render(Camera* camera, const Sun& sun, const Fog& fog) {
     Shader* skyboxShader = ShadersDatabase::get(ShaderType::SKYBOX);
 	skyboxShader->use();
 
-    TextureManager::bindTexture(*texture, *skyboxShader, "background");
-
-    skyboxShader->setMat4("projView", camera->getSkyboxProjView());
+    skyboxShader->setMat4("projection", camera->getProjection());
+    skyboxShader->setMat4("view", camera->getSkyboxView());
     skyboxShader->setVec3("lightDir", sun.getLight().direction);
 	
+    fog.addToShader(skyboxShader);
+
+    TextureManager::bindTexture(*texture, *skyboxShader, "background");
+
     model.draw(skyboxShader);
 }
 

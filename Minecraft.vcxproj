@@ -264,6 +264,8 @@
     <ClInclude Include="src\player\Player.h" />
     <ClInclude Include="src\render\BlockFrameRenderer.h" />
     <ClInclude Include="src\render\EntityRenderer.h" />
+    <ClInclude Include="src\render\fog\Fog.h" />
+    <ClInclude Include="src\render\fog\FogType.h" />
     <ClInclude Include="src\render\GUIRenderer.h" />
     <ClInclude Include="src\render\light\DirectLight.h" />
     <ClInclude Include="src\render\light\Light.h" />

@@ -1,8 +1,7 @@
 #ifndef BLOCKMETALOADER_H
 #define BLOCKMETALOADER_H
 
-#include <nlohmann/json.hpp>
-
+#include "../../../utils/Json.h"
 #include "Liquid.h"
 
 class BlockMetaLoader {

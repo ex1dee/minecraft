@@ -6,18 +6,19 @@
 #include "../utils/random/Random.h"
 #include "../shaders/ShadersDatabase.h"
 
-World::World(Player &player, Camera& camera) {
+World::World(Player &player) {
 	chunkManager = new ChunkManager(this);
 	isRunning = true;
 
 	seed = time(0);
-	terrainGen = new DefaultWorldGenerator(seed);
+	terrainGen = new SuperFlatGenerator();
 
 	player.hookWorld(this);
 
 	makeSun();
+	makeFog();
 	updateDefaultSpawnPoint(player);
-	addLoadChunksThread(player, camera);
+	addLoadChunksThread(player);
 }
 
 World::~World() {
@@ -36,8 +37,30 @@ void World::makeSun() {
 	sun = new Sun(ShadersDatabase::get(ShaderType::FRAMEBUFFER), this);
 }
 
-void World::addLoadChunksThread(Player& player, Camera& camera) {
-	loadThreads.push_back(std::thread([&]() { loadChunks(player, camera); }));
+void World::makeFog() {
+	fog = Fog(glm::vec4(0.85f, 0.85f, 0.85f, 1.0f));
+}
+
+const Fog& World::getFog(Player& player) {
+	Block* block = getBlock(player.transform.position + player.type->eyesOffset);
+	Liquid* liquid = nullptr;
+
+	if (block != nullptr)
+		liquid = ((Liquid*)block->type->meta);
+
+	if (block != nullptr && liquid != nullptr) {
+		return liquid->getFog();
+	} else {
+		int loadDist = Config::settings["world"]["loadDistance"];
+		fog.zStart = loadDist * CHUNK_D - 5;
+		fog.zEnd = fog.zStart + 40;
+
+		return fog;
+	}
+}
+
+void World::addLoadChunksThread(Player& player) {
+	loadThreads.push_back(std::thread([&]() { loadChunks(player); }));
 }
 
 void World::updateDefaultSpawnPoint(Player& player) {
@@ -65,7 +88,7 @@ void World::updateDefaultSpawnPoint(Player& player) {
 	spawnPoint = spawnPos;
 }
 
-void World::loadChunks(Player& player, Camera& camera) {
+void World::loadChunks(Player& player) {
 	while (isRunning) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
@@ -148,7 +171,7 @@ void World::renderChunks(Renderer& renderer, Player& player) {
 void World::update(Renderer& renderer, Player& player) {
 	updateChunks();
 
-	//sun->setTime((float)glfwGetTime() * 30.0f, player);
+	sun->setTime((float)glfwGetTime() * 30.0f, player);
 }
 
 void World::updateChunk(const glm::vec3& pos) {
@@ -194,6 +217,7 @@ void World::setBlock(const glm::vec3& pos, BlockID blockID) {
 
 WorldPosition World::getWorldPosition(const glm::vec3& pos) {
 	WorldPosition worldPos;
+
 	worldPos.localBlockPos = getLocalBlockPosition(floor(pos));
 	worldPos.chunk = getChunk(pos);
 

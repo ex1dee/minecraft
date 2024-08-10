@@ -1,12 +1,12 @@
 #include "EntityRenderer.h"
 
 void EntityRenderer::add(Entity* entity) {
-	if (!entity->getType()->model->isEmpty())
+	if (!entity->type->model->isEmpty())
 		entities.push_back(entity);
 }
 
-void EntityRenderer::render(Camera* camera, const Sun& sun) {
-	updateShader(camera, sun);
+void EntityRenderer::render(Camera* camera, const Sun& sun, const Fog& fog) {
+	updateShader(camera, sun, fog);
 
 	for (Entity* entity : entities) {
 		//render(entity, camera, true);
@@ -15,9 +15,11 @@ void EntityRenderer::render(Camera* camera, const Sun& sun) {
 	entities.clear();
 }
 
-void EntityRenderer::updateShader(Camera* camera, const Sun& sun) {
+void EntityRenderer::updateShader(Camera* camera, const Sun& sun, const Fog& fog) {
 	activeShader = ShadersDatabase::get(ShaderType::DEFAULT);
 	activeShader->use();
+
+	fog.addToShader(activeShader);
 
 	activeShader->setMat4("projView", camera->getProjView());
 	activeShader->setVec3("cameraPos", camera->getPosition());
@@ -41,7 +43,7 @@ void EntityRenderer::renderLights(const Sun& sun) {
 }
 
 void EntityRenderer::render(Entity* entity, Camera* camera, bool onlyVisible) {
-	Model* model = entity->getType()->model;
+	Model* model = entity->type->model;
 	updateModelMatrix(entity);
 
 	model->draw(activeShader);
@@ -52,7 +54,7 @@ void EntityRenderer::updateModelMatrix(Entity* entity) {
 	
 	matModel = entity->transform.calcModel();
 	matModel *= entity->orientation.getRotation();
-	matModel *= entity->getType()->offset.calcModel();
+	matModel *= entity->type->offset.calcModel();
 
 	activeShader->setMat4("model", matModel);
 }

@@ -16,8 +16,8 @@ void ChunkRenderer::add(const ChunkMeshCollection& chunk) {
 		floraMeshes.push_back(chunk.flora);
 }
 
-void ChunkRenderer::render(Camera* camera, const Sun& sun) {
-	updateDefaultShader(camera, sun);
+void ChunkRenderer::render(Camera* camera, const Sun& sun, const Fog& fog) {
+	updateDefaultShader(camera, sun, fog);
 
 	if (solidMeshes.size()) {
 		updateSolidShader();
@@ -45,12 +45,17 @@ void ChunkRenderer::render(Camera* camera, const Sun& sun) {
 	Renderer::finishTransparentRender();
 }
 
-void ChunkRenderer::updateDefaultShader(Camera* camera, const Sun& sun) {
+void ChunkRenderer::updateDefaultShader(Camera* camera, const Sun& sun, const Fog& fog) {
 	activeShader = ShadersDatabase::get(ShaderType::DEFAULT);
 	activeShader->use();
 
+	fog.addToShader(activeShader);
+
+	activeShader->setBool("water", false);
+
 	activeShader->setVec3("cameraPos", camera->getPosition());
-	activeShader->setMat4("projView", camera->getProjView());
+	activeShader->setMat4("projection", camera->getProjection());
+	activeShader->setMat4("view", camera->getView());
 	activeShader->setMat4("model", glm::mat4(1));
 
 	activeShader->setMat4("sun.shadow.projView", sun.getLight().getFramebuffer().getProjView());
@@ -63,7 +68,6 @@ void ChunkRenderer::updateDefaultShader(Camera* camera, const Sun& sun) {
 	TextureManager::bindDepthMap(sun.getLight().getFramebuffer().getDepthMap(), *activeShader, "sun.shadow.depthMap");
 }
 
-
 void ChunkRenderer::updateSolidShader() {
 	activeShader->setBool("material.shadow", true);
 	activeShader->setBool("material.lighting", true);
@@ -75,7 +79,8 @@ void ChunkRenderer::updateFloraShader() {
 }
 
 void ChunkRenderer::updateWaterShader() {
-	activeShader->setBool("material.shadow", true);
+	activeShader->setBool("water", true);
+	activeShader->setBool("material.shadow", false);
 	activeShader->setBool("material.lighting", false);
 }
 

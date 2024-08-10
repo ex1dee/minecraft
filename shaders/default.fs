@@ -46,14 +46,27 @@ struct Material {
 	bool lighting;
 };
 
+struct Fog {
+	bool enabled;
+	int type;
+
+	float density;
+	float zStart;
+	float zEnd;
+	vec4 color;
+};
+
 out vec4 FragColor;
+in vec4 cameraSpacePos;
 in vec3 Normal;
 in vec3 FragPos;
 in vec2 TexCoords;
 
 uniform DirectLight sun;
-uniform Material material;
 uniform vec3 cameraPos;
+uniform Fog fog;
+
+uniform Material material;
 uniform sampler2D tex;
 
 uniform int pointLightCount;
@@ -63,6 +76,7 @@ float calcShadow(LightShadow lightShadow, vec3 lightDir);
 float calcAttenuation(PointLight light, float distance);
 vec3 calcPointLight (PointLight light);
 vec3 calcSunDiffuse(DirectLight sun);
+float calcFogFactor();
 float calcSunLight();
 
 vec3 result = vec3(1);
@@ -93,6 +107,9 @@ void main() {
 		texColor = vec4(1);
 
 	FragColor = vec4(lighting, 1) * texColor;
+
+	if (fog.enabled)
+		FragColor = mix(FragColor, fog.color, calcFogFactor());
 }
 
 float calcShadow(LightShadow lightShadow, vec3 lightDir) {
@@ -128,6 +145,21 @@ float calcShadow(LightShadow lightShadow, vec3 lightDir) {
 	}
 
 	return shadow;
+}
+
+float calcFogFactor() {
+	float distance = abs(cameraSpacePos.z / cameraSpacePos.w);
+	float fogFactor;
+
+	if (fog.type == 0) {
+		fogFactor = (distance - fog.zStart) / (fog.zEnd - fog.zStart);
+	} else {
+		fogFactor = 1.0 - exp(-fog.density * distance);
+	}
+
+	fogFactor = clamp(fogFactor, 0.0, 1.0);
+
+	return fogFactor;
 }
 
 vec3 calcPointLight(PointLight light) {

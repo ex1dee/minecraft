@@ -13,11 +13,11 @@ GameObject::~GameObject() {
 
 Liquid* GameObject::getLiquidAtObject() {
 	Block* block = world->getBlock(transform.position);
-	Liquid* liquid = block->getMeta<Liquid>();
 
-	if (block != nullptr && liquid != nullptr) {
-		return liquid;
-	}
+	if (block != nullptr)
+		return ((Liquid*)block->type->meta);
+
+	return nullptr;
 }
 
 void GameObject::applyTransform(Transform& transform) {

@@ -18,7 +18,7 @@
 class Camera {
 	glm::mat4 view;
 	glm::mat4 projView;
-	glm::mat4 skyboxProjView;
+	glm::mat4 skyboxView;
 	glm::mat4 projection;
 
 	glm::vec3 viewPos;
@@ -54,7 +54,7 @@ public:
 	const glm::mat4& getView() { return view; }
 	const glm::mat4& getProjView() { return projView; }
 	const glm::mat4& getProjection() { return projection; }
-	const glm::mat4& getSkyboxProjView() { return skyboxProjView; }
+	const glm::mat4& getSkyboxView() { return skyboxView; }
 	void setViewMode(CameraViewMode viewMode) { this->viewMode = viewMode; }
 	void setZoom(float zoom);
 };

@@ -21,7 +21,9 @@ void Renderer::finishRender(Player& player, Camera* camera, World& world) {
 	glDisable(GL_CULL_FACE);
 	glDepthMask(GL_FALSE);
 
-	skyboxRenderer.render(camera, *sun);
+	const Fog& fog = world.getFog(player);
+
+	skyboxRenderer.render(camera, *sun, fog);
 
 	if (!player.isFlying()) {
 		enableCullFace();
@@ -32,8 +34,8 @@ void Renderer::finishRender(Player& player, Camera* camera, World& world) {
 	glEnable(GL_MULTISAMPLE);
 	glDepthMask(GL_TRUE);
 
-	entityRenderer.render(camera, *sun);
-	chunkRenderer.render(camera, *sun);
+	entityRenderer.render(camera, *sun, fog);
+	chunkRenderer.render(camera, *sun, fog);
 
 	disableCullFace();
 

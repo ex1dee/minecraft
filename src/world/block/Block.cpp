@@ -4,13 +4,6 @@
 
 Block::Block(BlockID id) {
 	type = BlocksDatabase::get(id);
-
-	if (type->meta != nullptr)
-		meta = type->meta->clone();
-}
-
-Block::~Block() {
-	delete meta;
 }
 
 IntersectList Block::intersect(const Ray& ray) const {
