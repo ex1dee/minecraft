@@ -9,13 +9,12 @@
 class Frustum {
 	void normalizePlanes();
 public:
-	std::array<Plane*, 6> planes;
+	std::array<Plane, 6> planes;
 
-	Frustum();
-	~Frustum();
+	Frustum() = default;
 
 	void update(const glm::mat4& projView);
-	bool isAABBInFrustum(const AABB& aabb);
+	bool isAABBInFrustum(const AABB& aabb) const;
 };
 
 #endif

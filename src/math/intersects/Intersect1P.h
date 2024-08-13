@@ -3,7 +3,7 @@
 
 #include <glm/glm.hpp>
 
-#define UNDEFINED_POINT glm::vec3(FLT_MAX)
+constexpr glm::vec3 UNDEFINED_POINT = glm::vec3(FLT_MAX);
 
 class Intersect1P {
 public:

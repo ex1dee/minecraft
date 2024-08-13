@@ -1,7 +1,7 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include <glad/glad.h>
+#include "../../GL/GLHelper.h"
 
 #include "../../math/geometry/Transform.h"
 #include "../../shaders/Shader.h"
@@ -15,7 +15,7 @@ class Sprite : public Drawable {
 
 	void calcVertices();
 	void calcTextureCoords();
-	void bindTexture(Shader* shader);
+	void bindTexture(Shader& shader);
 public:
 	SpriteTexture texture;
 	Transform transform;
@@ -24,7 +24,7 @@ public:
 
 	void setup() override;
 	void reset() override;
-	void draw(Shader* shader) override;
+	void draw(Shader& shader) override;
 
 	void resetTexture();
 };

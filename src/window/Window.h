@@ -1,11 +1,12 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include <glad/glad.h>
+#include "../GL/GLHelper.h"
 #include <GLFW/glfw3.h>
 
-#define GL_VERSION_MINOR 3
-#define GL_VERSION_MAJOR 3
+constexpr int
+GL_VERSION_MINOR = 3,
+GL_VERSION_MAJOR = 3;
 
 class Window {
 	static GLFWmonitor* monitor;

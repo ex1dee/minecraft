@@ -11,18 +11,18 @@ ZoomHandler::ZoomHandler(float timeSec, float minZoom, float maxZoom)
 	duration = 0;
 }
 
-void ZoomHandler::handle(Camera* camera, bool zoom, float deltaTime) {
+void ZoomHandler::handle(Camera& camera, bool zoom, float deltaTime) {
 	if (zoom) {
 		if (duration <= timeSec) {
 			duration = glm::min(timeSec, duration + ZOOM_SPEED);
 			
-			camera->setZoom(getZoom());
+			camera.setZoom(getZoom());
 		}
 	} else {
 		if (duration > 0) {
 			duration = glm::max(0.0f, duration - ZOOM_SPEED);
 
-			camera->setZoom(getZoom());
+			camera.setZoom(getZoom());
 		}
 	}
 }

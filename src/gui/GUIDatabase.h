@@ -4,9 +4,6 @@
 #include "../utils/Json.h"
 #include "GUIElement.h"
 
-#define GUI_DIR "resources/gui"
-#define TEXTURES_DIR "resources/textures/"
-
 class GUIDatabase {
 	static void createRootSector(GUISector& elements);
 	static void addTexture(GUIElement* element, const nlohmann::basic_json<>& json);

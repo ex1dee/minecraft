@@ -2,11 +2,11 @@
 
 #include "Renderer.h"
 
-void SpriteRenderer::render(const Sun* sun) {
-	startRender(true, sun);
+void SpriteRenderer::render(const Sun& sun) {
+	startRender(true, &sun);
 
 	for (Sprite* sprite : sprites) {
-		sprite->draw(activeShader);
+		sprite->draw(*activeShader);
 	}
 
 	sprites.clear();
@@ -24,7 +24,7 @@ void SpriteRenderer::startRender(bool depthTest, const Sun* sun) {
 }
 
 void SpriteRenderer::updateShader(const Sun* sun) {
-	activeShader = ShadersDatabase::get(ShaderType::SPRITE);
+	activeShader = &ShadersDatabase::get(ShaderType::SPRITE);
 	activeShader->use();
 
 	activeShader->setMat4("projection", GUI::getProjection());

@@ -27,8 +27,8 @@ void TextureManager::bindTexture(uint32_t textureID, Shader& shader, const std::
 	shader.use();
 	shader.setSampler(uniform.c_str(), id);
 
-	glActiveTexture(GL_TEXTURE0 + id);
-	glBindTexture(target, textureID);
+	GL(glActiveTexture(GL_TEXTURE0 + id));
+	GL(glBindTexture(target, textureID));
 
 	shader.incrementCurrentTextureID();
 }

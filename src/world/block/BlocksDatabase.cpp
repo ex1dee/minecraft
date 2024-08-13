@@ -1,8 +1,9 @@
 #include "BlocksDatabase.h"
 
 #include "../../utils/Json.h"
-
 #include "meta/BlockMetaLoader.h"
+
+constexpr const char* BLOCKS_DIR = "resources/blocks";
 
 std::unordered_map<BlockID, BlockType*> BlocksDatabase::blocks;
 const TextureAtlas* BlocksDatabase::textureAtlas;

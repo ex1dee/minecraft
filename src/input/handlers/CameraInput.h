@@ -5,14 +5,12 @@
 #include "../../player/Player.h"
 #include "ZoomHandler.h"
 
-#define ZOOM_TIME_SEC 0.15f
-
 class CameraInput {
 	static ZoomHandler zoom;
 
 	static CameraViewMode getNextViewMode(CameraViewMode currentMode);
 public:
-	static void handle(Player* player, float deltaTime);
+	static void handle(Player& player, float deltaTime);
 };
 
 #endif

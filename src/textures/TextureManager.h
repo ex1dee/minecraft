@@ -1,8 +1,6 @@
 #ifndef TEXTUREMANAGER_H
 #define TEXTUREMANAGER_H
 
-#include <glad/glad.h>
-
 #include "../shaders/Shader.h"
 
 class Texture;

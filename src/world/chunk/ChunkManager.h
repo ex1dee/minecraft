@@ -16,7 +16,7 @@ public:
 	std::unordered_set<glm::vec2> unloadedChunks;
 
 	ChunkManager() {}
-	ChunkManager(World* world);
+	ChunkManager(World& world);
 	~ChunkManager();
 
 	Chunk* const load(const glm::vec2& pos);

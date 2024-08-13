@@ -5,15 +5,20 @@
 #include "../world/World.h"
 #include "../window/Window.h"
 
-void Renderer::finishRender(Player& player, Camera* camera, World& world) {
+Renderer::Renderer(Player& player)
+	: player(&player) {
+
+}
+
+void Renderer::finishRender(World& world) {
 	glEnable(GL_DEPTH_TEST);
 	
-	const Sun* sun = &world.getSun();
+	const Sun& sun = world.getSun();
 
-	sun->getLight().startRender();
-	chunkRenderer.renderLights(*sun);
-	entityRenderer.renderLights(*sun);
-	sun->getLight().finishRender();
+	sun.getLight().startRender();
+	chunkRenderer.renderLights(sun);
+	entityRenderer.renderLights(sun);
+	sun.getLight().finishRender();
 
 	Window::setWindowViewport();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -21,12 +26,13 @@ void Renderer::finishRender(Player& player, Camera* camera, World& world) {
 	glDisable(GL_CULL_FACE);
 	glDepthMask(GL_FALSE);
 
-	const Fog& fog = world.getFog(player);
+	const Fog& fog = world.getFog();
 	const Clouds& clouds = world.getClouds();
+	Camera& camera = player->getCamera();
 
-	skyboxRenderer.render(camera, *sun, fog);
+	skyboxRenderer.render(camera, sun, fog);
 
-	if (!player.isFlying()) {
+	if (!player->isFlying()) {
 		enableCullFace();
 	} else {
 		disableCullFace();
@@ -35,13 +41,13 @@ void Renderer::finishRender(Player& player, Camera* camera, World& world) {
 	glEnable(GL_MULTISAMPLE);
 	glDepthMask(GL_TRUE);
 
-	entityRenderer.render(camera, *sun, fog);
-	chunkRenderer.render(camera, *sun, fog);
+	entityRenderer.render(camera, sun, fog);
+	chunkRenderer.render(camera, sun, fog);
 
 	disableCullFace();
 	
-	cloudsRenderer.render(camera, clouds, *sun, player);
-	blockFrameRenderer.render(camera, player);
+	cloudsRenderer.render(clouds, sun, *player);
+	blockFrameRenderer.render(*player);
 	spriteRenderer.render(sun);
 	guiRenderer.render();
 }

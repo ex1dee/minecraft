@@ -161,6 +161,7 @@
   <ItemGroup>
     <ClCompile Include="src\entity\EntitiesDatabase.cpp" />
     <ClCompile Include="src\entity\Entity.cpp" />
+    <ClCompile Include="src\GL\GLHelper.cpp" />
     <ClCompile Include="src\gui\GUI.cpp" />
     <ClCompile Include="src\gui\GUIDatabase.cpp" />
     <ClCompile Include="src\math\geometry\Transform.cpp" />
@@ -234,6 +235,7 @@
     <ClInclude Include="src\entity\Entity.h" />
     <ClInclude Include="src\entity\EntityID.h" />
     <ClInclude Include="src\entity\EntityType.h" />
+    <ClInclude Include="src\GL\GLHelper.h" />
     <ClInclude Include="src\gui\GUI.h" />
     <ClInclude Include="src\gui\GUIDatabase.h" />
     <ClInclude Include="src\gui\GUIElement.h" />

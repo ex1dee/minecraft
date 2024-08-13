@@ -3,8 +3,8 @@
 #include "../World.h"
 #include "ChunkMeshBuilder.h"
 
-Chunk::Chunk(World* world, glm::vec2 pos)
-	: world(world), position(pos) {
+Chunk::Chunk(World& world, glm::vec2 pos)
+	: world(&world), position(pos) {
 	for (int i = 0; i < CHUNK_VOL; ++i) {
 		blocks[i] = new Block(AIR);
 	}
@@ -30,7 +30,7 @@ void Chunk::render(Renderer& renderer) {
 
 void Chunk::makeMesh() {
 	if (!hasMesh()) {
-		ChunkMeshBuilder(this).build();
+		ChunkMeshBuilder(*this).build();
 
 		bHasMesh = true;
 		buffered = false;

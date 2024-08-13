@@ -24,7 +24,7 @@ void Mesh::setup() {
 	addEBO(data.indices);
 }
 
-void Mesh::draw(Shader* shader) {
+void Mesh::draw(Shader& shader) {
 	bindTextures(shader);
 
 	glBindVertexArray(VAO);
@@ -36,7 +36,7 @@ void Mesh::draw(Shader* shader) {
 	}
 }
 
-void Mesh::bindTextures(Shader* shader) {
+void Mesh::bindTextures(Shader& shader) {
 	int diffuseCount = 0;
 	int specularCount = 0;
 
@@ -54,11 +54,11 @@ void Mesh::bindTextures(Shader* shader) {
 		}
 
 		uniform += "]";
-		TextureManager::bindTexture(&texture, *shader, uniform);
+		TextureManager::bindTexture(&texture, shader, uniform);
 	}
 
-	shader->setInt("material.diffuseCount", diffuseCount);
-	shader->setInt("material.specularCount", specularCount);
+	shader.setInt("material.diffuseCount", diffuseCount);
+	shader.setInt("material.specularCount", specularCount);
 }
 
 void Mesh::reset() {

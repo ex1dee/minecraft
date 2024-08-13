@@ -12,8 +12,8 @@ public:
 	static void initialize();
 	static void finalize();
 
-	static Shader* const get(ShaderType type) {
-		return shaders[type];
+	static Shader& get(ShaderType type) {
+		return *shaders[type];
 	}
 };
 

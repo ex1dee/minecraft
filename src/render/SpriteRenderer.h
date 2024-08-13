@@ -18,7 +18,7 @@ protected:
 	void startRender(bool depthTest, const Sun* sun = nullptr);
 	void finishRender();
 public:
-	void render(const Sun* sun);
+	void render(const Sun& sun);
 	void add(Sprite* sprite);
 };
 

@@ -19,7 +19,7 @@ public:
 	Block() {}
 	Block(BlockID id);
 
-	const glm::vec3& getPosition() { return position; }
+	const glm::vec3& getPosition() const { return position; }
 
 	bool isCollidable() const;
 	IntersectList intersect(const Ray& ray) const;

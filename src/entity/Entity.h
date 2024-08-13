@@ -4,8 +4,6 @@
 #include "../physics/GameObject.h"
 #include "EntitiesDatabase.h"
 
-#define ENTITY_MAX_TARGET_BLOCK_DIST 5.0f
-
 class World;
 class Block;
 
@@ -16,9 +14,9 @@ public:
 
 	Entity(EntityID id, World* world = nullptr);
 
-	bool isOnGround();
-	Block* getTargetBlock();
-	Liquid* getLiquidAtEyes();
+	bool isOnGround() const;
+	Block* getTargetBlock() const;
+	Liquid* getLiquidAtEyes() const;
 };
 
 #endif

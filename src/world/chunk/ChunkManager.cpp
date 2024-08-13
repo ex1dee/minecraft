@@ -2,8 +2,8 @@
 
 #include "../World.h"
 
-ChunkManager::ChunkManager(World* world)
-	: world(world) {
+ChunkManager::ChunkManager(World& world)
+	: world(&world) {
 	
 }
 
@@ -47,7 +47,7 @@ Chunk* const ChunkManager::getChunk(const glm::vec2& pos) {
 		return nullptr;
 
 	if (!chunkExistsAt(pos)) {
-		Chunk* chunk = new Chunk(world, pos);
+		Chunk* chunk = new Chunk(*world, pos);
 
 		chunks.emplace(pos, chunk);
 	}

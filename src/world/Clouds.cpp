@@ -22,8 +22,8 @@ CLOUDS_MOVING_VELOCITY = glm::vec3(0.0f, 0.0f, 25.0f);
 const NoiseConfig 
 CLOUDS_NOISE_CONFIG(CLOUDS_NOISE_MIN, CLOUDS_NOISE_MAX, 1.0f, 0.1f, CLOUDS_FREQUENCY, 0.1f);
 
-Clouds::Clouds(uint8_t seed, Player* player, World* world)
-	: seed(seed), player(player), world(world) {
+Clouds::Clouds(uint32_t seed, Player& player, World& world)
+	: seed(seed), player(&player), world(&world) {
 	setup();
 
 	isRunning = true;

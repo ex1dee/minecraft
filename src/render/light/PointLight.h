@@ -15,10 +15,10 @@ class PointLight : public Light {
 public:
 	float radius = 1.0f;
 
-	PointLight(Shader* FBOShader, const glm::vec3& color, const DFBConfig& DFBconfig = DEFAULT_DFB)
-		: Light(FBOShader, color, DFBconfig) {
+	PointLight(Shader& FBOShader, const glm::vec3& color, const DFBConfig& DFBconfig = DEFAULT_DFB)
+		: Light(color) {
 		for (int i = 0; i < 6; ++i) {
-			framebuffers[i] = new DepthFramebuffer(FBOShader, DFBconfig);
+			framebuffers.push_back(new DepthFramebuffer(FBOShader, DFBconfig));
 		}
 	}
 
@@ -27,11 +27,11 @@ public:
 	}
 
 	void startRender(int i) {
-		getFramebuffer(i).startRender(faces[i], position);
+		framebuffers[i]->startRender(faces[i], position);
 	}
 
 	void finishRender(int i) {
-		getFramebuffer(i).finishRender();
+		framebuffers[i]->finishRender();
 	}
 };
 

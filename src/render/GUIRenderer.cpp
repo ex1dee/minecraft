@@ -15,7 +15,7 @@ void GUIRenderer::render(GUISector* sector) {
 		GUIElement* element = pair.second;
 
 		if (element->hasTexture)
-			element->sprite->draw(activeShader);
+			element->sprite->draw(*activeShader);
 
 		render(&element->children);
 	}

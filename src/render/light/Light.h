@@ -1,19 +1,19 @@
 #ifndef LIGHT_H
 #define LIGHT_H
 
-#include <array>
+#include <vector>
 
 #include "../framebuffer/DepthFramebuffer.h"
 #include "../framebuffer/DFBConfig.h"
 
 class Light {
 protected:
-	std::array<DepthFramebuffer*, 6> framebuffers;
+	std::vector<DepthFramebuffer*> framebuffers;
 public:
 	glm::vec3 position;
 	glm::vec3 color;
 
-	Light(Shader* FBOShader, const glm::vec3& color, const DFBConfig& DFBconfig = DEFAULT_DFB)
+	Light(const glm::vec3& color)
 		: color(color), position(glm::vec3(0)) {
 		
 	}

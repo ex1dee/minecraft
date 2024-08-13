@@ -1,11 +1,11 @@
 #include "EntityRenderer.h"
 
 void EntityRenderer::add(Entity* entity) {
-	if (!entity->type->model->isEmpty())
+	if (entity != nullptr && !entity->type->model->isEmpty())
 		entities.push_back(entity);
 }
 
-void EntityRenderer::render(Camera* camera, const Sun& sun, const Fog& fog) {
+void EntityRenderer::render(const Camera& camera, const Sun& sun, const Fog& fog) {
 	updateShader(camera, sun, fog);
 
 	for (Entity* entity : entities) {
@@ -15,14 +15,14 @@ void EntityRenderer::render(Camera* camera, const Sun& sun, const Fog& fog) {
 	entities.clear();
 }
 
-void EntityRenderer::updateShader(Camera* camera, const Sun& sun, const Fog& fog) {
-	activeShader = ShadersDatabase::get(ShaderType::DEFAULT);
+void EntityRenderer::updateShader(const Camera& camera, const Sun& sun, const Fog& fog) {
+	activeShader = &ShadersDatabase::get(ShaderType::DEFAULT);
 	activeShader->use();
 
 	fog.addToShader(activeShader);
 
-	activeShader->setMat4("projView", camera->getProjView());
-	activeShader->setVec3("cameraPos", camera->getPosition());
+	activeShader->setMat4("projView", camera.getProjView());
+	activeShader->setVec3("cameraPos", camera.getPosition());
 
 	activeShader->setBool("material.shadow", false);
 	activeShader->setBool("material.lighting", true);
@@ -38,23 +38,23 @@ void EntityRenderer::renderLights(const Sun& sun) {
 	activeShader = sun.getLight().getFramebuffer().getShader();
 
 	for (Entity* entity : entities) {
-		render(entity);
+		render(*entity);
 	}
 }
 
-void EntityRenderer::render(Entity* entity, Camera* camera, bool onlyVisible) {
-	Model* model = entity->type->model;
+void EntityRenderer::render(const Entity& entity, Camera* camera, bool onlyVisible) {
+	Model* model = entity.type->model;
 	updateModelMatrix(entity);
 
-	model->draw(activeShader);
+	model->draw(*activeShader);
 }
 
-void EntityRenderer::updateModelMatrix(Entity* entity) {
+void EntityRenderer::updateModelMatrix(const Entity& entity) {
 	glm::mat4 matModel(1.0f);
 	
-	matModel = entity->transform.calcModel();
-	matModel *= entity->orientation.getRotation();
-	matModel *= entity->type->offset.calcModel();
+	matModel = entity.transform.calcModel();
+	matModel *= entity.orientation.getRotation();
+	matModel *= entity.type->offset.calcModel();
 
 	activeShader->setMat4("model", matModel);
 }

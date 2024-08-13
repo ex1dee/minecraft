@@ -9,9 +9,9 @@
 class CloudsRenderer {
 	Shader* activeShader;
 
-	void updateShader(Camera* camera, const Sun& sun);
+	void updateShader(const Camera& camera, const Sun& sun);
 public:
-	void render(Camera* camera, const Clouds& clouds, const Sun& sun, const Player& player);
+	void render(const Clouds& clouds, const Sun& sun, const Player& player);
 };
 
 #endif

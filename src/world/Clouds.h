@@ -27,7 +27,7 @@ class Clouds {
 	Sprite* sprite;
 	Player* player;
 	World* world;
-	uint8_t seed;
+	uint32_t seed;
 
 	void setup();
 	void updateNoise();
@@ -35,7 +35,7 @@ class Clouds {
 	void updateNoiseCycle();
 	void updatePosition(float deltaTime);
 public:
-	Clouds(uint8_t seed, Player* player, World* world);
+	Clouds(uint32_t seed, Player& player, World& world);
 	~Clouds();
 
 	Sprite* getSprite() const { return sprite; }

@@ -102,7 +102,7 @@ void Window::framebufferSizeCallback(GLFWwindow* window, int width, int height) 
 }
 
 void Window::setWindowViewport() {
-    glViewport(0, 0, width, height);
+    GL(glViewport(0, 0, width, height));
 }
 
 void Window::toggleFullscreen() {

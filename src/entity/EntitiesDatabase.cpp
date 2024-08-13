@@ -3,6 +3,9 @@
 #include "../utils/AssimpLoader.h"
 #include "../utils/Json.h"
 
+constexpr const char* ENTITIES_DIR = "resources/entities";
+constexpr const char* MODELS_DIR = "resources/models";
+
 std::unordered_map<EntityID, EntityType*> EntitiesDatabase::entities;
 
 void EntitiesDatabase::initialize() {

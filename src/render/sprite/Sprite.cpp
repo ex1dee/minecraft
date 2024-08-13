@@ -61,12 +61,12 @@ void Sprite::calcTextureCoords() {
 	}
 }
 
-void Sprite::draw(Shader* shader) {
+void Sprite::draw(Shader& shader) {
 	if (texture.data == nullptr)
 		return;
 
-	shader->setMat4("model", transform.calcModel());
-	shader->setVec4("color", color);
+	shader.setMat4("model", transform.calcModel());
+	shader.setVec4("color", color);
 	bindTexture(shader);
 
 	glBindVertexArray(VAO);
@@ -76,8 +76,8 @@ void Sprite::draw(Shader* shader) {
 	}
 }
 
-void Sprite::bindTexture(Shader* shader) {
-	TextureManager::bindTexture(texture.data, *shader, "tex");
+void Sprite::bindTexture(Shader& shader) {
+	TextureManager::bindTexture(texture.data, shader, "tex");
 }
 
 void Sprite::reset() {

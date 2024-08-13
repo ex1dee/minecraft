@@ -3,7 +3,9 @@
 #include "../../math/Mathf.h"
 #include "NoiseManager.h"
 
-void PerlinNoise2D::setup(uint8_t seed, const NoiseConfig& config) {
+constexpr int PERLIN_NOISE_SIZE = 1024;
+
+void PerlinNoise2D::setup(uint32_t seed, const NoiseConfig& config) {
 	this->config = config;
 
 	RandomGenerator randomGen(seed);

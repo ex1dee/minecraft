@@ -20,8 +20,8 @@ const glm::vec3 rightFaceNormal{ 1, 0, 0 };
 const glm::vec3 topFaceNormal{ 0, 1, 0 };
 const glm::vec3 bottomFaceNormal{ 0, -1, 0 };
 
-ChunkMeshBuilder::ChunkMeshBuilder(Chunk* chunk)
-	: chunk(chunk) {
+ChunkMeshBuilder::ChunkMeshBuilder(Chunk& chunk)
+	: chunk(&chunk) {
 
 }
 

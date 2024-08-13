@@ -15,7 +15,7 @@ class ZoomHandler {
 public:
 	ZoomHandler(float timeSec, float minZoom, float maxZoom);
 
-	void handle(Camera* camera, bool zoom, float deltaTime);
+	void handle(Camera& camera, bool zoom, float deltaTime);
 };
 
 #endif

@@ -15,6 +15,10 @@ public:
 	glm::vec3 colliderPosition;
 	glm::vec3 colliderExtents;
 	glm::vec3 eyesOffset;
+
+	~EntityType() {
+		delete model;
+	}
 };
 
 #endif

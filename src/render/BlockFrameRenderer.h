@@ -6,19 +6,17 @@
 #include "../player/Player.h"
 #include "../player/Camera.h"
 
-#define BLOCKFRAME_LINE_WIDTH 3.0f
-
 class BlockFrameRenderer {
 	RandomGenerator randomGen;
 	Block* prevBlock;
 	Model* model;
 
-	void render(Camera* camera);
-	void createModel(Block* block, Player& player);
+	void render(const Camera& camera);
+	void createModel(Block* block, const Player& player);
 public:
 	BlockFrameRenderer();
 
-	void render(Camera* camera, Player& player);
+	void render(const Player& player);
 };
 
 #endif

@@ -1,8 +1,6 @@
 #ifndef BLOCKSDATABASE_H
 #define BLOCKSDATABASE_H
 
-#define BLOCKS_DIR "resources/blocks"
-
 #include <unordered_map>
 
 #include "../../textures/TextureLoader.h"

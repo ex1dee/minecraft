@@ -5,6 +5,11 @@
 #include "../config/Config.h"
 #include "../input/Input.h"
 
+constexpr float
+CAMERA_TPS_COEF = 5.0f,
+CAMERA_MAX_PITCH = 89.0f,
+CAMERA_INTERSECT_OFFSET = 1.7f;
+
 Camera::Camera() {
 	orientation.update(-90.0f, 0.0f);
 
@@ -12,12 +17,12 @@ Camera::Camera() {
 	zoom = 0;
 }
 
-void Camera::hookPlayer(Player* player) {
-	this->player = player;
+void Camera::hookPlayer(Player& player) {
+	this->player = &player;
 }
 
-void Camera::hookWorld(World* world) {
-	this->world = world;
+void Camera::hookWorld(World& world) {
+	this->world = &world;
 }
 
 void Camera::setZoom(float zoom) {
@@ -71,7 +76,7 @@ void Camera::updateTPSLook() {
 	float viewSign = (viewMode == THIRD_PERSON_BACK) ? 1.0f : -1.0f;
 
 	Ray ray(transform.position, viewSign * -viewDir);
-	Block* block = RayTracing::getNearestBlock(world, ray, CAMERA_TPS_COEF + CAMERA_INTERSECT_OFFSET);
+	Block* block = RayTracing::getNearestBlock(*world, ray, CAMERA_TPS_COEF + CAMERA_INTERSECT_OFFSET);
 
 	if (block != nullptr) {
 		IntersectList intersects = block->intersect(ray);
@@ -94,6 +99,6 @@ void Camera::updateProjection() {
 	);
 }
 
-bool Camera::isAABBInFrustum(const AABB& aabb) {
+bool Camera::isAABBInFrustum(const AABB& aabb) const {
 	return frustum.isAABBInFrustum(aabb);
 }

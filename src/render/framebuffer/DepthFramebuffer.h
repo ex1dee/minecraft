@@ -1,7 +1,7 @@
 #ifndef DEPTHFRAMEBUFFER_H
 #define DEPTHFRAMEBUFFER_H
 
-#include <glad/glad.h>
+#include "../../GL/GLHelper.h"
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
@@ -31,12 +31,11 @@ class DepthFramebuffer {
 	void updateView(const glm::vec3& front, const glm::vec3& position);
 	void updateProjView(const glm::vec3& front, const glm::vec3& position);
 public:
-	DepthFramebuffer() {}
-	DepthFramebuffer(Shader* shader, const DFBConfig& config);
+	DepthFramebuffer(Shader& shader, const DFBConfig& config);
 
-	glm::mat4 getProjView() { return projView; }
-	uint32_t getDepthMap() { return depthMap; }
-	Shader* const getShader() { return shader; }
+	glm::mat4 getProjView() const { return projView; }
+	uint32_t getDepthMap() const { return depthMap; }
+	Shader* const getShader() const { return shader; }
 
 	void startRender(const glm::vec3& front, const glm::vec3& position);
 	void finishRender();

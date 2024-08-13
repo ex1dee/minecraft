@@ -10,7 +10,7 @@ class DefaultWorldGenerator : public TerrainGenerator {
 	PerlinNoise2D landscapeNoise;
 	RandomGenerator randomGen;
 public:
-	DefaultWorldGenerator(uint8_t seed);
+	DefaultWorldGenerator(uint32_t seed);
 
 	void generateTerrain(Chunk* chunk) override;
 	int getMinSpawnHeight() override;

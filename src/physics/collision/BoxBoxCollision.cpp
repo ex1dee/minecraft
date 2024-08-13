@@ -2,28 +2,32 @@
 
 #include <algorithm>
 
-void BoxBoxCollision::detect(GameObject* obj1, GameObject* obj2) {
-	if (obj1->rigidBody.getPhysicsType() == PhysicsType::STATIC && obj2->rigidBody.getPhysicsType() == PhysicsType::STATIC)
+constexpr int
+PROJECTION_MIN_INDEX = 0,
+PROJECTION_MAX_INDEX = 1;
+
+void BoxBoxCollision::detect(GameObject& obj1, GameObject& obj2) {
+	if (obj1.rigidBody.getPhysicsType() == PhysicsType::STATIC && obj2.rigidBody.getPhysicsType() == PhysicsType::STATIC)
 		return;
 
-	BoxCollider* box1 = (BoxCollider*)obj1->collider;
-	BoxCollider* box2 = (BoxCollider*)obj2->collider;
+	BoxCollider* box1 = (BoxCollider*)obj1.collider;
+	BoxCollider* box2 = (BoxCollider*)obj2.collider;
 
 	Collision collision = detect(box1, box2);
 	CollisionHandler::handle(collision, obj1, obj2);
 }
 
-void BoxBoxCollision::detect(GameObject* obj, Block* block) {
-	if (obj->rigidBody.getPhysicsType()  == PhysicsType::STATIC)
+void BoxBoxCollision::detect(GameObject& obj, const Block& block) {
+	if (obj.rigidBody.getPhysicsType()  == PhysicsType::STATIC)
 		return;
 
-	BoxCollider* box = (BoxCollider*)obj->collider;
-	Transform transform(block->getPosition());
+	BoxCollider* box = (BoxCollider*)obj.collider;
+	Transform transform(block.getPosition());
 
-	for (BoxCollider* box2 : block->type->colliders) {
-		box2->applyTransform(transform);
+	for (BoxCollider* blockBox : block.type->colliders) {
+		blockBox->applyTransform(transform);
 
-		Collision collision = detect(box, box2);
+		Collision collision = detect(box, blockBox);
 		CollisionHandler::handle(collision, obj, block);
 	}
 }
@@ -109,7 +113,7 @@ std::vector<glm::vec3> BoxBoxCollision::calcBoxSepAxes(BoxCollider* box1, BoxCol
 	return axes;
 }
 
-glm::vec2 BoxBoxCollision::projAxis(std::vector<glm::vec3>& vertices, const glm::vec3& axis) {
+glm::vec2 BoxBoxCollision::projAxis(const std::vector<glm::vec3>& vertices, const glm::vec3& axis) {
 	glm::vec2 projSection(proj(vertices[0], axis), proj(vertices[0], axis));
 
 	for (int i = 1; i < vertices.size(); ++i) {

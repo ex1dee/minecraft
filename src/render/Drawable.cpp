@@ -1,5 +1,9 @@
 #include "Drawable.h"
 
+Drawable::~Drawable() {
+	resetBuffers();
+}
+
 void Drawable::setup() {
 	if (VAO)
 		resetBuffers();
@@ -8,8 +12,8 @@ void Drawable::setup() {
 }
 
 void Drawable::genVAO() {
-	glGenVertexArrays(1, &VAO);
-	glBindVertexArray(VAO);
+	GL(glGenVertexArrays(1, &VAO));
+	GL(glBindVertexArray(VAO));
 }
 
 void Drawable::addVBO(int dimensions, const std::vector<float>& vertices) {
@@ -17,12 +21,12 @@ void Drawable::addVBO(int dimensions, const std::vector<float>& vertices) {
 		return;
 
 	uint32_t VBO;
-	glGenBuffers(1, &VBO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
+	GL(glGenBuffers(1, &VBO));
+	GL(glBindBuffer(GL_ARRAY_BUFFER, VBO));
+	GL(glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW));
 
-	glVertexAttribPointer(buffers.size(), dimensions, GL_FLOAT, false, 0, 0);
-	glEnableVertexAttribArray(buffers.size());
+	GL(glVertexAttribPointer(buffers.size(), dimensions, GL_FLOAT, false, 0, 0));
+	GL(glEnableVertexAttribArray(buffers.size()));
 
 	buffers.push_back(VBO);
 }
@@ -34,9 +38,9 @@ void Drawable::addEBO(const std::vector<uint32_t>& indices) {
 	if (EBO)
 		glDeleteBuffers(1, &EBO);
 
-	glGenBuffers(1, &EBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), indices.data(), GL_STATIC_DRAW);
+	GL(glGenBuffers(1, &EBO));
+	GL(glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO));
+	GL(glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(uint32_t), indices.data(), GL_STATIC_DRAW));
 }
 
 void Drawable::resetBuffers() {

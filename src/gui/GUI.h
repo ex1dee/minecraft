@@ -1,16 +1,17 @@
 #ifndef GUI_H
 #define GUI_H
 
-#include <glad/glad.h>
+#include "../GL/GLHelper.h"
 #include <GLFW/glfw3.h>
 
 #include "GUIDatabase.h"
 
-#define GUI_DEFAULT_WIDTH 1920.0f
-#define GUI_DEFAULT_HEIGHT 1080.0f
-#define GUI_ORTHO_NEAR 0.1f
-#define GUI_ORTHO_FAR 10.0f
-#define GUI_SPRITE_Z -1
+constexpr float
+GUI_DEFAULT_WIDTH = 1920.0f,
+GUI_DEFAULT_HEIGHT = 1080.0f,
+GUI_ORTHO_NEAR = 0.1f,
+GUI_ORTHO_FAR = 10.0f,
+GUI_SPRITE_Z = -1.0f;
 
 class GUI {
 	static glm::mat4 projection;

@@ -2,6 +2,9 @@
 
 #include "../textures/TextureLoader.h"
 
+constexpr const char* GUI_DIR = "resources/gui";
+constexpr const char* TEXTURES_DIR = "resources/textures/";
+
 GUISector GUIDatabase::root;
 
 void GUIDatabase::initialize() {
@@ -41,7 +44,6 @@ void GUIDatabase::addChildren(GUIElement* element, const nlohmann::basic_json<>&
 	for (const std::string& childName : json["children"]) {
 		GUIElement* child = new GUIElement;
 		child->parent = element;
-
 		child->transform.add(element->transform);
 		
 		element->children.emplace(childName, child);

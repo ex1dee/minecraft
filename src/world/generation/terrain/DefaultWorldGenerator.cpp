@@ -3,7 +3,7 @@
 #include "../../../utils/noise/PerlinNoise2D.h"
 #include "../../WorldConstants.h"
 
-DefaultWorldGenerator::DefaultWorldGenerator(uint8_t seed) {
+DefaultWorldGenerator::DefaultWorldGenerator(uint32_t seed) {
 	landscapeNoise.setup(seed, NoiseConfig(0.0f, 1.0f, 5.0f, 0.5f, 0.003f));
 }
 

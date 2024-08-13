@@ -1,19 +1,17 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include <glad/glad.h>
+#include "../GL/GLHelper.h"
 
 #include "../math/geometry/Orientation.h"
 #include "../math/shapes/Frustum.h"
 #include "CameraViewMode.h"
 #include "Player.h"
 
-#define CAMERA_TPS_COEF 5.0f
-#define CAMERA_MAX_PITCH 89.0f
-#define CAMERA_NEAR 0.1f
-#define CAMERA_FAR 500.0f
-#define CAMERA_MAX_ZOOM 30.0f
-#define CAMERA_INTERSECT_OFFSET 1.7f
+constexpr float
+CAMERA_MAX_ZOOM = 30.0f,
+CAMERA_NEAR = 0.1f,
+CAMERA_FAR = 500.0f;
 
 class Camera {
 	glm::mat4 view;
@@ -40,21 +38,21 @@ class Camera {
 public:
 	Camera();
 
-	void update();
-	void hookWorld(World* world);
-	void hookPlayer(Player* player);
-	bool isAABBInFrustum(const AABB& aabb);
-
-	float getZoom() { return zoom; }
-	CameraViewMode getViewMode() { return viewMode; }
-	const Orientation& getOrientation() { return orientation; }
-	const glm::vec3& getPosition() { return transform.position; }
-	const glm::mat4& getView() { return view; }
-	const glm::mat4& getProjView() { return projView; }
-	const glm::mat4& getProjection() { return projection; }
-	const glm::mat4& getSkyboxView() { return skyboxView; }
+	float getZoom() const { return zoom; }
+	CameraViewMode getViewMode() const { return viewMode; }
+	const Orientation& getOrientation() const { return orientation; }
+	const glm::vec3& getPosition() const { return transform.position; }
+	const glm::mat4& getView() const { return view; }
+	const glm::mat4& getProjView() const { return projView; }
+	const glm::mat4& getProjection() const { return projection; }
+	const glm::mat4& getSkyboxView() const { return skyboxView; }
 	void setViewMode(CameraViewMode viewMode) { this->viewMode = viewMode; }
+
+	void update();
 	void setZoom(float zoom);
+	void hookWorld(World& world);
+	void hookPlayer(Player& player);
+	bool isAABBInFrustum(const AABB& aabb) const;
 };
 
 #endif

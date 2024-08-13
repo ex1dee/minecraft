@@ -1,9 +1,6 @@
 #ifndef ENTITIESDATABASE_H
 #define ENTITIESDATABASE_H
 
-#define ENTITIES_DIR "resources/entities"
-#define MODELS_DIR "resources/models"
-
 #include <unordered_map>
 
 #include "EntityType.h"

@@ -13,14 +13,14 @@ class PhysicsEngine {
 	static float deltaTime;
 
 	static void cullObjects();
-	static void prepare(GameObject* object);
-	static void addForces(GameObject* object);
-	static void updatePosition(GameObject* object);
+	static void prepare(GameObject& object);
+	static void addForces(GameObject& object);
+	static void updatePosition(GameObject& object);
 public:
-	static void initialize(World* world);
+	static void initialize(World& world);
 	static void finalize();
 
-	static void update(Player& player, float deltaTime);
+	static void update(float deltaTime);
 	static void addObject(GameObject* object);
 };
 

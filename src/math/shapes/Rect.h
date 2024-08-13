@@ -4,7 +4,7 @@
 #include "../Mathf.h"
 #include "Triangle.h"
 
-#define POINT_INSIDE_EPSILON 0.03f
+constexpr float POINT_INSIDE_EPSILON = 0.03f;
 
 class Rect : public Triangle {
 public:

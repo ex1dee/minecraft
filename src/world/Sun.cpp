@@ -2,8 +2,10 @@
 
 #include "World.h"
 
-Sun::Sun(Shader* FBOShader, World* world, Player* player)
-	: world(world), player(player) {
+constexpr float SUN_CHANGE_FOCUS_DIST = CHUNK_W * 1.5f;
+
+Sun::Sun(Shader& FBOShader, World& world, Player& player)
+	: world(&world), player(&player) {
 	light = new DirectLight(
 		FBOShader,
 		glm::vec3(1),
@@ -16,6 +18,8 @@ Sun::Sun(Shader* FBOShader, World* world, Player* player)
 	);
 
 	focus = glm::vec3(WORLD_BORDER, WORLD_BORDER, WORLD_BORDER);
+
+	setTime(0);
 }
 
 Sun::~Sun() {

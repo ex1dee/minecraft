@@ -1,19 +1,15 @@
 #ifndef CUBETEXTURE_H
 #define CUBETEXTURE_H
 
-#include <glad/glad.h>
-
 #include <string>
 #include <array>
 
 #include "Texture.h"
 
 class CubeTexture : public Texture {
-	std::array<std::string, 6> filePaths;
-
-	void load(bool flip);
+	void load(const std::string& directory, const std::array<std::string, 6>& fileNames, bool flip);
 public:
-	CubeTexture(const std::string& directory, std::array<std::string, 6>& fileNames, bool flip);
+	CubeTexture(const std::string& directory, const std::array<std::string, 6>& fileNames, bool flip);
 };
 
 #endif

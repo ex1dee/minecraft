@@ -23,7 +23,7 @@ class ChunkMeshBuilder {
 		const BlockType* blockType);
 	void setActiveMesh(const BlockType* blockType);
 public:
-	ChunkMeshBuilder(Chunk* chunk);
+	ChunkMeshBuilder(Chunk& chunk);
 
 	void build();
 };

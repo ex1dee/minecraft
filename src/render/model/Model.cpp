@@ -20,7 +20,7 @@ void Model::addMesh(Mesh* mesh) {
 	meshes.push_back(mesh);
 }
 
-void Model::draw(Shader* shader) {
+void Model::draw(Shader& shader) {
 	for (Mesh* mesh : meshes) {
 		if (mesh != nullptr)
 			mesh->draw(shader);

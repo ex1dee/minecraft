@@ -3,7 +3,7 @@
 
 #include "BaseRandomGenerator.h"
 
-#define SEED_CONSTANT 1812433253U
+constexpr uint32_t SEED_CONSTANT = 1812433253U;
 
 class RandomGenerator : public BaseRandomGenerator { // XORshift
 public:

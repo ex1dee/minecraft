@@ -3,15 +3,9 @@
 #include "../world/World.h"
 #include "Camera.h"
 
-Player::Player(Camera* camera)
-	: camera(camera), Entity(PLAYER) {
+Player::Player(Camera& camera)
+	: camera(&camera), Entity(PLAYER) {
 	
-}
-
-bool Player::isEyesInWater() const {
-	Block* block = world->getBlock(transform.position + type->eyesOffset);
-
-	return block->type->id == WATER;
 }
 
 void Player::setFlying(bool flying) {

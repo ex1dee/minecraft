@@ -6,7 +6,7 @@
 #include "MeshData.h"
 
 struct Mesh : public Drawable {
-	void bindTextures(Shader* shader);
+	void bindTextures(Shader& shader);
 public:
 	MeshData data;
 
@@ -16,7 +16,7 @@ public:
 
 	void setup() override;
 	void reset() override;
-	void draw(Shader* shader) override;
+	void draw(Shader& shader) override;
 };
 
 #endif

@@ -10,29 +10,30 @@ std::vector<GameObject*> PhysicsEngine::objects;
 float PhysicsEngine::deltaTime;
 World* PhysicsEngine::world;
 
-void PhysicsEngine::initialize(World* world) { 
-	PhysicsEngine::world = world;
+void PhysicsEngine::initialize(World& world) { 
+	PhysicsEngine::world = &world;
 }
 
 void PhysicsEngine::finalize() { 
 
 }
 
-void PhysicsEngine::update(Player& player, float deltaTime) {
-	PhysicsEngine::deltaTime = deltaTime;
+void PhysicsEngine::update(float deltaTime) {
 	if (deltaTime == 0)
 		return;
+
+	PhysicsEngine::deltaTime = deltaTime;
 
 	cullObjects();
 
 	for (GameObject* object : objects) {
-		prepare(object);
+		prepare(*object);
 	}
 
-	CollisionDetector::detect(objects, world);
+	CollisionDetector::detect(objects, *world);
 
 	for (GameObject* object : objects) {
-		updatePosition(object);
+		updatePosition(*object);
 	}
 }
 
@@ -40,40 +41,40 @@ void PhysicsEngine::cullObjects() {
 	objects.erase(std::remove(objects.begin(), objects.end(), nullptr), objects.end());
 }
 
-void PhysicsEngine::prepare(GameObject* object) {
-	RigidBody* rb = &object->rigidBody;
+void PhysicsEngine::prepare(GameObject& object) {
+	RigidBody& rb = object.rigidBody;
 
 	addForces(object);
 
-	rb->acceleration = rb->force / rb->mass;
-	rb->newVelocity = rb->velocity + rb->acceleration * deltaTime;
-	rb->deltaPosition = rb->newVelocity * deltaTime;
+	rb.acceleration = rb.force / rb.mass;
+	rb.newVelocity = rb.velocity + rb.acceleration * deltaTime;
+	rb.deltaPosition = rb.newVelocity * deltaTime;
 
-	rb->force = glm::vec3(0);
+	rb.force = glm::vec3(0);
 }
 
-void PhysicsEngine::addForces(GameObject* object) {
-	RigidBody* rb = &object->rigidBody;
+void PhysicsEngine::addForces(GameObject& object) {
+	RigidBody& rb = object.rigidBody;
 
-	if (rb->physicsType == PhysicsType::STATIC) {
-		rb->force = glm::vec3(0);
+	if (rb.physicsType == PhysicsType::STATIC) {
+		rb.force = glm::vec3(0);
 	} else {
-		rb->force += GRAVITY;
+		rb.force += GRAVITY;
 
-		Liquid* liquid = object->getLiquidAtObject();
+		Liquid* liquid = object.getLiquidAtObject();
 
 		if (liquid != nullptr) {
-			rb->force += ARHIMEDE;
-			rb->force.y -= glm::min(0.0f, rb->velocity.y) * liquid->getViscosity();
+			rb.force += ARHIMEDE;
+			rb.force.y -= glm::min(0.0f, rb.velocity.y) * liquid->getViscosity();
 		}
 	}
 }
 
-void PhysicsEngine::updatePosition(GameObject* object) {
-	RigidBody* rb = &object->rigidBody;
+void PhysicsEngine::updatePosition(GameObject& object) {
+	RigidBody& rb = object.rigidBody;
 
-	object->transform.position += rb->deltaPosition;
-	rb->velocity = rb->newVelocity;
+	object.transform.position += rb.deltaPosition;
+	rb.velocity = rb.newVelocity;
 }
 
 void PhysicsEngine::addObject(GameObject* object) {

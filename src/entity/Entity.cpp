@@ -3,10 +3,12 @@
 #include "../physics/collider/BoxCollider.h"
 #include "../world/RayTracing.h"
 
+constexpr float ENTITY_MAX_TARGET_BLOCK_DIST = 5.0f;
+
 Entity::Entity(EntityID id, World* world)
 	: GameObject(world) {
 	type = EntitiesDatabase::get(id);
-	GameObject::world = world;
+	hookWorld(world);
 
 	initialize();
 }
@@ -28,7 +30,7 @@ void Entity::initialize() {
 	}
 }
 
-bool Entity::isOnGround() {
+bool Entity::isOnGround() const {
 	glm::vec3 extents = ((BoxCollider*) collider)->getExtents();
 	glm::vec3 colliderCenter = transform.position + collider->getPosition();
 
@@ -38,13 +40,13 @@ bool Entity::isOnGround() {
 		|| world->getBlock(colliderCenter - glm::vec3(-extents.x, 0.00001f, extents.z))->isCollidable();
 }
 
-Block* Entity::getTargetBlock() {
+Block* Entity::getTargetBlock() const {
 	Ray ray(transform.position + type->eyesOffset, orientation.front);
 	
-	return RayTracing::getNearestBlock(world, ray, ENTITY_MAX_TARGET_BLOCK_DIST);
+	return RayTracing::getNearestBlock(*world, ray, ENTITY_MAX_TARGET_BLOCK_DIST);
 }
 
-Liquid* Entity::getLiquidAtEyes() {
+Liquid* Entity::getLiquidAtEyes() const {
 	Block* block = world->getBlock(transform.position + type->eyesOffset);
 
 	if (block != nullptr)

@@ -4,12 +4,14 @@
 
 #include "../shaders/ShadersDatabase.h"
 
+constexpr float BLOCKFRAME_LINE_WIDTH = 3.0f;
+
 BlockFrameRenderer::BlockFrameRenderer() {
 	model = new Model;
 	prevBlock = nullptr;
 }
 
-void BlockFrameRenderer::render(Camera* camera, Player& player) {
+void BlockFrameRenderer::render(const Player& player) {
 	Block* block = player.getTargetBlock();
 
 	if (prevBlock != block) {
@@ -23,12 +25,12 @@ void BlockFrameRenderer::render(Camera* camera, Player& player) {
 	}
 
 	if (block != nullptr) {
-		render(camera);
+		render(player.getCamera());
 	}
 }
 
-void BlockFrameRenderer::render(Camera* camera) {
-	Shader* shader = ShadersDatabase::get(ShaderType::LINE);
+void BlockFrameRenderer::render(const Camera& camera) {
+	Shader& shader = ShadersDatabase::get(ShaderType::LINE);
 
 	glm::vec3 lineColor(
 		glm::abs(sin(glfwGetTime())) + 0.1,
@@ -36,9 +38,9 @@ void BlockFrameRenderer::render(Camera* camera) {
 		glm::abs(tan(glfwGetTime())) + 0.1
 	);
 
-	shader->use();
-	shader->setMat4("projView", camera->getProjView());
-	shader->setVec3("color", lineColor);
+	shader.use();
+	shader.setMat4("projView", camera.getProjView());
+	shader.setVec3("color", lineColor);
 
 	glLineWidth(BLOCKFRAME_LINE_WIDTH);
 
@@ -46,7 +48,7 @@ void BlockFrameRenderer::render(Camera* camera) {
 		model->draw(shader);
 }
 
-void BlockFrameRenderer::createModel(Block* block, Player& player) {
+void BlockFrameRenderer::createModel(Block* block, const Player& player) {
 	MeshData meshData(MeshType::CUBE, 3, GL_LINES);
 	Transform transform(block->getPosition());
 

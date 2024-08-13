@@ -39,8 +39,7 @@ class Chunk {
 	void load(TerrainGenerator& terrainGen);
 	void updateHighestBlock(const glm::vec3& pos, Block* block);
 public:
-	Chunk() {}
-	Chunk(World* world, glm::vec2 pos);
+	Chunk(World& world, glm::vec2 pos);
 
 	bool isLoaded() { return loaded; }
 	bool hasMesh() { return bHasMesh; }

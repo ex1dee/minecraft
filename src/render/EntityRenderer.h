@@ -13,13 +13,13 @@ class EntityRenderer {
 	std::vector<Entity*> entities;
 	Shader* activeShader;
 
-	void updateModelMatrix(Entity* entity);
-	void updateShader(Camera* camera, const Sun& sun, const Fog& fog);
-	void render(Entity* entity, Camera* camera = nullptr, bool onlyVisible = false);
+	void updateModelMatrix(const Entity& entity);
+	void updateShader(const Camera& camera, const Sun& sun, const Fog& fog);
+	void render(const Entity& entity, Camera* camera = nullptr, bool onlyVisible = false);
 public:
 	void add(Entity* entity);
 	void renderLights(const Sun& sun);
-	void render(Camera* camera, const Sun& sun, const Fog& fog);
+	void render(const Camera& camera, const Sun& sun, const Fog& fog);
 };
 
 #endif

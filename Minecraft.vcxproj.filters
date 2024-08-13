@@ -221,6 +221,9 @@
     <ClCompile Include="src\render\CloudsRenderer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\GL\GLHelper.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\window\Window.h">
@@ -346,6 +349,7 @@
     <ClInclude Include="src\render\SpriteRenderer.h" />
     <ClInclude Include="src\render\CloudsRenderer.h" />
     <ClInclude Include="src\textures\CustomImage.h" />
+    <ClInclude Include="src\GL\GLHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />

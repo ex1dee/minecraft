@@ -3,8 +3,8 @@
 #include "../../math/geometry/Orientation.h"
 #include "../../render/Renderer.h"
 
-DepthFramebuffer::DepthFramebuffer(Shader* shader, const DFBConfig& config)
-	: shader(shader), config(config) {
+DepthFramebuffer::DepthFramebuffer(Shader& shader, const DFBConfig& config)
+	: shader(&shader), config(config) {
 
 	genFBO();
 	createProjection();
@@ -12,7 +12,7 @@ DepthFramebuffer::DepthFramebuffer(Shader* shader, const DFBConfig& config)
 }
 
 void DepthFramebuffer::genFBO() {
-	glGenFramebuffers(1, &FBO);
+	GL(glGenFramebuffers(1, &FBO));
 }
 
 void DepthFramebuffer::createProjection() {
@@ -35,24 +35,24 @@ void DepthFramebuffer::createProjection() {
 }
 
 void DepthFramebuffer::createDepthMap() {
-	glGenTextures(1, &depthMap);
-	glBindTexture(GL_TEXTURE_2D, depthMap);
+	GL(glGenTextures(1, &depthMap));
+	GL(glBindTexture(GL_TEXTURE_2D, depthMap));
 
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE);
+	GL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR));
+	GL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR));
+	GL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER));
+	GL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER));
+	GL(glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_COMPARE_MODE, GL_COMPARE_REF_TO_TEXTURE));
 
-	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, FRAMEBUFFER_BORDER_COLLOR);
+	GL(glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, FRAMEBUFFER_BORDER_COLLOR));
 
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, config.bufferSize, config.bufferSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0);
+	GL(glTexImage2D(GL_TEXTURE_2D, 0, GL_DEPTH_COMPONENT, config.bufferSize, config.bufferSize, 0, GL_DEPTH_COMPONENT, GL_FLOAT, 0));
 
-	glBindFramebuffer(GL_FRAMEBUFFER, FBO);
-	glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0);
-	glDrawBuffer(GL_NONE);
-	glReadBuffer(GL_NONE);
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	GL(glBindFramebuffer(GL_FRAMEBUFFER, FBO));
+	GL(glFramebufferTexture2D(GL_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_TEXTURE_2D, depthMap, 0));
+	GL(glDrawBuffer(GL_NONE));
+	GL(glReadBuffer(GL_NONE));
+	GL(glBindFramebuffer(GL_FRAMEBUFFER, 0));
 }
 
 void DepthFramebuffer::startRender(const glm::vec3& front, const glm::vec3& position) {
@@ -61,10 +61,10 @@ void DepthFramebuffer::startRender(const glm::vec3& front, const glm::vec3& posi
 	shader->use();
 	shader->setMat4("projView", projView);
 	
-	glBindFramebuffer(GL_FRAMEBUFFER, FBO);
-	glViewport(0, 0, config.bufferSize, config.bufferSize);
-	glClear(GL_DEPTH_BUFFER_BIT);
-	glEnable(GL_DEPTH_TEST);
+	GL(glBindFramebuffer(GL_FRAMEBUFFER, FBO));
+	GL(glViewport(0, 0, config.bufferSize, config.bufferSize));
+	GL(glClear(GL_DEPTH_BUFFER_BIT));
+	GL(glEnable(GL_DEPTH_TEST));
 
 	Renderer::enableCullFace();
 	
@@ -73,7 +73,7 @@ void DepthFramebuffer::startRender(const glm::vec3& front, const glm::vec3& posi
 }
 
 void DepthFramebuffer::finishRender() {
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
+	GL(glBindFramebuffer(GL_FRAMEBUFFER, 0));
 	
 	Renderer::disableCullFace();
 }

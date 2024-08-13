@@ -1,7 +1,7 @@
 #ifndef RENDERER_H
 #define RENDERER_H
 
-#include <glad/glad.h>
+#include "../GL/GLHelper.h"
 
 #include "light/DirectLight.h"
 
@@ -22,12 +22,17 @@ class Renderer {
 	CloudsRenderer cloudsRenderer;
 	ChunkRenderer chunkRenderer;
 	GUIRenderer guiRenderer;
+
 	Shader* FBOShader;
+	Player* player;
 public:
+	Renderer(Player& player);
+
+	void finishRender(World& world);
+
 	void addSprite(Sprite* sprite);
 	void addChunk(Chunk* chunk);
 	void addEntity(Entity* entity);
-	void finishRender(Player& player, Camera* camera, World& world);
 	
 	static void enableCullFace();
 	static void disableCullFace();

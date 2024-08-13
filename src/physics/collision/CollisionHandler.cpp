@@ -2,23 +2,23 @@
 
 #include "../collider/BoxCollider.h"
 
-void CollisionHandler::handle(const Collision& collision, GameObject* obj1, GameObject* obj2) {
+void CollisionHandler::handle(const Collision& collision, GameObject& obj1, GameObject& obj2) {
 	if (!collision.collided)
 		return;
 
 	//if (obj1->rigidBody.physicsType == PhysicsType::STATIC)
 }
 
-void CollisionHandler::handle(const Collision& collision, GameObject* obj, Block* block) {
+void CollisionHandler::handle(const Collision& collision, GameObject& obj, const Block& block) {
 	if (!collision.collided)
 		return;
 
-	RigidBody* rb = &obj->rigidBody;
+	RigidBody& rb = obj.rigidBody;
 	
-	rb->deltaPosition += getProjected(rb->deltaPosition, collision);
+	rb.deltaPosition += getProjected(rb.deltaPosition, collision);
 
 	if (collision.normal.y == 1)
-		rb->newVelocity += getProjected(rb->newVelocity, collision);
+		rb.newVelocity += getProjected(rb.newVelocity, collision);
 }
 
 glm::vec3 CollisionHandler::getProjected(const glm::vec3& v, const Collision& collision) {

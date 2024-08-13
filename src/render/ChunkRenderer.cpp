@@ -16,12 +16,12 @@ void ChunkRenderer::add(const ChunkMeshCollection& chunk) {
 		floraMeshes.push_back(chunk.flora);
 }
 
-void ChunkRenderer::render(Camera* camera, const Sun& sun, const Fog& fog) {
+void ChunkRenderer::render(const Camera& camera, const Sun& sun, const Fog& fog) {
 	updateDefaultShader(camera, sun, fog);
 
 	if (solidMeshes.size()) {
 		updateSolidShader();
-		render(solidMeshes, camera, true);
+		render(solidMeshes, &camera, true);
 
 		solidMeshes.clear();
 	}
@@ -30,14 +30,14 @@ void ChunkRenderer::render(Camera* camera, const Sun& sun, const Fog& fog) {
 
 	if (floraMeshes.size()) {
 		updateFloraShader();
-		render(floraMeshes, camera, true);
+		render(floraMeshes, &camera, true);
 
 		floraMeshes.clear();
 	}
 	
 	if (liquidMeshes.size()) {
 		updateWaterShader();
-		render(liquidMeshes, camera, true);
+		render(liquidMeshes, &camera, true);
 
 		liquidMeshes.clear();
 	}
@@ -45,17 +45,15 @@ void ChunkRenderer::render(Camera* camera, const Sun& sun, const Fog& fog) {
 	Renderer::finishTransparentRender();
 }
 
-void ChunkRenderer::updateDefaultShader(Camera* camera, const Sun& sun, const Fog& fog) {
-	activeShader = ShadersDatabase::get(ShaderType::DEFAULT);
+void ChunkRenderer::updateDefaultShader(const Camera& camera, const Sun& sun, const Fog& fog) {
+	activeShader = &ShadersDatabase::get(ShaderType::DEFAULT);
 	activeShader->use();
 
 	fog.addToShader(activeShader);
 
-	activeShader->setBool("water", false);
-
-	activeShader->setVec3("cameraPos", camera->getPosition());
-	activeShader->setMat4("projection", camera->getProjection());
-	activeShader->setMat4("view", camera->getView());
+	activeShader->setVec3("cameraPos", camera.getPosition());
+	activeShader->setMat4("projection", camera.getProjection());
+	activeShader->setMat4("view", camera.getView());
 	activeShader->setMat4("model", glm::mat4(1));
 
 	activeShader->setMat4("sun.shadow.projView", sun.getLight().getFramebuffer().getProjView());
@@ -97,9 +95,9 @@ void ChunkRenderer::renderLights(std::vector<ChunkMesh*>& meshes, const Sun& sun
 	render(meshes);
 }
 
-void ChunkRenderer::render(std::vector<ChunkMesh*>& meshes, Camera* camera, bool onlyVisible) {
+void ChunkRenderer::render(std::vector<ChunkMesh*>& meshes, const Camera* camera, bool onlyVisible) {
 	for (ChunkMesh* mesh : meshes) {
 		if (!onlyVisible || camera->isAABBInFrustum(mesh->getModel().aabb))
-			mesh->getModel().draw(activeShader);
+			mesh->getModel().draw(*activeShader);
 	}
 }

@@ -19,7 +19,7 @@ public:
 	SkyboxRenderer();
 	~SkyboxRenderer();
 
-	void render(Camera* camera, const Sun& sun, const Fog& fog);
+	void render(const Camera& camera, const Sun& sun, const Fog& fog);
 };
 
 #endif
