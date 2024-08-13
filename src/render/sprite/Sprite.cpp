@@ -62,6 +62,9 @@ void Sprite::calcTextureCoords() {
 }
 
 void Sprite::draw(Shader* shader) {
+	if (texture.data == nullptr)
+		return;
+
 	shader->setMat4("model", transform.calcModel());
 	shader->setVec4("color", color);
 	bindTexture(shader);
@@ -74,7 +77,7 @@ void Sprite::draw(Shader* shader) {
 }
 
 void Sprite::bindTexture(Shader* shader) {
-	TextureManager::bindTexture(*texture.data, *shader, "tex");
+	TextureManager::bindTexture(texture.data, *shader, "tex");
 }
 
 void Sprite::reset() {
@@ -83,4 +86,9 @@ void Sprite::reset() {
 	vertexPositions.clear();
 	textureCoords.clear();
 	indices.clear();
+}
+
+void Sprite::resetTexture() {
+	if (texture.data != nullptr)
+		delete texture.data;
 }

@@ -11,7 +11,7 @@
 
 class ChunkRenderer {
 	std::vector<ChunkMesh*> solidMeshes;
-	std::vector<ChunkMesh*> waterMeshes;
+	std::vector<ChunkMesh*> liquidMeshes;
 	std::vector<ChunkMesh*> floraMeshes;
 	Shader* activeShader;
 

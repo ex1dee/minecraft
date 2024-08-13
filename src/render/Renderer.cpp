@@ -8,7 +8,7 @@
 void Renderer::finishRender(Player& player, Camera* camera, World& world) {
 	glEnable(GL_DEPTH_TEST);
 	
-	Sun* sun = world.getSun();
+	const Sun* sun = &world.getSun();
 
 	sun->getLight().startRender();
 	chunkRenderer.renderLights(*sun);
@@ -22,6 +22,7 @@ void Renderer::finishRender(Player& player, Camera* camera, World& world) {
 	glDepthMask(GL_FALSE);
 
 	const Fog& fog = world.getFog(player);
+	const Clouds& clouds = world.getClouds();
 
 	skyboxRenderer.render(camera, *sun, fog);
 
@@ -38,17 +39,32 @@ void Renderer::finishRender(Player& player, Camera* camera, World& world) {
 	chunkRenderer.render(camera, *sun, fog);
 
 	disableCullFace();
-
+	
+	cloudsRenderer.render(camera, clouds, *sun, player);
 	blockFrameRenderer.render(camera, player);
+	spriteRenderer.render(sun);
 	guiRenderer.render();
 }
 
 void Renderer::addChunk(Chunk* chunk) {
+	if (chunk == nullptr)
+		return;
+	
 	chunkRenderer.add(chunk->getMeshes());
 }
 
 void Renderer::addEntity(Entity* entity) {
+	if (entity == nullptr)
+		return;
+
 	entityRenderer.add(entity);
+}
+
+void Renderer::addSprite(Sprite* sprite) {
+	if (sprite == nullptr)
+		return;
+
+	spriteRenderer.add(sprite);
 }
 
 void Renderer::enableCullFace() {

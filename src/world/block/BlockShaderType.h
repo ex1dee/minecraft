@@ -3,7 +3,7 @@
 
 enum class BlockShaderType {
 	SOLID = 0,
-	WATER = 1,
+	LIQUID = 1,
 	FLORA = 2
 };
 

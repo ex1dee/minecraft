@@ -10,8 +10,8 @@
 
 class Json {
 public:
-	static nlohmann::json parse(const char* path);
-	static void save(const char* path, const nlohmann::json& json);
+	static nlohmann::json parse(const std::string& path);
+	static void save(const std::string& path, const nlohmann::json& json);
 	static glm::vec4 toVec4(const nlohmann::basic_json<>& arr);
 	static glm::vec3 toVec3(const nlohmann::basic_json<>& arr);
 	static glm::vec2 toVec2(const nlohmann::basic_json<>& arr);

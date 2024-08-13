@@ -5,6 +5,7 @@
 #include <cstdint>
 
 #include "TextureType.h"
+#include "CustomImage.h"
 
 class Texture {
 protected:
@@ -13,8 +14,11 @@ protected:
 	GLenum target;
 	int width;
 	int height;
+	int nchannels;
 
-	void load(GLenum target, const char* path, bool flip);
+	void prepare(const Image& image);
+	void load(const CustomImage& image);
+	void load(GLenum target, const std::string& path, bool flip);
 public:
 	Texture() {}
 	Texture(GLenum target, TextureType type)

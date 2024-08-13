@@ -50,7 +50,7 @@ void Chunk::resetMeshes() {
 	buffered = false;
 
 	meshes.solid->getModel().reset();
-	meshes.water->getModel().reset();
+	meshes.liquid->getModel().reset();
 }
 
 void Chunk::load(TerrainGenerator& terrainGen) {

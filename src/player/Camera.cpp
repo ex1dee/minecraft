@@ -53,7 +53,7 @@ void Camera::updateOrientation() {
 }
 
 void Camera::updateView() {
-	viewPos = player->transform.position + player->type->eyesOffset;
+	transform.position = player->transform.position + player->type->eyesOffset;
 	viewDir = orientation.front;
 
 	if (viewMode != FIRST_PERSON) {
@@ -61,8 +61,8 @@ void Camera::updateView() {
 	}
 
 	view = glm::lookAt(
-		viewPos,
-		viewPos + viewDir,
+		transform.position,
+		transform.position + viewDir,
 		glm::vec3(0, 1, 0)
 	);
 }
@@ -70,17 +70,17 @@ void Camera::updateView() {
 void Camera::updateTPSLook() {
 	float viewSign = (viewMode == THIRD_PERSON_BACK) ? 1.0f : -1.0f;
 
-	Ray ray(viewPos, viewSign * -viewDir);
+	Ray ray(transform.position, viewSign * -viewDir);
 	Block* block = RayTracing::getNearestBlock(world, ray, CAMERA_TPS_COEF + CAMERA_INTERSECT_OFFSET);
 
 	if (block != nullptr) {
 		IntersectList intersects = block->intersect(ray);
-		glm::vec3 pos = intersects.getNearestTo(viewPos);
+		glm::vec3 pos = intersects.getNearestTo(transform.position);
 
-		viewDir = glm::normalize(viewPos - pos);
-		viewPos = pos + viewDir * CAMERA_INTERSECT_OFFSET;
+		viewDir = glm::normalize(transform.position - pos);
+		transform.position = pos + viewDir * CAMERA_INTERSECT_OFFSET;
 	} else {
-		viewPos += viewSign * -orientation.front * CAMERA_TPS_COEF;
+		transform.position += viewSign * -orientation.front * CAMERA_TPS_COEF;
 		viewDir *= viewSign;
 	}
 }

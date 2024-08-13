@@ -7,7 +7,10 @@ enum BlockID {
 	DIRT = 2,
 	STONE = 3,
 	SHORT_GRASS = 4,
-	WATER = 5
+	WATER = 5,
+	SAND = 6,
+	SNOW_GRASS = 7,
+	SNOW_BLOCK = 8
 };
 
 #endif

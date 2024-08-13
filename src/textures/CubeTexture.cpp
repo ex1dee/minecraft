@@ -4,13 +4,11 @@
 #include "TextureManager.h"
 #include "Image.h"
 
-CubeTexture::CubeTexture(const char* directory, std::array<const char*, 6>& fileNames, bool flip)
+CubeTexture::CubeTexture(const std::string& directory, std::array<std::string, 6>& fileNames, bool flip)
 	: Texture(GL_TEXTURE_CUBE_MAP, TextureType::CUBEMAP) {
 	this->filePaths = filePaths;
 	
 	for (int i = 0; i < fileNames.size(); ++i) {
-		std::string filePath = Files::getFullPath(directory, fileNames[i]);
-
 		filePaths[i] = Files::getFullPath(directory, fileNames[i]);
 	}
 
@@ -28,6 +26,6 @@ void CubeTexture::load(bool flip) {
 	glTexParameteri(target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
 	for (int i = 0; i < 6; ++i) {
-		Texture::load(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, filePaths[i].c_str(), flip);
+		Texture::load(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, filePaths[i], flip);
 	}
 }

@@ -25,6 +25,8 @@ public:
 	void setup() override;
 	void reset() override;
 	void draw(Shader* shader) override;
+
+	void resetTexture();
 };
 
 #endif

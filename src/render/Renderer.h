@@ -8,6 +8,7 @@
 #include "BlockFrameRenderer.h"
 #include "SkyboxRenderer.h"
 #include "EntityRenderer.h"
+#include "CloudsRenderer.h"
 #include "ChunkRenderer.h"
 #include "GUIRenderer.h"
 
@@ -17,10 +18,13 @@ class Renderer {
 	BlockFrameRenderer blockFrameRenderer;
 	SkyboxRenderer skyboxRenderer;
 	EntityRenderer entityRenderer;
+	SpriteRenderer spriteRenderer;
+	CloudsRenderer cloudsRenderer;
 	ChunkRenderer chunkRenderer;
 	GUIRenderer guiRenderer;
 	Shader* FBOShader;
 public:
+	void addSprite(Sprite* sprite);
 	void addChunk(Chunk* chunk);
 	void addEntity(Entity* entity);
 	void finishRender(Player& player, Camera* camera, World& world);

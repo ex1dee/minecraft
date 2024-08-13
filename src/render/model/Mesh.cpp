@@ -54,7 +54,7 @@ void Mesh::bindTextures(Shader* shader) {
 		}
 
 		uniform += "]";
-		TextureManager::bindTexture(texture, *shader, uniform);
+		TextureManager::bindTexture(&texture, *shader, uniform);
 	}
 
 	shader->setInt("material.diffuseCount", diffuseCount);

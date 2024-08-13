@@ -7,18 +7,19 @@
 #include "../shaders/ShadersDatabase.h"
 
 World::World(Player &player) {
-	chunkManager = new ChunkManager(this);
+	player.hookWorld(this);
+	seed = time(0);
+
+	chunkManager = ChunkManager(this);
+	terrainGen = new DefaultWorldGenerator(seed);
+
 	isRunning = true;
 
-	seed = time(0);
-	terrainGen = new SuperFlatGenerator();
-
-	player.hookWorld(this);
-
-	makeSun();
-	makeFog();
 	updateDefaultSpawnPoint(player);
 	addLoadChunksThread(player);
+
+	sun = new Sun(ShadersDatabase::get(ShaderType::FRAMEBUFFER), this, &player);
+	clouds = new Clouds(seed, &player, this);
 }
 
 World::~World() {
@@ -29,20 +30,12 @@ World::~World() {
 	}
 
 	delete sun;
-	delete chunkManager;
+	delete clouds;
 	delete terrainGen;
 }
 
-void World::makeSun() {
-	sun = new Sun(ShadersDatabase::get(ShaderType::FRAMEBUFFER), this);
-}
-
-void World::makeFog() {
-	fog = Fog(glm::vec4(0.85f, 0.85f, 0.85f, 1.0f));
-}
-
 const Fog& World::getFog(Player& player) {
-	Block* block = getBlock(player.transform.position + player.type->eyesOffset);
+	Block* block = getBlock(player.getCamera()->getPosition());
 	Liquid* liquid = nullptr;
 
 	if (block != nullptr)
@@ -51,9 +44,9 @@ const Fog& World::getFog(Player& player) {
 	if (block != nullptr && liquid != nullptr) {
 		return liquid->getFog();
 	} else {
-		int loadDist = Config::settings["world"]["loadDistance"];
-		fog.zStart = loadDist * CHUNK_D - 5;
-		fog.zEnd = fog.zStart + 40;
+		//int loadDist = Config::settings["world"]["loadDistance"];
+		//fog.zStart = loadDist * CHUNK_D - 20;
+		//fog.zEnd = fog.zStart + 20;
 
 		return fog;
 	}
@@ -67,19 +60,20 @@ void World::updateDefaultSpawnPoint(Player& player) {
 	glm::vec2 chunkPos{ 0, 0 };
 	glm::vec3 blockPos{ 0, 0, 0 };
 
-	RandomGenerator randGen(seed);
-	Chunk* chunk = chunkManager->getChunk(chunkPos);
 	int h = terrainGen->getMinSpawnHeight();
+	RandomGenerator randGen(seed);
+	Chunk* chunk = nullptr;
 
 	while (blockPos.y < h) {
-		chunkManager->unload(chunkPos);
+		if (chunk != nullptr)
+			chunkManager.unload(chunkPos);
 
 		chunkPos.x = rangedRand(randGen, -SPAWNPOINT_CHUNKS_RANGE, SPAWNPOINT_CHUNKS_RANGE);
 		chunkPos.y = rangedRand(randGen, -SPAWNPOINT_CHUNKS_RANGE, SPAWNPOINT_CHUNKS_RANGE);
 		blockPos.x = rangedRand(randGen, 0, CHUNK_W - 1);
 		blockPos.z = rangedRand(randGen, 0, CHUNK_D - 1);
 
-		chunk = chunkManager->load(chunkPos);
+		chunk = chunkManager.load(chunkPos);
 		blockPos.y = chunk->getHeightAt(blockPos);
 	}
 
@@ -104,22 +98,22 @@ void World::loadChunks(Player& player) {
 void World::makeMeshes(const glm::vec2& playerPos, int loadDist) {
 	for (int i = 0; i <= loadDist; ++i) {
 		for (int x = playerPos.x - i; x <= playerPos.x + i; ++x) {
-			chunkManager->makeMesh(glm::vec2(x, playerPos.y - i));
+			chunkManager.makeMesh(glm::vec2(x, playerPos.y - i));
 		}
 
 		for (int z = playerPos.y - i + 1; z <= playerPos.y + i - 1; ++z) {
-			chunkManager->makeMesh(glm::vec2(playerPos.x - i, z));
-			chunkManager->makeMesh(glm::vec2(playerPos.x + i, z));
+			chunkManager.makeMesh(glm::vec2(playerPos.x - i, z));
+			chunkManager.makeMesh(glm::vec2(playerPos.x + i, z));
 		}
 
 		for (int x = playerPos.x - i; x <= playerPos.x + i; ++x) {
-			chunkManager->makeMesh(glm::vec2(x, playerPos.y + i));
+			chunkManager.makeMesh(glm::vec2(x, playerPos.y + i));
 		}
 	}
 }
 
 void World::unloadNotVisibleChunks(const glm::vec2& playerPos, int loadDist) {
-	for (std::pair<glm::vec2, Chunk*> pair : chunkManager->chunks) {
+	for (std::pair<glm::vec2, Chunk*> pair : chunkManager.chunks) {
 		Chunk* chunk = pair.second;
 		if (chunk == nullptr)
 			continue;
@@ -132,21 +126,26 @@ void World::unloadNotVisibleChunks(const glm::vec2& playerPos, int loadDist) {
 		float maxZ = playerPos.y + loadDist;
 
 		if (chunkPos.x < minX || chunkPos.x > maxX || chunkPos.y < minZ || chunkPos.y > maxZ) {
-			chunkManager->unload(chunkPos);
+			chunkManager.unload(chunkPos);
 		}
 	}
 }
 
 void World::deleteUnloadedChunks() {
-	for (const glm::vec2& chunkPos : chunkManager->unloadedChunks) {
-		Chunk* chunk = chunkManager->getChunk(chunkPos);
-		chunkManager->loadedChunks.erase(chunkPos);
-		chunkManager->chunks.erase(chunkPos);
-
-		delete chunk;
+	for (const glm::vec2& chunkPos : chunkManager.unloadedChunks) {
+		deleteChunkAt(chunkPos);
 	}
 
-	chunkManager->unloadedChunks.clear();
+	chunkManager.unloadedChunks.clear();
+}
+
+void World::deleteChunkAt(const glm::vec2& chunkPos) {
+	Chunk* chunk = chunkManager.getChunk(chunkPos);
+	chunkManager.loadedChunks.erase(chunkPos);
+	chunkManager.chunks.erase(chunkPos);
+
+	if (chunk != nullptr)
+		delete chunk;
 }
 
 void World::render(Renderer& renderer, Player& player) {
@@ -159,7 +158,7 @@ void World::renderEntities(Renderer& renderer, Player& player) {
 }
 
 void World::renderChunks(Renderer& renderer, Player& player) {
-	for (std::pair<glm::vec2, Chunk*> pair : chunkManager->loadedChunks) {
+	for (std::pair<glm::vec2, Chunk*> pair : chunkManager.loadedChunks) {
 		Chunk* chunk = pair.second;
 		if (chunk == nullptr)
 			continue;
@@ -168,10 +167,11 @@ void World::renderChunks(Renderer& renderer, Player& player) {
 	}
 }
 
-void World::update(Renderer& renderer, Player& player) {
+void World::update(Renderer& renderer, Player& player, float deltaTime) {
 	updateChunks();
 
-	sun->setTime((float)glfwGetTime() * 30.0f, player);
+//	sun->setTime((float)glfwGetTime() * 30.0f);
+	clouds->update(deltaTime);
 }
 
 void World::updateChunk(const glm::vec3& pos) {
@@ -226,7 +226,7 @@ WorldPosition World::getWorldPosition(const glm::vec3& pos) {
 
 Chunk* const World::getChunk(const glm::vec3& pos) {
 	glm::vec2 locChunkPos = getLocalChunkPosition(pos);
-	return chunkManager->getChunk(locChunkPos);
+	return chunkManager.getChunk(locChunkPos);
 }
 
 glm::vec2 World::getLocalChunkPosition(const glm::vec3& pos) {

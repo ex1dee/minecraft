@@ -1,13 +1,13 @@
 #include "Json.h"
 
-nlohmann::json Json::parse(const char* path) {
+nlohmann::json Json::parse(const std::string& path) {
 	std::string data = Files::read(path);
 	nlohmann::json json = nlohmann::json::parse(data);
 	
 	return json;
 }
 
-void Json::save(const char* path, const nlohmann::json& json) {
+void Json::save(const std::string& path, const nlohmann::json& json) {
 	Files::write(path, json.dump());
 }
 

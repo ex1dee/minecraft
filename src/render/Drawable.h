@@ -8,7 +8,7 @@
 
 class Drawable {
 protected:
-	uint32_t VAO, VBO, EBO;
+	uint32_t VAO, EBO;
 
 	std::vector<uint32_t> buffers;
 

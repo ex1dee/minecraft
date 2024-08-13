@@ -16,7 +16,7 @@ public:
 	Model(float shininess = 0);
 	~Model();
 
-	bool isEmpty() { return meshes.empty(); }
+	bool isEmpty() { return meshes.empty() || meshes[0]->data.vertexPositions.empty(); }
 
 	void reset();
 	void draw(Shader* shader);

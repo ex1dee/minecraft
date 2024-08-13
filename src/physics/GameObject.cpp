@@ -12,7 +12,7 @@ GameObject::~GameObject() {
 }
 
 Liquid* GameObject::getLiquidAtObject() {
-	Block* block = world->getBlock(transform.position);
+	Block* block = world->getBlock(transform.position + glm::vec3(0, 0.3f, 0));
 
 	if (block != nullptr)
 		return ((Liquid*)block->type->meta);

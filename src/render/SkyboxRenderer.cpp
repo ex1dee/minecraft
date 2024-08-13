@@ -26,13 +26,13 @@ void SkyboxRenderer::render(Camera* camera, const Sun& sun, const Fog& fog) {
 	
     fog.addToShader(skyboxShader);
 
-    TextureManager::bindTexture(*texture, *skyboxShader, "background");
+    TextureManager::bindTexture(texture, *skyboxShader, "background");
 
     model.draw(skyboxShader);
 }
 
 void SkyboxRenderer::loadTexture() {
-	std::array<const char*, 6> files{
+	std::array<std::string, 6> files{
 		"stars.jpg", 
         "stars.jpg",
         "stars.jpg",

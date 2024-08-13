@@ -1,0 +1,14 @@
+{
+    "id": 8,
+    "meshType": 0,
+    "shaderType": 0,
+    "colliderType": 0,
+    "opaque": true,
+    "solid": true,
+
+    "texCoords": {
+        "side": [ 13, 15 ],
+        "top": [ 13, 15 ],
+        "bottom": [ 13, 15 ]
+    }
+}

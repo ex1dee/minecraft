@@ -4,12 +4,12 @@
 #include "Texture.h"
 
 class BasicTexture : public Texture {
-	const char* path;
+	std::string path;
 
 	void load(bool flip);
 public:
 	BasicTexture() {}
-	BasicTexture(const char* path, bool flip, TextureType type);
+	BasicTexture(const std::string& path, bool flip, TextureType type);
 };
 
 #endif

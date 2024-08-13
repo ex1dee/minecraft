@@ -203,6 +203,24 @@
     <ClCompile Include="src\world\block\meta\BlockMetaLoader.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\textures\CustomTexture.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\noise\NoiseMap.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\world\Clouds.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\noise\NoiseManager.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\SpriteRenderer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\CloudsRenderer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\window\Window.h">
@@ -320,6 +338,14 @@
     <ClInclude Include="src\physics\PhysicsConstants.h" />
     <ClInclude Include="src\render\fog\Fog.h" />
     <ClInclude Include="src\render\fog\FogType.h" />
+    <ClInclude Include="src\utils\noise\NoiseConfig.h" />
+    <ClInclude Include="src\world\Clouds.h" />
+    <ClInclude Include="src\textures\CustomTexture.h" />
+    <ClInclude Include="src\utils\noise\NoiseMap.h" />
+    <ClInclude Include="src\utils\noise\NoiseManager.h" />
+    <ClInclude Include="src\render\SpriteRenderer.h" />
+    <ClInclude Include="src\render\CloudsRenderer.h" />
+    <ClInclude Include="src\textures\CustomImage.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />
@@ -346,6 +372,10 @@
     <None Include="shaders\sprite.vs" />
     <None Include="shaders\sprite.fs" />
     <None Include="resources\blocks\water.json" />
+    <None Include="resources\blocks\sand.json" />
+    <None Include="resources\blocks\snow_grass.json" />
+    <None Include="resources\blocks\snow_block.json" />
+    <None Include="shaders\clouds.fs" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\blocks_atlas.png">

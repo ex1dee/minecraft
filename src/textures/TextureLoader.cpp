@@ -4,9 +4,9 @@
 
 #include "../utils/Files.h"
 
-std::unordered_map<const char*, Texture*> TextureLoader::textures;
+std::unordered_map<std::string, Texture*> TextureLoader::textures;
 
-const TextureAtlas* const TextureLoader::loadAtlas(const char* path, const glm::vec2& imagesCount, bool flip, TextureType type) {
+const TextureAtlas* const TextureLoader::loadAtlas(const std::string& path, const glm::vec2& imagesCount, bool flip, TextureType type) {
 	TextureAtlas* texture = getTexture<TextureAtlas>(path);
 
 	if (texture == nullptr)
@@ -15,7 +15,7 @@ const TextureAtlas* const TextureLoader::loadAtlas(const char* path, const glm::
 	return texture;
 }
 
-const BasicTexture* const TextureLoader::loadBasic(const char* path, bool flip, TextureType type) {
+const BasicTexture* const TextureLoader::loadBasic(const std::string& path, bool flip, TextureType type) {
 	BasicTexture* texture = getTexture<BasicTexture>(path);
 
 	if (texture == nullptr)
@@ -24,7 +24,7 @@ const BasicTexture* const TextureLoader::loadBasic(const char* path, bool flip, 
 	return texture;
 }
 
-const CubeTexture* const TextureLoader::loadCube(const char* directory, std::array<const char*, 6>& fileNames, bool flip) {
+const CubeTexture* const TextureLoader::loadCube(const std::string& directory, std::array<std::string, 6>& fileNames, bool flip) {
 	CubeTexture* texture = getTexture<CubeTexture>(directory);
 
 	if (texture == nullptr)
@@ -34,7 +34,7 @@ const CubeTexture* const TextureLoader::loadCube(const char* directory, std::arr
 }
 
 template<typename T> 
-static T* const TextureLoader::getTexture(const char* key) {
+static T* const TextureLoader::getTexture(const std::string& key) {
 	if (textures.find(key) != textures.end()) {
 		return nullptr;
 	} else {

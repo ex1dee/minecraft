@@ -1,7 +1,7 @@
 #version 330 core
 
 #define SHADOW_INTERPOLATION false
-#define SHADOW_BIAS 0.000175
+#define SHADOW_BIAS 0.00021
 #define SHADOW_SHARPNESS 2.0
 
 #define MIN_SUN_LIGHT 0.25
@@ -83,7 +83,6 @@ vec3 result = vec3(1);
 
 void main() {
 	float shadow = 1;
-	float sunLight = calcSunLight();
 
 	if (material.shadow)
 		shadow = min(shadow, calcShadow(sun.shadow, sun.direction));
@@ -99,7 +98,7 @@ void main() {
 
 	vec3 lighting = shadow * result;
 	lighting = max(lighting, MIN_SUN_LIGHT);
-	lighting = min(lighting, sunLight);
+	lighting = min(lighting, calcSunLight());
 
 	vec4 texColor = texture(tex, TexCoords);
 
@@ -197,7 +196,7 @@ float calcAttenuation(PointLight light, float distance) {
 }
 
 float calcSunLight() {
-	float sunLight = clamp(0.15 - sun.direction.y, MIN_SUN_LIGHT, 1);
+	float sunLight = clamp(0.3 - sun.direction.y, MIN_SUN_LIGHT, 1);
 
 	return sunLight;
 }

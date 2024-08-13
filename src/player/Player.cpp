@@ -8,7 +8,7 @@ Player::Player(Camera* camera)
 	
 }
 
-bool Player::isEyesInWater() {
+bool Player::isEyesInWater() const {
 	Block* block = world->getBlock(transform.position + type->eyesOffset);
 
 	return block->type->id == WATER;

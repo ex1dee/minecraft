@@ -23,13 +23,6 @@ void PhysicsEngine::update(Player& player, float deltaTime) {
 	if (deltaTime == 0)
 		return;
 
-	glm::vec3 position = player.transform.position;
-	glm::vec3 chunkPos = glm::vec3(position.x, 0, position.z);
-	Chunk* chunk = world->getChunk(chunkPos);
-
-	if (chunk == nullptr || !chunk->isLoaded())
-		return;
-
 	cullObjects();
 
 	for (GameObject* object : objects) {

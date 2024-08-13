@@ -6,8 +6,8 @@
 std::unordered_map<EntityID, EntityType*> EntitiesDatabase::entities;
 
 void EntitiesDatabase::initialize() {
-	for (std::string path : Files::getFolderFiles(ENTITIES_DIR)) {
-		nlohmann::json json = Json::parse(path.c_str());
+	for (const std::string& path : Files::getFolderFiles(ENTITIES_DIR)) {
+		nlohmann::json json = Json::parse(path);
 
 		EntityType* type = new EntityType;
 		type->id = json["id"];
@@ -25,7 +25,7 @@ void EntitiesDatabase::initialize() {
 		type->eyesOffset = Json::toVec3(json["eyes_offset"]);
 
 		std::string modelPath = json["model"]["path"];
-		type->model = AssimpLoader::load(Files::getFullPath(MODELS_DIR, modelPath.c_str()));
+		type->model = AssimpLoader::load(Files::getFullPath(MODELS_DIR, modelPath));
 
 		entities[type->id] = type;
 	}

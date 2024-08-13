@@ -35,7 +35,7 @@ public:
 	bool isSprinting() { return sprinting; }
 	Camera* const getCamera() { return camera; }
 
-	bool isEyesInWater();
+	bool isEyesInWater() const;
 	void setFlying(bool flying);
 };
 

@@ -1,18 +1,75 @@
 ﻿  Entity.cpp
+  CameraInput.cpp
+  MovementsInput.cpp
+  ZoomHandler.cpp
+  main.cpp
   GameObject.cpp
   PhysicsEngine.cpp
   CollisionDetector.cpp
   Camera.cpp
   Player.cpp
+  BlockFrameRenderer.cpp
+  ChunkRenderer.cpp
+  CloudsRenderer.cpp
+  EntityRenderer.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\input\handlers\CameraInput.h(4,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline (компилируется исходный файл src\input\handlers\CameraInput.cpp)
+  GUIRenderer.cpp
   Renderer.cpp
+  GLM: GLM_GTX_hash extension included
+  GLM: GLM_GTX_hash extension included
+  SkyboxRenderer.cpp
+  SpriteRenderer.cpp
+  DepthFramebuffer.cpp
   PlayState.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\framebuffer\DepthFramebuffer.cpp(49,78): warning C4244: аргумент: преобразование "float" в "GLsizei", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\framebuffer\DepthFramebuffer.cpp(49,59): warning C4244: аргумент: преобразование "float" в "GLsizei", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\framebuffer\DepthFramebuffer.cpp(65,44): warning C4244: аргумент: преобразование "float" в "GLsizei", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\render\framebuffer\DepthFramebuffer.cpp(65,25): warning C4244: аргумент: преобразование "float" в "GLsizei", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\input\handlers\CameraInput.h(4,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline (компилируется исходный файл src\states\PlayState.cpp)
+  Clouds.cpp
   RayTracing.cpp
+  Sun.cpp
   World.cpp
   Chunk.cpp
   GLM: GLM_GTX_hash extension included
+  ChunkManager.cpp
+  ChunkMeshBuilder.cpp
+  DefaultWorldGenerator.cpp
+  GLM: GLM_GTX_hash extension included
+  SuperFlatGenerator.cpp
   GLM: GLM_GTX_hash extension included
   GLM: GLM_GTX_hash extension included
   GLM: GLM_GTX_hash extension included
+  GLM: GLM_GTX_hash extension included
+C:\Users\User\source\repos\Minecraft\Minecraft\src\gui\GUI.h(26): warning C4172: возвращение адреса локальной или временной переменной
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\Clouds.cpp(44,49): warning C4244: аргумент: преобразование "const float" в "int", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\Clouds.cpp(44,26): warning C4244: аргумент: преобразование "const float" в "int", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(11,13): warning C4244: =: преобразование "time_t" в "uint32_t", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(71,26): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(72,26): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(73,26): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(74,26): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(77,34): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
 C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(141,28): warning C4244: =: преобразование "float" в "int", возможна потеря данных
 C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(150,16): warning C4244: =: преобразование "int" в "T", возможна потеря данных
           with
@@ -30,45 +87,17 @@ C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(152,28)
               T=float
           ]
 C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp(158,61): warning C4244: return: преобразование "float" в "int", возможна потеря данных
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(13,13): warning C4244: =: преобразование "time_t" в "uint32_t", возможна потеря данных
-C:\Users\User\source\repos\Minecraft\Minecraft\src\input\handlers\CameraInput.h(4,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline (компилируется исходный файл src\states\PlayState.cpp)
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(55,35): warning C4244: =: преобразование "int" в "float", возможна потеря данных
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(77,26): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(100,14): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
           with
           [
               T=float
           ]
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(78,26): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(104,14): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
           with
           [
               T=float
           ]
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(79,26): warning C4244: =: преобразование "int" в "T", возможна потеря данных
-          with
-          [
-              T=float
-          ]
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(80,26): warning C4244: =: преобразование "int" в "T", возможна потеря данных
-          with
-          [
-              T=float
-          ]
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(83,34): warning C4244: =: преобразование "int" в "T", возможна потеря данных
-          with
-          [
-              T=float
-          ]
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(106,14): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-          with
-          [
-              T=float
-          ]
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(110,14): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
-          with
-          [
-              T=float
-          ]
-C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(115,14): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(109,14): warning C4244: инициализация: преобразование "T" в "int", возможна потеря данных
           with
           [
               T=float

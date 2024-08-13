@@ -30,7 +30,11 @@ void CollisionDetector::detectO2B(std::vector<GameObject*>& objects, World* worl
 		if (obj->rigidBody.physicsType == PhysicsType::STATIC)
 			continue;
 
-		glm::vec3 newPosition = obj->transform.position + obj->rigidBody.deltaPosition;
+		glm::vec3 newPosition = obj->transform.position + 0.5f * glm::normalize(obj->rigidBody.deltaPosition);
+		Chunk* chunk = world->getChunk(glm::vec3(newPosition.x, 0, newPosition.z));
+
+		if (chunk == nullptr || !chunk->isLoaded())
+			continue;
 
 		for (float x = -1; x <= obj->model->aabb.extents.x + 1; ++x) {
 			for (float y = -1; y <= obj->model->aabb.extents.y + 1; ++y) {

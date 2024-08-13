@@ -14,11 +14,13 @@
 #include "chunk/ChunkManager.h"
 #include "../render/fog/Fog.h"
 #include "WorldPosition.h"
+#include "Clouds.h"
 #include "Sun.h"
 
 class World {
-	ChunkManager* chunkManager;
 	TerrainGenerator* terrainGen;
+	ChunkManager chunkManager;
+
 	std::vector<Chunk*> chunkUpdates;
 	std::vector<std::thread> loadThreads;
 	std::vector<Entity*> entities;
@@ -26,15 +28,15 @@ class World {
 	glm::vec3 spawnPoint;
 	uint32_t seed;
 
+	Clouds* clouds;
 	Sun* sun;
 	Fog fog;
 
 	std::atomic<bool> isRunning;
 	std::mutex mainMutex;
 
-	void makeSun();
-	void makeFog();
 	void loadChunks(Player& player);
+	void deleteChunkAt(const glm::vec2& chunkPos);
 	void renderChunks(Renderer& renderer, Player& player);
 	void renderEntities(Renderer& renderer, Player& player);
 	void updateDefaultSpawnPoint(Player& player);
@@ -48,7 +50,8 @@ public:
 	World(Player& player);
 	~World();
 
-	Sun* const getSun() const { return sun; }
+	const Sun& getSun() { return *sun; }
+	const Clouds& getClouds() { return *clouds; }
 	TerrainGenerator& getTerrainGenerator() { return *terrainGen; }
 
 	const Fog& getFog(Player& player);
@@ -59,7 +62,7 @@ public:
 	void updateChunks();
 	void updateChunk(const glm::vec3& pos);
 	void render(Renderer& renderer, Player& player);
-	void update(Renderer& renderer, Player& player);
+	void update(Renderer& renderer, Player& player, float deltaTime);
 	void setBlock(const glm::vec3& pos, BlockID blockID);
 	WorldPosition getWorldPosition(const glm::vec3& pos);
 	glm::vec3 getLocalBlockPosition(const glm::vec3& pos);

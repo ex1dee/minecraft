@@ -6,8 +6,12 @@ Transform::Transform(glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
 glm::mat4 Transform::calcModel() const {
 	glm::mat4 model(1.0f);
 
-	model = glm::mat4_cast(glm::quat(glm::radians(rotation)));
 	model = glm::translate(model, position);
+
+	if (rotation.x != 0) model = glm::rotate(model, glm::radians(rotation.x), glm::vec3(1, 0, 0));
+	if (rotation.y != 0) model = glm::rotate(model, glm::radians(rotation.y), glm::vec3(0, 1, 0));
+	if (rotation.z != 0) model = glm::rotate(model, glm::radians(rotation.z), glm::vec3(0, 0, 1));
+	
 	model = glm::scale(model, scale);
 
 	return model;

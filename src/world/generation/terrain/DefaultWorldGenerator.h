@@ -7,7 +7,8 @@
 #include "../../chunk/Chunk.h"
 
 class DefaultWorldGenerator : public TerrainGenerator {
-	PerlinNoise2D perlin;
+	PerlinNoise2D landscapeNoise;
+	RandomGenerator randomGen;
 public:
 	DefaultWorldGenerator(uint8_t seed);
 

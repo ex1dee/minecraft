@@ -9,8 +9,8 @@ void ChunkRenderer::add(const ChunkMeshCollection& chunk) {
 	if (!chunk.solid->getModel().isEmpty())
 		solidMeshes.push_back(chunk.solid);
 
-	if (!chunk.water->getModel().isEmpty())
-		waterMeshes.push_back(chunk.water);
+	if (!chunk.liquid->getModel().isEmpty())
+		liquidMeshes.push_back(chunk.liquid);
 
 	if (!chunk.flora->getModel().isEmpty())
 		floraMeshes.push_back(chunk.flora);
@@ -35,11 +35,11 @@ void ChunkRenderer::render(Camera* camera, const Sun& sun, const Fog& fog) {
 		floraMeshes.clear();
 	}
 	
-	if (waterMeshes.size()) {
+	if (liquidMeshes.size()) {
 		updateWaterShader();
-		render(waterMeshes, camera, true);
+		render(liquidMeshes, camera, true);
 
-		waterMeshes.clear();
+		liquidMeshes.clear();
 	}
 
 	Renderer::finishTransparentRender();
@@ -79,16 +79,8 @@ void ChunkRenderer::updateFloraShader() {
 }
 
 void ChunkRenderer::updateWaterShader() {
-	activeShader->setBool("water", true);
 	activeShader->setBool("material.shadow", false);
 	activeShader->setBool("material.lighting", false);
-}
-
-void ChunkRenderer::render(std::vector<ChunkMesh*>& meshes, Camera* camera, bool onlyVisible) {
-	for (ChunkMesh* mesh : meshes) {
-		if (!onlyVisible || camera->isAABBInFrustum(mesh->getModel().aabb))
-			mesh->getModel().draw(activeShader);
-	}
 }
 
 void ChunkRenderer::renderLights(const Sun& sun) {
@@ -103,4 +95,11 @@ void ChunkRenderer::renderLights(std::vector<ChunkMesh*>& meshes, const Sun& sun
 	activeShader = sun.getLight().getFramebuffer().getShader();
 
 	render(meshes);
+}
+
+void ChunkRenderer::render(std::vector<ChunkMesh*>& meshes, Camera* camera, bool onlyVisible) {
+	for (ChunkMesh* mesh : meshes) {
+		if (!onlyVisible || camera->isAABBInFrustum(mesh->getModel().aabb))
+			mesh->getModel().draw(activeShader);
+	}
 }

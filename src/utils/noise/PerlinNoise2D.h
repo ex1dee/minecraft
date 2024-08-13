@@ -8,20 +8,24 @@
 #include <vector>
 
 #include "../random/Random.h"
+#include "NoiseConfig.h"
 
 #define PERLIN_NOISE_SIZE 1024
 
 class PerlinNoise2D {
-	std::unordered_map<glm::vec2, float> noiseCache;
 	std::vector<uint8_t> permutations;
+	NoiseConfig config;
 
 	glm::vec2 getGradient(int x, int y);
 	void generatePermutations(RandomGenerator& randomGen);
 public:
-	void setup(uint8_t seed);
+	void setup(uint8_t seed, const NoiseConfig& config);
 
 	float noise(float x, float y);
-	float noise(float x, float y, int octaves, float persistance = 0.5f);
+	float FBM(float x, float y, int octaves);
+
+	float ridgeNoise(float x, float y);
+	float ridgeFBM(float x, float y, int octaves);
 };
 
 #endif

@@ -13,15 +13,13 @@
 #define CAMERA_NEAR 0.1f
 #define CAMERA_FAR 500.0f
 #define CAMERA_MAX_ZOOM 30.0f
-#define CAMERA_INTERSECT_OFFSET 1.5f
+#define CAMERA_INTERSECT_OFFSET 1.7f
 
 class Camera {
 	glm::mat4 view;
 	glm::mat4 projView;
 	glm::mat4 skyboxView;
 	glm::mat4 projection;
-
-	glm::vec3 viewPos;
 	glm::vec3 viewDir;
 
 	Orientation orientation;

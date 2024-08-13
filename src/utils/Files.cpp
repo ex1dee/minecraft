@@ -5,25 +5,15 @@
 #include <iostream>
 #include <filesystem>
 
-std::string Files::getFullPath(const char* dirPath, const char* fileName) {
-	std::string path = dirPath;
-	path += "/";
-	path += fileName;
-
-	return path;
-}
-
-std::string Files::getDirectory(const char* path) {
-	std::string strPath = path;
-
-	return getDirectory(strPath);
+std::string Files::getFullPath(const std::string& dirPath, const std::string& fileName) {
+	return dirPath + "/" + fileName;
 }
 
 std::string Files::getDirectory(const std::string& path) {
 	return path.substr(0, path.find_last_of('/'));
 }
 
-std::string Files::read(const char* path) {
+std::string Files::read(const std::string& path) {
 	std::string data;
 	std::fstream file;
 	std::stringstream stream;
@@ -35,7 +25,7 @@ std::string Files::read(const char* path) {
 	return stream.str();
 }
 
-void Files::write(const char* path, const std::string& data) {
+void Files::write(const std::string& path, const std::string& data) {
 	std::fstream file;
 
 	open(file, path);
@@ -43,7 +33,7 @@ void Files::write(const char* path, const std::string& data) {
 	close(file);
 }
 
-void Files::open(std::fstream& file, const char* path) {
+void Files::open(std::fstream& file, const std::string& path) {
 	file.exceptions(std::ifstream::badbit | std::ifstream::failbit);
 	file.open(path, std::ios::out);
 }
@@ -52,7 +42,7 @@ void Files::close(std::fstream& file) {
 	file.close();
 }
 
-std::vector<std::string> Files::getFolderFiles(const char* dirPath) {
+std::vector<std::string> Files::getFolderFiles(const std::string& dirPath) {
 	std::vector<std::string> files;
 
 	if (isDirectory(dirPath)) {
@@ -66,10 +56,10 @@ std::vector<std::string> Files::getFolderFiles(const char* dirPath) {
 	return files;
 }
 
-bool Files::isDirectory(const char* path) {
+bool Files::isDirectory(const std::string& path) {
 	return std::filesystem::is_directory(path);
 }
 
-bool Files::exists(const char* path) {
+bool Files::exists(const std::string& path) {
 	return std::filesystem::exists(path);
 }

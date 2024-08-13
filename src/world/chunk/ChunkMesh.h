@@ -27,28 +27,28 @@ public:
 
 struct ChunkMeshCollection {
 	ChunkMesh* solid;
-	ChunkMesh* water;
+	ChunkMesh* liquid;
 	ChunkMesh* flora;
 
 	ChunkMeshCollection() {
 		solid = new ChunkMesh();
-		water = new ChunkMesh();
+		liquid = new ChunkMesh();
 		flora = new ChunkMesh();
 	}
 
 	~ChunkMeshCollection() {
-		delete solid, water, flora;
+		delete solid, liquid, flora;
 	}
 
 	void createBuffers() {
 		solid->createBuffers();
-		water->createBuffers();
+		liquid->createBuffers();
 		flora->createBuffers();
 	}
 
 	void setAABB(const AABB& aabb) {
 		solid->getModel().aabb = aabb;
-		water->getModel().aabb = aabb;
+		liquid->getModel().aabb = aabb;
 		flora->getModel().aabb = aabb;
 	}
 };

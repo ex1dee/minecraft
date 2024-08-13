@@ -7,8 +7,8 @@ GUISector GUIDatabase::root;
 void GUIDatabase::initialize() {
 	GUISector elements;
 
-	for (std::string path : Files::getFolderFiles(GUI_DIR)) {
-		nlohmann::json json = Json::parse(path.c_str());
+	for (const std::string& path : Files::getFolderFiles(GUI_DIR)) {
+		nlohmann::json json = Json::parse(path);
 
 		std::string name = json["name"];
 		GUIElement* element;
@@ -38,7 +38,7 @@ void GUIDatabase::initialize() {
 }
 
 void GUIDatabase::addChildren(GUIElement* element, const nlohmann::basic_json<>& json, GUISector& elements) {
-	for (std::string childName : json["children"]) {
+	for (const std::string& childName : json["children"]) {
 		GUIElement* child = new GUIElement;
 		child->parent = element;
 
@@ -61,7 +61,7 @@ void GUIDatabase::addTexture(GUIElement* element, const nlohmann::basic_json<>& 
 
 	if (texture->useAtlas) {
 		glm::vec2 imagesCount = Json::toVec2(atlasJson["imagesCount"]);
-		const TextureAtlas* atlas = TextureLoader::loadAtlas(path.c_str(), imagesCount, true, TextureType::SPRITE);
+		const TextureAtlas* atlas = TextureLoader::loadAtlas(path, imagesCount, true, TextureType::SPRITE);
 		texture->data = (const Texture*)atlas;
 
 		glm::vec2 bottomLeft = Json::toVec2(atlasJson["bottomLeft"]);
@@ -74,7 +74,7 @@ void GUIDatabase::addTexture(GUIElement* element, const nlohmann::basic_json<>& 
 			texture->atlas = atlas->getTextureCoords(bottomLeft, topRight);
 		}
 	} else {
-		texture->data = TextureLoader::loadBasic(path.c_str(), false, TextureType::SPRITE);
+		texture->data = TextureLoader::loadBasic(path, false, TextureType::SPRITE);
 	}
 }
 

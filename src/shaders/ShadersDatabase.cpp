@@ -8,6 +8,7 @@ void ShadersDatabase::initialize() {
 	shaders[ShaderType::SKYBOX]		 = new Shader("shaders/skybox.vs", "shaders/skybox.fs");
 	shaders[ShaderType::LINE]	     = new Shader("shaders/line.vs", "shaders/line.fs");
 	shaders[ShaderType::SPRITE]		 = new Shader("shaders/sprite.vs", "shaders/sprite.fs");
+	shaders[ShaderType::CLOUDS]		 = new Shader("shaders/sprite.vs", "shaders/clouds.fs");
 }
 
 void ShadersDatabase::finalize() {

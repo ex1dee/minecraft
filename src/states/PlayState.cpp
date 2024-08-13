@@ -34,7 +34,7 @@ void PlayState::handleInput() {
 
 void PlayState::update() {
 	if (worldTickTimer.isTickElapsed()) {
-		world->update(*renderer, *player);
+		world->update(*renderer, *player, worldTickTimer.getSecPerTick());
 	}
 
 	if (physicsTickTimer.isTickElapsed()) {

@@ -1,27 +1,39 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
+#include <glad/glad.h>
+#include <string>
+
 #include "../../dependencies/stb_image.h"
 
 class Image {
-	Image();
 public:
 	unsigned char* data;
 	int width;
 	int height;
 	int nchannels;
 
-	Image(const char* path, bool flip) {
-		stbi_set_flip_vertically_on_load(flip);
-		data = stbi_load(path, &width, &height, &nchannels, 0);
+	Image(int width, int height, int nchannels)
+		: width(width), height(height), nchannels(nchannels) {
+
+	}
+
+	Image(const std::string& path, bool flip) {
+		load(path, flip);
 	}
 
 	~Image() {
 		free();
 	}
 
-	void free() {
-		stbi_image_free(data);
+	void load(const std::string& path, bool flip) {
+		stbi_set_flip_vertically_on_load(flip);
+		data = stbi_load(path.c_str(), &width, &height, &nchannels, STBI_default);
+	}
+
+	virtual void free() {
+		if (data != nullptr)
+			stbi_image_free(data);
 	}
 };
 

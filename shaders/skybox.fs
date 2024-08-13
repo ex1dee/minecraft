@@ -10,16 +10,11 @@
 #define SUN_COLOR vec3(1, 1, 0.8)
 #define MOON_COLOR vec3(0.6, 0.6, 0.6)
 
-#define FOG_ZSTART 0.0
-#define FOG_ZEND 3.0
-
 struct Fog {
 	bool enabled;
 	int type;
 
 	float density;
-	float zStart;
-	float zEnd;
 	vec4 color;
 };
 

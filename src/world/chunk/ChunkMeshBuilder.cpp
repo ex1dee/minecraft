@@ -48,14 +48,14 @@ void ChunkMeshBuilder::build() {
 void ChunkMeshBuilder::setActiveMesh(const BlockType* blockType) {
 	if (blockType->shaderType == BlockShaderType::SOLID)
 		activeMesh = chunk->getMeshes().solid;
-	else if (blockType->shaderType == BlockShaderType::WATER)
-		activeMesh = chunk->getMeshes().water;
+	else if (blockType->shaderType == BlockShaderType::LIQUID)
+		activeMesh = chunk->getMeshes().liquid;
 	else if (blockType->shaderType == BlockShaderType::FLORA)
 		activeMesh = chunk->getMeshes().flora;
 }
 
 void ChunkMeshBuilder::addX(const glm::vec3& blockPos, const BlockType* blockType) {
-	AtlasCoords atlasCoords = BlocksDatabase::getTextureAtlas().getTextureCoords(blockType->texSideCoords);
+	AtlasCoords atlasCoords = BlocksDatabase::getTextureAtlas()->getTextureCoords(blockType->texSideCoords);
 
 	activeMesh->addBlockFace(xSide1, atlasCoords, chunk->getLocalPosition(), blockPos);
 	activeMesh->addBlockFace(xSide2, atlasCoords, chunk->getLocalPosition(), blockPos);
@@ -85,7 +85,7 @@ void ChunkMeshBuilder::tryAddFace(const std::array<float, 12>& vertices,
 		return;
 
 	if (shouldAddFace(adjacentDir, blockType)) {
-		AtlasCoords atlasCoords = BlocksDatabase::getTextureAtlas().getTextureCoords(texCoords);
+		AtlasCoords atlasCoords = BlocksDatabase::getTextureAtlas()->getTextureCoords(texCoords);
 
 		activeMesh->addBlockFace(vertices, atlasCoords, chunk->getLocalPosition(), localBlockPosition, normal);
 	}

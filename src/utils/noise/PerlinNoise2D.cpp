@@ -1,10 +1,12 @@
 #include "PerlinNoise2D.h"
 
 #include "../../math/Mathf.h"
+#include "NoiseManager.h"
 
-void PerlinNoise2D::setup(uint8_t seed) {
+void PerlinNoise2D::setup(uint8_t seed, const NoiseConfig& config) {
+	this->config = config;
+
 	RandomGenerator randomGen(seed);
-
 	generatePermutations(randomGen);
 }
 
@@ -16,28 +18,51 @@ void PerlinNoise2D::generatePermutations(RandomGenerator& randomGen) {
 	}
 }
 
-float PerlinNoise2D::noise(float x, float y, int octaves, float persistance) {
+float PerlinNoise2D::FBM(float x, float y, int octaves) {
+	float frequency = config.frequency;
 	float amplitude = 1.0f;
 	float maxAmplitude = 0.0f;
-	float frequence = 1.0f;
 	float result = 0.0f;
 
 	for (int i = 0; i < octaves; ++i) {
-		result += noise(x * frequence, y * frequence) * amplitude;
+		result += noise(x * frequency, y * frequency) * amplitude;
 
 		maxAmplitude += amplitude;
-		amplitude *= persistance;
-		frequence *= 2;
+		amplitude *= config.persistance;
+		frequency *= config.lacunarity;
 	}
 
-	return result / maxAmplitude;
+	return pow(result / maxAmplitude, config.redistribution);
+}
+
+float PerlinNoise2D::ridgeFBM(float x, float y, int octaves) {
+	float frequency = config.frequency;
+	float maxAmplitude = 0.0f;
+	float amplitude = 1.0f;
+	float result = 0.0f;
+
+	for (int i = 0; i < octaves; ++i) {
+		float d = 1.0f;
+
+		if (result)
+			d = result;
+
+		result += ridgeNoise(x * frequency, y * frequency) * amplitude * d;
+
+		maxAmplitude += amplitude;
+		amplitude *= config.persistance;
+		frequency *= config.lacunarity;
+	}
+
+	return pow(result / maxAmplitude, config.redistribution);
+}
+
+float PerlinNoise2D::ridgeNoise(float x, float y) {
+	return 2.0f * (0.5f - glm::abs(0.5f - noise(x, y)));
 }
 
 float PerlinNoise2D::noise(float x, float y) {
 	glm::vec2 point(x, y);
-
-	if (noiseCache.find(point) != noiseCache.end())
-		return noiseCache[point];
 
 	int left = (int)floor(x);
 	int top = (int)floor(y);
@@ -66,8 +91,11 @@ float PerlinNoise2D::noise(float x, float y) {
 	float topLerp = Mathf::lerp(topLeftDot, topRightDot, pointX);
 	float bottomLerp = Mathf::lerp(bottomLeftDot, bottomRightDot, pointX);
 
-	float result = Mathf::lerp(topLerp, bottomLerp, pointY);
-	noiseCache.emplace(point, result);
+	float result = NoiseManager::remap(
+		Mathf::lerp(topLerp, bottomLerp, pointY),
+		-1.0f, 1.0f,
+		config.noise_min, config.noise_max
+	);
 
 	return result;
 }

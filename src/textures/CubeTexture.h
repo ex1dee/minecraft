@@ -13,7 +13,7 @@ class CubeTexture : public Texture {
 
 	void load(bool flip);
 public:
-	CubeTexture(const char* directory, std::array<const char*, 6>& fileNames, bool flip);
+	CubeTexture(const std::string& directory, std::array<std::string, 6>& fileNames, bool flip);
 };
 
 #endif

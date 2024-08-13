@@ -8,13 +8,13 @@
 #include "TextureAtlas.h"
 
 class TextureLoader {
-	static std::unordered_map<const char*, Texture*> textures;
+	static std::unordered_map<std::string, Texture*> textures;
 
-	template<typename T> static T* const getTexture(const char* key);
+	template<typename T> static T* const getTexture(const std::string& key);
 public:
-	static const TextureAtlas* const loadAtlas(const char* path, const glm::vec2& imagesCount, bool flip, TextureType type);
-	static const BasicTexture* const loadBasic(const char* path, bool flip, TextureType type);
-	static const CubeTexture* const loadCube(const char* directory, std::array<const char*, 6>& fileNames, bool flip);
+	static const TextureAtlas* const loadAtlas(const std::string& path, const glm::vec2& imagesCount, bool flip, TextureType type);
+	static const BasicTexture* const loadBasic(const std::string& path, bool flip, TextureType type);
+	static const CubeTexture* const loadCube(const std::string& directory, std::array<std::string, 6>& fileNames, bool flip);
 };
 
 #endif

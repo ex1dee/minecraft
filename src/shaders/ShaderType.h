@@ -6,7 +6,8 @@ enum class ShaderType {
 	FRAMEBUFFER = 1,
 	SKYBOX = 2,
 	LINE = 3,
-	SPRITE = 4
+	SPRITE = 4,
+	CLOUDS = 5
 };
 
 #endif

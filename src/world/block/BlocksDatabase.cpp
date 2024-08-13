@@ -10,8 +10,8 @@ const TextureAtlas* BlocksDatabase::textureAtlas;
 void BlocksDatabase::initialize() {
 	textureAtlas = TextureLoader::loadAtlas("resources/textures/blocks_atlas.png", glm::vec2(16, 16), true, TextureType::DIFFUSE);
 
-	for (std::string path : Files::getFolderFiles(BLOCKS_DIR)) {
-		nlohmann::json json = Json::parse(path.c_str());
+	for (const std::string& path : Files::getFolderFiles(BLOCKS_DIR)) {
+		nlohmann::json json = Json::parse(path);
 
 		BlockType* type = new BlockType;
 		type->texBottomCoords = Json::toVec2(json["texCoords"]["bottom"]);

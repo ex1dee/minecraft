@@ -93,8 +93,8 @@ void AssimpLoader::loadMaterialTextures(MeshData& meshData, aiMaterial* material
 		aiString texName;
 		material->GetTexture(type, i, &texName);
 		
-		std::string path = Files::getFullPath(directory.c_str(), texName.C_Str());
-		textures.push_back(*TextureLoader::loadBasic(path.c_str(), true, getTextureTypeBy(type)));
+		std::string path = Files::getFullPath(directory, texName.C_Str());
+		textures.push_back(*TextureLoader::loadBasic(path, true, getTextureTypeBy(type)));
 	}
 
 	meshData.textures.insert(meshData.textures.end(), textures.begin(), textures.end());

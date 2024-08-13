@@ -11,7 +11,7 @@ class TextureAtlas : public BasicTexture {
 	glm::vec2 indvTextureSize;
 public:
 	TextureAtlas() {}
-	TextureAtlas(const char* path, const glm::vec2& imagesCount, bool flip, TextureType type);
+	TextureAtlas(const std::string& path, const glm::vec2& imagesCount, bool flip, TextureType type);
 
 	AtlasCoords getTextureCoords(const glm::vec2& position) const;
 	AtlasCoords getTextureCoords(const glm::vec2& bottomLeft, const glm::vec2& topRight) const;
