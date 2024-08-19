@@ -1,5 +1,7 @@
 #include "Model.h"
 
+#include "../../utils/PointerUtils.h"
+
 Model::Model(float shininess)
 	: shininess(shininess) {
 
@@ -28,9 +30,5 @@ void Model::draw(Shader& shader) {
 }
 
 void Model::reset() {
-	for (Mesh* mesh : meshes) {
-		delete mesh;
-	}
-
-	meshes.clear();
+	freeArray(meshes);
 }

@@ -27,6 +27,8 @@ class Camera {
 	Player* player;
 	World* world;
 
+	bool blocked;
+
 	float aspect;
 	float fov;
 	float zoom;
@@ -46,6 +48,7 @@ public:
 	const glm::mat4& getProjView() const { return projView; }
 	const glm::mat4& getProjection() const { return projection; }
 	const glm::mat4& getSkyboxView() const { return skyboxView; }
+	void setBlocked(bool blocked) { this->blocked = blocked; }
 	void setViewMode(CameraViewMode viewMode) { this->viewMode = viewMode; }
 
 	void update();

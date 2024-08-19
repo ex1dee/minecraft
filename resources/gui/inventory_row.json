@@ -1,0 +1,24 @@
+{
+    "visible": false,
+    "hasTexture": true,
+    "hasText": false,
+    "name": "inventory_row",
+
+    "color": [ 1, 1, 1, 1 ],
+    "center": [ 0, 0 ],
+    "rotation": [ 0, 0 ],
+    "scale": [ 3, 3 ],
+
+    "children": [],
+
+    "texture": {
+        "path": "resources/textures/gui/widgets.png",
+        "atlas": {
+            "use": true,
+            "exactCoords": true,
+
+            "bottomLeft": [ 1, 235 ],
+            "topRight": [ 181, 255 ]
+        }
+    }
+}

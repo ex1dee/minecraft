@@ -9,14 +9,14 @@ typedef std::function<float(int, int)> SetNoiseFunc;
 typedef std::function<float(float)> ChangeNoiseFunc;
 
 class NoiseMap {
-	CustomImage map;
+	CustomImage<float> map;
 
 	int getIndex(int x, int y) { return y * map.width + x; }
 public:
 	NoiseMap(int width, int height);
 	~NoiseMap();
 
-	const CustomImage& getMap() { return map; }
+	const CustomImage<float>& getMap() { return map; }
 	float get(int x, int y) { return map.data[getIndex(x, y)]; }
 
 	void reset();

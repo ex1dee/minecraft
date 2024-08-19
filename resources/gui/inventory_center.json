@@ -1,0 +1,12 @@
+{
+    "visible": true,
+    "hasTexture": false,
+    "hasText": false,
+    "name": "center",
+
+    "center": [ 0, 0 ],
+    "rotation": [ 0, 0 ],
+    "scale": [ 1, 1 ],
+
+    "children": []
+}

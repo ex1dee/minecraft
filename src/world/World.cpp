@@ -2,9 +2,10 @@
 
 #include <GLFW/glfw3.h>
 
-#include "../config/Config.h"
-#include "../utils/random/Random.h"
 #include "../shaders/ShadersDatabase.h"
+#include "../utils/random/Random.h"
+#include "../utils/PointerUtils.h"
+#include "../config/Config.h"
 
 constexpr float SPAWNPOINT_CHUNKS_RANGE = 100.0f;
 
@@ -32,9 +33,9 @@ World::~World() {
 		thr.join();
 	}
 
-	delete sun;
-	delete clouds;
-	delete terrainGen;
+	freePointer(&sun);
+	freePointer(&clouds);
+	freePointer(&terrainGen);
 }
 
 const Fog& World::getFog() {
@@ -143,8 +144,7 @@ void World::deleteChunkAt(const glm::vec2& chunkPos) {
 	chunkManager.loadedChunks.erase(chunkPos);
 	chunkManager.chunks.erase(chunkPos);
 
-	if (chunk != nullptr)
-		delete chunk;
+	freePointer(&chunk);
 }
 
 void World::render() {
@@ -209,9 +209,9 @@ Block* World::getBlock(const glm::vec3& pos) {
 	return worldPos.chunk->getBlock(worldPos.localBlockPos);
 }
 
-void World::setBlock(const glm::vec3& pos, BlockID blockID) {
+void World::setBlock(const glm::vec3& pos, Material materialID) {
 	WorldPosition worldPos = getWorldPosition(pos);
-	return worldPos.chunk->setBlock(worldPos.localBlockPos, blockID);
+	return worldPos.chunk->setBlock(worldPos.localBlockPos, materialID);
 }
 
 WorldPosition World::getWorldPosition(const glm::vec3& pos) {

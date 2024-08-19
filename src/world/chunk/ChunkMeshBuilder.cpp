@@ -30,7 +30,7 @@ void ChunkMeshBuilder::build() {
 		Block* block = chunk->blocks[i];
 		const BlockType* blockType = block->type;
 
-		if (blockType->id == AIR)
+		if (blockType->material == AIR)
 			continue;
 
 		setActiveMesh(blockType);
@@ -98,8 +98,8 @@ bool ChunkMeshBuilder::shouldAddFace(glm::vec3 adjacentDir, const BlockType* blo
 
 	const BlockType* adjBlockType = adjBlock->type;
 
-	if (adjBlockType->id == BlockID::AIR 
-		|| (!adjBlockType->isOpaque && blockType->id != adjBlockType->id)) {
+	if (adjBlockType->material == Material::AIR 
+		|| (!adjBlockType->isOpaque && blockType->material != adjBlockType->material)) {
 		return true;
 	}
 

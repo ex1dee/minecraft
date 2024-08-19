@@ -35,6 +35,7 @@ class Clouds {
 	void updateNoiseCycle();
 	void updatePosition(float deltaTime);
 public:
+	Clouds(const Clouds& clouds) = default;
 	Clouds(uint32_t seed, Player& player, World& world);
 	~Clouds();
 

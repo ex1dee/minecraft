@@ -2,6 +2,7 @@
 #define TEXTURE_H
 
 #include "../GL/GLHelper.h"
+#include "TextureManager.h"
 #include <cstdint>
 
 #include "TextureType.h"
@@ -16,9 +17,25 @@ protected:
 	int height;
 	int nchannels;
 
+	void align();
 	void prepare(const Image& image);
-	void load(const CustomImage& image);
 	void load(GLenum target, const std::string& path, bool flip);
+
+	template<typename Td> 
+	void load(const CustomImage<Td>& image) {
+		prepare(image);
+
+		if (image.data) {
+			GLenum format = TextureManager::getFormat(image.nchannels);
+
+			if (!format) {
+				std::cout << "Unsupported number of channels in a custom texture\n";
+			}
+
+			GL(glTexImage2D(target, 0, format, width, height, 0, format, image.getType(), image.data));
+			align();
+		}
+	}
 public:
 	Texture() {}
 	Texture(GLenum target, TextureType type)

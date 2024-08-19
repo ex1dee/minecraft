@@ -1,0 +1,15 @@
+{
+    "visible": true,
+    "hasTexture": false,
+    "hasText": false,
+    "name": "titles",
+
+    "center": [ 0, 0 ],
+    "rotation": [ 0, 0 ],
+    "scale": [ 1, 1 ],
+
+    "children": [
+        "backpack_title",
+        "open_title"
+    ]
+}

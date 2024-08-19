@@ -1,5 +1,7 @@
 {
+    "visible": true,
     "hasTexture": true,
+    "hasText": false,
     "name": "crosshair",
 
     "color": [ 1, 1, 1, 0.75 ],
@@ -10,12 +12,11 @@
     "children": [],
 
     "texture": {
-        "path": "resources/textures/hud/icons.png",
+        "path": "resources/textures/gui/icons.png",
         "atlas": {
             "use": true,
             "exactCoords": true,
 
-            "imagesCount": [ 25, 25 ],
             "bottomLeft": [ 2, 243 ],
             "topRight": [ 12, 253 ]
         }

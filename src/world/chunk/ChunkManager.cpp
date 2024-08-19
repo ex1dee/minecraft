@@ -8,9 +8,7 @@ ChunkManager::ChunkManager(World& world)
 }
 
 ChunkManager::~ChunkManager() {
-	for (std::pair<glm::vec2, Chunk*> pair : chunks) {
-		delete pair.second;
-	}
+	freeMapValues(chunks);
 }
 
 void ChunkManager::makeMesh(const glm::vec2& pos) {

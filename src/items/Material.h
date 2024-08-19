@@ -1,7 +1,7 @@
-#ifndef BLOCKID_H
-#define BLOCKID_H
+#ifndef MATERIAL_H
+#define MATERIAL_H
 
-enum BlockID {
+enum Material {
 	AIR = 0,
 	GRASS_BLOCK = 1,
 	DIRT = 2,

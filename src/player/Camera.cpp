@@ -32,7 +32,9 @@ void Camera::setZoom(float zoom) {
 void Camera::update() {
 	fov = Config::settings["camera"]["fov"];
 
-	updateOrientation();
+	if (!blocked)
+		updateOrientation();
+
 	updateView();
 	updateProjection();
 

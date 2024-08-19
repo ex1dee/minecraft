@@ -49,7 +49,7 @@ public:
 	AABB& getAABB() { return aabb; }
 
 	Block* getBlock(const glm::vec3& pos);
-	void setBlock(const glm::vec3& pos, BlockID blockID);
+	void setBlock(const glm::vec3& pos, Material material);
 	glm::vec3 getWorldPosition(const glm::vec3& blockPos);
 
 	static glm::vec3 getLocalBlockPosition(int index);

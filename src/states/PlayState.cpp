@@ -3,12 +3,13 @@
 #include "../input/handlers/MovementsInput.h"
 #include "../input/handlers/CameraInput.h"
 #include "../input/handlers/WindowInput.h"
+#include "../input/handlers/GUIInput.h"
 #include "../physics/PhysicsEngine.h"
 #include "../gui/GUI.h"
 
 constexpr float
 SEC_PER_PHYSICS_TICK = 1.0f / 120.0f,
-SEC_PER_WORLD_TICK = 0.005;
+SEC_PER_WORLD_TICK = 0.005f;
 
 PlayState::PlayState(Player& player)
 	: player(&player) {
@@ -29,11 +30,12 @@ PlayState::~PlayState() {
 	PhysicsEngine::finalize();
 	isRunning = false;
 
-	delete world;
-	delete renderer;
+	freePointer(&world);
+	freePointer(&renderer);
 }
 
 void PlayState::handleInput() {
+	GUIInput::handle(*player);
 	MovementsInput::handle(*player, physicsTickTimer.getSecPerTick());
 	CameraInput::handle(*player, physicsTickTimer.getSecPerTick());
 	WindowInput::handle();
@@ -48,7 +50,7 @@ void PlayState::update() {
 		PhysicsEngine::update(physicsTickTimer.getSecPerTick());
 	}
 
-	GUI::update();
+	GUI::update(*player);
 }
 
 void PlayState::render() {

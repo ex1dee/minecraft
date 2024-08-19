@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\OpenGL\includes\;$(IncludePath);$(IncludePath)</IncludePath>
-    <LibraryPath>C:\OpenGL\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Users\User\YandexDisk\INFO's recopy\ОСНОВНОЕ\БИБЛИОТЕКИ\OpenGL\OpenGL\includes;C:\OpenGL\includes\;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\User\YandexDisk\INFO's recopy\ОСНОВНОЕ\БИБЛИОТЕКИ\OpenGL\OpenGL\libs;C:\OpenGL\libs;$(LibraryPath)</LibraryPath>
     <ReferencePath />
     <LibraryWPath />
     <IntDir>$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
@@ -128,7 +128,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;glfw3_mt.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;glfw3.lib;glfw3_mt.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
     </Link>
@@ -164,6 +164,15 @@
     <ClCompile Include="src\GL\GLHelper.cpp" />
     <ClCompile Include="src\gui\GUI.cpp" />
     <ClCompile Include="src\gui\GUIDatabase.cpp" />
+    <ClCompile Include="src\gui\GUIManager.cpp" />
+    <ClCompile Include="src\gui\InventoryGUI.cpp" />
+    <ClCompile Include="src\input\handlers\GUIInput.cpp" />
+    <ClCompile Include="src\items\inventory\Inventory.cpp" />
+    <ClCompile Include="src\items\inventory\InventoryView.cpp" />
+    <ClCompile Include="src\items\ItemsDatabase.cpp" />
+    <ClCompile Include="src\items\ItemStack.cpp" />
+    <ClCompile Include="src\items\meta\ItemMeta.cpp" />
+    <ClCompile Include="src\items\meta\ItemMetaLoader.cpp" />
     <ClCompile Include="src\math\geometry\Transform.cpp" />
     <ClCompile Include="src\math\intersects\RayBoxIntersect.cpp" />
     <ClCompile Include="src\math\intersects\RayRectIntersect.cpp" />
@@ -189,10 +198,13 @@
     <ClCompile Include="src\render\SkyboxRenderer.cpp" />
     <ClCompile Include="src\render\SpriteRenderer.cpp" />
     <ClCompile Include="src\render\sprite\Sprite.cpp" />
+    <ClCompile Include="src\render\TextRenderer.cpp" />
     <ClCompile Include="src\shaders\ShadersDatabase.cpp" />
     <ClCompile Include="src\textures\CustomTexture.cpp" />
     <ClCompile Include="src\textures\Texture.cpp" />
     <ClCompile Include="src\textures\TextureLoader.cpp" />
+    <ClCompile Include="src\text\FTLoader.cpp" />
+    <ClCompile Include="src\text\Text2D.cpp" />
     <ClCompile Include="src\utils\AssimpLoader.cpp" />
     <ClCompile Include="src\utils\noise\NoiseManager.cpp" />
     <ClCompile Include="src\utils\noise\NoiseMap.cpp" />
@@ -239,6 +251,18 @@
     <ClInclude Include="src\gui\GUI.h" />
     <ClInclude Include="src\gui\GUIDatabase.h" />
     <ClInclude Include="src\gui\GUIElement.h" />
+    <ClInclude Include="src\gui\GUIManager.h" />
+    <ClInclude Include="src\gui\InventoryGUI.h" />
+    <ClInclude Include="src\gui\InventoryItem.h" />
+    <ClInclude Include="src\input\handlers\GUIInput.h" />
+    <ClInclude Include="src\items\inventory\Inventory.h" />
+    <ClInclude Include="src\items\inventory\InventoryView.h" />
+    <ClInclude Include="src\items\ItemStack.h" />
+    <ClInclude Include="src\items\ItemType.h" />
+    <ClInclude Include="src\items\meta\BlockStateMeta.h" />
+    <ClInclude Include="src\items\meta\ItemMeta.h" />
+    <ClInclude Include="src\items\ItemsDatabase.h" />
+    <ClInclude Include="src\items\meta\ItemMetaLoader.h" />
     <ClInclude Include="src\math\intersects\Intersect1P.h" />
     <ClInclude Include="src\math\intersects\IntersectList.h" />
     <ClInclude Include="src\math\intersects\RayBoxIntersect.h" />
@@ -273,10 +297,18 @@
     <ClInclude Include="src\render\BlockFrameRenderer.h" />
     <ClInclude Include="src\render\CloudsRenderer.h" />
     <ClInclude Include="src\render\SpriteRenderer.h" />
+    <ClInclude Include="src\render\TextRenderer.h" />
     <ClInclude Include="src\textures\CustomImage.h" />
     <ClInclude Include="src\textures\CustomTexture.h" />
+    <ClInclude Include="src\text\FTCharacter.h" />
+    <ClInclude Include="src\text\FTLoader.h" />
+    <ClInclude Include="src\text\Text2D.h" />
+    <ClInclude Include="src\text\TextAlignment.h" />
     <ClInclude Include="src\utils\noise\NoiseManager.h" />
     <ClInclude Include="src\utils\noise\NoiseMap.h" />
+    <ClInclude Include="src\utils\PointerUtils.h" />
+    <ClInclude Include="src\utils\StringConverter.h" />
+    <ClInclude Include="src\world\block\states\BlockState.h" />
     <ClInclude Include="src\world\Clouds.h" />
     <ClInclude Include="src\render\EntityRenderer.h" />
     <ClInclude Include="src\render\fog\Fog.h" />
@@ -289,7 +321,7 @@
     <ClInclude Include="src\render\model\MeshType.h" />
     <ClInclude Include="src\textures\AtlasCoords.h" />
     <ClInclude Include="src\render\sprite\Sprite.h" />
-    <ClInclude Include="src\render\sprite\SpriteTexture.h" />
+    <ClInclude Include="src\textures\SpriteTexture.h" />
     <ClInclude Include="src\shaders\ShadersDatabase.h" />
     <ClInclude Include="src\shaders\ShaderType.h" />
     <ClInclude Include="src\textures\TextureLoader.h" />
@@ -338,7 +370,7 @@
     <ClInclude Include="src\input\CursorPos.h" />
     <ClInclude Include="src\window\Window.h" />
     <ClInclude Include="src\textures\TextureAtlas.h" />
-    <ClInclude Include="src\world\block\BlockID.h" />
+    <ClInclude Include="src\items\Material.h" />
     <ClInclude Include="src\world\block\BlocksDatabase.h" />
     <ClInclude Include="src\world\chunk\ChunkManager.h" />
     <ClInclude Include="src\world\chunk\ChunkMesh.h" />
@@ -364,8 +396,21 @@
     <None Include="resources\blocks\stone.json" />
     <None Include="resources\blocks\water.json" />
     <None Include="resources\entities\player.json" />
+    <None Include="resources\gui\inventory_titles.json" />
+    <None Include="resources\gui\item_description.json" />
+    <None Include="resources\gui\item_description_text.json" />
+    <None Include="resources\gui\slot_frame.json" />
     <None Include="resources\gui\hud.json" />
     <None Include="resources\gui\hud_crosshair.json" />
+    <None Include="resources\gui\inventory.json" />
+    <None Include="resources\gui\inventory_background.json" />
+    <None Include="resources\gui\inventory_bottom.json" />
+    <None Include="resources\gui\inventory_center.json" />
+    <None Include="resources\gui\inventory_row.json" />
+    <None Include="resources\gui\inventory_top.json" />
+    <None Include="resources\gui\hotbar.json" />
+    <None Include="resources\items\air.json" />
+    <None Include="resources\items\grass_block.json" />
     <None Include="resources\models\player\model.gltf" />
     <None Include="shaders\clouds.fs" />
     <None Include="shaders\default.fs" />
@@ -378,12 +423,25 @@
     <None Include="shaders\skybox.vs" />
     <None Include="shaders\sprite.fs" />
     <None Include="shaders\sprite.vs" />
+    <None Include="shaders\text.fs" />
     <None Include="src\render\Drawable.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\models\player\textures\gltf_embedded_0.png" />
     <Image Include="resources\textures\blocks_atlas.png" />
+    <Image Include="resources\textures\gui\icons.png" />
+    <Image Include="resources\textures\gui\inventory_background.png" />
+    <Image Include="resources\textures\gui\widgets.png" />
     <Image Include="resources\textures\hud\icons.png" />
+    <Image Include="resources\textures\inventory\inventory0.png" />
+    <Image Include="resources\textures\inventory\inventory1.png" />
+    <Image Include="resources\textures\inventory\inventory2.png" />
+    <Image Include="resources\textures\inventory\inventory3.png" />
+    <Image Include="resources\textures\inventory\inventory4.png" />
+    <Image Include="resources\textures\inventory\inventory5.png" />
+    <Image Include="resources\textures\inventory\inventory6.png" />
+    <Image Include="resources\textures\items\air.png" />
+    <Image Include="resources\textures\items\grass_block.png" />
     <Image Include="resources\textures\skybox\back.bmp" />
     <Image Include="resources\textures\skybox\bottom.bmp" />
     <Image Include="resources\textures\skybox\front.bmp" />

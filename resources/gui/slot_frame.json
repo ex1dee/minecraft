@@ -1,0 +1,24 @@
+{
+    "visible": false,
+    "hasTexture": true,
+    "hasText": false,
+    "name": "slot_frame",
+
+    "color": [ 1, 1, 1, 0.5 ],
+    "center": [ 0, 0 ],
+    "rotation": [ 0, 0 ],
+    "scale": [ 1, 1 ],
+
+    "children": [],
+
+    "texture": {
+        "path": "resources/textures/gui/widgets.png",
+        "atlas": {
+            "use": true,
+            "exactCoords": true,
+
+            "bottomLeft": [ 1, 211 ],
+            "topRight": [ 22, 232 ]
+        }
+    }
+}

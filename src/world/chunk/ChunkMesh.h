@@ -6,6 +6,7 @@
 
 #include "../../textures/AtlasCoords.h"
 #include "../../render/model/Model.h"
+#include "../../utils/PointerUtils.h"
 #include "../WorldConstants.h"
 
 class ChunkMesh {
@@ -37,7 +38,9 @@ struct ChunkMeshCollection {
 	}
 
 	~ChunkMeshCollection() {
-		delete solid, liquid, flora;
+		freePointer(&solid);
+		freePointer(&liquid);
+		freePointer(&flora);
 	}
 
 	void createBuffers() {

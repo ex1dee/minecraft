@@ -1,0 +1,22 @@
+{
+    "visible": false,
+    "hasTexture": true,
+    "hasText": false,
+    "name": "item_description",
+
+    "color": [ 0.2, 0, 0.2, 1 ],
+    "center": [ 0, 0 ],
+    "rotation": [ 0, 0 ],
+    "scale": [ 1.0, 1.0 ],
+
+    "children": [
+        "text"
+    ],
+
+    "texture": {
+        "path": "resources/textures/gui/inventory_background.png",
+        "atlas": {
+            "use": false
+        }
+    }
+}

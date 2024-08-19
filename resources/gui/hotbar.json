@@ -1,0 +1,12 @@
+{
+    "visible": true,
+    "hasTexture": false,
+    "hasText": false,
+    "name": "hotbar",
+
+    "center": [ 0, -485 ],
+    "rotation": [ 0, 0 ],
+    "scale": [ 1.35, 1.35 ],
+
+    "children": []
+}

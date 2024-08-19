@@ -17,6 +17,7 @@ public:
 
 	glm::mat4 calcModel() const;
 	void add(const Transform& transform);
+	void subtract(const Transform& transform);
 };
 
 #endif

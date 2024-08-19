@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "../utils/PointerUtils.h"
 #include "../framebuffer/DepthFramebuffer.h"
 #include "../framebuffer/DFBConfig.h"
 
@@ -19,9 +20,7 @@ public:
 	}
 
 	~Light() {
-		for (DepthFramebuffer* framebuffer : framebuffers) {
-			delete framebuffer;
-		}
+		freeArray(framebuffers);
 	}
 };
 

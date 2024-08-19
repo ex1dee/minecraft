@@ -1,7 +1,9 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+#include "../items/inventory/InventoryView.h"
 #include "../math/geometry/Orientation.h"
+#include "../gui/InventoryItem.h"
 #include "../entity/Entity.h"
 
 constexpr float
@@ -19,24 +21,51 @@ class Camera;
 class Player : public Entity {
 	friend class MovementsInput;
 
-	bool sprinting = false;
-	bool sneaking = false;
+	int selectedSlot = 0;
 	bool flying = false;
+	bool sneaking = false;
+	bool sprinting = false;
 	float speed = PLAYER_DEFAULT_SPEED;
 	float jumpForce = PLAYER_JUMP_FORCE;
 
+	InventoryView* openInventoryView;
+	InventoryView* backpackView;
+	InventoryView* hotbarView;
+	Inventory* pOpenInventory;
+	Inventory* inventory;
+	InventoryItem draggedItem;
+
 	Camera* camera;
+
+	void setupInventory();
 public:
 	Player(Camera& camera);
+	~Player();
 
+	Camera& getCamera() const { return *camera; }
 	float getWalkSpeed() const { return speed; }
 	float getJumpForce() const { return jumpForce; }
+	int getSelectedSlot() const { return selectedSlot; }
 	bool isFlying() const { return flying; }
 	bool isSneaking() const { return sneaking; }
 	bool isSprinting() const { return sprinting; }
-	Camera& getCamera() const { return *camera; }
+	bool isOpenedBackpack() { return backpackView->isOpened(); }
+	bool isOpenedInventory() { return openInventoryView != nullptr; }
+	InventoryView* getOpenInventoryView() { return openInventoryView; }
+	InventoryView& getBackpackView() { return *backpackView; }
+	InventoryView& getHotbarView() { return *hotbarView; }
+	const InventoryItem& getDraggedItem() { return draggedItem; }
 
+	void openBackpack();
+	void closeBackpack();
+	void closeInventory();
+	void resetDraggedItem();
+	void selectSlot(int slot);
 	void setFlying(bool flying);
+	void openInventory(Inventory* inventory);
+	void setDraggedItem(const InventoryItem& item);
+	void setNeedUpdateInventoryViews(bool needUpdate);
+	bool isNeedUpdateInventoryViews();
 };
 
 #endif

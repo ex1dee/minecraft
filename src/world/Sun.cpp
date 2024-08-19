@@ -23,7 +23,7 @@ Sun::Sun(Shader& FBOShader, World& world, Player& player)
 }
 
 Sun::~Sun() {
-	delete light;
+	freePointer(&light);
 }
 
 void Sun::setTime(float time) {

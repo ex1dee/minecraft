@@ -1,5 +1,6 @@
 #include "EntitiesDatabase.h"
 
+#include "../utils/PointerUtils.h"
 #include "../utils/AssimpLoader.h"
 #include "../utils/Json.h"
 
@@ -35,7 +36,5 @@ void EntitiesDatabase::initialize() {
 }
 
 void EntitiesDatabase::finalize() {
-	for (std::pair<EntityID, EntityType*> pair : entities) {
-		delete pair.second;
-	}
+	freeMapValues(entities);
 }

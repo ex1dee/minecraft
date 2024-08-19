@@ -4,6 +4,13 @@ Drawable::~Drawable() {
 	resetBuffers();
 }
 
+Drawable::Drawable(const Drawable& other) {
+	buffers = other.buffers;
+
+	if (other.VAO != 0)
+		setup();
+}
+
 void Drawable::setup() {
 	if (VAO)
 		resetBuffers();

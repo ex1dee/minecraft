@@ -2,8 +2,9 @@
 
 #include "Renderer.h"
 
-void SpriteRenderer::render(const Sun& sun) {
-	startRender(true, &sun);
+void SpriteRenderer::render(const Sun& sun, const Camera& camera) {
+	Renderer::startTransparentRender();
+	updateShader(sun, camera);
 
 	for (Sprite* sprite : sprites) {
 		sprite->draw(*activeShader);
@@ -11,36 +12,18 @@ void SpriteRenderer::render(const Sun& sun) {
 
 	sprites.clear();
 
-	finishRender();
+	Renderer::finishTransparentRender();
 }
 
-void SpriteRenderer::startRender(bool depthTest, const Sun* sun) {
-	updateShader(sun);
-
-	if (!depthTest)
-		glDisable(GL_DEPTH_TEST);
-
-	Renderer::startTransparentRender();
-}
-
-void SpriteRenderer::updateShader(const Sun* sun) {
+void SpriteRenderer::updateShader(const Sun& sun, const Camera& camera) {
 	activeShader = &ShadersDatabase::get(ShaderType::SPRITE);
 	activeShader->use();
 
-	activeShader->setMat4("projection", GUI::getProjection());
-	activeShader->setMat4("view", GUI::getView());
+	activeShader->setMat4("projection", camera.getProjection());
+	activeShader->setMat4("view", camera.getView());
 
-	if (sun != nullptr) {
-		activeShader->setBool("sunEnabled", true);
-		activeShader->setVec3("sunDirection", sun->getLight().direction);
-	} else {
-		activeShader->setBool("sunEnabled", false);
-	}
-}
-
-void SpriteRenderer::finishRender() {
-	Renderer::finishTransparentRender();
-	glEnable(GL_DEPTH_TEST);
+	activeShader->setBool("sunEnabled", true);
+	activeShader->setVec3("sunDirection", sun.getLight().direction);
 }
 
 void SpriteRenderer::add(Sprite* sprite) {

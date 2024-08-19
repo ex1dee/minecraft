@@ -36,8 +36,8 @@ Clouds::~Clouds() {
 
 	sprite->resetTexture();
 
-	delete noiseMap;
-	delete sprite;
+	freePointer(&noiseMap);
+	freePointer(&sprite);
 }
 
 void Clouds::setup() {
@@ -112,7 +112,7 @@ void Clouds::update(float deltaTime) {
 void Clouds::updateTexture() {
 	if (noiseUpdated) {
 		sprite->resetTexture();
-		sprite->texture.data = new CustomTexture(noiseMap->getMap(), GL_MIRRORED_REPEAT, GL_LINEAR);
+		sprite->texture.data = new CustomTexture<float>(noiseMap->getMap(), GL_MIRRORED_REPEAT, GL_LINEAR);
 
 		noiseUpdated = false;
 	}

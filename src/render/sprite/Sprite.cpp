@@ -1,8 +1,33 @@
 #include "Sprite.h"
 
+#include "../../utils/PointerUtils.h"
 #include "../../textures/TextureManager.h"
 
+Sprite::Sprite(const Sprite& other) {
+	texture = other.texture;
+	transform = other.transform;
+	color = other.color;
+
+	setup();
+}
+
+Rect Sprite::getRect() {
+	Rect rect(
+		glm::vec3(vertexPositions[0], vertexPositions[1], vertexPositions[2]),
+		glm::vec3(vertexPositions[3], vertexPositions[4], vertexPositions[5]),
+		glm::vec3(vertexPositions[6], vertexPositions[7], vertexPositions[8]),
+		glm::vec3(vertexPositions[9], vertexPositions[10], vertexPositions[11])
+	);
+
+	rect.applyTransform(transform);
+
+	return rect;
+}
+
 void Sprite::setup() {
+	if (texture.data == nullptr)
+		return;
+
 	Drawable::setup();
 
 	calcVertices();
@@ -89,6 +114,5 @@ void Sprite::reset() {
 }
 
 void Sprite::resetTexture() {
-	if (texture.data != nullptr)
-		delete texture.data;
+	freePointer(&texture.data);
 }

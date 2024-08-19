@@ -33,7 +33,7 @@ struct DirectLight {
 	vec3 color;
 };
 
-struct Material {
+struct MaterialID {
 	int diffuseCount;
 	sampler2D diffuse[16];
 
@@ -66,7 +66,7 @@ uniform DirectLight sun;
 uniform vec3 cameraPos;
 uniform Fog fog;
 
-uniform Material material;
+uniform MaterialID material;
 uniform sampler2D tex;
 
 uniform int pointLightCount;

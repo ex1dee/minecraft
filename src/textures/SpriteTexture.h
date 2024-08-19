@@ -1,8 +1,8 @@
 #ifndef SPRITETEXTURE_H
 #define SPRITETEXTURE_H
 
-#include "../../textures/Texture.h"
-#include "../../textures/AtlasCoords.h"
+#include "Texture.h"
+#include "AtlasCoords.h"
 
 class SpriteTexture {
 public:

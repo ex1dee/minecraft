@@ -22,3 +22,9 @@ void Transform::add(const Transform& transform) {
 	rotation += transform.rotation;
 	scale *= transform.scale;
 }
+
+void Transform::subtract(const Transform& transform) {
+	position -= transform.position;
+	rotation -= transform.rotation;
+	scale /= transform.scale;
+}

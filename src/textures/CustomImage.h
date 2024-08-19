@@ -3,22 +3,27 @@
 
 #include "Image.h"
 
+template<typename Td>
 class CustomImage : public Image {
+	GLenum type;
 public:
-	float* data;
+	Td* data;
 
-	CustomImage(int width, int height, int nchannels)
-		: Image(width, height, nchannels) {
+	CustomImage(GLenum type, int width, int height, int nchannels)
+		: Image(width, height, nchannels), type(type) {
 		allocData();
 	}
 
 	void allocData() {
-		data = new float[width * height * nchannels];
+		data = new Td[width * height * nchannels];
+	}
+
+	GLenum getType() const {
+		return type;
 	}
 
 	void free() override {
-		if (data != nullptr)
-			delete data;
+		freePointer(&data);
 	}
 };
 

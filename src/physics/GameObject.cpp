@@ -8,7 +8,7 @@ GameObject::GameObject(World* world)
 }
 
 GameObject::~GameObject() {
-	delete collider;
+	freePointer(&collider);
 }
 
 Liquid* GameObject::getLiquidAtObject() {

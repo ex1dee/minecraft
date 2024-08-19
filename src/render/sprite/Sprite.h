@@ -4,8 +4,9 @@
 #include "../../GL/GLHelper.h"
 
 #include "../../math/geometry/Transform.h"
+#include "../../math/shapes/Rect.h"
+#include "../../textures/SpriteTexture.h"
 #include "../../shaders/Shader.h"
-#include "SpriteTexture.h"
 #include "../Drawable.h"
 
 class Sprite : public Drawable {
@@ -17,16 +18,19 @@ class Sprite : public Drawable {
 	void calcTextureCoords();
 	void bindTexture(Shader& shader);
 public:
+	glm::vec4 color = glm::vec4(1);
 	SpriteTexture texture;
 	Transform transform;
 
-	glm::vec4 color = glm::vec4(1);
+	Sprite() = default;
+	Sprite(const Sprite& other);
 
 	void setup() override;
 	void reset() override;
 	void draw(Shader& shader) override;
 
 	void resetTexture();
+	Rect getRect();
 };
 
 #endif

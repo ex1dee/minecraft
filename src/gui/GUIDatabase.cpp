@@ -1,6 +1,8 @@
 #include "GUIDatabase.h"
 
 #include "../textures/TextureLoader.h"
+#include "../utils/StringConverter.h"
+#include "GUIManager.h"
 
 constexpr const char* GUI_DIR = "resources/gui";
 constexpr const char* TEXTURES_DIR = "resources/textures/";
@@ -21,12 +23,20 @@ void GUIDatabase::initialize() {
 		else
 			element = new GUIElement;
 
+		element->visible = json["visible"];
 		element->hasTexture = json["hasTexture"];
+		element->hasText = json["hasText"];
 		element->name = name;
 
 		element->transform.position += glm::vec3(Json::toVec2(json["center"]), 0);
 		element->transform.rotation += glm::vec3(Json::toVec2(json["rotation"]), 0);
 		element->transform.scale *= glm::vec3(Json::toVec2(json["scale"]), 1);
+		
+		if (json.contains("layer_offset")) {
+			element->layer_offset = json["layer_offset"];
+		} else {
+			element->layer_offset = 0;
+		}
 
 		addChildren(element, json, elements);
 
@@ -34,10 +44,18 @@ void GUIDatabase::initialize() {
 			addTexture(element, json);
 		}
 
+		if (element->hasText) {
+			addText(element, json);
+		}
+
 		elements.emplace(name, element);
 	}
 
 	createRootSector(elements);
+}
+
+void GUIDatabase::finalize() {
+	GUIManager::deleteSector(root);
 }
 
 void GUIDatabase::addChildren(GUIElement* element, const nlohmann::basic_json<>& json, GUISector& elements) {
@@ -58,26 +76,21 @@ void GUIDatabase::addTexture(GUIElement* element, const nlohmann::basic_json<>& 
 	element->sprite = new Sprite;
 	element->sprite->color *= Json::toVec4(json["color"]);
 
-	SpriteTexture* texture = &element->sprite->texture;
-	texture->useAtlas = atlasJson["use"];
+	TextureLoader::loadSprite(json["texture"], element->sprite->texture);
+}
 
-	if (texture->useAtlas) {
-		glm::vec2 imagesCount = Json::toVec2(atlasJson["imagesCount"]);
-		const TextureAtlas* atlas = TextureLoader::loadAtlas(path, imagesCount, true, TextureType::SPRITE);
-		texture->data = (const Texture*)atlas;
+void GUIDatabase::addText(GUIElement* element, const nlohmann::basic_json<>& json) {
+	glm::vec3 position = glm::vec3(Json::toVec2(json["text"]["position"]), 0);
+	glm::vec4 color = Json::toVec4(json["text"]["color"]);
+	TextAlignment alignment = json["text"]["alignment"];
+	std::string title = json["text"]["content"];
 
-		glm::vec2 bottomLeft = Json::toVec2(atlasJson["bottomLeft"]);
-		glm::vec2 topRight = Json::toVec2(atlasJson["topRight"]);
-		texture->atlas.exactly = atlasJson["exactCoords"];
-
-		if (texture->atlas.exactly) {
-			texture->atlas = atlas->getExactTextureCoords(bottomLeft, topRight);
-		} else {
-			texture->atlas = atlas->getTextureCoords(bottomLeft, topRight);
-		}
-	} else {
-		texture->data = TextureLoader::loadBasic(path, false, TextureType::SPRITE);
-	}
+	element->text = new Text2D(
+		StringConverter::toWString(title),
+		alignment,
+		element->transform.position + position,
+		color
+	);
 }
 
 void GUIDatabase::createRootSector(GUISector& elements) {
@@ -87,22 +100,5 @@ void GUIDatabase::createRootSector(GUISector& elements) {
 		if (element->parent == nullptr) {
 			root.emplace(element->name, element);
 		}
-	}
-}
-
-void GUIDatabase::finalize(GUISector* sector) {
-	if (sector == nullptr)
-		sector = &root;
-
-	for (auto pair : *sector) {
-		GUIElement* element = pair.second;
-
-		for (auto childPair : element->children) {
-			GUIElement* child = childPair.second;
-
-			finalize(&child->children);
-		}
-
-		delete element;
 	}
 }

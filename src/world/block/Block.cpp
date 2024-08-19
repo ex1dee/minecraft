@@ -1,9 +1,14 @@
 #include "Block.h"
 
 #include "../../math/intersects/RayBoxIntersect.h"
+#include "../../utils/PointerUtils.h"
 
-Block::Block(BlockID id) {
-	type = BlocksDatabase::get(id);
+Block::Block(Material material) {
+	type = BlocksDatabase::get(material);
+}
+
+Block::~Block() {
+	freePointer(&state);
 }
 
 IntersectList Block::intersect(const Ray& ray) const {

@@ -3,11 +3,12 @@
 
 #include "Texture.h"
 
+template <typename Td>
 class CustomTexture : public Texture {
-	void load(const CustomImage& image, GLint wrap, GLint filter);
+	void load(const CustomImage<Td>& image, GLint wrap, GLint filter);
 public:
 	CustomTexture() {}
-	CustomTexture(const CustomImage& image, GLint wrap, GLint filter);
+	CustomTexture(const CustomImage<Td>& image, GLint wrap, GLint filter);
 };
 
 #endif

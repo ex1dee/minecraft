@@ -5,6 +5,7 @@
 #include <mutex>
 
 #include "../entity/EntitiesDatabase.h"
+#include "../utils/PointerUtils.h"
 #include "../render/fog/Fog.h"
 #include "../player/Player.h"
 #include "generation/terrain/DefaultWorldGenerator.h"
@@ -61,7 +62,7 @@ public:
 	void updateChunks();
 	void update(float deltaTime);
 	void updateChunk(const glm::vec3& pos);
-	void setBlock(const glm::vec3& pos, BlockID blockID);
+	void setBlock(const glm::vec3& pos, Material materialID);
 	WorldPosition getWorldPosition(const glm::vec3& pos);
 	glm::vec3 getLocalBlockPosition(const glm::vec3& pos);
 	glm::vec2 getLocalChunkPosition(const glm::vec3& pos);

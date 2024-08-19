@@ -1,11 +1,12 @@
 #include "BlocksDatabase.h"
 
-#include "../../utils/Json.h"
 #include "meta/BlockMetaLoader.h"
+#include "../../utils/PointerUtils.h"
+#include "../../utils/Json.h"
 
 constexpr const char* BLOCKS_DIR = "resources/blocks";
 
-std::unordered_map<BlockID, BlockType*> BlocksDatabase::blocks;
+std::unordered_map<Material, BlockType*> BlocksDatabase::blocks;
 const TextureAtlas* BlocksDatabase::textureAtlas;
 
 void BlocksDatabase::initialize() {
@@ -23,18 +24,16 @@ void BlocksDatabase::initialize() {
 		type->meshType = json["meshType"];
 		type->isOpaque = json["opaque"];
 		type->isSolid = json["solid"];
-		type->id = json["id"];
+		type->material = json["material"];
 
 		if (json.find("meta") != json.end()) {
 			type->meta = BlockMetaLoader::load(json["meta"]["id"], json);
 		}
 
-		blocks.emplace(type->id, type);
+		blocks.emplace(type->material, type);
 	}
 }
 
 void BlocksDatabase::finalize() {
-	for (std::pair<int, BlockType*> pair : blocks) {
-		delete pair.second;
-	}
+	freeMapValues(blocks);
 }

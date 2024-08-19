@@ -1,6 +1,8 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
+#include <glm/glm.hpp>
+
 #include "../GL/GLHelper.h"
 #include <GLFW/glfw3.h>
 
@@ -37,10 +39,16 @@ public:
 	static void initialize();
 	static void finalize();
 
-	static void swapBuffers();
 	static bool shouldClose();
+	static void swapBuffers();
+	static void enableCursor();
+	static void disableCursor();
 	static void toggleFullscreen();
 	static void setWindowViewport();
+	static void setCursorInCenter();
+	static void setCursorPos(double x, double y);
+	static glm::dvec2 getCursorPos();
+	static glm::dvec2 getCursorPosRelativeToCenter();
 };
 
 #endif

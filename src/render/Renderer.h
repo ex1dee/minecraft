@@ -10,6 +10,7 @@
 #include "EntityRenderer.h"
 #include "CloudsRenderer.h"
 #include "ChunkRenderer.h"
+#include "TextRenderer.h"
 #include "GUIRenderer.h"
 
 class Chunk;
@@ -21,6 +22,7 @@ class Renderer {
 	SpriteRenderer spriteRenderer;
 	CloudsRenderer cloudsRenderer;
 	ChunkRenderer chunkRenderer;
+	TextRenderer textRenderer;
 	GUIRenderer guiRenderer;
 
 	Shader* FBOShader;

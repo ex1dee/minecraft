@@ -1,0 +1,17 @@
+{
+    "material": 1,
+    "hasMeta": true,
+
+    "meta": {
+        "id": 0,
+        "name": "Grass",
+        "lore": []
+    },
+
+    "texture": {
+        "path": "resources/textures/items/grass_block.png",
+        "atlas": {
+            "use": false
+        }
+    }
+}

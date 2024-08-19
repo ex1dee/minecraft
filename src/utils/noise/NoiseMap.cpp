@@ -1,7 +1,7 @@
 #include "NoiseMap.h"
 
 NoiseMap::NoiseMap(int width, int height)
-	: map(width, height, 1) {
+	: map(GL_FLOAT, width, height, 1) {
 
 }
 

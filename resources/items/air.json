@@ -1,0 +1,11 @@
+{
+    "material": 0,
+    "hasMeta": false,
+
+    "texture": {
+        "path": "resources/textures/items/air.png",
+        "atlas": {
+            "use": false
+        }
+    }
+}

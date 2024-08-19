@@ -8,12 +8,15 @@
 #include "shaders/ShadersDatabase.h"
 #include "entity/EntitiesDatabase.h"
 #include "world/block/BlocksDatabase.h"
-#include "states/PlayState.h"
-#include "player/Camera.h"
+#include "items/ItemsDatabase.h"
+#include "text/FTLoader.h"
 #include "gui/GUIDatabase.h"
 #include "gui/GUI.h"
 
-#include "../dependencies/stb_image.h"
+#include "states/PlayState.h"
+#include "player/Camera.h"
+
+#include <ft2build.h>
 
 int main() {
     try {
@@ -23,6 +26,8 @@ int main() {
         EntitiesDatabase::initialize();
         ShadersDatabase::initialize();
         GUIDatabase::initialize();
+        ItemsDatabase::initialize();
+        FTLoader::initialize();
         GUI::initialize();
     } catch (const char* message) {
         std::cout << "ERROR::INITIALIZE\n" << message << "\n";
@@ -36,6 +41,9 @@ int main() {
 
     std::vector<BaseState*> states;
     states.push_back(new PlayState(player));
+
+    player.getBackpackView().setItem(0, 0, ItemStack(GRASS_BLOCK));
+    player.getBackpackView().setItem(3, 1, ItemStack(GRASS_BLOCK));
 
     while (!Window::shouldClose()) {
         camera.update();
@@ -51,7 +59,7 @@ int main() {
     }
 
     for (BaseState* state : states) {
-        delete state;
+        freePointer(&state);
     }
 
     Window::finalize();
@@ -59,4 +67,6 @@ int main() {
     EntitiesDatabase::finalize();
     ShadersDatabase::finalize();
     GUIDatabase::finalize();
+    ItemsDatabase::finalize();
+    FTLoader::finalize();
 }

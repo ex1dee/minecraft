@@ -14,6 +14,8 @@ public:
 	glm::vec3 right;
 	glm::vec3 up;
 
+	Orientation() = default;
+
 	void update(float yaw, float pitch);
 	void update(const glm::vec3& front);
 

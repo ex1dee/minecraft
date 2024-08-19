@@ -48,7 +48,8 @@ void Renderer::finishRender(World& world) {
 	
 	cloudsRenderer.render(clouds, sun, *player);
 	blockFrameRenderer.render(*player);
-	spriteRenderer.render(sun);
+	spriteRenderer.render(sun, camera);
+	textRenderer.render(camera);
 	guiRenderer.render();
 }
 

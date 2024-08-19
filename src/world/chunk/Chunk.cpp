@@ -84,17 +84,17 @@ Block* Chunk::getBlock(const glm::vec3& pos) {
 	return blocks[toBlockIndex(pos)];
 }
 
-void Chunk::setBlock(const glm::vec3& pos, BlockID blockID) {
+void Chunk::setBlock(const glm::vec3& pos, Material material) {
 	if (pos.y < 0 || ceil(pos.y) >= CHUNK_H)
 		return;
 
 	glm::vec3 worldPos = getWorldPosition(pos);
 
-	Block* block = new Block(blockID);
+	Block* block = new Block(material);
 	block->position = worldPos;
 
 	if (outOfBounds(pos)) {
-		world->setBlock(worldPos, blockID);
+		world->setBlock(worldPos, material);
 
 		return;
 	}
@@ -103,7 +103,7 @@ void Chunk::setBlock(const glm::vec3& pos, BlockID blockID) {
 
 	int blockIndex = toBlockIndex(pos);
 
-	delete blocks[blockIndex];
+	freePointer(&blocks[blockIndex]);
 	blocks[blockIndex] = block;
 }
 

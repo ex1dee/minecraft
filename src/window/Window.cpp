@@ -33,12 +33,41 @@ void Window::initialize() {
     setCallbacks();
     gladLoad();
 
-    glfwSetWindowPos(window, width / 2, height / 2);
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+    disableCursor();
+    glfwSetWindowPos(window, width * 0.5, height * 0.5);
 }
 
 void Window::finalize() {
     glfwTerminate();
+}
+
+void Window::enableCursor() {
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
+}
+
+void Window::disableCursor() {
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+}
+
+void Window::setCursorPos(double x, double y) {
+    glfwSetCursorPos(window, x, y);
+}
+
+void Window::setCursorInCenter() {
+    glfwSetCursorPos(window, width * 0.5, height * 0.5);
+}
+
+glm::dvec2 Window::getCursorPosRelativeToCenter() {
+    return getCursorPos() + glm::dvec2(-width * 0.5, height * 0.5f);
+}
+
+glm::dvec2 Window::getCursorPos() {
+    glm::dvec2 pos;
+    glfwGetCursorPos(window, &pos.x, &pos.y);
+    
+    pos.y *= -1.0;
+
+    return pos;
 }
 
 void Window::createWindow() {

@@ -5,9 +5,9 @@
 
 #include "../../math/intersects/IntersectList.h"
 #include "../../math/shapes/Ray.h"
+#include "states/BlockState.h"
 #include "BlocksDatabase.h"
 #include "BlockType.h"
-#include "BlockID.h"
 
 class Block {
 	friend class Chunk;
@@ -15,9 +15,11 @@ class Block {
 	glm::vec3 position;
 public:
 	const BlockType* type;
+	BlockState* state;
 
 	Block() {}
-	Block(BlockID id);
+	Block(Material material);
+	~Block();
 
 	const glm::vec3& getPosition() const { return position; }
 

@@ -1,16 +1,2 @@
-﻿  Drawable.cpp
-  Renderer.cpp
-  DepthFramebuffer.cpp
-  Shader.cpp
-  Texture.cpp
-  Window.cpp
-C:\Users\User\source\repos\Minecraft\Minecraft\src\render\Drawable.cpp(28,2): warning C4267: аргумент: преобразование из "size_t" в "GLuint"; возможна потеря данных
-C:\Users\User\source\repos\Minecraft\Minecraft\src\render\Drawable.cpp(29,2): warning C4267: аргумент: преобразование из "size_t" в "GLuint"; возможна потеря данных
-C:\Users\User\source\repos\Minecraft\Minecraft\src\render\Drawable.cpp(51,49): warning C4267: аргумент: преобразование из "size_t" в "GLsizei"; возможна потеря данных
-C:\Users\User\source\repos\Minecraft\Minecraft\src\window\Window.cpp(74,25): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-C:\Users\User\source\repos\Minecraft\Minecraft\src\window\Window.cpp(75,27): warning C4244: =: преобразование "float" в "int", возможна потеря данных
-C:\Users\User\source\repos\Minecraft\Minecraft\src\window\Window.cpp(126,18): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
-C:\Users\User\source\repos\Minecraft\Minecraft\src\window\Window.cpp(127,18): warning C4244: инициализация: преобразование "float" в "int", возможна потеря данных
-C:\Users\User\source\repos\Minecraft\Minecraft\src\render\framebuffer\DepthFramebuffer.cpp(49,2): warning C4244: аргумент: преобразование "float" в "GLsizei", возможна потеря данных
-C:\Users\User\source\repos\Minecraft\Minecraft\src\render\framebuffer\DepthFramebuffer.cpp(65,2): warning C4244: аргумент: преобразование "float" в "GLsizei", возможна потеря данных
+﻿  GUIInput.cpp
   Minecraft.vcxproj -> C:\Users\User\source\repos\Minecraft\x64\Debug\Minecraft.exe

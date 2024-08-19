@@ -3,16 +3,16 @@
 
 #include <glm/glm.hpp>
 
+#include "../../utils/PointerUtils.h"
 #include "../../render/model/Mesh.h"
+#include "../../items/Material.h"
 #include "meta/BlockMetaLoader.h"
 #include "BlockColliders.h"
 #include "BlockShaderType.h"
-#include "BlockType.h"
-#include "BlockID.h"
 
 class BlockType {
 public:
-	BlockID id;
+	Material material;
 	BlockMeta* meta;
 	bool isOpaque;
 	bool isSolid;
@@ -24,7 +24,7 @@ public:
 	std::vector<BoxCollider*> colliders;
 
 	~BlockType() {
-		delete meta;
+		freePointer(&meta);
 	}
 };
 

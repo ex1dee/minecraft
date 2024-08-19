@@ -1,5 +1,7 @@
 #include "ShadersDatabase.h"
 
+#include "../utils/PointerUtils.h"
+
 std::unordered_map<ShaderType, Shader*> ShadersDatabase::shaders;
 
 void ShadersDatabase::initialize() {
@@ -9,10 +11,9 @@ void ShadersDatabase::initialize() {
 	shaders[ShaderType::LINE]	     = new Shader("shaders/line.vs", "shaders/line.fs");
 	shaders[ShaderType::SPRITE]		 = new Shader("shaders/sprite.vs", "shaders/sprite.fs");
 	shaders[ShaderType::CLOUDS]		 = new Shader("shaders/sprite.vs", "shaders/clouds.fs");
+	shaders[ShaderType::TEXT]		 = new Shader("shaders/sprite.vs", "shaders/text.fs");
 }
 
 void ShadersDatabase::finalize() {
-	for (std::pair<ShaderType, Shader*> pair : shaders) {
-		delete pair.second;
-	}
+	freeMapValues(shaders);
 }

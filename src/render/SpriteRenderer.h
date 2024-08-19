@@ -10,15 +10,11 @@
 
 class SpriteRenderer {
 	std::vector<Sprite*> sprites;
-
-	void updateShader(const Sun* sun);
-protected:
 	Shader* activeShader;
 
-	void startRender(bool depthTest, const Sun* sun = nullptr);
-	void finishRender();
+	void updateShader(const Sun& sun, const Camera& camera);
 public:
-	void render(const Sun& sun);
+	void render(const Sun& sun, const Camera& camera);
 	void add(Sprite* sprite);
 };
 

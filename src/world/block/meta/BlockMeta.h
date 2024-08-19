@@ -2,8 +2,7 @@
 #define BLOCKMETA_H
 
 class BlockMeta {
-public:
-	
+
 };
 
 enum class BlockMetaID {

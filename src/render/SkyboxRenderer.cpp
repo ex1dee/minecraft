@@ -1,6 +1,7 @@
 #include "SkyboxRenderer.h"
 
 #include "../textures/TextureManager.h"
+#include "../utils/PointerUtils.h"
 #include "../world/WorldConstants.h"
 #include "../shaders/ShadersDatabase.h"
 #include "Renderer.h"
@@ -13,7 +14,7 @@ SkyboxRenderer::SkyboxRenderer() {
 SkyboxRenderer::~SkyboxRenderer() {
 	model.reset();
 
-	delete texture;
+    freePointer(&texture);
 }
 
 void SkyboxRenderer::render(const Camera& camera, const Sun& sun, const Fog& fog) {

@@ -6,7 +6,6 @@
 #include <assert.h>
 
 #define GL(line) {line; assert(glGetError() == GL_NO_ERROR);}
-#define GL_DBG(line) {line; GLHelper::checkGLError(); assert(glGetError() == GL_NO_ERROR);}
 
 class GLHelper {
 public:

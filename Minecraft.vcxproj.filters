@@ -224,6 +224,42 @@
     <ClCompile Include="src\GL\GLHelper.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\items\ItemsDatabase.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\items\meta\ItemMetaLoader.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\items\inventory\Inventory.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\items\inventory\InventoryView.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\GUIManager.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\InventoryGUI.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\input\handlers\GUIInput.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\text\FTLoader.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\text\Text2D.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\render\TextRenderer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\items\meta\ItemMeta.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\items\ItemStack.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\window\Window.h">
@@ -252,7 +288,7 @@
     <ClInclude Include="src\textures\TextureAtlas.h" />
     <ClInclude Include="src\world\block\BlocksDatabase.h" />
     <ClInclude Include="src\world\block\BlockType.h" />
-    <ClInclude Include="src\world\block\BlockID.h" />
+    <ClInclude Include="src\items\Material.h" />
     <ClInclude Include="src\render\model\Mesh.h" />
     <ClInclude Include="src\world\block\Block.h" />
     <ClInclude Include="src\world\chunk\Chunk.h" />
@@ -326,7 +362,7 @@
     <ClInclude Include="src\gui\GUIDatabase.h" />
     <ClInclude Include="src\gui\GUIElement.h" />
     <ClInclude Include="src\render\sprite\Sprite.h" />
-    <ClInclude Include="src\render\sprite\SpriteTexture.h" />
+    <ClInclude Include="src\textures\SpriteTexture.h" />
     <ClInclude Include="src\textures\AtlasCoords.h" />
     <ClInclude Include="src\render\GUIRenderer.h" />
     <ClInclude Include="src\input\handlers\WindowInput.h" />
@@ -350,6 +386,26 @@
     <ClInclude Include="src\render\CloudsRenderer.h" />
     <ClInclude Include="src\textures\CustomImage.h" />
     <ClInclude Include="src\GL\GLHelper.h" />
+    <ClInclude Include="src\items\meta\ItemMeta.h" />
+    <ClInclude Include="src\items\ItemsDatabase.h" />
+    <ClInclude Include="src\items\meta\ItemMetaLoader.h" />
+    <ClInclude Include="src\items\meta\BlockStateMeta.h" />
+    <ClInclude Include="src\world\block\states\BlockState.h" />
+    <ClInclude Include="src\items\ItemStack.h" />
+    <ClInclude Include="src\items\ItemType.h" />
+    <ClInclude Include="src\items\inventory\Inventory.h" />
+    <ClInclude Include="src\items\inventory\InventoryView.h" />
+    <ClInclude Include="src\gui\GUIManager.h" />
+    <ClInclude Include="src\gui\InventoryGUI.h" />
+    <ClInclude Include="src\input\handlers\GUIInput.h" />
+    <ClInclude Include="src\text\FTLoader.h" />
+    <ClInclude Include="src\text\FTCharacter.h" />
+    <ClInclude Include="src\text\Text2D.h" />
+    <ClInclude Include="src\render\TextRenderer.h" />
+    <ClInclude Include="src\text\TextAlignment.h" />
+    <ClInclude Include="src\utils\StringConverter.h" />
+    <ClInclude Include="src\utils\PointerUtils.h" />
+    <ClInclude Include="src\gui\InventoryItem.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />
@@ -380,6 +436,20 @@
     <None Include="resources\blocks\snow_grass.json" />
     <None Include="resources\blocks\snow_block.json" />
     <None Include="shaders\clouds.fs" />
+    <None Include="resources\items\grass_block.json" />
+    <None Include="resources\items\air.json" />
+    <None Include="resources\gui\inventory.json" />
+    <None Include="resources\gui\inventory_background.json" />
+    <None Include="resources\gui\inventory_row.json" />
+    <None Include="resources\gui\inventory_top.json" />
+    <None Include="resources\gui\inventory_center.json" />
+    <None Include="resources\gui\inventory_bottom.json" />
+    <None Include="resources\gui\hotbar.json" />
+    <None Include="resources\gui\slot_frame.json" />
+    <None Include="shaders\text.fs" />
+    <None Include="resources\gui\inventory_titles.json" />
+    <None Include="resources\gui\item_description.json" />
+    <None Include="resources\gui\item_description_text.json" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\blocks_atlas.png">
@@ -410,6 +480,42 @@
       <Filter>Файлы ресурсов</Filter>
     </Image>
     <Image Include="resources\textures\hud\icons.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\items\grass_block.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\inventory\inventory0.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\inventory\inventory1.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\inventory\inventory2.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\inventory\inventory3.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\inventory\inventory4.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\inventory\inventory5.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\inventory\inventory6.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\gui\widgets.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\gui\icons.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\gui\inventory_background.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\textures\items\air.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
   </ItemGroup>

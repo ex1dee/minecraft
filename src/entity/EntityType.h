@@ -1,6 +1,7 @@
 #ifndef ENTITYTYPE_H
 #define ENTITYTYPE_H
 
+#include "../utils/PointerUtils.h"
 #include "../render/model/Model.h"
 #include "EntityID.h"
 
@@ -17,7 +18,7 @@ public:
 	glm::vec3 eyesOffset;
 
 	~EntityType() {
-		delete model;
+		freePointer(&model);
 	}
 };
 

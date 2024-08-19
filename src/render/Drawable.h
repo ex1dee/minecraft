@@ -15,7 +15,10 @@ protected:
 	void addVBO(int dimensions, const std::vector<float>& vertices);
 	void addEBO(const std::vector<uint32_t>& indices);
 public:
+	Drawable() = default;
 	~Drawable();
+
+	Drawable(const Drawable& other);
 
 	virtual void setup();
 	virtual void reset() = 0;

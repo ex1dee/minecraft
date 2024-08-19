@@ -1,11 +1,16 @@
 #include "CustomTexture.h"
 
-CustomTexture::CustomTexture(const CustomImage& image, GLint wrap, GLint filter)
+template class CustomTexture<float>;
+template class CustomTexture<std::uint8_t>;
+
+template<typename Td>
+CustomTexture<Td>::CustomTexture(const CustomImage<Td>& image, GLint wrap, GLint filter)
 	: Texture(GL_TEXTURE_2D, TextureType::CUSTOM) {
 	load(image, wrap, filter);
 }
 
-void CustomTexture::load(const CustomImage& image, GLint wrap, GLint filter) {
+template<typename Td>
+void CustomTexture<Td>::load(const CustomImage<Td>& image, GLint wrap, GLint filter) {
 	GL(glGenTextures(1, &ID));
 	GL(glBindTexture(target, ID));
 
