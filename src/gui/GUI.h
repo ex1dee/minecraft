@@ -28,7 +28,7 @@ public:
 	static const glm::mat4& getView() { return glm::mat4(1); }
 
 	static void update(Player& player);
-	static void setupElement(GUIElement* element);
+	static void setupElement(GUIElement& element);
 	static glm::vec3 scaleByWindow(const glm::vec3& vec);
 	static void setupElements(GUISector* sector = nullptr);
 	static void framebufferSizeCallback(GLFWwindow* window, int width, int height);

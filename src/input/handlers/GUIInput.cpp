@@ -50,7 +50,7 @@ void GUIInput::checkDraggingItems(Player& player) {
 
 	InventoryView* view = invItem.view;
 	Inventory& inventory = view->getInventory();
-	ItemStack* item = invItem.item;
+	ItemStack& item = *invItem.item;
 	int column = invItem.column;
 	int row = invItem.row;
 
@@ -59,33 +59,33 @@ void GUIInput::checkDraggingItems(Player& player) {
 	InventoryView& bottom = player.getHotbarView();
 
 	if (Input::justClicked(GLFW_MOUSE_BUTTON_LEFT)) {
-		if (Input::pressed(GLFW_KEY_LEFT_SHIFT) && invItem.item->type->material != AIR) {
+		if (Input::pressed(GLFW_KEY_LEFT_SHIFT) && invItem.item->getType().material != AIR) {
 			if (top != nullptr) {
 				if (view == top) {
-					center.getInventory().addItem(*item);
+					center.getInventory().addItem(item);
 					top->setItem(column, row, ItemStack(AIR));
 				} else {
-					top->addItem(*item);
+					top->addItem(item);
 					view->setItem(column, row, ItemStack(AIR));
 				}
 			} else {
 				if (view == &center) {
-					bottom.addItem(*item);
+					bottom.addItem(item);
 					center.setItem(column, row, ItemStack(AIR));
 				} else {
-					center.addItem(*item);
+					center.addItem(item);
 					bottom.setItem(column, row, ItemStack(AIR));
 				}
 			}
 		} else {
 			const InventoryItem& draggedItem = player.getDraggedItem();
 
-			if (invItem.item->type->material != AIR) {
+			if (invItem.item->getType().material != AIR) {
 				if (!draggedItem.isValid()) {
 					player.setDraggedItem(invItem);
 					view->setItem(column, row, ItemStack(AIR));
 				} else {
-					ItemStack* prevItem = new ItemStack(*view->getItem(column, row));
+					std::shared_ptr<ItemStack> prevItem = std::make_shared<ItemStack>(*view->getItem(column, row));
 					view->setItem(column, row, ItemStack(*draggedItem.item));
 					invItem.item = prevItem;
 

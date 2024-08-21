@@ -26,7 +26,7 @@ void SpriteRenderer::updateShader(const Sun& sun, const Camera& camera) {
 	activeShader->setVec3("sunDirection", sun.getLight().direction);
 }
 
-void SpriteRenderer::add(Sprite* sprite) {
-	if (sprite->texture.data != nullptr)
-		sprites.push_back(sprite);
+void SpriteRenderer::add(Sprite& sprite) {
+	if (sprite.texture.data != nullptr)
+		sprites.push_back(&sprite);
 }

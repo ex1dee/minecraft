@@ -12,17 +12,15 @@ CAMERA_INTERSECT_OFFSET = 1.7f;
 
 Camera::Camera() {
 	orientation.update(-90.0f, 0.0f);
-
 	aspect = (float) Window::getScreenWidth() / (float) Window::getScreenHeight();
-	zoom = 0;
 }
 
-void Camera::hookPlayer(Player& player) {
-	this->player = &player;
+void Camera::hookPlayer(std::shared_ptr<Player>& player) {
+	this->player = player;
 }
 
-void Camera::hookWorld(World& world) {
-	this->world = &world;
+void Camera::hookWorld(std::shared_ptr<World>& world) {
+	this->world = world;
 }
 
 void Camera::setZoom(float zoom) {
@@ -60,7 +58,7 @@ void Camera::updateOrientation() {
 }
 
 void Camera::updateView() {
-	transform.position = player->transform.position + player->type->eyesOffset;
+	transform.position = player->transform.position + player->getType().eyesOffset;
 	viewDir = orientation.front;
 
 	if (viewMode != FIRST_PERSON) {
@@ -78,7 +76,7 @@ void Camera::updateTPSLook() {
 	float viewSign = (viewMode == THIRD_PERSON_BACK) ? 1.0f : -1.0f;
 
 	Ray ray(transform.position, viewSign * -viewDir);
-	Block* block = RayTracing::getNearestBlock(*world, ray, CAMERA_TPS_COEF + CAMERA_INTERSECT_OFFSET);
+	std::shared_ptr<Block> block = RayTracing::getNearestBlock(*world, ray, CAMERA_TPS_COEF + CAMERA_INTERSECT_OFFSET);
 
 	if (block != nullptr) {
 		IntersectList intersects = block->intersect(ray);

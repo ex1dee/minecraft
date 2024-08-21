@@ -16,11 +16,11 @@ class GameObject {
 protected:
 	World* world;
 public:
+	std::unique_ptr<Collider> collider;
+	std::shared_ptr<Model> model;
 	Orientation orientation;
 	Transform transform;
 	RigidBody rigidBody;
-	Collider* collider;
-	Model* model;
 
 	GameObject(World* world);
 	~GameObject();

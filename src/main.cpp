@@ -13,10 +13,7 @@
 #include "gui/GUIDatabase.h"
 #include "gui/GUI.h"
 
-#include "states/PlayState.h"
-#include "player/Camera.h"
-
-#include <ft2build.h>
+#include "PlayState.h"
 
 int main() {
     try {
@@ -36,37 +33,28 @@ int main() {
         return -1;
     }
 
-    Camera camera;
-    Player player(camera);
+    std::shared_ptr<Camera> camera = std::make_shared<Camera>();
+    std::shared_ptr<Player> player = std::make_shared<Player>(camera);
 
-    std::vector<BaseState*> states;
-    states.push_back(new PlayState(player));
+    PlayState state(player);
 
-    player.getBackpackView().setItem(0, 0, ItemStack(GRASS_BLOCK));
-    player.getBackpackView().setItem(3, 1, ItemStack(GRASS_BLOCK));
+    player->getBackpackView().setItem(0, 0, ItemStack(GRASS_BLOCK));
+    player->getBackpackView().setItem(3, 1, ItemStack(GRASS_BLOCK));
 
     while (!Window::shouldClose()) {
-        camera.update();
+        camera->update();
 
-        for (BaseState* state : states) {
-            state->handleInput();
-            state->update();
-            state->render();
-        }
+        state.handleInput();
+        state.update();
+        state.render();
+
+        if (Input::justPressed(GLFW_KEY_ESCAPE))
+            break;
 
         Window::swapBuffers();
         Input::pollEvents();
     }
 
-    for (BaseState* state : states) {
-        freePointer(&state);
-    }
-
     Window::finalize();
-    BlocksDatabase::finalize();
-    EntitiesDatabase::finalize();
-    ShadersDatabase::finalize();
-    GUIDatabase::finalize();
-    ItemsDatabase::finalize();
     FTLoader::finalize();
 }

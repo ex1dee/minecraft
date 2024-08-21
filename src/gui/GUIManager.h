@@ -6,13 +6,12 @@
 #include "GUIElement.h"
 
 class GUIManager {
-	static bool isElementOnCursor(GUIElement* element);
-	static void getElementOnCursor(const GUISector& sector, int layer, std::pair<int, GUIElement*>& cursorElement);
+	static void getElementOnCursor(const GUISector& sector, int layer, std::pair<int, std::shared_ptr<GUIElement>>& cursorElement);
 public:
-	static void deleteSector(GUISector& sector);
+	static bool isElementOnCursor(GUIElement& element);
 	static InventoryItem getItemOnCursor(Player& player);
-	static GUIElement* getElementOnCursor(GUISector* sector = nullptr);
-	static InventoryItem getItemByElement(Player& player, GUIElement* element);
+	static std::shared_ptr<GUIElement> getElementOnCursor(GUISector* sector = nullptr);
+	static InventoryItem getItemByElement(Player& player, const std::shared_ptr<GUIElement>& element);
 	static InventoryView* getInventoryViewByName(const std::string& name, Player& player);
 	static glm::vec3 scale(const glm::vec3& vec, float oldWidth, float oldHeight, float newWidth, float newHeight);
 };

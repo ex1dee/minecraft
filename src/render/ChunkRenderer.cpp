@@ -86,17 +86,17 @@ void ChunkRenderer::renderLights(const Sun& sun) {
 	renderLights(floraMeshes, sun);
 }
 
-void ChunkRenderer::renderLights(std::vector<ChunkMesh*>& meshes, const Sun& sun) {
+void ChunkRenderer::renderLights(std::vector<std::shared_ptr<ChunkMesh>>& meshes, const Sun& sun) {
 	if (!meshes.size())
 		return;
 
-	activeShader = sun.getLight().getFramebuffer().getShader();
+	activeShader = &sun.getLight().getFramebuffer().getShader();
 
 	render(meshes);
 }
 
-void ChunkRenderer::render(std::vector<ChunkMesh*>& meshes, const Camera* camera, bool onlyVisible) {
-	for (ChunkMesh* mesh : meshes) {
+void ChunkRenderer::render(std::vector<std::shared_ptr<ChunkMesh>>& meshes, const Camera* camera, bool onlyVisible) {
+	for (auto& mesh : meshes) {
 		if (!onlyVisible || camera->isAABBInFrustum(mesh->getModel().aabb))
 			mesh->getModel().draw(*activeShader);
 	}

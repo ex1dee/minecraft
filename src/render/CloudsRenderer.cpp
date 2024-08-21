@@ -9,7 +9,7 @@ void CloudsRenderer::render(const Clouds& clouds, const Sun& sun, const Player& 
 	updateShader(player.getCamera(), sun);
 	Renderer::startTransparentRender();
 
-	Sprite* sprite = clouds.getSprite();
+	std::shared_ptr<Sprite> sprite = clouds.getSprite();
 
 	if (sprite != nullptr)
 		sprite->draw(*activeShader);

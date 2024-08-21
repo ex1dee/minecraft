@@ -12,7 +12,7 @@
 
 class AssimpLoader {
 	static std::string directory;
-	static Model* model;
+	static std::unique_ptr<Model> model;
 
 	static TextureType getTextureTypeBy(aiTextureType type);
 	static void addVertices(const aiMesh* mesh, MeshData& meshData);
@@ -23,7 +23,7 @@ class AssimpLoader {
 	static void processNode(const aiScene* scene, const aiNode* node);
 	static void loadMaterialTextures(MeshData& meshData, aiMaterial* material, aiTextureType type);
 public:
-	static Model* load(const std::string& path);
+	static std::unique_ptr<Model> load(const std::string& path);
 };
 
 #endif

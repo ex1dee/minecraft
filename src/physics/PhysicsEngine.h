@@ -12,7 +12,6 @@ class PhysicsEngine {
 	static World* world;
 	static float deltaTime;
 
-	static void cullObjects();
 	static void prepare(GameObject& object);
 	static void addForces(GameObject& object);
 	static void updatePosition(GameObject& object);
@@ -21,7 +20,8 @@ public:
 	static void finalize();
 
 	static void update(float deltaTime);
-	static void addObject(GameObject* object);
+	static void addObject(GameObject& object);
+	static void removeObject(GameObject& object);
 };
 
 #endif

@@ -6,12 +6,11 @@
 #include "EntityType.h"
 
 class EntitiesDatabase {
-	static std::unordered_map<EntityID, EntityType*> entities;
+	static std::unordered_map<EntityID, std::unique_ptr<EntityType>> entities;
 public:
 	static void initialize();
-	static void finalize();
 
-	static EntityType* const get(EntityID id) { return entities[id]; }
+	static const EntityType& get(EntityID id) { return *entities[id]; }
 };
 
 #endif

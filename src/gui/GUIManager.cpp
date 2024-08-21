@@ -4,18 +4,6 @@
 #include "../window/Window.h"
 #include "GUIDatabase.h"
 
-void GUIManager::deleteSector(GUISector& sector) {
-	for (auto pair : sector) {
-		GUIElement* element = pair.second;
-
-		deleteSector(element->children);
-
-		freePointer(&element);
-	}
-
-	sector.clear();
-}
-
 glm::vec3 GUIManager::scale(const glm::vec3& vec, float oldWidth, float oldHeight, float newWidth, float newHeight) {
 	return glm::vec3(
 		(newWidth / oldWidth) * vec.x,
@@ -25,8 +13,8 @@ glm::vec3 GUIManager::scale(const glm::vec3& vec, float oldWidth, float oldHeigh
 }
 
 InventoryItem GUIManager::getItemOnCursor(Player& player) {
-	GUIElement* background = GUIDatabase::root["inventory"]->children["background"];
-	GUIElement* cursorElement = GUIManager::getElementOnCursor(&background->children);
+	std::shared_ptr<GUIElement> background = GUIDatabase::root["inventory"]->children["background"];
+	std::shared_ptr<GUIElement> cursorElement = GUIManager::getElementOnCursor(&background->children);
 
 	if (cursorElement == nullptr)
 		return InventoryItem();
@@ -34,8 +22,46 @@ InventoryItem GUIManager::getItemOnCursor(Player& player) {
 	return GUIManager::getItemByElement(player, cursorElement);
 }
 
-InventoryItem GUIManager::getItemByElement(Player& player, GUIElement* element) {
-	InventoryItem result = InventoryItem();
+std::shared_ptr<GUIElement> GUIManager::getElementOnCursor(GUISector* sector) {
+	if (sector == nullptr)
+		sector = &GUIDatabase::root;
+
+	std::pair<int, std::shared_ptr<GUIElement>> cursorElement;
+	cursorElement.first = -1;
+
+	getElementOnCursor(*sector, 0, cursorElement);
+
+	return cursorElement.second;
+}
+
+void GUIManager::getElementOnCursor(const GUISector& sector, int layer, std::pair<int, std::shared_ptr<GUIElement>>& cursorElement) {
+	for (auto pair : sector) {
+		std::shared_ptr<GUIElement> element = pair.second;
+
+		if (!element->visible)
+			continue;
+
+		getElementOnCursor(element->children, layer + 1, cursorElement);
+
+		if (layer > cursorElement.first && element->name != "dragged_item" && isElementOnCursor(*element)) {
+			cursorElement.first = layer;
+			cursorElement.second = element;
+		}
+	}
+}
+
+bool GUIManager::isElementOnCursor(GUIElement& element) {
+	if (!element.hasTexture)
+		return false;
+
+	glm::vec3 cursorPos = glm::vec3(Window::getCursorPosRelativeToCenter(), GUI_ELEMENT_Z);
+	Rect rect = element.sprite->getRect();
+
+	return rect.isPointInside(cursorPos);
+}
+
+InventoryItem GUIManager::getItemByElement(Player& player, const std::shared_ptr<GUIElement>& element) {
+	InventoryItem result;
 
 	if (element == nullptr || element->parent == nullptr || element->parent->parent == nullptr)
 		return result;
@@ -45,8 +71,7 @@ InventoryItem GUIManager::getItemByElement(Player& player, GUIElement* element) 
 	try {
 		column = std::stoi(element->name);
 		row = std::stoi(element->parent->name);
-	}
-	catch (...) {
+	} catch (...) {
 		return result;
 	}
 
@@ -73,42 +98,4 @@ InventoryView* GUIManager::getInventoryViewByName(const std::string& name, Playe
 		return &player.getHotbarView();
 	else
 		return nullptr;
-}
-
-GUIElement* GUIManager::getElementOnCursor(GUISector* sector) {
-	if (sector == nullptr)
-		sector = &GUIDatabase::root;
-
-	std::pair<int, GUIElement*> cursorElement;
-	cursorElement.first = -1;
-
-	getElementOnCursor(*sector, 0, cursorElement);
-
-	return cursorElement.second;
-}
-
-void GUIManager::getElementOnCursor(const GUISector& sector, int layer, std::pair<int, GUIElement*>& cursorElement) {
-	for (auto pair : sector) {
-		GUIElement* element = pair.second;
-
-		if (!element->visible)
-			continue;
-
-		getElementOnCursor(element->children, layer + 1, cursorElement);
-
-		if (layer > cursorElement.first && element->name != "dragged_item" && isElementOnCursor(element)) {
-			cursorElement.first = layer;
-			cursorElement.second = element;
-		}
-	}
-}
-
-bool GUIManager::isElementOnCursor(GUIElement* element) {
-	if (!element->hasTexture)
-		return false;
-
-	glm::vec3 cursorPos = glm::vec3(Window::getCursorPosRelativeToCenter(), GUI_ELEMENT_Z);
-	Rect rect = element->sprite->getRect();
-
-	return rect.isPointInside(cursorPos);
 }

@@ -4,9 +4,9 @@
 #include "Files.h"
 
 std::string AssimpLoader::directory;
-Model* AssimpLoader::model;
+std::unique_ptr<Model> AssimpLoader::model;
 
-Model* AssimpLoader::load(const std::string& path) {
+std::unique_ptr<Model> AssimpLoader::load(const std::string& path) {
 	Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
 
@@ -17,11 +17,11 @@ Model* AssimpLoader::load(const std::string& path) {
 	}
 
 	directory = Files::getDirectory(path);
-	model = new Model;
+	model = std::make_unique<Model>();
 
 	processNode(scene, scene->mRootNode);
 	
-	return model;
+	return std::move(model);
 }
 
 void AssimpLoader::processNode(const aiScene* scene, const aiNode* node) {

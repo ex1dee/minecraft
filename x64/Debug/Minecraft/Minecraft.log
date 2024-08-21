@@ -1,2 +1,43 @@
-﻿  GUIInput.cpp
+﻿  PlayState.cpp
+  Entity.cpp
+  GameObject.cpp
+  PhysicsEngine.cpp
+  CollisionDetector.cpp
+  Camera.cpp
+  Player.cpp
+  RayTracing.cpp
+  World.cpp
+  ChunkManager.cpp
+  GLM: GLM_GTX_hash extension included
+C:\Users\User\source\repos\Minecraft\Minecraft\src\input\handlers\CameraInput.h(4,10): warning C4067: непредвиденные лексемы за директивой препроцессора, требуется newline (компилируется исходный файл src\PlayState.cpp)
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(14,13): warning C4244: =: преобразование "time_t" в "uint32_t", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(66,26): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(67,26): warning C4244: =: преобразование "float" в "T", возможна потеря данных
+          with
+          [
+              T=int
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(68,26): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(69,26): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\World.cpp(72,34): warning C4244: =: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\ChunkManager.cpp(60,14): warning C4244: инициализация: преобразование "int" в "float", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\ChunkManager.cpp(61,14): warning C4244: инициализация: преобразование "int" в "float", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\ChunkManager.cpp(62,14): warning C4244: инициализация: преобразование "int" в "float", возможна потеря данных
+C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\ChunkManager.cpp(63,14): warning C4244: инициализация: преобразование "int" в "float", возможна потеря данных
   Minecraft.vcxproj -> C:\Users\User\source\repos\Minecraft\x64\Debug\Minecraft.exe

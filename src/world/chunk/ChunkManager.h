@@ -11,19 +11,22 @@ class World;
 class ChunkManager {
 	World* world;
 public:
-	std::unordered_map<glm::vec2, Chunk*> chunks;
-	std::unordered_map<glm::vec2, Chunk*> loadedChunks;
-	std::unordered_set<glm::vec2> unloadedChunks;
+	std::unordered_map<glm::ivec2, std::shared_ptr<Chunk>> chunks;
+	std::unordered_map<glm::ivec2, std::shared_ptr<Chunk>> loadedChunks;
+	std::unordered_set<glm::ivec2> unloadedChunks;
 
 	ChunkManager() {}
 	ChunkManager(World& world);
-	~ChunkManager();
 
-	Chunk* const load(const glm::vec2& pos);
-	void unload(const glm::vec2& pos);
-	void makeMesh(const glm::vec2& pos);
-	Chunk* const getChunk(const glm::vec2& pos);
-	bool chunkExistsAt(const glm::vec2& pos);
+	std::shared_ptr<Chunk> load(const glm::ivec2& pos);
+	void deleteUnloadedChunks();
+	void deleteChunkAt(const glm::ivec2& pos);
+	void makeMeshes(const glm::ivec2& playerChunkPos, int loadDist);
+	void unloadNotVisibleChunks(const glm::ivec2& playerChunkPos, int loadDist);
+	void makeMesh(const glm::ivec2& pos);
+	void markAsUnloadedChunk(const glm::ivec2& pos);
+	std::shared_ptr<Chunk> getChunk(const glm::ivec2& pos);
+	bool chunkExistsAt(const glm::ivec2& pos);
 };
 
 #endif

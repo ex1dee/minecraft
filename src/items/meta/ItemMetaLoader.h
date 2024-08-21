@@ -5,9 +5,9 @@
 #include "ItemMeta.h"
 
 class ItemMetaLoader {
-	static ItemMeta* load(ItemMetaID id);
+	static std::unique_ptr<ItemMeta> load(ItemMetaID id);
 public:
-	static ItemMeta* load(const nlohmann::basic_json<>& json);
+	static std::unique_ptr<ItemMeta> load(const nlohmann::basic_json<>& json);
 };
 
 #endif

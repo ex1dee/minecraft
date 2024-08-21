@@ -1,6 +1,5 @@
 #include "Sprite.h"
 
-#include "../../utils/PointerUtils.h"
 #include "../../textures/TextureManager.h"
 
 Sprite::Sprite(const Sprite& other) {
@@ -11,7 +10,7 @@ Sprite::Sprite(const Sprite& other) {
 	setup();
 }
 
-Rect Sprite::getRect() {
+Rect&& Sprite::getRect() {
 	Rect rect(
 		glm::vec3(vertexPositions[0], vertexPositions[1], vertexPositions[2]),
 		glm::vec3(vertexPositions[3], vertexPositions[4], vertexPositions[5]),
@@ -21,7 +20,7 @@ Rect Sprite::getRect() {
 
 	rect.applyTransform(transform);
 
-	return rect;
+	return std::move(rect);
 }
 
 void Sprite::setup() {
@@ -102,7 +101,7 @@ void Sprite::draw(Shader& shader) {
 }
 
 void Sprite::bindTexture(Shader& shader) {
-	TextureManager::bindTexture(texture.data, shader, "tex");
+	TextureManager::bindTexture(*texture.data, shader, "tex");
 }
 
 void Sprite::reset() {
@@ -114,5 +113,5 @@ void Sprite::reset() {
 }
 
 void Sprite::resetTexture() {
-	freePointer(&texture.data);
+	texture.data.reset();
 }

@@ -9,7 +9,7 @@
 #include "FTLoader.h"
 
 class Text2D {
-	std::vector<Sprite*> sprites;
+	std::vector<std::unique_ptr<Sprite>> sprites;
 	TextAlignment alignment;
 	Transform transform;
 	std::wstring text;
@@ -26,7 +26,7 @@ class Text2D {
 	float getAlignmentOffset(const std::wstring& line);
 	float getWidth(const std::wstring& line, int length = INT_MAX);
 	int getHeight(const std::wstring& line, int length = INT_MAX);
-	Sprite* createSprite(const FTCharacter& ftChar, float x, float y);
+	std::unique_ptr<Sprite> createSprite(const FTCharacter& ftChar, float x, float y);
 public:
 	Text2D() = default;
 	Text2D(const std::wstring& text, TextAlignment alignment, const Transform& transform, const glm::vec4& color = glm::vec4(1));

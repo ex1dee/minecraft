@@ -6,7 +6,7 @@
 
 class SpriteTexture {
 public:
-	const Texture* data;
+	std::shared_ptr<Texture> data;
 	AtlasCoords atlas;
 	bool useAtlas;
 

@@ -80,8 +80,8 @@
     </GlfwPlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\User\source\repos\Minecraft\Minecraft\dependencies\json\include;C:\OpenGL\includes\;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\OpenGL\libs;$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64)</LibraryPath>
+    <IncludePath>C:\Users\User\YandexDisk\INFO's recopy\ОСНОВНОЕ\БИБЛИОТЕКИ\OpenGL\OpenGL\includes;C:\OpenGL\includes\;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Users\User\YandexDisk\INFO's recopy\ОСНОВНОЕ\БИБЛИОТЕКИ\OpenGL\OpenGL\libs;C:\OpenGL\libs;$(LibraryPath)</LibraryPath>
     <ReferencePath />
     <LibraryWPath />
   </PropertyGroup>
@@ -120,7 +120,8 @@
       <PreprocessorDefinitions>
       </PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\User\source\repos\Minecraft\Minecraft\dependencies\json\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
@@ -153,7 +154,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>glfw3.lib;glfw3_mt.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>freetype.lib;glfw3.lib;glfw3_mt.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>
       </AdditionalOptions>
     </Link>
@@ -195,6 +196,7 @@
     <ClCompile Include="src\render\EntityRenderer.cpp" />
     <ClCompile Include="src\render\GUIRenderer.cpp" />
     <ClCompile Include="src\render\model\Mesh.cpp" />
+    <ClCompile Include="src\render\model\MeshData.cpp" />
     <ClCompile Include="src\render\SkyboxRenderer.cpp" />
     <ClCompile Include="src\render\SpriteRenderer.cpp" />
     <ClCompile Include="src\render\sprite\Sprite.cpp" />
@@ -215,7 +217,7 @@
     <ClCompile Include="src\world\generation\terrain\DefaultWorldGenerator.cpp" />
     <ClCompile Include="src\world\RayTracing.cpp" />
     <ClCompile Include="src\world\Sun.cpp" />
-    <ClCompile Include="src\states\PlayState.cpp" />
+    <ClCompile Include="src\PlayState.cpp" />
     <ClCompile Include="src\render\ChunkRenderer.cpp" />
     <ClCompile Include="src\render\framebuffer\DepthFramebuffer.cpp" />
     <ClCompile Include="src\utils\Timer.cpp" />
@@ -306,7 +308,6 @@
     <ClInclude Include="src\text\TextAlignment.h" />
     <ClInclude Include="src\utils\noise\NoiseManager.h" />
     <ClInclude Include="src\utils\noise\NoiseMap.h" />
-    <ClInclude Include="src\utils\PointerUtils.h" />
     <ClInclude Include="src\utils\StringConverter.h" />
     <ClInclude Include="src\world\block\states\BlockState.h" />
     <ClInclude Include="src\world\Clouds.h" />
@@ -337,9 +338,8 @@
     <ClInclude Include="src\world\block\meta\Liquid.h" />
     <ClInclude Include="src\world\RayTracing.h" />
     <ClInclude Include="src\world\Sun.h" />
-    <ClInclude Include="src\states\PlayState.h" />
+    <ClInclude Include="src\PlayState.h" />
     <ClInclude Include="src\render\ChunkRenderer.h" />
-    <ClInclude Include="src\states\BaseState.h" />
     <ClInclude Include="src\render\framebuffer\DepthFramebuffer.h" />
     <ClInclude Include="src\utils\Timer.h" />
     <ClInclude Include="src\utils\random\BaseRandomGenerator.h" />

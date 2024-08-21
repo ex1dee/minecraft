@@ -13,8 +13,8 @@ GLenum TextureManager::getFormat(int nchannels) {
 		return NULL;
 }
 
-void TextureManager::bindTexture(const Texture* texture, Shader& shader, const std::string& uniform) {
-	bindTexture(texture->getID(), shader, uniform, texture->getTarget());
+void TextureManager::bindTexture(const Texture& texture, Shader& shader, const std::string& uniform) {
+	bindTexture(texture.getID(), shader, uniform, texture.getTarget());
 }
 
 void TextureManager::bindDepthMap(uint32_t depthMap, Shader& shader, const std::string& uniform) {

@@ -13,15 +13,15 @@ void GUIDatabase::initialize() {
 	GUISector elements;
 
 	for (const std::string& path : Files::getFolderFiles(GUI_DIR)) {
-		nlohmann::json json = Json::parse(path);
+		std::shared_ptr<GUIElement> element;
 
+		nlohmann::json json = Json::parse(path);
 		std::string name = json["name"];
-		GUIElement* element;
 
 		if (elements.find(name) != elements.end())
 			element = elements[name];
 		else
-			element = new GUIElement;
+			element = std::make_shared<GUIElement>();
 
 		element->visible = json["visible"];
 		element->hasTexture = json["hasTexture"];
@@ -32,20 +32,17 @@ void GUIDatabase::initialize() {
 		element->transform.rotation += glm::vec3(Json::toVec2(json["rotation"]), 0);
 		element->transform.scale *= glm::vec3(Json::toVec2(json["scale"]), 1);
 		
-		if (json.contains("layer_offset")) {
+		if (json.contains("layer_offset"))
 			element->layer_offset = json["layer_offset"];
-		} else {
-			element->layer_offset = 0;
-		}
 
 		addChildren(element, json, elements);
 
 		if (element->hasTexture) {
-			addTexture(element, json);
+			addTexture(*element, json);
 		}
 
 		if (element->hasText) {
-			addText(element, json);
+			addText(*element, json);
 		}
 
 		elements.emplace(name, element);
@@ -54,14 +51,16 @@ void GUIDatabase::initialize() {
 	createRootSector(elements);
 }
 
-void GUIDatabase::finalize() {
-	GUIManager::deleteSector(root);
-}
-
-void GUIDatabase::addChildren(GUIElement* element, const nlohmann::basic_json<>& json, GUISector& elements) {
+void GUIDatabase::addChildren(std::shared_ptr<GUIElement> element, const nlohmann::basic_json<>& json, GUISector& elements) {
 	for (const std::string& childName : json["children"]) {
-		GUIElement* child = new GUIElement;
-		child->parent = element;
+		std::shared_ptr<GUIElement> child;
+
+		if (elements.find(childName) != elements.end())
+			child = elements[childName];
+		else
+			child = std::make_shared<GUIElement>();
+
+		child->parent = std::shared_ptr<GUIElement>(element);
 		child->transform.add(element->transform);
 		
 		element->children.emplace(childName, child);
@@ -69,33 +68,33 @@ void GUIDatabase::addChildren(GUIElement* element, const nlohmann::basic_json<>&
 	}
 }
 
-void GUIDatabase::addTexture(GUIElement* element, const nlohmann::basic_json<>& json) {
+void GUIDatabase::addTexture(GUIElement& element, const nlohmann::basic_json<>& json) {
 	nlohmann::basic_json<> atlasJson = json["texture"]["atlas"];
 	std::string path = json["texture"]["path"];
 
-	element->sprite = new Sprite;
-	element->sprite->color *= Json::toVec4(json["color"]);
+	element.sprite = std::make_unique<Sprite>();
+	element.sprite->color *= Json::toVec4(json["color"]);
 
-	TextureLoader::loadSprite(json["texture"], element->sprite->texture);
+	TextureLoader::loadSprite(json["texture"], element.sprite->texture);
 }
 
-void GUIDatabase::addText(GUIElement* element, const nlohmann::basic_json<>& json) {
+void GUIDatabase::addText(GUIElement& element, const nlohmann::basic_json<>& json) {
 	glm::vec3 position = glm::vec3(Json::toVec2(json["text"]["position"]), 0);
 	glm::vec4 color = Json::toVec4(json["text"]["color"]);
 	TextAlignment alignment = json["text"]["alignment"];
 	std::string title = json["text"]["content"];
 
-	element->text = new Text2D(
+	element.text = std::make_unique<Text2D>(
 		StringConverter::toWString(title),
 		alignment,
-		element->transform.position + position,
+		element.transform.position + position,
 		color
 	);
 }
 
 void GUIDatabase::createRootSector(GUISector& elements) {
 	for (auto pair : elements) {
-		GUIElement* element = pair.second;
+		std::shared_ptr<GUIElement> element = pair.second;
 
 		if (element->parent == nullptr) {
 			root.emplace(element->name, element);

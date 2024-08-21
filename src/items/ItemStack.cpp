@@ -1,36 +1,29 @@
 #include "ItemStack.h"
 
-ItemStack::ItemStack(Material material) {
-	type = ItemsDatabase::get(material);
+ItemStack::ItemStack(Material material)
+	: material(material) {
 
-	if (type->meta != nullptr)
-		meta = new ItemMeta(*type->meta);
+	if (getType().meta != nullptr)
+		meta = std::make_unique<ItemMeta>(*getType().meta);
 }
 
 ItemStack::ItemStack(const Block& block) {
-	type = ItemsDatabase::get(block.type->material);
+	material = block.getType().material;
 
 	if (block.state != nullptr)
-		meta = new BlockStateMeta(*type->meta, block.state);
+		meta = std::make_unique<BlockStateMeta>(*getType().meta, block.state);
 	else
-		meta = new ItemMeta(*type->meta);
+		meta = std::make_unique<ItemMeta>(*getType().meta);
 }
 
 ItemStack::ItemStack(const ItemStack& other) {
 	if (other.meta != nullptr)
-		meta = new ItemMeta(*other.meta);
+		meta = std::make_unique<ItemMeta>(*other.meta);
 
 	amount = other.amount;
-	type = other.type;
-}
-
-ItemStack::~ItemStack() {
-	free(meta);
+	material = other.material;
 }
 
 void ItemStack::setMeta(const ItemMeta& meta) {
-	if (this->meta != nullptr)
-		freePointer(&this->meta);
-
-	this->meta = new ItemMeta(meta);
+	this->meta = std::make_unique<ItemMeta>(meta);
 }

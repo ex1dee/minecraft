@@ -21,7 +21,7 @@ public:
 
 	float mass;
 
-	RigidBody(float mass = 1.0f) 
+	RigidBody(float mass = 1.0f)
 		: mass(mass) {}
 
 	PhysicsType getPhysicsType() { return physicsType; }

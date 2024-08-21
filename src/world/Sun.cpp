@@ -4,9 +4,9 @@
 
 constexpr float SUN_CHANGE_FOCUS_DIST = CHUNK_W * 1.5f;
 
-Sun::Sun(Shader& FBOShader, World& world, Player& player)
-	: world(&world), player(&player) {
-	light = new DirectLight(
+Sun::Sun(Shader& FBOShader, World& world, std::shared_ptr<Player>& player)
+	: world(&world), player(player) {
+	light = std::make_unique<DirectLight>(
 		FBOShader,
 		glm::vec3(1),
 		DFBConfig(
@@ -20,10 +20,6 @@ Sun::Sun(Shader& FBOShader, World& world, Player& player)
 	focus = glm::vec3(WORLD_BORDER, WORLD_BORDER, WORLD_BORDER);
 
 	setTime(0);
-}
-
-Sun::~Sun() {
-	freePointer(&light);
 }
 
 void Sun::setTime(float time) {

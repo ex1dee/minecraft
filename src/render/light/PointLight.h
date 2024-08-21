@@ -18,7 +18,7 @@ public:
 	PointLight(Shader& FBOShader, const glm::vec3& color, const DFBConfig& DFBconfig = DEFAULT_DFB)
 		: Light(color) {
 		for (int i = 0; i < 6; ++i) {
-			framebuffers.push_back(new DepthFramebuffer(FBOShader, DFBconfig));
+			framebuffers.push_back(std::make_unique<DepthFramebuffer>(FBOShader, DFBconfig));
 		}
 	}
 

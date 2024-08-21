@@ -89,7 +89,7 @@ void Shader::use() {
 }
 
 void Shader::setBool(const char* uniform, bool value) const {
-	GL(glUniform1i(glGetUniformLocation(programID, uniform), value))
+	glUniform1i(glGetUniformLocation(programID, uniform), value);
 }
 
 void Shader::setSampler(const char* uniform, int value) {
@@ -97,21 +97,21 @@ void Shader::setSampler(const char* uniform, int value) {
 }
 
 void Shader::setInt(const char* uniform, int value) const {
-	GL(glUniform1i(glGetUniformLocation(programID, uniform), value))
+	glUniform1i(glGetUniformLocation(programID, uniform), value);
 }
 
 void Shader::setFloat(const char* uniform, float value) const {
-	GL(glUniform1f(glGetUniformLocation(programID, uniform), value))
+	glUniform1f(glGetUniformLocation(programID, uniform), value);
 }
 
 void Shader::setMat4(const char* uniform, const glm::mat4& value) const {
-	GL(glUniformMatrix4fv(glGetUniformLocation(programID, uniform), 1, GL_FALSE, glm::value_ptr(value)))
+	glUniformMatrix4fv(glGetUniformLocation(programID, uniform), 1, GL_FALSE, glm::value_ptr(value));
 }
 
 void Shader::setVec3(const char* uniform, const glm::vec3& value) const {
-	GL(glUniform3f(glGetUniformLocation(programID, uniform), value.x, value.y, value.z))
+	glUniform3f(glGetUniformLocation(programID, uniform), value.x, value.y, value.z);
 }
 
 void Shader::setVec4(const char* uniform, const glm::vec4& value) const {
-	GL(glUniform4f(glGetUniformLocation(programID, uniform), value.x, value.y, value.z, value.w))
+	glUniform4f(glGetUniformLocation(programID, uniform), value.x, value.y, value.z, value.w);
 }

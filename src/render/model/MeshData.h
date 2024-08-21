@@ -3,6 +3,7 @@
 
 #include <vector>
 
+#include "../../textures/Texture.h"
 #include "MeshType.h"
 
 class MeshData {
@@ -19,16 +20,9 @@ public:
 	uint32_t mode;
 
 	MeshData() {}
-	MeshData(MeshType type, int dimensions, uint32_t mode = GL_TRIANGLES)
-		: type(type), dimensions(dimensions), mode(mode) {}
+	MeshData(MeshType type, int dimensions, uint32_t mode = GL_TRIANGLES);
 
-	void reset() {
-		vertexPositions.clear();
-		textureCoords.clear();
-		textures.clear();
-		normals.clear();
-		indices.clear();
-	}
+	void reset();
 };
 
 #endif

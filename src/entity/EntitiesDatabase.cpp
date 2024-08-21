@@ -1,19 +1,18 @@
 #include "EntitiesDatabase.h"
 
-#include "../utils/PointerUtils.h"
 #include "../utils/AssimpLoader.h"
 #include "../utils/Json.h"
 
 constexpr const char* ENTITIES_DIR = "resources/entities";
 constexpr const char* MODELS_DIR = "resources/models";
 
-std::unordered_map<EntityID, EntityType*> EntitiesDatabase::entities;
+std::unordered_map<EntityID, std::unique_ptr<EntityType>> EntitiesDatabase::entities;
 
 void EntitiesDatabase::initialize() {
 	for (const std::string& path : Files::getFolderFiles(ENTITIES_DIR)) {
+		std::unique_ptr<EntityType> type = std::make_unique<EntityType>();
 		nlohmann::json json = Json::parse(path);
 
-		EntityType* type = new EntityType;
 		type->id = json["id"];
 		type->physics = json["physics"]["enabled"];
 		type->gravity = json["physics"]["gravity"];
@@ -31,10 +30,6 @@ void EntitiesDatabase::initialize() {
 		std::string modelPath = json["model"]["path"];
 		type->model = AssimpLoader::load(Files::getFullPath(MODELS_DIR, modelPath));
 
-		entities[type->id] = type;
+		entities[type->id] = std::move(type);
 	}
-}
-
-void EntitiesDatabase::finalize() {
-	freeMapValues(entities);
 }

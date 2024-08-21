@@ -11,7 +11,7 @@ class TextRenderer {
 	void updateShader(const Camera& camera);
 public:
 	void render(const Camera& camera);
-	void add(Text2D* text);
+	void add(Text2D& text);
 };
 
 #endif

@@ -4,23 +4,16 @@
 #include "../world/World.h"
 #include "Camera.h"
 
-Player::Player(Camera& camera)
-	: camera(&camera), Entity(PLAYER) {
+Player::Player(std::shared_ptr<Camera>& camera)
+	: camera(camera), Entity(PLAYER) {
 	setupInventory();
 }
 
-Player::~Player() {
-	freePointer(&inventory);
-	freePointer(&backpackView);
-	freePointer(&hotbarView);
-	freePointer(&openInventoryView);
-}
-
 void Player::setupInventory() {
-	inventory = new Inventory(L"Inventory", 4);
-
-	backpackView = new InventoryView(*inventory, 1);
-	hotbarView = new InventoryView(*inventory, 0, 1);
+	inventory = std::make_shared<Inventory>(L"Inventory", 4);
+	
+	backpackView = std::make_shared<InventoryView>(inventory, 1);
+	hotbarView = std::make_shared<InventoryView>(inventory, 0, 1);
 	hotbarView->open();
 }
 
@@ -43,19 +36,19 @@ void Player::setDraggedItem(const InventoryItem& item) {
 }
 
 void Player::resetDraggedItem() {
-	freePointer(&draggedItem.element);
-	freePointer(&draggedItem.item);
+	draggedItem.element.reset();
+	draggedItem.item.reset();
 	draggedItem.view = nullptr;
 
 	GUIDatabase::root.erase("dragged_item");
 }
 
-void Player::openInventory(Inventory* inventory) {
+void Player::openInventory(const std::shared_ptr<Inventory>& inventory) {
 	if (inventory->getRowsNumber() == 0)
 		return;
 
 	pOpenInventory = inventory;
-	openInventoryView = new InventoryView(*pOpenInventory);
+	openInventoryView = std::make_shared<InventoryView>(pOpenInventory);
 	openInventoryView->open();
 	openBackpack();
 }

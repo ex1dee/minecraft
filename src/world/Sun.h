@@ -7,16 +7,15 @@
 class World;
 
 class Sun {
+	std::unique_ptr<DirectLight> light;
+	std::shared_ptr<Player> player;
 	glm::vec3 focus;
-	DirectLight* light;
-	Player* player;
 	World* world;
 	
 	glm::vec3& getFocus();
 	float calcAngle(float time);
 public:
-	Sun(Shader& FBOShader, World& world, Player& player);
-	~Sun();
+	Sun(Shader& FBOShader, World& world, std::shared_ptr<Player>& player);
 
 	DirectLight& getLight() const { return *light; }
 

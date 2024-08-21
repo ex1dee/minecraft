@@ -10,14 +10,13 @@
 #include "fog/Fog.h"
 
 class SkyboxRenderer {
-	const CubeTexture* texture;
+	std::shared_ptr<CubeTexture> texture;
 	Model model;
 
 	void loadTexture();
 	void makeModel();
 public:
 	SkyboxRenderer();
-	~SkyboxRenderer();
 
 	void render(const Camera& camera, const Sun& sun, const Fog& fog);
 };

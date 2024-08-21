@@ -2,7 +2,6 @@
 
 #include <glm/glm.hpp>
 
-#include "../../utils/PointerUtils.h"
 #include "InventoryView.h"
 
 Inventory::Inventory(const std::wstring& title, int rowsNumber)
@@ -10,34 +9,26 @@ Inventory::Inventory(const std::wstring& title, int rowsNumber)
 	items.reserve(size);
 
 	for (int i = 0; i < size; ++i) {
-		items.push_back(new ItemStack(AIR));
+		items.push_back(std::make_shared<ItemStack>(AIR));
 	}
 }
 
-Inventory::~Inventory() {
-	for (const ItemStack* item : items) {
-		freePointer(&item);
-	}
-}
-
-ItemStack* Inventory::getItem(int column, int row) const {
+std::shared_ptr<ItemStack> Inventory::getItem(int column, int row) const {
 	int index = getIndex(column, row);
 	
 	return getItem(index);
 }
 
-ItemStack* Inventory::getItem(int index) const {
+std::shared_ptr<ItemStack> Inventory::getItem(int index) const {
 	if (isCorrectIndex(index)) {
 		return items[index];
-	}
-	else {
+	} else {
 		return nullptr;
 	}
 }
 
-void Inventory::hookView(InventoryView* view) {
-	if (view != nullptr)
-		views.push_back(view);
+void Inventory::hookView(InventoryView& view){
+	views.push_back(&view);
 }
 
 void Inventory::setItem(int column, int row, const ItemStack& item) {
@@ -48,7 +39,7 @@ void Inventory::setItem(int column, int row, const ItemStack& item) {
 
 void Inventory::addItem(const ItemStack& item) {
 	for (int i = 0; i < items.size(); ++i) {
-		if (items[i]->type->material == AIR) {
+		if (items[i]->getType().material == AIR) {
 			setItem(i, item);
 
 			return;
@@ -58,11 +49,7 @@ void Inventory::addItem(const ItemStack& item) {
 
 void Inventory::setItem(int index, const ItemStack& item) {
 	if (isCorrectIndex(index)) {
-		if (items[index] == &item)
-			return;
-
-		freePointer(&items[index]);
-		items[index] = new ItemStack(item);
+		items[index] = std::make_shared<ItemStack>(item);
 
 		updateViews();
 	}
@@ -71,7 +58,7 @@ void Inventory::setItem(int index, const ItemStack& item) {
 void Inventory::updateViews() {
 	views.erase(std::remove(views.begin(), views.end(), nullptr), views.end());
 
-	for (InventoryView* view : views) {
+	for (auto& view : views) {
 		view->setNeedUpdate(true);
 	}
 }

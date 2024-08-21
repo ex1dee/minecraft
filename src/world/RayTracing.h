@@ -6,7 +6,7 @@
 
 class RayTracing {
 public:
-	static Block* getNearestBlock(World& world, const Ray& ray, float maxDistance);
+	static std::shared_ptr<Block> getNearestBlock(World& world, const Ray& ray, float maxDistance);
 };
 
 #endif

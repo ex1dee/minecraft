@@ -27,33 +27,33 @@ void GUI::setupElements(GUISector* sector) {
 		sector = &GUIDatabase::root;
 
 	for (auto pair : *sector) {
-		setupElement(pair.second);
+		setupElement(*pair.second);
 	}
 }
 
-void GUI::setupElement(GUIElement* element) {
-	if (!element->visible) {
-		if (element->hasTexture)
-			element->sprite->reset();
+void GUI::setupElement(GUIElement& element) {
+	if (!element.visible) {
+		if (element.hasTexture)
+			element.sprite->reset();
 
 		return;
 	}
 
-	if (element->hasTexture) {
-		element->sprite->transform.position = scaleByWindow(element->transform.position);
-		element->sprite->transform.rotation = element->transform.rotation;
-		element->sprite->transform.scale = scaleByWindow(element->transform.scale);
+	if (element.hasTexture) {
+		element.sprite->transform.position = scaleByWindow(element.transform.position);
+		element.sprite->transform.rotation = element.transform.rotation;
+		element.sprite->transform.scale = scaleByWindow(element.transform.scale);
 
-		element->sprite->reset();
-		element->sprite->setup();
+		element.sprite->reset();
+		element.sprite->setup();
 	}
 
-	if (element->hasText) {
-		element->text->setPosition(scaleByWindow(element->text->getPosition()));
-		element->text->setScale(scaleByWindow(element->text->getScale()));
+	if (element.hasText) {
+		element.text->setPosition(scaleByWindow(element.text->getPosition()));
+		element.text->setScale(scaleByWindow(element.text->getScale()));
 	}
 
-	setupElements(&element->children);
+	setupElements(&element.children);
 }
 
 void GUI::setupProjection() {

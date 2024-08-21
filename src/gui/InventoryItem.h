@@ -7,9 +7,9 @@
 
 class InventoryItem {
 public:
-	GUIElement* element;
+	std::shared_ptr<GUIElement> element;
+	std::shared_ptr<ItemStack> item;
 	InventoryView* view;
-	ItemStack* item;
 	int column;
 	int row;
 
@@ -20,7 +20,7 @@ public:
 
 		invItem.element = element;
 		invItem.view = view;
-		invItem.item = new ItemStack(*item);
+		invItem.item = std::make_unique<ItemStack>(*item);
 		invItem.column = column;
 		invItem.row = row;
 

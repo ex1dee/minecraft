@@ -1,18 +1,16 @@
 #include "ItemsDatabase.h"
 
 #include "../textures/TextureLoader.h"
-#include "../utils/PointerUtils.h"
 #include "meta/ItemMetaLoader.h"
 
-std::unordered_map<Material, ItemType*> ItemsDatabase::items;
+std::unordered_map<Material, std::unique_ptr<ItemType>> ItemsDatabase::items;
 
 constexpr const char* ITEMS_DIR = "resources/items";
 
 void ItemsDatabase::initialize() {
 	for (const std::string& path : Files::getFolderFiles(ITEMS_DIR)) {
+		std::unique_ptr<ItemType> type = std::make_unique<ItemType>();
 		nlohmann::json json = Json::parse(path);
-
-		ItemType* type = new ItemType;
 
 		type->material = json["material"];
 		type->hasMeta = json["hasMeta"];
@@ -24,10 +22,6 @@ void ItemsDatabase::initialize() {
 
 		TextureLoader::loadSprite(json["texture"], type->texture);
 
-		items.emplace(type->material, type);
+		items.emplace(type->material, std::move(type));
 	}
-}
-
-void ItemsDatabase::finalize() {
-	freeMapValues(items);
 }

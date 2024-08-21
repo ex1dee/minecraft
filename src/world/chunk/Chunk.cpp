@@ -3,10 +3,10 @@
 #include "../World.h"
 #include "ChunkMeshBuilder.h"
 
-Chunk::Chunk(World& world, glm::vec2 pos)
+Chunk::Chunk(World& world, glm::ivec2 pos)
 	: world(&world), position(pos) {
 	for (int i = 0; i < CHUNK_VOL; ++i) {
-		blocks[i] = new Block(AIR);
+		blocks[i] = std::make_shared<Block>(AIR);
 	}
 	
 	makeAABB();
@@ -24,7 +24,7 @@ void Chunk::render(Renderer& renderer) {
 	if (hasMesh()) {
 		bufferMesh();
 
-		renderer.addChunk(this);
+		renderer.addChunk(*this);
 	}
 }
 
@@ -62,15 +62,15 @@ void Chunk::load(TerrainGenerator& terrainGen) {
 }
 
 
-Block* Chunk::getHighestBlockAt(const glm::vec3& pos) {
+std::shared_ptr<Block> Chunk::getHighestBlockAt(const glm::vec3& pos) {
 	return getBlock(glm::vec3(pos.x, getHeightAt(pos), pos.z));
 }
 
 int Chunk::getHeightAt(const glm::vec3& pos) {
-	return highestBlocks[glm::vec2(pos.x, pos.z)];
+	return highestBlocks[glm::ivec2(pos.x, pos.z)];
 }
 
-Block* Chunk::getBlock(const glm::vec3& pos) {
+std::shared_ptr<Block> Chunk::getBlock(const glm::vec3& pos) {
 	if (pos.y < 0 || ceil(pos.y) >= CHUNK_H) {
 		return nullptr;
 	}
@@ -90,7 +90,7 @@ void Chunk::setBlock(const glm::vec3& pos, Material material) {
 
 	glm::vec3 worldPos = getWorldPosition(pos);
 
-	Block* block = new Block(material);
+	std::shared_ptr<Block> block = std::make_shared<Block>(material);
 	block->position = worldPos;
 
 	if (outOfBounds(pos)) {
@@ -99,12 +99,9 @@ void Chunk::setBlock(const glm::vec3& pos, Material material) {
 		return;
 	}
 
-	updateHighestBlock(pos, block);
+	updateHighestBlock(pos, *block);
 
-	int blockIndex = toBlockIndex(pos);
-
-	freePointer(&blocks[blockIndex]);
-	blocks[blockIndex] = block;
+	blocks[toBlockIndex(pos)] = block;
 }
 
 bool Chunk::outOfBounds(const glm::vec3& pos) {
@@ -120,19 +117,19 @@ glm::vec3 Chunk::getWorldPosition(const glm::vec3& blockPos) {
 	);
 }
 
-void Chunk::updateHighestBlock(const glm::vec3& pos, Block* block) {
-	glm::vec2 posXZ = glm::vec2(pos.x, pos.z);
+void Chunk::updateHighestBlock(const glm::vec3& pos, const Block& block) {
+	glm::ivec2 posXZ = glm::ivec2(pos.x, pos.z);
 	float y = pos.y;
 
 	if (highestBlocks.find(posXZ) == highestBlocks.end()) {
 		highestBlocks.emplace(posXZ, y);
 	}
 	else {
-		if (!block->type->colliders.size()) {
+		if (!block.getType().colliders.size()) {
 			if (y == highestBlocks[pos]) {
-				Block* blockBelow = getBlock(glm::vec3(pos.x, y--, pos.z));
+				std::shared_ptr<Block> blockBelow = getBlock(glm::vec3(pos.x, y--, pos.z));
 
-				while (blockBelow != nullptr && !blockBelow->type->colliders.size()) {
+				while (blockBelow != nullptr && !blockBelow->getType().colliders.size()) {
 					blockBelow = getBlock(glm::vec3(pos.x, y--, pos.z));
 				}
 			}

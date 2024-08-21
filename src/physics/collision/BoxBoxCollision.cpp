@@ -10,8 +10,8 @@ void BoxBoxCollision::detect(GameObject& obj1, GameObject& obj2) {
 	if (obj1.rigidBody.getPhysicsType() == PhysicsType::STATIC && obj2.rigidBody.getPhysicsType() == PhysicsType::STATIC)
 		return;
 
-	BoxCollider* box1 = (BoxCollider*)obj1.collider;
-	BoxCollider* box2 = (BoxCollider*)obj2.collider;
+	BoxCollider& box1 = *(BoxCollider*)obj1.collider.get();
+	BoxCollider& box2 = *(BoxCollider*)obj2.collider.get();
 
 	Collision collision = detect(box1, box2);
 	CollisionHandler::handle(collision, obj1, obj2);
@@ -21,18 +21,18 @@ void BoxBoxCollision::detect(GameObject& obj, const Block& block) {
 	if (obj.rigidBody.getPhysicsType()  == PhysicsType::STATIC)
 		return;
 
-	BoxCollider* box = (BoxCollider*)obj.collider;
+	BoxCollider& box = *(BoxCollider*) obj.collider.get();
 	Transform transform(block.getPosition());
 
-	for (BoxCollider* blockBox : block.type->colliders) {
+	for (auto& blockBox : block.getType().colliders) {
 		blockBox->applyTransform(transform);
 
-		Collision collision = detect(box, blockBox);
+		Collision collision = detect(box, *blockBox);
 		CollisionHandler::handle(collision, obj, block);
 	}
 }
 
-Collision BoxBoxCollision::detect(BoxCollider* box1, BoxCollider* box2) {
+Collision BoxBoxCollision::detect(const BoxCollider& box1, const BoxCollider& box2) {
 	Collision collision;
 	glm::vec3 minDepthAxis(0);
 	float minDepth = FLT_MAX;
@@ -40,8 +40,8 @@ Collision BoxBoxCollision::detect(BoxCollider* box1, BoxCollider* box2) {
 	std::vector<glm::vec3> sepAxes = calcBoxSepAxes(box1, box2);
 
 	for (glm::vec3& sepAxis : sepAxes) {
-		glm::vec2 section1 = projAxis(box1->globalVertices, sepAxis);
-		glm::vec2 section2 = projAxis(box2->globalVertices, sepAxis);
+		glm::vec2 section1 = projAxis(box1.globalVertices, sepAxis);
+		glm::vec2 section2 = projAxis(box2.globalVertices, sepAxis);
 
 		float points[4] = {
 			section1[PROJECTION_MIN_INDEX],
@@ -74,35 +74,35 @@ Collision BoxBoxCollision::detect(BoxCollider* box1, BoxCollider* box2) {
 	collision.collided = true;
 	collision.depth = minDepth;
 
-	glm::vec3 diff = box2->globalVertices[0] - box1->globalVertices[0];
+	glm::vec3 diff = box2.globalVertices[0] - box1.globalVertices[0];
 	float normSign = -glm::sign(glm::dot(diff, minDepthAxis));
 	collision.normal = glm::normalize(normSign * minDepthAxis);
 
 	return collision;
 }
 
-std::vector<glm::vec3> BoxBoxCollision::calcBoxSepAxes(BoxCollider* box1, BoxCollider* box2) {
+std::vector<glm::vec3> BoxBoxCollision::calcBoxSepAxes(const BoxCollider& box1, const BoxCollider& box2) {
 	std::vector<glm::vec3> axes;
 
 	for (int i = 1; i < 4; ++i) {
-		glm::vec3 a = box1->globalVertices[i] - box1->globalVertices[0];
-		glm::vec3 b = box1->globalVertices[(i + 1) % 3 + 1] - box1->globalVertices[0];
+		glm::vec3 a = box1.globalVertices[i] - box1.globalVertices[0];
+		glm::vec3 b = box1.globalVertices[(i + 1) % 3 + 1] - box1.globalVertices[0];
 
 		axes.push_back(glm::normalize(glm::cross(b, a)));
 	}
 
 	for (int i = 1; i < 4; ++i) {
-		glm::vec3 a = box2->globalVertices[i] - box2->globalVertices[0];
-		glm::vec3 b = box2->globalVertices[(i + 1) % 3 + 1] - box2->globalVertices[0];
+		glm::vec3 a = box2.globalVertices[i] - box2.globalVertices[0];
+		glm::vec3 b = box2.globalVertices[(i + 1) % 3 + 1] - box2.globalVertices[0];
 
 		axes.push_back(glm::normalize(glm::cross(b, a)));
 	}
 
 	for (int i = 1; i < 4; ++i) {
-		glm::vec3 a = box1->globalVertices[i] - box1->globalVertices[0];
+		glm::vec3 a = box1.globalVertices[i] - box1.globalVertices[0];
 
 		for (int j = 1; j < 4; ++j) {
-			glm::vec3 b = box2->globalVertices[i] - box2->globalVertices[0];
+			glm::vec3 b = box2.globalVertices[i] - box2.globalVertices[0];
 			glm::vec3 cross = glm::cross(b, a);
 
 			if (glm::length(cross) != 0)

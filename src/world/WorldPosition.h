@@ -5,7 +5,7 @@
 
 struct WorldPosition {
 public:
-	Chunk* chunk;
+	std::shared_ptr<Chunk> chunk;
 	glm::vec3 localBlockPos;
 };
 

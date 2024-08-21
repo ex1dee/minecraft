@@ -83,7 +83,7 @@
     <ClCompile Include="src\world\generation\terrain\SuperFlatGenerator.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\states\PlayState.cpp">
+    <ClCompile Include="src\PlayState.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\player\Player.cpp">
@@ -260,6 +260,9 @@
     <ClCompile Include="src\items\ItemStack.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\render\model\MeshData.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\window\Window.h">
@@ -306,8 +309,7 @@
     <ClInclude Include="src\utils\random\Random.h" />
     <ClInclude Include="src\utils\random\RandomGenerator.h" />
     <ClInclude Include="src\world\generation\terrain\SuperFlatGenerator.h" />
-    <ClInclude Include="src\states\BaseState.h" />
-    <ClInclude Include="src\states\PlayState.h" />
+    <ClInclude Include="src\PlayState.h" />
     <ClInclude Include="src\player\Player.h" />
     <ClInclude Include="src\entity\Entity.h" />
     <ClInclude Include="src\math\shapes\AABB.h" />
@@ -404,7 +406,6 @@
     <ClInclude Include="src\render\TextRenderer.h" />
     <ClInclude Include="src\text\TextAlignment.h" />
     <ClInclude Include="src\utils\StringConverter.h" />
-    <ClInclude Include="src\utils\PointerUtils.h" />
     <ClInclude Include="src\gui\InventoryItem.h" />
   </ItemGroup>
   <ItemGroup>

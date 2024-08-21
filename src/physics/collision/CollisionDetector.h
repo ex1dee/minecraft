@@ -10,7 +10,7 @@ class CollisionDetector {
 
 	static void applyTransforms(std::vector<GameObject*>& objects);
 	static void detectO2O(std::vector<GameObject*>& objects);
-	static void detectO2B(GameObject& obj, World& world, Block* block);
+	static void detectO2B(GameObject& obj, World& world, std::shared_ptr<Block>& block);
 	static void detectO2B(std::vector<GameObject*>& objects, World& world);
 public:
 	static void detect(std::vector<GameObject*>& objects, World& world);

@@ -5,8 +5,8 @@
 #include "../world/World.h"
 #include "../window/Window.h"
 
-Renderer::Renderer(Player& player)
-	: player(&player) {
+Renderer::Renderer(std::shared_ptr<Player>& player)
+	: player(player) {
 
 }
 
@@ -53,25 +53,20 @@ void Renderer::finishRender(World& world) {
 	guiRenderer.render();
 }
 
-void Renderer::addChunk(Chunk* chunk) {
-	if (chunk == nullptr)
-		return;
-	
-	chunkRenderer.add(chunk->getMeshes());
+void Renderer::addChunk(Chunk& chunk) {
+	chunkRenderer.add(chunk.getMeshes());
 }
 
-void Renderer::addEntity(Entity* entity) {
-	if (entity == nullptr)
-		return;
-
+void Renderer::addEntity(Entity& entity) {
 	entityRenderer.add(entity);
 }
 
-void Renderer::addSprite(Sprite* sprite) {
-	if (sprite == nullptr)
-		return;
-
+void Renderer::addSprite(Sprite& sprite) {
 	spriteRenderer.add(sprite);
+}
+
+void Renderer::addText(Text2D& text) {
+	textRenderer.add(text);
 }
 
 void Renderer::enableCullFace() {

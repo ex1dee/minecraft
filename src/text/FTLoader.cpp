@@ -1,8 +1,6 @@
 ﻿#include "FTLoader.h"
 
-#include "../utils/PointerUtils.h"
-
-std::unordered_map<CharacterType, FTCharacter*> FTLoader::chars;
+std::unordered_map<CharacterType, std::unique_ptr<FTCharacter>> FTLoader::chars;
 FT_Library FTLoader::ft;
 FT_Face FTLoader::face;
 
@@ -20,8 +18,6 @@ void FTLoader::initialize() {
 
 void FTLoader::finalize() {
 	FT_Done_FreeType(ft);
-	
-	freeMapValues(chars);
 }
 
 void FTLoader::load(const std::string& path) {
@@ -50,8 +46,8 @@ void FTLoader::loadChar(CharacterType c) {
 
 	CustomImage<std::uint8_t> image(GL_UNSIGNED_BYTE, bitmap.width, bitmap.rows, 1);
 	image.data = face->glyph->bitmap.buffer;
-
-	CustomTexture<std::uint8_t>* texture = new CustomTexture(image, GL_CLAMP_TO_EDGE, GL_LINEAR);
+	
+	std::shared_ptr<CustomTexture<std::uint8_t>> texture = std::make_shared<CustomTexture<std::uint8_t>>(image, GL_CLAMP_TO_EDGE, GL_LINEAR);
 	
 	FTCharacter* ftChar = new FTCharacter{
 		texture,
@@ -65,9 +61,7 @@ void FTLoader::loadChar(CharacterType c) {
 }
 
 const FTCharacter& FTLoader::getCharacter(CharacterType c) {
-	FTCharacter* ftChar = chars[c];
-
-	if (ftChar == nullptr)
+	if (chars.find(c) == chars.end())
 		return *chars[UNKNOWN_SYMBOL];
 
 	return *chars[c];

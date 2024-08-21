@@ -1,6 +1,6 @@
 {
     "world": {
-        "loadDistance": 10
+        "loadDistance": 2
     },
 
     "camera": {

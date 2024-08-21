@@ -7,7 +7,7 @@
 
 class RayBoxIntersect {
 public:
-	static IntersectList intersect(const Ray& ray, BoxCollider* collider, const Transform& boxTransform);
+	static IntersectList intersect(const Ray& ray, BoxCollider& collider, const Transform& boxTransform);
 };
 
 #endif

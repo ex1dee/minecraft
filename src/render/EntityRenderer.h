@@ -17,7 +17,7 @@ class EntityRenderer {
 	void updateShader(const Camera& camera, const Sun& sun, const Fog& fog);
 	void render(const Entity& entity, Camera* camera = nullptr, bool onlyVisible = false);
 public:
-	void add(Entity* entity);
+	void add(Entity& entity);
 	void renderLights(const Sun& sun);
 	void render(const Camera& camera, const Sun& sun, const Fog& fog);
 };

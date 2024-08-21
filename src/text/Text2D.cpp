@@ -1,7 +1,5 @@
 #include "Text2D.h"
 
-#include "../utils/PointerUtils.h"
-
 constexpr float LINE_SPACING = 10.0f;
 
 Text2D::Text2D(const std::wstring& text, TextAlignment alignment, const Transform& transform, const glm::vec4& color)
@@ -15,8 +13,8 @@ Text2D::Text2D(const Text2D& other) {
 	transform = other.transform;
 	color = other.color;
 
-	for (Sprite* sprite : other.sprites) {
-		this->sprites.push_back(new Sprite(*sprite));
+	for (const std::unique_ptr<Sprite>& sprite : other.sprites) {
+		sprites.push_back(std::make_unique<Sprite>(*sprite));
 	}
 }
 
@@ -56,7 +54,7 @@ void Text2D::setText(const std::wstring& text) {
 
 		x += ftChar.size.x * 0.5f + ftChar.bearing.x;
 
-		sprites.push_back(createSprite(ftChar, x, y));
+		sprites.push_back(std::move(createSprite(ftChar, x, y)));
 
 		x += (ftChar.advance.x >> 6) - ftChar.size.x * 0.5f - ftChar.bearing.x;
 	}
@@ -164,8 +162,8 @@ int Text2D::getHeight(const std::wstring& line, int length) {
 	return maxHeight;
 }
 
-Sprite* Text2D::createSprite(const FTCharacter& ftChar, float x, float y) {
-	Sprite* sprite = new Sprite;
+std::unique_ptr<Sprite> Text2D::createSprite(const FTCharacter& ftChar, float x, float y) {
+	std::unique_ptr<Sprite> sprite = std::make_unique<Sprite>();
 	sprite->texture.data = ftChar.texture;
 	sprite->texture.useAtlas = false;
 
@@ -180,29 +178,27 @@ Sprite* Text2D::createSprite(const FTCharacter& ftChar, float x, float y) {
 
 	sprite->setup();
 
-	return sprite;
+	return std::move(sprite);
 }
 
 void Text2D::draw(Shader& activeShader) {
-	for (Sprite* sprite : sprites) {
+	for (auto& sprite : sprites) {
 		sprite->draw(activeShader);
 	}
 }
 
 void Text2D::reset() {
-	freeArray(sprites);
-
 	sprites.clear();
 }
 
 void Text2D::setColor(const glm::vec4& color) {
-	for (Sprite* sprite : sprites) {
+	for (auto& sprite : sprites) {
 		sprite->color = color;
 	}
 }
 
 void Text2D::setPosition(const glm::vec3& position) {
-	for (Sprite* sprite : sprites) {
+	for (auto& sprite : sprites) {
 		sprite->transform.position += position - transform.position;
 	}
 

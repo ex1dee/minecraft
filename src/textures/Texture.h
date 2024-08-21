@@ -40,6 +40,7 @@ public:
 	Texture() {}
 	Texture(GLenum target, TextureType type)
 		: target(target), type(type) {}
+	virtual ~Texture() = default;
 
 	int getWidth() const { return width; }
 	int getHeight() const { return height; }

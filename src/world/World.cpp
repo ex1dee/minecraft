@@ -4,26 +4,25 @@
 
 #include "../shaders/ShadersDatabase.h"
 #include "../utils/random/Random.h"
-#include "../utils/PointerUtils.h"
 #include "../config/Config.h"
 
 constexpr float SPAWNPOINT_CHUNKS_RANGE = 100.0f;
 
-World::World(Player &player, Renderer& renderer)
-	: player(&player), renderer(&renderer) {
-	player.hookWorld(this);
+World::World(std::shared_ptr<Player>& player, std::shared_ptr<Renderer>& renderer)
+	: player(player), renderer(renderer) {
+	player->hookWorld(this);
 	seed = time(0);
 
 	chunkManager = ChunkManager(*this);
-	terrainGen = new DefaultWorldGenerator(seed);
+	terrainGen = std::make_unique<DefaultWorldGenerator>(seed);
 
 	isRunning = true;
 
 	updateDefaultSpawnPoint();
 	addLoadChunksThread();
-
-	sun = new Sun(ShadersDatabase::get(ShaderType::FRAMEBUFFER), *this, player);
-	clouds = new Clouds(seed, player, *this);
+	
+	sun = std::make_unique<Sun>(ShadersDatabase::get(ShaderType::FRAMEBUFFER), *this, this->player);
+	clouds = std::make_unique<Clouds>(seed, player, *this);
 }
 
 World::~World() {
@@ -32,15 +31,11 @@ World::~World() {
 	for (std::thread& thr : loadThreads) {
 		thr.join();
 	}
-
-	freePointer(&sun);
-	freePointer(&clouds);
-	freePointer(&terrainGen);
 }
 
 const Fog& World::getFog() {
 	Liquid* liquid = player->getLiquidAtEyes();
-
+	
 	if (liquid != nullptr) {
 		return liquid->getFog();
 	} else {
@@ -57,22 +52,22 @@ void World::addLoadChunksThread() {
 }
 
 void World::updateDefaultSpawnPoint() {
-	glm::vec2 chunkPos{ 0, 0 };
+	glm::ivec2 chunkPos{ 0, 0 };
 	glm::vec3 blockPos{ 0, 0, 0 };
 
 	int h = terrainGen->getMinSpawnHeight();
 	RandomGenerator randGen(seed);
-	Chunk* chunk = nullptr;
+	std::shared_ptr<Chunk> chunk;
 
 	while (blockPos.y < h) {
 		if (chunk != nullptr)
-			chunkManager.unload(chunkPos);
+			chunkManager.markAsUnloadedChunk(chunkPos);
 
 		chunkPos.x = rangedRand(randGen, -SPAWNPOINT_CHUNKS_RANGE, SPAWNPOINT_CHUNKS_RANGE);
 		chunkPos.y = rangedRand(randGen, -SPAWNPOINT_CHUNKS_RANGE, SPAWNPOINT_CHUNKS_RANGE);
 		blockPos.x = rangedRand(randGen, 0, CHUNK_W - 1);
 		blockPos.z = rangedRand(randGen, 0, CHUNK_D - 1);
-
+		
 		chunk = chunkManager.load(chunkPos);
 		blockPos.y = chunk->getHeightAt(blockPos);
 	}
@@ -86,65 +81,13 @@ void World::loadChunks() {
 	while (isRunning) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
 
-		glm::vec2 playerPos = getLocalChunkPosition(player->transform.position);
+		glm::ivec2 playerPos = getLocalChunkPosition(player->transform.position);
 		int loadDist = Config::settings["world"]["loadDistance"];
-
-		makeMeshes(playerPos, loadDist);
-		unloadNotVisibleChunks(playerPos, loadDist);
-		deleteUnloadedChunks();
+		
+		chunkManager.makeMeshes(playerPos, loadDist);
+		chunkManager.unloadNotVisibleChunks(playerPos, loadDist);
+		chunkManager.deleteUnloadedChunks();
 	}
-}
-
-void World::makeMeshes(const glm::vec2& chunkPos, int loadDist) {
-	for (int i = 0; i <= loadDist; ++i) {
-		for (int x = chunkPos.x - i; x <= chunkPos.x + i; ++x) {
-			chunkManager.makeMesh(glm::vec2(x, chunkPos.y - i));
-		}
-
-		for (int z = chunkPos.y - i + 1; z <= chunkPos.y + i - 1; ++z) {
-			chunkManager.makeMesh(glm::vec2(chunkPos.x - i, z));
-			chunkManager.makeMesh(glm::vec2(chunkPos.x + i, z));
-		}
-
-		for (int x = chunkPos.x - i; x <= chunkPos.x + i; ++x) {
-			chunkManager.makeMesh(glm::vec2(x, chunkPos.y + i));
-		}
-	}
-}
-
-void World::unloadNotVisibleChunks(const glm::vec2& chunkPos, int loadDist) {
-	for (std::pair<glm::vec2, Chunk*> pair : chunkManager.chunks) {
-		Chunk* chunk = pair.second;
-		if (chunk == nullptr)
-			continue;
-
-		glm::vec2 chunkPos = chunk->getLocalPosition();
-
-		float minX = chunkPos.x - loadDist;
-		float maxX = chunkPos.x + loadDist;
-		float minZ = chunkPos.y - loadDist;
-		float maxZ = chunkPos.y + loadDist;
-
-		if (chunkPos.x < minX || chunkPos.x > maxX || chunkPos.y < minZ || chunkPos.y > maxZ) {
-			chunkManager.unload(chunkPos);
-		}
-	}
-}
-
-void World::deleteUnloadedChunks() {
-	for (const glm::vec2& chunkPos : chunkManager.unloadedChunks) {
-		deleteChunkAt(chunkPos);
-	}
-
-	chunkManager.unloadedChunks.clear();
-}
-
-void World::deleteChunkAt(const glm::vec2& chunkPos) {
-	Chunk* chunk = chunkManager.getChunk(chunkPos);
-	chunkManager.loadedChunks.erase(chunkPos);
-	chunkManager.chunks.erase(chunkPos);
-
-	freePointer(&chunk);
 }
 
 void World::render() {
@@ -153,12 +96,12 @@ void World::render() {
 }
 
 void World::renderEntities() {
-	renderer->addEntity(player);
+	renderer->addEntity(*player);
 }
 
 void World::renderChunks() {
-	for (std::pair<glm::vec2, Chunk*> pair : chunkManager.loadedChunks) {
-		Chunk* chunk = pair.second;
+	for (auto& pair : chunkManager.loadedChunks) {
+		Chunk* chunk = pair.second.get();
 		if (chunk == nullptr)
 			continue;
 
@@ -174,14 +117,13 @@ void World::update(float deltaTime) {
 }
 
 void World::updateChunk(const glm::vec3& pos) {
-	Chunk* chunk = getChunk(pos);
-	chunkUpdates.push_back(chunk);
+	std::shared_ptr<Chunk> chunk = getChunk(pos);
+	chunkUpdates.push_back(std::move(chunk));
 }
 
 void World::updateChunks() {
-	for (Chunk* chunk : chunkUpdates) {
+	for (auto& chunk : chunkUpdates) {
 		chunk->resetMeshes();
-		std::unique_lock<std::mutex> lock(mainMutex);
 		chunk->makeMesh();
 	}
 
@@ -193,7 +135,7 @@ int World::getHeightAt(const glm::vec3& pos) {
 	return worldPos.chunk->getHeightAt(worldPos.localBlockPos);
 }
 
-Block* World::getHighestBlockAt(const glm::vec3& pos) {
+std::shared_ptr<Block> World::getHighestBlockAt(const glm::vec3& pos) {
 	WorldPosition worldPos = getWorldPosition(pos);
 	if (worldPos.chunk == nullptr)
 		return nullptr;
@@ -201,9 +143,9 @@ Block* World::getHighestBlockAt(const glm::vec3& pos) {
 	return worldPos.chunk->getHighestBlockAt(worldPos.localBlockPos);
 }
 
-Block* World::getBlock(const glm::vec3& pos) {
+std::shared_ptr<Block> World::getBlock(const glm::vec3& pos) {
 	WorldPosition worldPos = getWorldPosition(pos);
-	if (worldPos.chunk == nullptr)
+	if (worldPos.chunk == nullptr || !worldPos.chunk->isLoaded())
 		return nullptr;
 
 	return worldPos.chunk->getBlock(worldPos.localBlockPos);
@@ -211,6 +153,9 @@ Block* World::getBlock(const glm::vec3& pos) {
 
 void World::setBlock(const glm::vec3& pos, Material materialID) {
 	WorldPosition worldPos = getWorldPosition(pos);
+	if (worldPos.chunk == nullptr || !worldPos.chunk->isLoaded())
+		return;
+
 	return worldPos.chunk->setBlock(worldPos.localBlockPos, materialID);
 }
 
@@ -223,13 +168,13 @@ WorldPosition World::getWorldPosition(const glm::vec3& pos) {
 	return worldPos;
 }
 
-Chunk* const World::getChunk(const glm::vec3& pos) {
-	glm::vec2 locChunkPos = getLocalChunkPosition(pos);
+std::shared_ptr<Chunk> World::getChunk(const glm::vec3& pos) {
+	glm::ivec2 locChunkPos = getLocalChunkPosition(pos);
 	return chunkManager.getChunk(locChunkPos);
 }
 
-glm::vec2 World::getLocalChunkPosition(const glm::vec3& pos) {
-	return glm::vec2(floor(pos.x / CHUNK_W), floor(pos.z / CHUNK_D));
+glm::ivec2 World::getLocalChunkPosition(const glm::vec3& pos) {
+	return glm::ivec2(floor(pos.x / CHUNK_W), floor(pos.z / CHUNK_D));
 }
 
 glm::vec3 World::getLocalBlockPosition(const glm::vec3& pos) {

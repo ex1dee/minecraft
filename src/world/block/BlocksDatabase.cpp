@@ -1,13 +1,12 @@
 #include "BlocksDatabase.h"
 
 #include "meta/BlockMetaLoader.h"
-#include "../../utils/PointerUtils.h"
 #include "../../utils/Json.h"
 
 constexpr const char* BLOCKS_DIR = "resources/blocks";
 
-std::unordered_map<Material, BlockType*> BlocksDatabase::blocks;
-const TextureAtlas* BlocksDatabase::textureAtlas;
+std::unordered_map<Material, std::unique_ptr<BlockType>> BlocksDatabase::blocks;
+std::shared_ptr<TextureAtlas> BlocksDatabase::textureAtlas;
 
 void BlocksDatabase::initialize() {
 	textureAtlas = TextureLoader::loadAtlas("resources/textures/blocks_atlas.png", glm::vec2(16, 16), true, TextureType::DIFFUSE);
@@ -15,7 +14,7 @@ void BlocksDatabase::initialize() {
 	for (const std::string& path : Files::getFolderFiles(BLOCKS_DIR)) {
 		nlohmann::json json = Json::parse(path);
 
-		BlockType* type = new BlockType;
+		std::unique_ptr<BlockType> type = std::make_unique<BlockType>();
 		type->texBottomCoords = Json::toVec2(json["texCoords"]["bottom"]);
 		type->texSideCoords = Json::toVec2(json["texCoords"]["side"]);
 		type->texTopCoords = Json::toVec2(json["texCoords"]["top"]);
@@ -30,10 +29,6 @@ void BlocksDatabase::initialize() {
 			type->meta = BlockMetaLoader::load(json["meta"]["id"], json);
 		}
 
-		blocks.emplace(type->material, type);
+		blocks.emplace(type->material, std::move(type));
 	}
-}
-
-void BlocksDatabase::finalize() {
-	freeMapValues(blocks);
 }

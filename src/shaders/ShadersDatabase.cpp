@@ -1,19 +1,13 @@
 #include "ShadersDatabase.h"
 
-#include "../utils/PointerUtils.h"
-
-std::unordered_map<ShaderType, Shader*> ShadersDatabase::shaders;
+std::unordered_map<ShaderType, std::shared_ptr<Shader>> ShadersDatabase::shaders;
 
 void ShadersDatabase::initialize() {
-	shaders[ShaderType::DEFAULT]	 = new Shader("shaders/default.vs", "shaders/default.fs");
-	shaders[ShaderType::FRAMEBUFFER] = new Shader("shaders/framebuffer.vs", "shaders/framebuffer.fs");
-	shaders[ShaderType::SKYBOX]		 = new Shader("shaders/skybox.vs", "shaders/skybox.fs");
-	shaders[ShaderType::LINE]	     = new Shader("shaders/line.vs", "shaders/line.fs");
-	shaders[ShaderType::SPRITE]		 = new Shader("shaders/sprite.vs", "shaders/sprite.fs");
-	shaders[ShaderType::CLOUDS]		 = new Shader("shaders/sprite.vs", "shaders/clouds.fs");
-	shaders[ShaderType::TEXT]		 = new Shader("shaders/sprite.vs", "shaders/text.fs");
-}
-
-void ShadersDatabase::finalize() {
-	freeMapValues(shaders);
+	shaders[ShaderType::DEFAULT]	 = std::make_shared<Shader>("shaders/default.vs", "shaders/default.fs");
+	shaders[ShaderType::FRAMEBUFFER] = std::make_shared<Shader>("shaders/framebuffer.vs", "shaders/framebuffer.fs");
+	shaders[ShaderType::SKYBOX]		 = std::make_shared<Shader>("shaders/skybox.vs", "shaders/skybox.fs");
+	shaders[ShaderType::LINE]	     = std::make_shared<Shader>("shaders/line.vs", "shaders/line.fs");
+	shaders[ShaderType::SPRITE]		 = std::make_shared<Shader>("shaders/sprite.vs", "shaders/sprite.fs");
+	shaders[ShaderType::CLOUDS]		 = std::make_shared<Shader>("shaders/sprite.vs", "shaders/clouds.fs");
+	shaders[ShaderType::TEXT]		 = std::make_shared<Shader>("shaders/sprite.vs", "shaders/text.fs");
 }

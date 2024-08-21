@@ -14,6 +14,9 @@ public:
 		this->extents = max - min;
 	}
 
+	AABB& operator=(const AABB& other) = default;
+	AABB& operator=(AABB&& other) = default;
+
 	glm::vec3 getVP(const glm::vec3& normal) const {
 		glm::vec3 res = min;
 

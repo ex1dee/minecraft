@@ -27,51 +27,51 @@ ChunkMeshBuilder::ChunkMeshBuilder(Chunk& chunk)
 
 void ChunkMeshBuilder::build() {
 	for (int i = 0; i < CHUNK_VOL; ++i) {
-		Block* block = chunk->blocks[i];
-		const BlockType* blockType = block->type;
+		std::shared_ptr<Block> block = chunk->blocks[i];
+		const BlockType& blockType = block->getType();
 
-		if (blockType->material == AIR)
+		if (blockType.material == AIR)
 			continue;
 
 		setActiveMesh(blockType);
 
 		glm::vec3 blockPos = Chunk::getLocalBlockPosition(i);
 
-		if (blockType->meshType == MeshType::CUBE) {
+		if (blockType.meshType == MeshType::CUBE) {
 			addCube(blockPos, blockType);
-		} else if (blockType->meshType == MeshType::X) {
+		} else if (blockType.meshType == MeshType::X) {
 			addX(blockPos, blockType);
 		}
 	}
 }
 
-void ChunkMeshBuilder::setActiveMesh(const BlockType* blockType) {
-	if (blockType->shaderType == BlockShaderType::SOLID)
+void ChunkMeshBuilder::setActiveMesh(const BlockType& blockType) {
+	if (blockType.shaderType == BlockShaderType::SOLID)
 		activeMesh = chunk->getMeshes().solid;
-	else if (blockType->shaderType == BlockShaderType::LIQUID)
+	else if (blockType.shaderType == BlockShaderType::LIQUID)
 		activeMesh = chunk->getMeshes().liquid;
-	else if (blockType->shaderType == BlockShaderType::FLORA)
+	else if (blockType.shaderType == BlockShaderType::FLORA)
 		activeMesh = chunk->getMeshes().flora;
 }
 
-void ChunkMeshBuilder::addX(const glm::vec3& blockPos, const BlockType* blockType) {
-	AtlasCoords atlasCoords = BlocksDatabase::getTextureAtlas()->getTextureCoords(blockType->texSideCoords);
+void ChunkMeshBuilder::addX(const glm::vec3& blockPos, const BlockType& blockType) {
+	AtlasCoords atlasCoords = BlocksDatabase::getTextureAtlas().getTextureCoords(blockType.texSideCoords);
 
 	activeMesh->addBlockFace(xSide1, atlasCoords, chunk->getLocalPosition(), blockPos);
 	activeMesh->addBlockFace(xSide2, atlasCoords, chunk->getLocalPosition(), blockPos);
 }
 
-void ChunkMeshBuilder::addCube(const glm::vec3& blockPos, const BlockType* blockType) {
+void ChunkMeshBuilder::addCube(const glm::vec3& blockPos, const BlockType& blockType) {
 	BlockFaces blockFaces(blockPos);
 
-	tryAddFace(bottomFace, blockType->texBottomCoords, bottomFaceNormal, blockPos, blockFaces.bottom, blockType);
-	tryAddFace(topFace, blockType->texTopCoords, topFaceNormal, blockPos, blockFaces.top, blockType);
+	tryAddFace(bottomFace, blockType.texBottomCoords, bottomFaceNormal, blockPos, blockFaces.bottom, blockType);
+	tryAddFace(topFace, blockType.texTopCoords, topFaceNormal, blockPos, blockFaces.top, blockType);
 
-	tryAddFace(rightFace, blockType->texSideCoords, rightFaceNormal, blockPos, blockFaces.right, blockType);
-	tryAddFace(leftFace, blockType->texSideCoords, leftFaceNormal, blockPos, blockFaces.left, blockType);
+	tryAddFace(rightFace, blockType.texSideCoords, rightFaceNormal, blockPos, blockFaces.right, blockType);
+	tryAddFace(leftFace, blockType.texSideCoords, leftFaceNormal, blockPos, blockFaces.left, blockType);
 
-	tryAddFace(frontFace, blockType->texSideCoords, frontFaceNormal, blockPos, blockFaces.front, blockType);
-	tryAddFace(backFace, blockType->texSideCoords, backFaceNormal, blockPos, blockFaces.back, blockType);
+	tryAddFace(frontFace, blockType.texSideCoords, frontFaceNormal, blockPos, blockFaces.front, blockType);
+	tryAddFace(backFace, blockType.texSideCoords, backFaceNormal, blockPos, blockFaces.back, blockType);
 }
 
 void ChunkMeshBuilder::tryAddFace(const std::array<float, 12>& vertices,
@@ -79,27 +79,27 @@ void ChunkMeshBuilder::tryAddFace(const std::array<float, 12>& vertices,
 	const glm::vec3& normal,
 	const glm::vec3& localBlockPosition,
 	const glm::vec3& adjacentDir,
-	const BlockType* blockType) {
+	const BlockType& blockType) {
 	
 	if (localBlockPosition.y < 0)
 		return;
 
 	if (shouldAddFace(adjacentDir, blockType)) {
-		AtlasCoords atlasCoords = BlocksDatabase::getTextureAtlas()->getTextureCoords(texCoords);
+		AtlasCoords atlasCoords = BlocksDatabase::getTextureAtlas().getTextureCoords(texCoords);
 
 		activeMesh->addBlockFace(vertices, atlasCoords, chunk->getLocalPosition(), localBlockPosition, normal);
 	}
 }
 
-bool ChunkMeshBuilder::shouldAddFace(glm::vec3 adjacentDir, const BlockType* blockType) {
-	Block* adjBlock = chunk->getBlock(adjacentDir);
+bool ChunkMeshBuilder::shouldAddFace(glm::vec3 adjacentDir, const BlockType& blockType) {
+	std::shared_ptr<Block> adjBlock = chunk->getBlock(adjacentDir);
 	if (adjBlock == nullptr)
 		return true;
 
-	const BlockType* adjBlockType = adjBlock->type;
+	const BlockType& adjBlockType = adjBlock->getType();
 
-	if (adjBlockType->material == Material::AIR 
-		|| (!adjBlockType->isOpaque && blockType->material != adjBlockType->material)) {
+	if (adjBlockType.material == Material::AIR 
+		|| (!adjBlockType.isOpaque && blockType.material != adjBlockType.material)) {
 		return true;
 	}
 

@@ -5,7 +5,6 @@
 #include <string>
 
 #include "../../dependencies/stb_image.h"
-#include "../utils/PointerUtils.h"
 
 class Image {
 public:

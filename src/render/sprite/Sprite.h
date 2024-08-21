@@ -30,7 +30,7 @@ public:
 	void draw(Shader& shader) override;
 
 	void resetTexture();
-	Rect getRect();
+	Rect&& getRect();
 };
 
 #endif

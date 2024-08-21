@@ -24,8 +24,6 @@ void PhysicsEngine::update(float deltaTime) {
 
 	PhysicsEngine::deltaTime = deltaTime;
 
-	cullObjects();
-
 	for (GameObject* object : objects) {
 		prepare(*object);
 	}
@@ -37,8 +35,8 @@ void PhysicsEngine::update(float deltaTime) {
 	}
 }
 
-void PhysicsEngine::cullObjects() {
-	objects.erase(std::remove(objects.begin(), objects.end(), nullptr), objects.end());
+void PhysicsEngine::removeObject(GameObject& object) {
+	objects.erase(std::remove(objects.begin(), objects.end(), &object), objects.end());
 }
 
 void PhysicsEngine::prepare(GameObject& object) {
@@ -77,6 +75,6 @@ void PhysicsEngine::updatePosition(GameObject& object) {
 	rb.velocity = rb.newVelocity;
 }
 
-void PhysicsEngine::addObject(GameObject* object) {
-	objects.push_back(object);
+void PhysicsEngine::addObject(GameObject& object) {
+	objects.push_back(&object);
 }

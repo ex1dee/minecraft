@@ -7,12 +7,12 @@
 #include "../player/Camera.h"
 
 class BlockFrameRenderer {
+	std::shared_ptr<Block> prevBlock;
 	RandomGenerator randomGen;
-	Block* prevBlock;
-	Model* model;
+	Model model;
 
 	void render(const Camera& camera);
-	void createModel(Block* block, const Player& player);
+	void createModel(const Block& block, const Player& player);
 public:
 	BlockFrameRenderer();
 

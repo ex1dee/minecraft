@@ -2,20 +2,15 @@
 #define ITEMTYPE_H
 
 #include "../textures/SpriteTexture.h"
-#include "../utils/PointerUtils.h"
 #include "meta/ItemMeta.h"
 #include "Material.h"
 
 class ItemType {
 public:
+	std::unique_ptr<ItemMeta> meta;
 	SpriteTexture texture;
 	Material material;
-	ItemMeta* meta;
 	bool hasMeta;
-
-	~ItemType() {
-		freePointer(&meta);
-	}
 };
 
 #endif

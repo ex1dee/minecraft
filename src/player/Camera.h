@@ -20,18 +20,17 @@ class Camera {
 	glm::mat4 projection;
 	glm::vec3 viewDir;
 
+	std::shared_ptr<Player> player;
+	std::shared_ptr<World> world;
 	Orientation orientation;
-	CameraViewMode viewMode;
 	Transform transform;
 	Frustum frustum;
-	Player* player;
-	World* world;
 
-	bool blocked;
-
+	CameraViewMode viewMode = CameraViewMode::FIRST_PERSON;
+	bool blocked = false;
+	float zoom = 0;
 	float aspect;
 	float fov;
-	float zoom;
 
 	void updateTPSLook();
 	void updateOrientation();
@@ -53,8 +52,8 @@ public:
 
 	void update();
 	void setZoom(float zoom);
-	void hookWorld(World& world);
-	void hookPlayer(Player& player);
+	void hookWorld(std::shared_ptr<World>& world);
+	void hookPlayer(std::shared_ptr<Player>& player);
 	bool isAABBInFrustum(const AABB& aabb) const;
 };
 

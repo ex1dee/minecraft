@@ -25,16 +25,16 @@ class Renderer {
 	TextRenderer textRenderer;
 	GUIRenderer guiRenderer;
 
-	Shader* FBOShader;
-	Player* player;
+	std::shared_ptr<Player> player;
 public:
-	Renderer(Player& player);
+	Renderer(std::shared_ptr<Player>& player);
 
 	void finishRender(World& world);
 
-	void addSprite(Sprite* sprite);
-	void addChunk(Chunk* chunk);
-	void addEntity(Entity* entity);
+	void addText(Text2D& text);
+	void addChunk(Chunk& chunk);
+	void addSprite(Sprite& sprite);
+	void addEntity(Entity& entity);
 	
 	static void enableCullFace();
 	static void disableCullFace();

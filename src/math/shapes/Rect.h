@@ -5,7 +5,7 @@
 #include "Triangle.h"
 
 constexpr float POINT_INSIDE_EPSILON = 0.03f;
-#include <iostream>
+
 class Rect : public Triangle {
 public:
 	glm::vec3 d;
@@ -14,6 +14,13 @@ public:
 	Rect(const glm::vec3& a, const glm::vec3& b, const glm::vec3& c, const glm::vec3& d)
 		: Triangle(a, b, c), d(d) {
 		
+	}
+
+	Rect(Rect&& other) noexcept {
+		a = std::move(other.a);
+		b = std::move(other.b);
+		c = std::move(other.c);
+		d = std::move(other.d);
 	}
 
 	bool isPointInside(const glm::vec3& p) const {

@@ -11,8 +11,7 @@ class Collider : protected Transform {
 private:
 	ColliderType type;
 public:
-	Collider() {}
-
+	Collider() = default;
 	Collider(ColliderType type, const Transform& transform)
 		: type(type) {
 
@@ -20,6 +19,7 @@ public:
 		rotation = transform.rotation;
 		scale = transform.scale;
 	}
+	virtual ~Collider() = default;
 
 	ColliderType getType() { return type; }
 	glm::vec3 getPosition() { return position; }

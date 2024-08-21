@@ -1,34 +1,23 @@
 #include "Model.h"
 
-#include "../../utils/PointerUtils.h"
-
 Model::Model(float shininess)
 	: shininess(shininess) {
 
 }
 
-Model::~Model() {
-	reset();
-}
-
 void Model::addMesh(const MeshData& data) {
-	Mesh* mesh = new Mesh(data);
+	std::unique_ptr<Mesh> mesh = std::make_unique<Mesh>(data);
 	mesh->setup();
 
-	addMesh(mesh);
-}
-
-void Model::addMesh(Mesh* mesh) {
-	meshes.push_back(mesh);
+	meshes.push_back(std::move(mesh));
 }
 
 void Model::draw(Shader& shader) {
-	for (Mesh* mesh : meshes) {
-		if (mesh != nullptr)
-			mesh->draw(shader);
+	for (auto& mesh : meshes) {
+		mesh->draw(shader);
 	}
 }
 
 void Model::reset() {
-	freeArray(meshes);
+	meshes.clear();
 }

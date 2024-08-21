@@ -13,7 +13,7 @@ constexpr CharacterType UNKNOWN_SYMBOL = L'∅';
 constexpr float GLYPH_SIZE_PX = 128;
 
 class FTLoader {
-	static std::unordered_map<CharacterType, FTCharacter*> chars;
+	static std::unordered_map<CharacterType, std::unique_ptr<FTCharacter>> chars;
 	static FT_Library ft;
 	static FT_Face face;
 

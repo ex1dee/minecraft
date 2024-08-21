@@ -1,7 +1,6 @@
 #include "SkyboxRenderer.h"
 
 #include "../textures/TextureManager.h"
-#include "../utils/PointerUtils.h"
 #include "../world/WorldConstants.h"
 #include "../shaders/ShadersDatabase.h"
 #include "Renderer.h"
@@ -9,12 +8,6 @@
 SkyboxRenderer::SkyboxRenderer() {
 	loadTexture();
 	makeModel();
-}
-
-SkyboxRenderer::~SkyboxRenderer() {
-	model.reset();
-
-    freePointer(&texture);
 }
 
 void SkyboxRenderer::render(const Camera& camera, const Sun& sun, const Fog& fog) {
@@ -27,7 +20,7 @@ void SkyboxRenderer::render(const Camera& camera, const Sun& sun, const Fog& fog
 	
     fog.addToShader(skyboxShader);
 
-    TextureManager::bindTexture(texture, *skyboxShader, "background");
+    TextureManager::bindTexture(*texture, *skyboxShader, "background");
 
     model.draw(*skyboxShader);
 }

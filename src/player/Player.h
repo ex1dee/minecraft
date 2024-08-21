@@ -20,6 +20,7 @@ class Camera;
 
 class Player : public Entity {
 	friend class MovementsInput;
+	friend class PlayState;
 
 	int selectedSlot = 0;
 	bool flying = false;
@@ -28,19 +29,18 @@ class Player : public Entity {
 	float speed = PLAYER_DEFAULT_SPEED;
 	float jumpForce = PLAYER_JUMP_FORCE;
 
-	InventoryView* openInventoryView;
-	InventoryView* backpackView;
-	InventoryView* hotbarView;
-	Inventory* pOpenInventory;
-	Inventory* inventory;
+	std::shared_ptr<InventoryView> openInventoryView;
+	std::shared_ptr<InventoryView> backpackView;
+	std::shared_ptr<InventoryView> hotbarView;
+	std::shared_ptr<Inventory> pOpenInventory;
+	std::shared_ptr<Inventory> inventory;
 	InventoryItem draggedItem;
 
-	Camera* camera;
+	std::shared_ptr<Camera> camera;
 
 	void setupInventory();
 public:
-	Player(Camera& camera);
-	~Player();
+	Player(std::shared_ptr<Camera>& camera);
 
 	Camera& getCamera() const { return *camera; }
 	float getWalkSpeed() const { return speed; }
@@ -51,7 +51,7 @@ public:
 	bool isSprinting() const { return sprinting; }
 	bool isOpenedBackpack() { return backpackView->isOpened(); }
 	bool isOpenedInventory() { return openInventoryView != nullptr; }
-	InventoryView* getOpenInventoryView() { return openInventoryView; }
+	InventoryView* getOpenInventoryView() { return openInventoryView.get(); }
 	InventoryView& getBackpackView() { return *backpackView; }
 	InventoryView& getHotbarView() { return *hotbarView; }
 	const InventoryItem& getDraggedItem() { return draggedItem; }
@@ -62,9 +62,9 @@ public:
 	void resetDraggedItem();
 	void selectSlot(int slot);
 	void setFlying(bool flying);
-	void openInventory(Inventory* inventory);
 	void setDraggedItem(const InventoryItem& item);
 	void setNeedUpdateInventoryViews(bool needUpdate);
+	void openInventory(const std::shared_ptr<Inventory>& inventory);
 	bool isNeedUpdateInventoryViews();
 };
 

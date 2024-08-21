@@ -35,7 +35,7 @@ public:
 
 	glm::mat4 getProjView() const { return projView; }
 	uint32_t getDepthMap() const { return depthMap; }
-	Shader* const getShader() const { return shader; }
+	Shader& getShader() const { return *shader; }
 
 	void startRender(const glm::vec3& front, const glm::vec3& position);
 	void finishRender();

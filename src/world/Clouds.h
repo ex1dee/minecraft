@@ -22,12 +22,12 @@ class Clouds {
 	glm::vec3 noiseCenter;
 	glm::vec3 newCenter;
 
-	NoiseMap* noiseMap;
+	std::unique_ptr<NoiseMap> noiseMap;
+	std::shared_ptr<Sprite> sprite;
+	std::shared_ptr<Player> player;
 	PerlinNoise2D noise;
-	Sprite* sprite;
-	Player* player;
-	World* world;
 	uint32_t seed;
+	World* world;
 
 	void setup();
 	void updateNoise();
@@ -36,10 +36,10 @@ class Clouds {
 	void updatePosition(float deltaTime);
 public:
 	Clouds(const Clouds& clouds) = default;
-	Clouds(uint32_t seed, Player& player, World& world);
+	Clouds(uint32_t seed, std::shared_ptr<Player>& player, World& world);
 	~Clouds();
 
-	Sprite* getSprite() const { return sprite; }
+	std::shared_ptr<Sprite> getSprite() const { return sprite; }
 
 	void update(float deltaTime);
 };

@@ -6,11 +6,11 @@
 
 class BlockColliders {
 public:
-	static std::vector<BoxCollider*> get(BlockColliderType type) {
-		std::vector<BoxCollider*> colliders;
+	static std::vector<std::unique_ptr<BoxCollider>> get(BlockColliderType type) {
+		std::vector<std::unique_ptr<BoxCollider>> colliders;
 
 		if (type == FULL_SIZE) {
-			colliders.push_back(new BoxCollider(glm::vec3(1, 1, 1)));
+			colliders.push_back(std::make_unique<BoxCollider>(glm::vec3(1, 1, 1)));
 		}
 
 		return colliders;

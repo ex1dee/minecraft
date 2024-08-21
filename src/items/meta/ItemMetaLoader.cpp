@@ -2,8 +2,8 @@
 
 #include "../../utils/StringConverter.h"
 
-ItemMeta* ItemMetaLoader::load(const nlohmann::basic_json<>& json) {
-	ItemMeta* meta = load((ItemMetaID) json["id"]);
+std::unique_ptr<ItemMeta> ItemMetaLoader::load(const nlohmann::basic_json<>& json) {
+	std::unique_ptr<ItemMeta> meta = load((ItemMetaID) json["id"]);
 	meta->setName(StringConverter::toWString(json["name"]));
 
 	std::vector<std::wstring> lore;
@@ -13,12 +13,12 @@ ItemMeta* ItemMetaLoader::load(const nlohmann::basic_json<>& json) {
 
 	meta->setLore(lore);
 
-	return meta;
+	return std::move(meta);
 }
 
-ItemMeta* ItemMetaLoader::load(ItemMetaID id) {
+std::unique_ptr<ItemMeta> ItemMetaLoader::load(ItemMetaID id) {
 	switch (id) {
 	default:
-		return new ItemMeta;
+		return std::move(std::make_unique<ItemMeta>());
 	}
 }

@@ -15,7 +15,7 @@ class SpriteRenderer {
 	void updateShader(const Sun& sun, const Camera& camera);
 public:
 	void render(const Sun& sun, const Camera& camera);
-	void add(Sprite* sprite);
+	void add(Sprite& sprite);
 };
 
 #endif

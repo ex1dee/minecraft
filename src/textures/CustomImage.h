@@ -1,6 +1,8 @@
 #ifndef CUSTOMIMAGE_H
 #define CUSTOMIMAGE_H
 
+#include <vector>
+
 #include "Image.h"
 
 template<typename Td>
@@ -11,11 +13,8 @@ public:
 
 	CustomImage(GLenum type, int width, int height, int nchannels)
 		: Image(width, height, nchannels), type(type) {
-		allocData();
-	}
-
-	void allocData() {
-		data = new Td[width * height * nchannels];
+		data = new Td[width * height * nchannels + 1];
+		data[width * height * nchannels] = '\0';
 	}
 
 	GLenum getType() const {
@@ -23,7 +22,7 @@ public:
 	}
 
 	void free() override {
-		freePointer(&data);
+		delete[] data;
 	}
 };
 

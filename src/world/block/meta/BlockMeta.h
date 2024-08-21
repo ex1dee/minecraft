@@ -2,7 +2,8 @@
 #define BLOCKMETA_H
 
 class BlockMeta {
-
+public:
+	virtual ~BlockMeta() = default;
 };
 
 enum class BlockMetaID {

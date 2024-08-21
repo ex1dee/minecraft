@@ -8,14 +8,16 @@ class World;
 class Block;
 
 class Entity : public GameObject {
+	EntityID id;
+
 	void initialize();
 public:
-	const EntityType* type;
-
 	Entity(EntityID id, World* world = nullptr);
 
+	const EntityType& getType() const { return EntitiesDatabase::get(id); }
+
 	bool isOnGround() const;
-	Block* getTargetBlock() const;
+	std::shared_ptr<Block> getTargetBlock() const;
 	Liquid* getLiquidAtEyes() const;
 };
 

@@ -6,19 +6,18 @@
 #include "ItemsDatabase.h"
 
 class ItemStack {
-	ItemMeta* meta = nullptr;
+	std::unique_ptr<ItemMeta> meta;
+	Material material;
 	int amount = 1;
 public:
-	const ItemType* type;
-
 	ItemStack(Material material);
 	ItemStack(const Block& block);
 	ItemStack(const ItemStack& other);
-	~ItemStack();
 
-	int getAmount() { return amount; }
-	const ItemMeta* getMeta() { return meta; }
-	bool hasMeta() { return meta != nullptr; }
+	int getAmount() const { return amount; }
+	bool hasMeta() const { return meta != nullptr; }
+	ItemMeta& getMeta() const { return *meta; }
+	const ItemType& getType() const { return ItemsDatabase::get(material); }
 
 	void setMeta(const ItemMeta& meta);
 };

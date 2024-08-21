@@ -13,15 +13,18 @@ class Block {
 	friend class Chunk;
 	
 	glm::vec3 position;
-public:
-	const BlockType* type;
-	BlockState* state;
+	Material material;
 
-	Block() {}
+	Block(const Block& other) = delete;
+	Block& operator=(const Block& other) = delete;
+public:
+	std::unique_ptr<BlockState> state;
+
+	Block() = default;
 	Block(Material material);
-	~Block();
 
 	const glm::vec3& getPosition() const { return position; }
+	const BlockType& getType() const { return BlocksDatabase::get(material); }
 
 	bool isCollidable() const;
 	IntersectList intersect(const Ray& ray) const;

@@ -23,7 +23,7 @@ void TextRenderer::updateShader(const Camera& camera) {
 	activeShader->setMat4("view", camera.getView());
 }
 
-void TextRenderer::add(Text2D* text) {
-	if (!text->getText().empty())
-		texts.push_back(text);
+void TextRenderer::add(Text2D& text) {
+	if (!text.getText().empty())
+		texts.push_back(&text);
 }

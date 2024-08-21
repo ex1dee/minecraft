@@ -31,7 +31,7 @@ void CollisionDetector::detectO2B(std::vector<GameObject*>& objects, World& worl
 			continue;
 
 		glm::vec3 newPosition = obj->transform.position + 0.5f * glm::normalize(obj->rigidBody.deltaPosition);
-		Chunk* chunk = world.getChunk(glm::vec3(newPosition.x, 0, newPosition.z));
+		std::shared_ptr<Chunk> chunk = world.getChunk(glm::vec3(newPosition.x, 0, newPosition.z));
 
 		if (chunk == nullptr || !chunk->isLoaded())
 			continue;
@@ -40,7 +40,7 @@ void CollisionDetector::detectO2B(std::vector<GameObject*>& objects, World& worl
 			for (float y = -1; y <= obj->model->aabb.extents.y + 1; ++y) {
 				for (float z = -1; z <= obj->model->aabb.extents.z + 1; ++z) {
 					glm::vec3 blockPosition = newPosition + glm::vec3(x, y, z);
-					Block* block = world.getBlock(glm::floor(blockPosition));
+					std::shared_ptr<Block> block = world.getBlock(glm::floor(blockPosition));
 
 					detectO2B(*obj, world, block);
 				}
@@ -49,7 +49,7 @@ void CollisionDetector::detectO2B(std::vector<GameObject*>& objects, World& worl
 	}
 }
 
-void CollisionDetector::detectO2B(GameObject& obj, World& world, Block* block) {
+void CollisionDetector::detectO2B(GameObject& obj, World& world, std::shared_ptr<Block>& block) {
 	if (block == nullptr)
 		return;
 

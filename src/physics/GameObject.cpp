@@ -8,14 +8,14 @@ GameObject::GameObject(World* world)
 }
 
 GameObject::~GameObject() {
-	freePointer(&collider);
+	PhysicsEngine::removeObject(*this);
 }
 
 Liquid* GameObject::getLiquidAtObject() {
-	Block* block = world->getBlock(transform.position + glm::vec3(0, 0.3f, 0));
+	std::shared_ptr<Block> block = world->getBlock(transform.position + glm::vec3(0, 0.3f, 0));
 
 	if (block != nullptr)
-		return ((Liquid*)block->type->meta);
+		return ((Liquid*)block->getType().meta.get());
 
 	return nullptr;
 }

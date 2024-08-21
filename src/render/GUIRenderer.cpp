@@ -35,28 +35,28 @@ void GUIRenderer::updateTextShader() {
 
 void GUIRenderer::render(GUISector* sector, int layer) {
 	for (auto pair : *sector) {
-		GUIElement* element = pair.second;
+		GUIElement& element = *pair.second;
 
-		if (!element->visible)
+		if (!element.visible)
 			continue;
 
-		float z = GUI_ELEMENT_Z + (layer + element->layer_offset) * GUI_ELEMENT_LAYER_Z_OFFSET;
+		float z = GUI_ELEMENT_Z + (layer + element.layer_offset) * GUI_ELEMENT_LAYER_Z_OFFSET;
 
-		if (element->hasTexture) {
+		if (element.hasTexture) {
 			spriteShader->use();
 
-			element->sprite->transform.position.z = z;
-			element->sprite->draw(*spriteShader);
+			element.sprite->transform.position.z = z;
+			element.sprite->draw(*spriteShader);
 		}
 
-		if (element->hasText) {
+		if (element.hasText) {
 			textShader->use();
 
-			const glm::vec3& textPos = element->text->getPosition();
-			element->text->setPosition(glm::vec3(textPos.x, textPos.y, z));
-			element->text->draw(*textShader);
+			const glm::vec3& textPos = element.text->getPosition();
+			element.text->setPosition(glm::vec3(textPos.x, textPos.y, z));
+			element.text->draw(*textShader);
 		}
 
-		render(&element->children, layer + element->layer_offset + 1);
+		render(&element.children, layer + element.layer_offset + 1);
 	}
 }

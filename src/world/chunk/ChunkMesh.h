@@ -6,7 +6,6 @@
 
 #include "../../textures/AtlasCoords.h"
 #include "../../render/model/Model.h"
-#include "../../utils/PointerUtils.h"
 #include "../WorldConstants.h"
 
 class ChunkMesh {
@@ -27,20 +26,14 @@ public:
 };
 
 struct ChunkMeshCollection {
-	ChunkMesh* solid;
-	ChunkMesh* liquid;
-	ChunkMesh* flora;
+	std::shared_ptr<ChunkMesh> solid;
+	std::shared_ptr<ChunkMesh> liquid;
+	std::shared_ptr<ChunkMesh> flora;
 
 	ChunkMeshCollection() {
-		solid = new ChunkMesh();
-		liquid = new ChunkMesh();
-		flora = new ChunkMesh();
-	}
-
-	~ChunkMeshCollection() {
-		freePointer(&solid);
-		freePointer(&liquid);
-		freePointer(&flora);
+		solid = std::make_shared<ChunkMesh>();
+		liquid = std::make_shared<ChunkMesh>();
+		flora = std::make_shared<ChunkMesh>();
 	}
 
 	void createBuffers() {

@@ -7,18 +7,17 @@
 constexpr float BLOCKFRAME_LINE_WIDTH = 3.0f;
 
 BlockFrameRenderer::BlockFrameRenderer() {
-	model = new Model;
 	prevBlock = nullptr;
 }
 
 void BlockFrameRenderer::render(const Player& player) {
-	Block* block = player.getTargetBlock();
+	std::shared_ptr<Block> block = player.getTargetBlock();
 
 	if (prevBlock != block) {
-		model->reset();
+		model.reset();
 
 		if (block != nullptr) {
-			createModel(block, player);
+			createModel(*block, player);
 		}
 
 		prevBlock = block;
@@ -44,15 +43,15 @@ void BlockFrameRenderer::render(const Camera& camera) {
 
 	glLineWidth(BLOCKFRAME_LINE_WIDTH);
 
-	if (!model->isEmpty())
-		model->draw(shader);
+	if (!model.isEmpty())
+		model.draw(shader);
 }
 
-void BlockFrameRenderer::createModel(Block* block, const Player& player) {
+void BlockFrameRenderer::createModel(const Block& block, const Player& player) {
 	MeshData meshData(MeshType::CUBE, 3, GL_LINES);
-	Transform transform(block->getPosition());
+	Transform transform(block.getPosition());
 
-	for (BoxCollider* collider : block->type->colliders) {
+	for (auto& collider : block.getType().colliders) {
 		int index = 0;
 
 		for (const Rect& rect : collider->getRectangles(transform)) {
@@ -88,5 +87,5 @@ void BlockFrameRenderer::createModel(Block* block, const Player& player) {
 		}
 	}
 
-	model->addMesh(meshData);
+	model.addMesh(meshData);
 }

@@ -22,8 +22,8 @@ CLOUDS_MOVING_VELOCITY = glm::vec3(0.0f, 0.0f, 25.0f);
 const NoiseConfig 
 CLOUDS_NOISE_CONFIG(CLOUDS_NOISE_MIN, CLOUDS_NOISE_MAX, 1.0f, 0.1f, CLOUDS_FREQUENCY, 0.1f);
 
-Clouds::Clouds(uint32_t seed, Player& player, World& world)
-	: seed(seed), player(&player), world(&world) {
+Clouds::Clouds(uint32_t seed, std::shared_ptr<Player>& player, World& world)
+	: seed(seed), player(player), world(&world) {
 	setup();
 
 	isRunning = true;
@@ -35,16 +35,13 @@ Clouds::~Clouds() {
 	updateThread.join();
 
 	sprite->resetTexture();
-
-	freePointer(&noiseMap);
-	freePointer(&sprite);
 }
 
 void Clouds::setup() {
-	noiseMap = new NoiseMap(CLOUDS_NOISE_MAP_SIZE, CLOUDS_NOISE_MAP_SIZE);
+	noiseMap = std::make_unique<NoiseMap>(CLOUDS_NOISE_MAP_SIZE, CLOUDS_NOISE_MAP_SIZE);
 	noise.setup(seed, CLOUDS_NOISE_CONFIG);
 
-	sprite = new Sprite;
+	sprite = std::make_shared<Sprite>();
 	sprite->transform.rotation = glm::vec3(90, 0, 0);
 	sprite->transform.scale = glm::vec3(CLOUDS_SCALE, CLOUDS_SCALE, 1);
 	sprite->texture.useAtlas = false;
@@ -112,7 +109,7 @@ void Clouds::update(float deltaTime) {
 void Clouds::updateTexture() {
 	if (noiseUpdated) {
 		sprite->resetTexture();
-		sprite->texture.data = new CustomTexture<float>(noiseMap->getMap(), GL_MIRRORED_REPEAT, GL_LINEAR);
+		sprite->texture.data = std::make_shared<CustomTexture<float>>(noiseMap->getMap(), GL_MIRRORED_REPEAT, GL_LINEAR);
 
 		noiseUpdated = false;
 	}

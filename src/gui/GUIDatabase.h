@@ -6,14 +6,13 @@
 
 class GUIDatabase {
 	static void createRootSector(GUISector& elements);
-	static void addText(GUIElement* element, const nlohmann::basic_json<>& json);
-	static void addTexture(GUIElement* element, const nlohmann::basic_json<>& json);
-	static void addChildren(GUIElement* element, const nlohmann::basic_json<>& json, GUISector& elements);
+	static void addText(GUIElement& element, const nlohmann::basic_json<>& json);
+	static void addTexture(GUIElement& element, const nlohmann::basic_json<>& json);
+	static void addChildren(std::shared_ptr<GUIElement> element, const nlohmann::basic_json<>& json, GUISector& elements);
 public:
 	static GUISector root;
 
 	static void initialize();
-	static void finalize();
 };
 
 #endif

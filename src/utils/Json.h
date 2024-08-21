@@ -1,7 +1,7 @@
 #ifndef JSON_H
 #define JSON_H
 
-#include <nlohmann/json.hpp> 
+#include <nlohmann/json.hpp>
 #include <glm/glm.hpp>
 #include <vector>
 #include <string>

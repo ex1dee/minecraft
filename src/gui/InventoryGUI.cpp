@@ -30,11 +30,11 @@ ITEM_DESCRIPTION_TEXT_SCALE = glm::vec3(0.15f);
 
 constexpr glm::vec4 TITLE_COLOR = glm::vec4(glm::vec3(0.3f), 1.0f);
 
-GUIElement* InventoryGUI::item_description;
+std::shared_ptr<GUIElement> InventoryGUI::item_description;
 
 void InventoryGUI::update(Player& player, bool& windowScaled) {
-	GUIElement* item_description = GUIDatabase::root["item_description"];
-	GUIElement* inventory = GUIDatabase::root["inventory"];
+	GUIElement* inventory = GUIDatabase::root["inventory"].get();
+	item_description = GUIDatabase::root["item_description"];
 	item_description->visible = inventory->visible = player.isOpenedBackpack();
 
 	InventoryView& hotbarView = player.getHotbarView();
@@ -48,7 +48,7 @@ void InventoryGUI::update(Player& player, bool& windowScaled) {
 	if (!inventory->visible)
 		return;
 
-	updateItemDesciption(player, inventory->children["background"]);
+	updateItemDesciption(player);
 	updateDraggedItem(player);
 
 	if (!windowScaled && !player.isNeedUpdateInventoryViews())
@@ -59,10 +59,8 @@ void InventoryGUI::update(Player& player, bool& windowScaled) {
 	player.setNeedUpdateInventoryViews(false);
 }
 
-void InventoryGUI::updateItemDesciption(Player& player, GUIElement* background) {
+void InventoryGUI::updateItemDesciption(Player& player) {
 	InventoryItem invItem = GUIManager::getItemOnCursor(player);
-
-	item_description = GUIDatabase::root["item_description"];
 
 	if (!invItem.isValid() || !invItem.item->hasMeta()) {
 		item_description->visible = false;
@@ -73,11 +71,11 @@ void InventoryGUI::updateItemDesciption(Player& player, GUIElement* background) 
 	item_description->layer_offset = GUI_ELEMENT_MAX_LAYER - 1;
 	item_description->visible = true;
 
-	GUIElement* textElement = item_description->children["text"];
-	Text2D* text = textElement->text;
+	std::shared_ptr<GUIElement> textElement = item_description->children["text"];
+	Text2D* text = textElement->text.get();
 
 	text->setScale(ITEM_DESCRIPTION_TEXT_SCALE);
-	text->setText(invItem.item->getMeta()->getDescription());
+	text->setText(invItem.item->getMeta().getDescription());
 
 	float textWidth = text->getMaxWidth();
 	float textHeight = text->getHeight();
@@ -106,7 +104,7 @@ void InventoryGUI::updateItemDesciption(Player& player, GUIElement* background) 
 
 	item_description->children.emplace(textElement->name, textElement);
 
-	GUI::setupElement(item_description);
+	GUI::setupElement(*item_description);
 }
 
 void InventoryGUI::updateDraggedItem(Player& player) {
@@ -121,19 +119,20 @@ void InventoryGUI::updateDraggedItem(Player& player) {
 	invItem.element->transform.position = position;
 	invItem.element->layer_offset = GUI_ELEMENT_MAX_LAYER - 1;
 
-	GUI::setupElement(invItem.element);
+	GUI::setupElement(*invItem.element);
 }
 
 void InventoryGUI::updateHotbar(Player& player) {
-	GUIElement* hotbar = GUIDatabase::root["hotbar"];
-	GUIManager::deleteSector(hotbar->children);
+	std::shared_ptr<GUIElement> hotbar = GUIDatabase::root["hotbar"];
+	hotbar->children.clear();
 
-	InventoryView& hotbarView = player.getHotbarView();
-	hotbar->children = hotbarView.getGUISector(*hotbar);
-	GUIElement* hotbarViewElement = hotbar->children["0"];
+	const InventoryView& hotbarView = player.getHotbarView();
+	hotbar->children = hotbarView.getGUISector(hotbar);
 
-	GUIElement* frame = new GUIElement(*GUIDatabase::root["slot_frame"]);
-	frame->parent = hotbarViewElement;
+	std::shared_ptr<GUIElement> hotbarViewElement = hotbar->children["0"];
+	std::shared_ptr<GUIElement> frame = std::make_shared<GUIElement>(*GUIDatabase::root["slot_frame"]);
+
+	frame->parent = std::shared_ptr<GUIElement>(hotbarViewElement);
 	frame->transform.scale = frame->parent->transform.scale;
 	frame->transform.position.x = DEFAULT_SLOT_WIDTH * frame->transform.scale.x * (player.getSelectedSlot() - 0.5f * (SLOTS_IN_ROW - 1));
 	frame->transform.position += frame->parent->transform.position;
@@ -141,16 +140,16 @@ void InventoryGUI::updateHotbar(Player& player) {
 
 	hotbarViewElement->children.emplace("frame", frame);
 
-	GUI::setupElement(hotbar);
+	GUI::setupElement(*hotbar);
 }
 
 void InventoryGUI::updateOpenInventory(Player& player) {
-	GUIElement* inventory = GUIDatabase::root["inventory"];
-	GUIElement* background = inventory->children["background"];
+	GUIElement* inventory = GUIDatabase::root["inventory"].get();
+	GUIElement* background = inventory->children["background"].get();
 
-	InventoryView* top = player.getOpenInventoryView();
-	InventoryView& center = player.getBackpackView();
-	InventoryView& bottom = player.getHotbarView();
+	const InventoryView* top = player.getOpenInventoryView();
+	const InventoryView& center = player.getBackpackView();
+	const InventoryView& bottom = player.getHotbarView();
 
 	int topRowsNumber = top != nullptr ? top->getRowsNumber() : 0;
 	glm::vec2 slotSize = InventoryView::getSlotSize();
@@ -167,16 +166,16 @@ void InventoryGUI::updateOpenInventory(Player& player) {
 		height
 	);
 
-	GUIElement* bottomElement = background->children["bottom"];
+	std::shared_ptr<GUIElement> bottomElement = background->children["bottom"];
 	bottomElement->transform.position
 		= glm::vec3(bottom.getSectorCenter() + glm::vec2(PADDING_WIDTH, PADDING_BOTTOM), 0);
 
-	GUIElement* centerElement = background->children["center"];
+	std::shared_ptr<GUIElement> centerElement = background->children["center"];
 	centerElement->transform.position =
 		bottomElement->transform.position
 		+ glm::vec3(0, bottom.getSectorCenter().y + PADDING_BETWEEN_CENTERBOTTOM + center.getSectorCenter().y - 0.5f * slotSize.y, 0);
 
-	GUIElement* topElement = background->children["top"];
+	std::shared_ptr<GUIElement> topElement = background->children["top"];
 
 	if (top != nullptr) {
 		topElement->transform.position
@@ -199,10 +198,17 @@ void InventoryGUI::updateOpenInventory(Player& player) {
 		topElement->children.clear();
 	}
 
-	GUI::setupElement(background);
+	GUI::setupElement(*background);
 }
 
-void InventoryGUI::updateInventoryViewTitle(GUIElement* element, InventoryView& view, TextAlignment titleAlignment) {
+void InventoryGUI::updateInventoryElement(std::shared_ptr<GUIElement>& element, const InventoryView& view, const glm::vec3& bottomLeft) {
+	element->children.clear();
+
+	element->transform.position += bottomLeft;
+	element->children = view.getGUISector(element);
+}
+
+void InventoryGUI::updateInventoryViewTitle(std::shared_ptr<GUIElement>& element, const InventoryView& view, TextAlignment titleAlignment) {
 	float dx = 0;
 
 	if (titleAlignment == TextAlignment::LEFT)
@@ -220,14 +226,14 @@ void InventoryGUI::updateInventoryViewTitle(GUIElement* element, InventoryView& 
 		glm::vec3(TITLE_SCALE)
 	);
 
-	Text2D* titleText = new Text2D(
+	std::unique_ptr<Text2D> titleText = std::make_unique<Text2D>(
 		view.getInventory().getTitle(),
 		titleAlignment,
 		transform,
 		TITLE_COLOR
 	);
-	
-	GUIElement* titleElement = new GUIElement(
+
+	std::shared_ptr<GUIElement> titleElement = std::make_shared<GUIElement>(
 		"title",
 		titleText,
 		true,
@@ -235,11 +241,4 @@ void InventoryGUI::updateInventoryViewTitle(GUIElement* element, InventoryView& 
 	);
 
 	element->children.emplace(titleElement->name, titleElement);
-}
-
-void InventoryGUI::updateInventoryElement(GUIElement* element, InventoryView& view, const glm::vec3& bottomLeft) {
-	GUIManager::deleteSector(element->children);
-
-	element->transform.position += bottomLeft;
-	element->children = view.getGUISector(*element);
 }

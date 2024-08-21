@@ -7,20 +7,18 @@
 #include "Mesh.h"
 
 class Model {
-	std::vector<Mesh*> meshes;
+	std::vector<std::unique_ptr<Mesh>> meshes;
 
 	float shininess;
 public:
 	AABB aabb;
 
 	Model(float shininess = 0);
-	~Model();
 
 	bool isEmpty() { return meshes.empty() || meshes[0]->data.vertexPositions.empty(); }
 
 	void reset();
 	void draw(Shader& shader);
-	void addMesh(Mesh* mesh);
 	void addMesh(const MeshData& data);
 };
 

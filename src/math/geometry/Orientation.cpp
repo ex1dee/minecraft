@@ -1,5 +1,5 @@
 #include "Orientation.h"
-#include <iostream>
+
 void Orientation::update(float yaw, float pitch) {
 	this->yaw = yaw;
 	this->pitch = pitch;

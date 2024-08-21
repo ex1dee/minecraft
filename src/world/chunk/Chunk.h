@@ -17,10 +17,10 @@ class Chunk {
 	friend class ChunkManager;
 	friend class ChunkMeshBuilder;
 
-	std::unordered_map<glm::vec2, int> highestBlocks;
-	std::array<Block*, CHUNK_VOL> blocks;
+	std::unordered_map<glm::ivec2, int> highestBlocks;
+	std::array<std::shared_ptr<Block>, CHUNK_VOL> blocks;
 	ChunkMeshCollection meshes;
-	glm::vec2 position;
+	glm::ivec2 position;
 	World* world;
 	AABB aabb;
 
@@ -28,7 +28,7 @@ class Chunk {
 	bool buffered = false;
 	bool loaded = false;
 
-	Block* getHighestBlockAt(const glm::vec3& pos);
+	std::shared_ptr<Block> getHighestBlockAt(const glm::vec3& pos);
 	int getHeightAt(const glm::vec3& pos);
 	bool outOfBounds(const glm::vec3& pos);
 	void makeAABB();
@@ -37,18 +37,18 @@ class Chunk {
 	void resetMeshes();
 	void render(Renderer& renderer);
 	void load(TerrainGenerator& terrainGen);
-	void updateHighestBlock(const glm::vec3& pos, Block* block);
+	void updateHighestBlock(const glm::vec3& pos, const Block& block);
 public:
-	Chunk(World& world, glm::vec2 pos);
+	Chunk(World& world, glm::ivec2 pos);
 
 	bool isLoaded() { return loaded; }
 	bool hasMesh() { return bHasMesh; }
 	bool hasBuffered() { return buffered; }
 	ChunkMeshCollection& getMeshes() { return meshes; }
-	glm::vec2 getLocalPosition() { return position; }
+	glm::ivec2 getLocalPosition() { return position; }
 	AABB& getAABB() { return aabb; }
 
-	Block* getBlock(const glm::vec3& pos);
+	std::shared_ptr<Block> getBlock(const glm::vec3& pos);
 	void setBlock(const glm::vec3& pos, Material material);
 	glm::vec3 getWorldPosition(const glm::vec3& blockPos);
 

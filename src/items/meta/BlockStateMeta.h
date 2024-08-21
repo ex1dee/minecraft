@@ -5,11 +5,11 @@
 #include "ItemMeta.h"
 
 class BlockStateMeta : public ItemMeta {
-	BlockState* blockState;
+	std::unique_ptr<BlockState> blockState;
 public:
-	BlockStateMeta(const ItemMeta& meta, const BlockState* blockState)
-		: ItemMeta(meta) {
-		blockState = new BlockState(*blockState);
+	BlockStateMeta(const ItemMeta& meta, const std::unique_ptr<BlockState>& blockState)
+		: ItemMeta(meta), blockState(std::make_unique<BlockState>(*blockState)) {
+
 	}
 };
 

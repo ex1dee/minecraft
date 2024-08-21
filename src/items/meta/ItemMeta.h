@@ -14,6 +14,11 @@ public:
 	ItemMeta() = default;
 	ItemMeta(const std::wstring& name, const std::vector<std::wstring>& lore);
 
+	ItemMeta(const ItemMeta& other) = default;
+	ItemMeta(ItemMeta&& other) = default;
+	ItemMeta& operator=(const ItemMeta& other) = default;
+	ItemMeta& operator=(ItemMeta&& other) = default;
+
 	const std::wstring& getName() const { return name; }
 	const std::vector<std::wstring>& getLore() const { return lore; }
 	const std::wstring& getDescription() const { return description; }

@@ -5,7 +5,6 @@
 #include <mutex>
 
 #include "../entity/EntitiesDatabase.h"
-#include "../utils/PointerUtils.h"
 #include "../render/fog/Fog.h"
 #include "../player/Player.h"
 #include "generation/terrain/DefaultWorldGenerator.h"
@@ -16,21 +15,20 @@
 #include "Sun.h"
 
 class World {
-	TerrainGenerator* terrainGen;
-	ChunkManager chunkManager;
-
-	std::vector<Chunk*> chunkUpdates;
+	std::vector<std::shared_ptr<Chunk>> chunkUpdates;
 	std::vector<std::thread> loadThreads;
 	std::vector<Entity*> entities;
 
 	glm::vec3 spawnPoint;
 	uint32_t seed;
 
-	Renderer* renderer;
-	Player* player;
+	std::shared_ptr<Renderer> renderer;
+	std::shared_ptr<Player> player;
 
-	Clouds* clouds;
-	Sun* sun;
+	std::unique_ptr<TerrainGenerator> terrainGen;
+	std::unique_ptr<Clouds> clouds;
+	std::unique_ptr<Sun> sun;
+	ChunkManager chunkManager;
 	Fog fog;
 
 	std::atomic<bool> isRunning;
@@ -40,13 +38,9 @@ class World {
 	void renderChunks();
 	void renderEntities();
 	void addLoadChunksThread();
-	void deleteUnloadedChunks();
 	void updateDefaultSpawnPoint();
-	void deleteChunkAt(const glm::vec2& chunkPos);
-	void makeMeshes(const glm::vec2& chunkPos, int loadDist);
-	void unloadNotVisibleChunks(const glm::vec2& chunkPos, int loadDist);
 public:
-	World(Player& player, Renderer& renderer);
+	World(std::shared_ptr<Player>& player, std::shared_ptr<Renderer>& renderer);
 	~World();
 
 	const Sun& getSun() { return *sun; }
@@ -55,9 +49,6 @@ public:
 
 	const Fog& getFog();
 	int getHeightAt(const glm::vec3& pos);
-	Chunk* const getChunk(const glm::vec3& pos);
-	Block* getBlock(const glm::vec3& pos);
-	Block* getHighestBlockAt(const glm::vec3& pos);
 	void render();
 	void updateChunks();
 	void update(float deltaTime);
@@ -65,7 +56,10 @@ public:
 	void setBlock(const glm::vec3& pos, Material materialID);
 	WorldPosition getWorldPosition(const glm::vec3& pos);
 	glm::vec3 getLocalBlockPosition(const glm::vec3& pos);
-	glm::vec2 getLocalChunkPosition(const glm::vec3& pos);
+	glm::ivec2 getLocalChunkPosition(const glm::vec3& pos);
+	std::shared_ptr<Chunk> getChunk(const glm::vec3& pos);
+	std::shared_ptr<Block> getBlock(const glm::vec3& pos);
+	std::shared_ptr<Block> getHighestBlockAt(const glm::vec3& pos);
 };
 
 #endif

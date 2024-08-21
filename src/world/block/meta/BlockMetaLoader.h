@@ -6,7 +6,7 @@
 
 class BlockMetaLoader {
 public:
-	static BlockMeta* load(BlockMetaID id, const nlohmann::basic_json<>& json);
+	static std::unique_ptr<BlockMeta> load(BlockMetaID id, const nlohmann::basic_json<>& json);
 };
 
 #endif
