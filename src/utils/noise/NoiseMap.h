@@ -17,7 +17,7 @@ public:
 	~NoiseMap();
 
 	const CustomImage<float>& getMap() { return map; }
-	float get(int x, int y) { return map.data[getIndex(x, y)]; }
+	float get(int x, int y) { return map[getIndex(x, y)]; }
 
 	void reset();
 	void apply(const SetNoiseFunc& func);

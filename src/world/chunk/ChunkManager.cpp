@@ -32,14 +32,14 @@ void ChunkManager::makeMesh(const glm::ivec2& pos) {
 		load(pos + glm::ivec2(-1, 0));
 		load(pos + glm::ivec2(0, 1));
 		load(pos + glm::ivec2(0, -1));
-		load(pos);
 
-		chunk->makeMesh();
+		load(pos)->makeMesh();
 	}
 }
 
 std::shared_ptr<Chunk> ChunkManager::load(const glm::ivec2& pos) {
 	std::shared_ptr<Chunk> chunk = getChunk(pos);
+
 	if (chunk != nullptr && chunk->isLoaded())
 		return chunk;
 
@@ -81,21 +81,13 @@ void ChunkManager::deleteUnloadedChunks() {
 }
 
 void ChunkManager::deleteChunkAt(const glm::ivec2& chunkPos) {
-	std::shared_ptr<Chunk> chunk = std::move(chunks[chunkPos]);
-
 	loadedChunks.erase(chunkPos);
 	chunks.erase(chunkPos);
-
-	chunk.reset();
 }
 
 std::shared_ptr<Chunk> ChunkManager::getChunk(const glm::ivec2& pos) {
-	if (pos.x != pos.x || pos.y != pos.y)
-		return nullptr;
-
-	if (!chunkExistsAt(pos)) {
+	if (!chunkExistsAt(pos))
 		chunks.try_emplace(pos, std::make_shared<Chunk>(*world, pos));
-	}
 
 	return chunks[pos];
 }

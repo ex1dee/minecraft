@@ -44,10 +44,14 @@ void FTLoader::loadChar(CharacterType c) {
 	if (!face->glyph->bitmap.buffer && c != L' ')
 		return;
 
-	CustomImage<std::uint8_t> image(GL_UNSIGNED_BYTE, bitmap.width, bitmap.rows, 1);
-	image.data = face->glyph->bitmap.buffer;
-	
-	std::shared_ptr<CustomTexture<std::uint8_t>> texture = std::make_shared<CustomTexture<std::uint8_t>>(image, GL_CLAMP_TO_EDGE, GL_LINEAR);
+	std::shared_ptr<CustomTexture<std::uint8_t>> texture;
+
+	if (c != L' ') {
+		CustomImage<std::uint8_t> image(GL_UNSIGNED_BYTE, face->glyph->bitmap.width, face->glyph->bitmap.rows, 1);
+		image.copyData(face->glyph->bitmap.buffer);
+
+		texture = std::make_shared<CustomTexture<std::uint8_t>>(image, GL_CLAMP_TO_EDGE, GL_LINEAR);
+	}
 	
 	FTCharacter* ftChar = new FTCharacter{
 		texture,
@@ -57,7 +61,7 @@ void FTLoader::loadChar(CharacterType c) {
 		glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows)
 	};
 
-	chars.emplace(c, ftChar);
+	chars.try_emplace(c, ftChar);
 }
 
 const FTCharacter& FTLoader::getCharacter(CharacterType c) {

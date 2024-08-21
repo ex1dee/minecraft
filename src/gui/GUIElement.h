@@ -32,8 +32,8 @@ public:
 	GUIElement() = default;
 
 	GUIElement(const std::string& name, const Transform& transform, std::unique_ptr<Sprite>& sprite, bool visible, std::shared_ptr<GUIElement>& parent)
-		: name(name), hasTexture(true), hasText(false), transform(transform), 
-		  sprite(std::move(sprite)), visible(visible), parent(parent), text(nullptr) {}
+		: name(name), hasTexture(true), hasText(false), transform(transform),
+		sprite(std::move(sprite)), visible(visible), parent(parent), text(nullptr) {}	
 
 	GUIElement(const std::string& name, std::unique_ptr<Text2D>& text, bool visible, std::shared_ptr<GUIElement>& parent)
 		: name(name), hasTexture(false), hasText(true),  

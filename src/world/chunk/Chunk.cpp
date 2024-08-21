@@ -8,7 +8,7 @@ Chunk::Chunk(World& world, glm::ivec2 pos)
 	for (int i = 0; i < CHUNK_VOL; ++i) {
 		blocks[i] = std::make_shared<Block>(AIR);
 	}
-	
+
 	makeAABB();
 	meshes.setAABB(aabb);
 }
