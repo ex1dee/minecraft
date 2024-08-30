@@ -50,7 +50,7 @@ std::vector<std::string> Files::getFolderFiles(const std::string& dirPath) {
 			files.push_back(entry.path().string());
 		}
 	} else {
-		std::cout << "Folder \"" << dirPath << "\" was not found\n";
+		std::cerr << "Folder \"" << dirPath << "\" was not found\n";
 	}
 	
 	return files;

@@ -1,7 +1,5 @@
 {
     "visible": true,
-    "hasTexture": false,
-    "hasText": false,
     "name": "bottom",
 
     "center": [ 0, 0 ],

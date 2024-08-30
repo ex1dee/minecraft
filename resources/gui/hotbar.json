@@ -1,7 +1,5 @@
 {
     "visible": true,
-    "hasTexture": false,
-    "hasText": false,
     "name": "hotbar",
 
     "center": [ 0, -485 ],

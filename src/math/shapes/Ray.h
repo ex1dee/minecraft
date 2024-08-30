@@ -9,7 +9,7 @@ public:
 	glm::vec3 direction;
 
 	Ray(const glm::vec3& start, const glm::vec3& direction)
-		: start(start), direction(direction) {
+		: start(start), direction(glm::normalize(direction)) {
 
 	}
 };

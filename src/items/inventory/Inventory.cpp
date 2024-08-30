@@ -5,7 +5,7 @@
 #include "InventoryView.h"
 
 Inventory::Inventory(const std::wstring& title, int rowsNumber)
-	: title(title), size(SLOTS_IN_ROW* this->rowsNumber), rowsNumber(glm::clamp(rowsNumber, 0, MAX_ROWS_NUMBER)) {
+	: title(title), size(SLOTS_IN_ROW * this->rowsNumber), rowsNumber(glm::clamp(rowsNumber, 0, MAX_ROWS_NUMBER)) {
 	items.reserve(size);
 
 	for (int i = 0; i < size; ++i) {
@@ -50,6 +50,7 @@ void Inventory::addItem(const ItemStack& item) {
 void Inventory::setItem(int index, const ItemStack& item) {
 	if (isCorrectIndex(index)) {
 		items[index] = std::make_shared<ItemStack>(item);
+		items[index]->hookInventory(this);
 
 		updateViews();
 	}

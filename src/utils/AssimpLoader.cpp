@@ -11,7 +11,7 @@ std::unique_ptr<Model> AssimpLoader::load(const std::string& path) {
 	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
-		std::cout << "ERROR::ASSIMP\n" << importer.GetErrorString() << "\n";
+		std::cerr << "ERROR::ASSIMP\n" << importer.GetErrorString() << "\n";
 
 		return nullptr;
 	}
@@ -37,11 +37,11 @@ void AssimpLoader::processNode(const aiScene* scene, const aiNode* node) {
 }
 
 void AssimpLoader::addMesh(const aiScene* scene, const aiMesh* mesh) {
-	MeshData meshData(MeshType::ASSIMP, 3);
+	std::unique_ptr<MeshData> meshData = std::make_unique<MeshData>(MeshType::ASSIMP, 3);
 
-	addVertices(mesh, meshData);
-	addIndices(mesh, meshData);
-	addMaterial(scene, mesh, meshData);
+	addVertices(mesh, *meshData);
+	addIndices(mesh, *meshData);
+	addMaterial(scene, mesh, *meshData);
 
 	model->addMesh(meshData);
 }

@@ -1,7 +1,5 @@
 {
     "visible": false,
-    "hasTexture": true,
-    "hasText": false,
     "name": "slot_frame",
 
     "color": [ 1, 1, 1, 0.5 ],

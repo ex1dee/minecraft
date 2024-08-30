@@ -65,10 +65,10 @@
     <ClCompile Include="src\world\chunk\Chunk.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\chunk\ChunkMesh.cpp">
+    <ClCompile Include="src\world\chunk\ChunkModel.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\world\chunk\ChunkMeshBuilder.cpp">
+    <ClCompile Include="src\world\chunk\ChunkModelBuilder.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\world\World.cpp">
@@ -263,6 +263,15 @@
     <ClCompile Include="src\render\model\MeshData.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\math\shapes\AABB.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\input\handlers\BlockInteractsInput.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\items\DroppedItem.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\window\Window.h">
@@ -295,9 +304,9 @@
     <ClInclude Include="src\render\model\Mesh.h" />
     <ClInclude Include="src\world\block\Block.h" />
     <ClInclude Include="src\world\chunk\Chunk.h" />
-    <ClInclude Include="src\world\chunk\ChunkMesh.h" />
+    <ClInclude Include="src\world\chunk\ChunkModel.h" />
     <ClInclude Include="src\world\WorldConstants.h" />
-    <ClInclude Include="src\world\chunk\ChunkMeshBuilder.h" />
+    <ClInclude Include="src\world\chunk\ChunkModelBuilder.h" />
     <ClInclude Include="src\world\block\BlockFaces.h" />
     <ClInclude Include="src\world\World.h" />
     <ClInclude Include="src\world\chunk\ChunkManager.h" />
@@ -407,6 +416,8 @@
     <ClInclude Include="src\text\TextAlignment.h" />
     <ClInclude Include="src\utils\StringConverter.h" />
     <ClInclude Include="src\gui\InventoryItem.h" />
+    <ClInclude Include="src\input\handlers\BlockInteractsInput.h" />
+    <ClInclude Include="src\items\DroppedItem.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />
@@ -451,6 +462,7 @@
     <None Include="resources\gui\inventory_titles.json" />
     <None Include="resources\gui\item_description.json" />
     <None Include="resources\gui\item_description_text.json" />
+    <None Include="resources\entities\dropped_item.json" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\blocks_atlas.png">
@@ -519,5 +531,8 @@
     <Image Include="resources\textures\items\air.png">
       <Filter>Файлы ресурсов</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\fonts\MinecraftiaRegular.ttf" />
   </ItemGroup>
 </Project>

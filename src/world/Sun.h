@@ -13,13 +13,13 @@ class Sun {
 	World* world;
 	
 	glm::vec3& getFocus();
-	float calcAngle(float time);
+	float calcAngle(int time);
 public:
 	Sun(Shader& FBOShader, World& world, std::shared_ptr<Player>& player);
 
 	DirectLight& getLight() const { return *light; }
 
-	void setTime(float time);
+	void setTime(int time);
 };
 
 #endif

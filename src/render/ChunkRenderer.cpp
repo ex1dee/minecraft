@@ -5,41 +5,41 @@
 #include "../shaders/ShadersDatabase.h"
 #include "Renderer.h"
 
-void ChunkRenderer::add(const ChunkMeshCollection& chunk) {
+void ChunkRenderer::add(const ChunkModelCollection& chunk) {
 	if (!chunk.solid->getModel().isEmpty())
-		solidMeshes.push_back(chunk.solid);
+		solidModel.push_back(chunk.solid);
 
 	if (!chunk.liquid->getModel().isEmpty())
-		liquidMeshes.push_back(chunk.liquid);
+		liquidModel.push_back(chunk.liquid);
 
 	if (!chunk.flora->getModel().isEmpty())
-		floraMeshes.push_back(chunk.flora);
+		floraModel.push_back(chunk.flora);
 }
 
 void ChunkRenderer::render(const Camera& camera, const Sun& sun, const Fog& fog) {
 	updateDefaultShader(camera, sun, fog);
 
-	if (solidMeshes.size()) {
+	if (solidModel.size()) {
 		updateSolidShader();
-		render(solidMeshes, &camera, true);
+		render(solidModel, &camera, true);
 
-		solidMeshes.clear();
+		solidModel.clear();
 	}
 
 	Renderer::startTransparentRender();
 
-	if (floraMeshes.size()) {
+	if (floraModel.size()) {
 		updateFloraShader();
-		render(floraMeshes, &camera, true);
+		render(floraModel, &camera, true);
 
-		floraMeshes.clear();
+		floraModel.clear();
 	}
 	
-	if (liquidMeshes.size()) {
+	if (liquidModel.size()) {
 		updateWaterShader();
-		render(liquidMeshes, &camera, true);
+		render(liquidModel, &camera, true);
 
-		liquidMeshes.clear();
+		liquidModel.clear();
 	}
 
 	Renderer::finishTransparentRender();
@@ -82,21 +82,21 @@ void ChunkRenderer::updateWaterShader() {
 }
 
 void ChunkRenderer::renderLights(const Sun& sun) {
-	renderLights(solidMeshes, sun);
-	renderLights(floraMeshes, sun);
+	renderLights(solidModel, sun);
+	renderLights(floraModel, sun);
 }
 
-void ChunkRenderer::renderLights(std::vector<std::shared_ptr<ChunkMesh>>& meshes, const Sun& sun) {
-	if (!meshes.size())
+void ChunkRenderer::renderLights(std::vector<std::shared_ptr<ChunkModel>>& model, const Sun& sun) {
+	if (!model.size())
 		return;
 
 	activeShader = &sun.getLight().getFramebuffer().getShader();
 
-	render(meshes);
+	render(model);
 }
 
-void ChunkRenderer::render(std::vector<std::shared_ptr<ChunkMesh>>& meshes, const Camera* camera, bool onlyVisible) {
-	for (auto& mesh : meshes) {
+void ChunkRenderer::render(std::vector<std::shared_ptr<ChunkModel>>& model, const Camera* camera, bool onlyVisible) {
+	for (auto& mesh : model) {
 		if (!onlyVisible || camera->isAABBInFrustum(mesh->getModel().aabb))
 			mesh->getModel().draw(*activeShader);
 	}

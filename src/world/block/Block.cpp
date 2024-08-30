@@ -4,7 +4,7 @@
 
 Block::Block(Material material)
 	: material(material) {
-	
+	assert(BlocksDatabase::contains(material));
 }
 
 IntersectList Block::intersect(const Ray& ray) const {
@@ -21,5 +21,5 @@ IntersectList Block::intersect(const Ray& ray) const {
 }
 
 bool Block::isCollidable() const { 
-	return getType().colliders.size();
+	return !getType().colliders.empty();
 }

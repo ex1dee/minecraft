@@ -10,51 +10,83 @@ ChunkManager::ChunkManager(World& world)
 void ChunkManager::makeMeshes(const glm::ivec2& playerChunkPos, int loadDist) {
 	for (int i = 0; i <= loadDist; ++i) {
 		for (int x = playerChunkPos.x - i; x <= playerChunkPos.x + i; ++x) {
-			makeMesh(glm::ivec2(x, playerChunkPos.y - i));
+			makeModel(glm::ivec2(x, playerChunkPos.y - i));
 		}
 
 		for (int z = playerChunkPos.y - i + 1; z <= playerChunkPos.y + i - 1; ++z) {
-			makeMesh(glm::ivec2(playerChunkPos.x - i, z));
-			makeMesh(glm::ivec2(playerChunkPos.x + i, z));
+			makeModel(glm::ivec2(playerChunkPos.x - i, z));
+			makeModel(glm::ivec2(playerChunkPos.x + i, z));
 		}
 
 		for (int x = playerChunkPos.x - i; x <= playerChunkPos.x + i; ++x) {
-			makeMesh(glm::ivec2(x, playerChunkPos.y + i));
+			makeModel(glm::ivec2(x, playerChunkPos.y + i));
 		}
 	}
 }
 
-void ChunkManager::makeMesh(const glm::ivec2& pos) {
+void ChunkManager::makeModel(const glm::ivec2& pos) {
 	std::shared_ptr<Chunk> chunk = getChunk(pos);
 
-	if (chunk == nullptr || !chunk->hasMesh()) {
+	if (!chunk->hasMesh()) {
 		load(pos + glm::ivec2(1, 0));
 		load(pos + glm::ivec2(-1, 0));
 		load(pos + glm::ivec2(0, 1));
 		load(pos + glm::ivec2(0, -1));
 
-		load(pos)->makeMesh();
+		std::shared_ptr<Chunk> chunk = load(pos);
+
+		if (!chunk->isUpdating())
+			chunk->makeModel();
 	}
 }
 
 std::shared_ptr<Chunk> ChunkManager::load(const glm::ivec2& pos) {
 	std::shared_ptr<Chunk> chunk = getChunk(pos);
 
-	if (chunk != nullptr && chunk->isLoaded())
+	if (chunk->isLoaded())
 		return chunk;
 
 	chunk->load(world->getTerrainGenerator());
-	loadedChunks.emplace(pos, chunk);
+	visibleChunks.emplace(pos, chunk);
 
 	return chunk;
+}
+
+void ChunkManager::resetChunkMeshes(const glm::ivec2& pos) {
+	getChunk(pos)->resetMeshes();
+}
+
+void ChunkManager::updateChunk(const glm::ivec2& pos) {
+	std::shared_ptr<Chunk> chunk = getChunk(pos);
+
+	if (!chunk->isLoaded())
+		return;
+
+	chunk->updating = true;
+
+	ChunkModelCollection newModel;
+	ChunkModelBuilder(*chunk, newModel).build();
+	chunk->model = newModel;
+	chunk->bHasMesh = true;
+	chunk->buffered = false;
+
+	chunk->updating = false;
+}
+
+std::shared_ptr<Chunk> ChunkManager::getChunk(const glm::ivec2& pos) {
+	if (!chunkExistsAt(pos) || chunks[pos] == nullptr)
+		chunks.emplace(pos, std::make_shared<Chunk>(*world, pos));
+
+	return chunks[pos];
+}
+
+bool ChunkManager::chunkExistsAt(const glm::ivec2& pos) {
+	return chunks.find(pos) != chunks.end();
 }
 
 void ChunkManager::unloadNotVisibleChunks(const glm::ivec2& playerChunkPos, int loadDist) {
 	for (auto pair : chunks) {
 		std::shared_ptr<Chunk> chunk = pair.second;
-		if (chunk == nullptr)
-			continue;
-
 		glm::ivec2 chunkPos = chunk->getLocalPosition();
 
 		float minX = playerChunkPos.x - loadDist;
@@ -74,24 +106,23 @@ void ChunkManager::markAsUnloadedChunk(const glm::ivec2& pos) {
 
 void ChunkManager::deleteUnloadedChunks() {
 	for (const glm::ivec2& chunkPos : unloadedChunks) {
-		deleteChunkAt(chunkPos);
+		deleteChunk(chunkPos);
 	}
 
 	unloadedChunks.clear();
 }
 
-void ChunkManager::deleteChunkAt(const glm::ivec2& chunkPos) {
-	loadedChunks.erase(chunkPos);
+void ChunkManager::deleteChunk(const glm::ivec2& chunkPos) {
+	visibleChunks.erase(chunkPos);
 	chunks.erase(chunkPos);
 }
 
-std::shared_ptr<Chunk> ChunkManager::getChunk(const glm::ivec2& pos) {
-	if (!chunkExistsAt(pos))
-		chunks.try_emplace(pos, std::make_shared<Chunk>(*world, pos));
+void ChunkManager::deleteNullChunks() {
+	std::erase_if(visibleChunks, [](const auto& pair) {
+		return pair.second == nullptr;
+	});
 
-	return chunks[pos];
-}
-
-bool ChunkManager::chunkExistsAt(const glm::ivec2& pos) {
-	return chunks.find(pos) != chunks.end();
+	std::erase_if(chunks, [](const auto& pair) {
+		return pair.second == nullptr;
+	});
 }

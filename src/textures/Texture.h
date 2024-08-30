@@ -29,7 +29,7 @@ protected:
 			GLenum format = TextureManager::getFormat(image.nchannels);
 
 			if (!format) {
-				std::cout << "Unsupported number of channels in a custom texture\n";
+				std::cerr << "Unsupported number of channels in a custom texture\n";
 			}
 
 			GL(glTexImage2D(target, 0, format, width, height, 0, format, image.getType(), image.getRawData()));

@@ -15,12 +15,12 @@ class AssimpLoader {
 	static std::unique_ptr<Model> model;
 
 	static TextureType getTextureTypeBy(aiTextureType type);
-	static void addVertices(const aiMesh* mesh, MeshData& meshData);
-	static void addIndices(const aiMesh* mesh, MeshData& meshData);
-	static void addMaterial(const aiScene* scene, const aiMesh* mesh, MeshData& meshData);
-	static void addVertex(const aiMesh* mesh, MeshData& meshData, int i);
 	static void addMesh(const aiScene* scene, const aiMesh* mesh);
+	static void addIndices(const aiMesh* mesh, MeshData& meshData);
+	static void addVertices(const aiMesh* mesh, MeshData& meshData);
 	static void processNode(const aiScene* scene, const aiNode* node);
+	static void addVertex(const aiMesh* mesh, MeshData& meshData, int i);
+	static void addMaterial(const aiScene* scene, const aiMesh* mesh, MeshData& meshData);
 	static void loadMaterialTextures(MeshData& meshData, aiMaterial* material, aiTextureType type);
 public:
 	static std::unique_ptr<Model> load(const std::string& path);

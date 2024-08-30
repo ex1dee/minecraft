@@ -27,7 +27,7 @@ int main() {
         FTLoader::initialize();
         GUI::initialize();
     } catch (const char* message) {
-        std::cout << "ERROR::INITIALIZE\n" << message << "\n";
+        std::cerr << "ERROR::INITIALIZE\n" << message << "\n";
         glfwTerminate();
 
         return -1;
@@ -38,8 +38,7 @@ int main() {
 
     PlayState state(player);
 
-    player->getBackpackView().setItem(0, 0, ItemStack(GRASS_BLOCK));
-    player->getBackpackView().setItem(3, 1, ItemStack(GRASS_BLOCK));
+    player->getHotbarView().setItem(0, 0, ItemStack(GRASS_BLOCK, 32));
 
     while (!Window::shouldClose()) {
         camera->update();

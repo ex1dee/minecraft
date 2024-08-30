@@ -6,7 +6,7 @@ void TextRenderer::render(const Camera& camera) {
 	Renderer::startTransparentRender();
 	updateShader(camera);
 
-	for (Text2D* text : texts) {
+	for (auto& text : texts) {
 		text->draw(*activeShader);
 	}
 
@@ -23,7 +23,7 @@ void TextRenderer::updateShader(const Camera& camera) {
 	activeShader->setMat4("view", camera.getView());
 }
 
-void TextRenderer::add(Text2D& text) {
-	if (!text.getText().empty())
-		texts.push_back(&text);
+void TextRenderer::add(std::shared_ptr<Text2D>& text) {
+	if (!text->getText().empty())
+		texts.push_back(text);
 }

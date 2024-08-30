@@ -8,10 +8,10 @@
 struct Mesh : public Drawable {
 	void bindTextures(Shader& shader);
 public:
-	MeshData data;
+	std::unique_ptr<MeshData> data;
 
 	Mesh() {}
-	Mesh(const MeshData& data);
+	Mesh(std::unique_ptr<MeshData>& data);
 	~Mesh();
 
 	void setup() override;

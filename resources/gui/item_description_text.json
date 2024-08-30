@@ -1,7 +1,5 @@
 {
     "visible": true,
-    "hasTexture": false,
-    "hasText": true,
     "name": "text",
 
     "color": [ 1, 1, 1, 1 ],

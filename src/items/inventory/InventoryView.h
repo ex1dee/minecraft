@@ -23,6 +23,9 @@ class InventoryView {
 	void setupSlotSize();
 	std::shared_ptr<GUIElement> createRowElement(int row, std::shared_ptr<GUIElement>& parent) const;
 	std::shared_ptr<GUIElement> createSlotElement(int column, int row, std::shared_ptr<GUIElement>& rowElement) const;
+	void addItemAmountElement(
+		const ItemStack& item, std::shared_ptr<GUIElement>& slotElement, std::shared_ptr<GUIElement>& rowElement
+	) const;
 public:
 	InventoryView(const std::shared_ptr<Inventory>& inventory, int firstRow = 0, int rowsNumber = MAX_ROWS_NUMBER);
 

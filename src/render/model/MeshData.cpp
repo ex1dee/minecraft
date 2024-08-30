@@ -9,4 +9,5 @@ void MeshData::reset() {
 	textures.clear();
 	normals.clear();
 	indices.clear();
+	colors.clear();
 }

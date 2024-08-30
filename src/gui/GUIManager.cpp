@@ -51,7 +51,7 @@ void GUIManager::getElementOnCursor(const GUISector& sector, int layer, std::pai
 }
 
 bool GUIManager::isElementOnCursor(GUIElement& element) {
-	if (!element.hasTexture)
+	if (!element.hasTexture())
 		return false;
 
 	glm::vec3 cursorPos = glm::vec3(Window::getCursorPosRelativeToCenter(), GUI_ELEMENT_Z);

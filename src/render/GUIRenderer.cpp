@@ -42,14 +42,14 @@ void GUIRenderer::render(GUISector* sector, int layer) {
 
 		float z = GUI_ELEMENT_Z + (layer + element.layer_offset) * GUI_ELEMENT_LAYER_Z_OFFSET;
 
-		if (element.hasTexture) {
+		if (element.hasTexture()) {
 			spriteShader->use();
 
 			element.sprite->transform.position.z = z;
 			element.sprite->draw(*spriteShader);
 		}
 
-		if (element.hasText) {
+		if (element.hasText()) {
 			textShader->use();
 
 			const glm::vec3& textPos = element.text->getPosition();

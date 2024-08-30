@@ -39,7 +39,7 @@ void InventoryGUI::update(Player& player, bool& windowScaled) {
 
 	InventoryView& hotbarView = player.getHotbarView();
 
-	if (hotbarView.isNeedUpdate()) {
+	if (windowScaled || hotbarView.isNeedUpdate()) {
 		updateHotbar(player);
 
 		hotbarView.setNeedUpdate(false);
@@ -72,13 +72,12 @@ void InventoryGUI::updateItemDesciption(Player& player) {
 	item_description->visible = true;
 
 	std::shared_ptr<GUIElement> textElement = item_description->children["text"];
-	Text2D* text = textElement->text.get();
 
-	text->setScale(ITEM_DESCRIPTION_TEXT_SCALE);
-	text->setText(invItem.item->getMeta().getDescription());
+	textElement->text->setScale(ITEM_DESCRIPTION_TEXT_SCALE);
+	textElement->text->setText(invItem.item->getMeta().getDescription());
 
-	float textWidth = text->getMaxWidth();
-	float textHeight = text->getHeight();
+	float textWidth = textElement->text->getMaxWidth();
+	float textHeight = textElement->text->getHeight();
 	float width = glm::max(ITEM_DESCRIPTION_MIN_WIDTH, textWidth + 2 * ITEM_DESCRIPTION_PADDING_WIDTH);
 	float height = textHeight + ITEM_DESCRIPTION_PADDING_TOP + ITEM_DESCRIPTION_PADDING_BOTTOM;
 
@@ -96,7 +95,7 @@ void InventoryGUI::updateItemDesciption(Player& player) {
 		height
 	);
 
-	text->setPosition(glm::vec3(
+	textElement->text->setPosition(glm::vec3(
 		item_description->transform.position.x - 0.5f * width + ITEM_DESCRIPTION_PADDING_WIDTH,
 		item_description->transform.position.y + 0.5f * height - ITEM_DESCRIPTION_PADDING_TOP,
 		0
@@ -118,6 +117,7 @@ void InventoryGUI::updateDraggedItem(Player& player) {
 
 	invItem.element->transform.position = position;
 	invItem.element->layer_offset = GUI_ELEMENT_MAX_LAYER - 1;
+	invItem.element->children["amount"]->visible = false;
 
 	GUI::setupElement(*invItem.element);
 }
@@ -226,7 +226,7 @@ void InventoryGUI::updateInventoryViewTitle(std::shared_ptr<GUIElement>& element
 		glm::vec3(TITLE_SCALE)
 	);
 
-	std::unique_ptr<Text2D> titleText = std::make_unique<Text2D>(
+	std::shared_ptr<Text2D> titleText = std::make_shared<Text2D>(
 		view.getInventory().getTitle(),
 		titleAlignment,
 		transform,

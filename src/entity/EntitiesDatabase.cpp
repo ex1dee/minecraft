@@ -27,8 +27,8 @@ void EntitiesDatabase::initialize() {
 
 		type->eyesOffset = Json::toVec3(json["eyes_offset"]);
 
-		std::string modelPath = json["model"]["path"];
-		type->model = AssimpLoader::load(Files::getFullPath(MODELS_DIR, modelPath));
+		if (json.contains("model"))
+			type->model = AssimpLoader::load(Files::getFullPath(MODELS_DIR, json["model"]["path"]));
 
 		entities[type->id] = std::move(type);
 	}

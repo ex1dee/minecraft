@@ -7,7 +7,7 @@
 #include "Mesh.h"
 
 class Model {
-	std::vector<std::unique_ptr<Mesh>> meshes;
+	std::vector<std::unique_ptr<Mesh>> model;
 
 	float shininess;
 public:
@@ -15,11 +15,11 @@ public:
 
 	Model(float shininess = 0);
 
-	bool isEmpty() { return meshes.empty() || meshes[0]->data.vertexPositions.empty(); }
+	bool isEmpty() { return model.empty() || model[0]->data->vertexPositions.empty(); }
 
 	void reset();
 	void draw(Shader& shader);
-	void addMesh(const MeshData& data);
+	void addMesh(std::unique_ptr<MeshData>& data);
 };
 
 #endif

@@ -10,6 +10,7 @@ public:
 	std::unique_ptr<ItemMeta> meta;
 	SpriteTexture texture;
 	Material material;
+	int maxAmount;
 	bool hasMeta;
 };
 

@@ -4,8 +4,8 @@
 
 #include "../../textures/TextureManager.h"
 
-Mesh::Mesh(const MeshData& data)
-	: data(data) {
+Mesh::Mesh(std::unique_ptr<MeshData>& data)
+	: data(std::move(data)) {
 	EBO = 0;
 	VAO = 0;
 }
@@ -17,11 +17,11 @@ Mesh::~Mesh() {
 void Mesh::setup() {
 	Drawable::setup();
 	
-	addVBO(data.dimensions, data.vertexPositions);
-	addVBO(3, data.colors);
-	addVBO(2, data.textureCoords);
-	addVBO(data.dimensions, data.normals);
-	addEBO(data.indices);
+	addVBO(data->dimensions, data->vertexPositions);
+	addVBO(3, data->colors);
+	addVBO(2, data->textureCoords);
+	addVBO(data->dimensions, data->normals);
+	addEBO(data->indices);
 }
 
 void Mesh::draw(Shader& shader) {
@@ -29,10 +29,10 @@ void Mesh::draw(Shader& shader) {
 
 	glBindVertexArray(VAO);
 	
-	if (data.indices.size()) {
-		glDrawElements(data.mode, data.indices.size(), GL_UNSIGNED_INT, 0);
-	} else if (data.vertexPositions.size()) {
-		glDrawArrays(data.mode, 0, data.vertexPositions.size());
+	if (data->indices.size()) {
+		glDrawElements(data->mode, data->indices.size(), GL_UNSIGNED_INT, 0);
+	} else if (data->vertexPositions.size()) {
+		glDrawArrays(data->mode, 0, data->vertexPositions.size());
 	}
 }
 
@@ -40,7 +40,7 @@ void Mesh::bindTextures(Shader& shader) {
 	int diffuseCount = 0;
 	int specularCount = 0;
 
-	for (Texture& texture : data.textures) {
+	for (Texture& texture : data->textures) {
 		std::string uniform = "";
 
 		if (texture.getType() == TextureType::DIFFUSE) {
@@ -64,5 +64,5 @@ void Mesh::bindTextures(Shader& shader) {
 void Mesh::reset() {
 	resetBuffers();
 
-	data.reset();
+	data->reset();
 }

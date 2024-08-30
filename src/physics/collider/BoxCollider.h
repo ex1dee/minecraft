@@ -7,8 +7,8 @@
 #include "Collider.h"
 
 class BoxCollider : public Collider {
-	glm::vec3 extents = glm::vec3(0);
 	std::vector<glm::vec3> vertices;
+	glm::vec3 extents;
 
 	void calcVertices();
 public:
@@ -19,7 +19,7 @@ public:
 	const glm::vec3& getExtents() { return extents; }
 
 	std::vector<Rect> getRectangles(const Transform& transform);
-	void applyTransform(const Transform& transform) override;
+	void updateTransform(const Transform& transform) override;
 };
 
 #endif

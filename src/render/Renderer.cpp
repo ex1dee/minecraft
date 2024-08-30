@@ -53,19 +53,19 @@ void Renderer::finishRender(World& world) {
 	guiRenderer.render();
 }
 
-void Renderer::addChunk(Chunk& chunk) {
-	chunkRenderer.add(chunk.getMeshes());
+void Renderer::addChunk(std::shared_ptr<Chunk>& chunk) {
+	chunkRenderer.add(chunk->getModel());
 }
 
-void Renderer::addEntity(Entity& entity) {
+void Renderer::addEntity(std::shared_ptr<Entity>& entity) {
 	entityRenderer.add(entity);
 }
 
-void Renderer::addSprite(Sprite& sprite) {
+void Renderer::addSprite(std::shared_ptr<Sprite>& sprite) {
 	spriteRenderer.add(sprite);
 }
 
-void Renderer::addText(Text2D& text) {
+void Renderer::addText(std::shared_ptr<Text2D>& text) {
 	textRenderer.add(text);
 }
 

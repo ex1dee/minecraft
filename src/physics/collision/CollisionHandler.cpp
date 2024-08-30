@@ -14,11 +14,12 @@ void CollisionHandler::handle(const Collision& collision, GameObject& obj, const
 		return;
 
 	RigidBody& rb = obj.rigidBody;
-	
-	rb.deltaPosition += getProjected(rb.deltaPosition, collision);
 
-	if (collision.normal.y == 1)
+	rb.deltaPosition += getProjected(rb.deltaPosition, collision);
+	
+	if (glm::abs(collision.normal.y) == 1) {
 		rb.newVelocity += getProjected(rb.newVelocity, collision);
+	}
 }
 
 glm::vec3 CollisionHandler::getProjected(const glm::vec3& v, const Collision& collision) {

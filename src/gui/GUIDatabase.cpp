@@ -24,8 +24,6 @@ void GUIDatabase::initialize() {
 			element = std::make_shared<GUIElement>();
 
 		element->visible = json["visible"];
-		element->hasTexture = json["hasTexture"];
-		element->hasText = json["hasText"];
 		element->name = name;
 
 		element->transform.position += glm::vec3(Json::toVec2(json["center"]), 0);
@@ -37,11 +35,11 @@ void GUIDatabase::initialize() {
 
 		addChildren(element, json, elements);
 
-		if (element->hasTexture) {
+		if (json.contains("texture")) {
 			addTexture(*element, json);
 		}
 
-		if (element->hasText) {
+		if (json.contains("text")) {
 			addText(*element, json);
 		}
 
@@ -84,7 +82,7 @@ void GUIDatabase::addText(GUIElement& element, const nlohmann::basic_json<>& jso
 	TextAlignment alignment = json["text"]["alignment"];
 	std::string title = json["text"]["content"];
 
-	element.text = std::make_unique<Text2D>(
+	element.text = std::make_shared<Text2D>(
 		StringConverter::toWString(title),
 		alignment,
 		element.transform.position + position,

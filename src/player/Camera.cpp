@@ -11,7 +11,6 @@ CAMERA_MAX_PITCH = 89.0f,
 CAMERA_INTERSECT_OFFSET = 1.7f;
 
 Camera::Camera() {
-	orientation.update(-90.0f, 0.0f);
 	aspect = (float) Window::getScreenWidth() / (float) Window::getScreenHeight();
 }
 
@@ -45,21 +44,20 @@ void Camera::updateOrientation() {
 	CursorPos curPos = Input::getCursorPos();
 	curPos.delta *= Config::settings["camera"]["sensitivity"];
 
-	float yaw	= orientation.getYaw() + curPos.delta.x;
-	float pitch = orientation.getPitch() - curPos.delta.y;
+	float yaw	= player->orientation.getYaw() + curPos.delta.x;
+	float pitch = player->orientation.getPitch() - curPos.delta.y;
 
 	if (pitch > CAMERA_MAX_PITCH)
 		pitch = CAMERA_MAX_PITCH;
 	if (pitch < -CAMERA_MAX_PITCH)
 		pitch = -CAMERA_MAX_PITCH;
 
-	orientation.update(yaw, pitch);
-	player->orientation = orientation;
+	player->orientation.update(yaw, pitch);
 }
 
 void Camera::updateView() {
 	transform.position = player->transform.position + player->getType().eyesOffset;
-	viewDir = orientation.front;
+	viewDir = player->orientation.front;
 
 	if (viewMode != FIRST_PERSON) {
 		updateTPSLook();
@@ -85,7 +83,7 @@ void Camera::updateTPSLook() {
 		viewDir = glm::normalize(transform.position - pos);
 		transform.position = pos + viewDir * CAMERA_INTERSECT_OFFSET;
 	} else {
-		transform.position += viewSign * -orientation.front * CAMERA_TPS_COEF;
+		transform.position += viewSign * -player->orientation.front * CAMERA_TPS_COEF;
 		viewDir *= viewSign;
 	}
 }

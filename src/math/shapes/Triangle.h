@@ -17,7 +17,7 @@ public:
 		return 0.5f * glm::length(glm::cross(b - a, c - a));
 	}
 
-	virtual void applyTransform(const Transform& transform) {
+	virtual void updateTransform(const Transform& transform) {
 		glm::mat4 model = transform.calcModel();
 
 		a = glm::vec3(model * glm::vec4(a, 1));

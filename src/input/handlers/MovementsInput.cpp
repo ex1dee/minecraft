@@ -30,47 +30,17 @@ void MovementsInput::handle(Player& player, float deltaTime) {
 	checkFlying(player, speed);
 }
 
-void MovementsInput::checkFlying(Player& player, float speed) {
-	RigidBody* rb = &player.rigidBody;
-
-	if (Input::justPressed(GLFW_KEY_F)) {
-		player.setFlying(!player.flying);
-
-		rb->velocity = glm::vec3(0);
-		keys.clear();
-	}
-
-	if (player.flying) {
-		check(GLFW_KEY_SPACE, rb, glm::vec3(0, 1, 0) * speed);
-		check(player.sneaking, rb, glm::vec3(0, -1, 0) * speed);
-	}
-}
-
-void MovementsInput::checkSwimming(Player& player, Liquid* const liquid) {
-	RigidBody* rb = &player.rigidBody;
-
-	if (liquid != nullptr && !player.flying) {
-		if (Input::pressed(GLFW_KEY_SPACE)) {
-			rb->velocity.y = player.getJumpForce() * PLAYER_INLIQUID_JUMP_COEF;
-			keys.emplace(GLFW_KEY_SPACE, rb->velocity);
-		} else if (keys.find(GLFW_KEY_SPACE) != keys.end()) {
-			rb->velocity.y -= keys[GLFW_KEY_SPACE].y;
-			keys.erase(GLFW_KEY_SPACE);
-		}
-	}
-}
-
 float MovementsInput::calcSpeed(Player& player, Liquid* const liquid) {
 	float speed = player.getWalkSpeed();
 
 	player.sprinting = Input::pressed(GLFW_KEY_LEFT_CONTROL);
-	player.sneaking = !player.isOpenedBackpack() && Input::pressed(GLFW_KEY_LEFT_SHIFT);
+	player.sneaking = Input::pressed(GLFW_KEY_LEFT_SHIFT);
 
 	if (player.flying) {
 		speed *= PLAYER_FLYING_COEF;
 	} else if (liquid != nullptr) {
 		speed *= PLAYER_INLIQUID_SWIM_COEF * liquid->getSpeedCoef();
-	} else if (player.sneaking) {
+	} else if (player.sneaking && !player.isOpenedBackpack()) {
 		speed *= PLAYER_SNEAKING_COEF;
 	}
 	
@@ -88,25 +58,8 @@ void MovementsInput::checkJumping(Player& player, Liquid* const liquid) {
 	RigidBody* rb = &player.rigidBody;
 
 	if (Input::pressed(GLFW_KEY_SPACE)) {
-		if (liquid == nullptr && player.isOnGround() && rb->velocity.y == 0) {
+		if (liquid == nullptr && player.isOnGround() && rb->velocity.y >= 0 && rb->velocity.y < 0.04f) {
 			rb->velocity += glm::vec3(0, 1, 0) * player.getJumpForce();
-		}
-	}
-}
-
-void MovementsInput::check(int key, RigidBody* const rigidBody, const glm::vec3& velocity) {
-	if (keys.find(key) != keys.end()) {
-		if (!Input::pressed(key)) {
-			rigidBody->velocity += -keys[key];
-			keys.erase(key);
-		} else {
-			rigidBody->velocity += -keys[key] + velocity;
-			keys[key] = velocity;
-		}
-	} else {
-		if (Input::pressed(key)) {
-			rigidBody->velocity += velocity;
-			keys.emplace(key, velocity);
 		}
 	}
 }
@@ -120,4 +73,54 @@ void MovementsInput::checkRunZoom(Player& player, float deltaTime) {
 			Input::pressed(GLFW_KEY_W) && Input::pressed(GLFW_KEY_LEFT_CONTROL),
 			deltaTime
 		);
+}
+
+void MovementsInput::checkSwimming(Player& player, Liquid* const liquid) {
+	RigidBody* rb = &player.rigidBody;
+
+	if (liquid != nullptr && !player.flying) {
+		if (Input::pressed(GLFW_KEY_SPACE)) {
+			rb->velocity.y = player.getJumpForce() * PLAYER_INLIQUID_JUMP_COEF;
+			keys.emplace(GLFW_KEY_SPACE, rb->velocity);
+		} else if (keys.find(GLFW_KEY_SPACE) != keys.end()) {
+			rb->velocity.y -= keys[GLFW_KEY_SPACE].y;
+			keys.erase(GLFW_KEY_SPACE);
+		}
+	}
+}
+
+
+void MovementsInput::checkFlying(Player& player, float speed) {
+	RigidBody* rb = &player.rigidBody;
+
+	if (Input::justPressed(GLFW_KEY_F)) {
+		player.setFlying(!player.flying);
+
+		rb->velocity = glm::vec3(0);
+		keys.clear();
+	}
+
+	if (player.flying) {
+		check(GLFW_KEY_SPACE, rb, glm::vec3(0, 1, 0) * speed);
+		check(GLFW_KEY_LEFT_SHIFT, rb, glm::vec3(0, -1, 0) * speed);
+	}
+}
+
+void MovementsInput::check(int key, RigidBody* const rigidBody, const glm::vec3& velocity) {
+	if (keys.find(key) != keys.end()) {
+		if (!Input::pressed(key)) {
+			rigidBody->velocity += -keys[key];
+			keys.erase(key);
+		}
+		else {
+			rigidBody->velocity += -keys[key] + velocity;
+			keys[key] = velocity;
+		}
+	}
+	else {
+		if (Input::pressed(key)) {
+			rigidBody->velocity += velocity;
+			keys.emplace(key, velocity);
+		}
+	}
 }

@@ -22,7 +22,6 @@ class Camera {
 
 	std::shared_ptr<Player> player;
 	std::shared_ptr<World> world;
-	Orientation orientation;
 	Transform transform;
 	Frustum frustum;
 
@@ -41,7 +40,6 @@ public:
 
 	float getZoom() const { return zoom; }
 	CameraViewMode getViewMode() const { return viewMode; }
-	const Orientation& getOrientation() const { return orientation; }
 	const glm::vec3& getPosition() const { return transform.position; }
 	const glm::mat4& getView() const { return view; }
 	const glm::mat4& getProjView() const { return projView; }

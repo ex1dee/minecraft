@@ -65,6 +65,7 @@ public:
 	void setDraggedItem(const InventoryItem& item);
 	void setNeedUpdateInventoryViews(bool needUpdate);
 	void openInventory(const std::shared_ptr<Inventory>& inventory);
+	std::shared_ptr<ItemStack> getSelectedItem();
 	bool isNeedUpdateInventoryViews();
 };
 

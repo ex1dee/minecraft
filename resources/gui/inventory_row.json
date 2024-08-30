@@ -1,7 +1,5 @@
 {
     "visible": false,
-    "hasTexture": true,
-    "hasText": false,
     "name": "inventory_row",
 
     "color": [ 1, 1, 1, 1 ],

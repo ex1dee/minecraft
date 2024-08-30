@@ -14,6 +14,7 @@ void ItemsDatabase::initialize() {
 
 		type->material = json["material"];
 		type->hasMeta = json["hasMeta"];
+		type->maxAmount = json["maxAmount"];
 
 		nlohmann::basic_json id = json["meta"];
 

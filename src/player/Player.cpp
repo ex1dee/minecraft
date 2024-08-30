@@ -89,3 +89,7 @@ void Player::setNeedUpdateInventoryViews(bool needUpdate) {
 	if (openInventoryView != nullptr)
 		openInventoryView->setNeedUpdate(needUpdate);
 }
+
+std::shared_ptr<ItemStack> Player::getSelectedItem() {
+	return hotbarView->getItem(selectedSlot, 0);
+}

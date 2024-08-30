@@ -2,6 +2,8 @@
     "material": 1,
     "hasMeta": true,
 
+    "maxAmount": 64,
+
     "meta": {
         "id": 0,
         "name": "Grass",

@@ -18,7 +18,7 @@ Rect&& Sprite::getRect() {
 		glm::vec3(vertexPositions[9], vertexPositions[10], vertexPositions[11])
 	);
 
-	rect.applyTransform(transform);
+	rect.updateTransform(transform);
 
 	return std::move(rect);
 }

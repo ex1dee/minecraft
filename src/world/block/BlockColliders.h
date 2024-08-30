@@ -10,7 +10,7 @@ public:
 		std::vector<std::unique_ptr<BoxCollider>> colliders;
 
 		if (type == FULL_SIZE) {
-			colliders.push_back(std::make_unique<BoxCollider>(glm::vec3(1, 1, 1)));
+			colliders.push_back(std::make_unique<BoxCollider>(glm::vec3(1.0f)));
 		}
 
 		return colliders;

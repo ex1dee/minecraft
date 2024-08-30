@@ -17,7 +17,6 @@ class PhysicsEngine {
 	static void updatePosition(GameObject& object);
 public:
 	static void initialize(World& world);
-	static void finalize();
 
 	static void update(float deltaTime);
 	static void addObject(GameObject& object);

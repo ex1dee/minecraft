@@ -20,12 +20,12 @@ Liquid* GameObject::getLiquidAtObject() {
 	return nullptr;
 }
 
-void GameObject::applyTransform(Transform& transform) {
-	collider->applyTransform(transform);
-	model->aabb.applyTransform(transform);
+void GameObject::updateTransform(Transform& transform) {
+	collider->updateTransform(transform);
+	model->aabb.updateTransform(transform);
 }
 
-void GameObject::applyTransform() {
-	collider->applyTransform(transform);
-	model->aabb.applyTransform(transform);
+void GameObject::updateTransform() {
+	collider->updateTransform(transform);
+	model->aabb.updateTransform(transform);
 }

@@ -17,13 +17,11 @@ typedef std::unordered_map<std::string, std::shared_ptr<GUIElement>> GUISector;
 
 class GUIElement {
 public:
-	std::unique_ptr<Sprite> sprite;
-	std::unique_ptr<Text2D> text;
+	std::shared_ptr<Sprite> sprite;
+	std::shared_ptr<Text2D> text;
 	int layer_offset = 0;
 	Transform transform;
 	std::string name;
-	bool hasTexture;
-	bool hasText;
 	bool visible;
 
 	std::shared_ptr<GUIElement> parent;
@@ -31,13 +29,11 @@ public:
 
 	GUIElement() = default;
 
-	GUIElement(const std::string& name, const Transform& transform, std::unique_ptr<Sprite>& sprite, bool visible, std::shared_ptr<GUIElement>& parent)
-		: name(name), hasTexture(true), hasText(false), transform(transform),
-		sprite(std::move(sprite)), visible(visible), parent(parent), text(nullptr) {}	
+	GUIElement(const std::string& name, const Transform& transform, std::shared_ptr<Sprite>& sprite, bool visible, std::shared_ptr<GUIElement>& parent)
+		: name(name), transform(transform), sprite(sprite), visible(visible), parent(parent), text(nullptr) {}	
 
-	GUIElement(const std::string& name, std::unique_ptr<Text2D>& text, bool visible, std::shared_ptr<GUIElement>& parent)
-		: name(name), hasTexture(false), hasText(true),  
-		  text(std::move(text)), visible(visible), parent(parent), sprite(nullptr) {}
+	GUIElement(const std::string& name, std::shared_ptr<Text2D>& text, bool visible, std::shared_ptr<GUIElement>& parent)
+		: name(name),  text(text), visible(visible), parent(parent), sprite(nullptr) {}
 
 	GUIElement(const GUIElement& other) {
 		if (other.sprite != nullptr)
@@ -48,14 +44,15 @@ public:
 
 		transform = other.transform;
 		name = other.name;
-		hasTexture = other.hasTexture;
-		hasText = other.hasText;
 		visible = other.visible;
 		layer_offset = other.layer_offset;
 
 		parent = other.parent;
 		children = other.children;
 	}
+
+	bool hasTexture() const { return sprite != nullptr && sprite->texture.data != nullptr; }
+	bool hasText() const { return text != nullptr && !text->empty(); }
 };
 
 #endif

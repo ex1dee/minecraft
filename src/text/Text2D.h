@@ -37,6 +37,7 @@ public:
 	const std::wstring& getText() { return text; }
 	const glm::vec3& getPosition() { return transform.position; }
 	const glm::vec3& getScale() { return transform.scale; }
+	bool empty() { return sprites.empty(); }
 
 	void reset();
 	void draw(Shader& activeShader);

@@ -31,10 +31,10 @@ public:
 
 	void finishRender(World& world);
 
-	void addText(Text2D& text);
-	void addChunk(Chunk& chunk);
-	void addSprite(Sprite& sprite);
-	void addEntity(Entity& entity);
+	void addText(std::shared_ptr<Text2D>& text);
+	void addChunk(std::shared_ptr<Chunk>& chunk);
+	void addSprite(std::shared_ptr<Sprite>& sprite);
+	void addEntity(std::shared_ptr<Entity>& entity);
 	
 	static void enableCullFace();
 	static void disableCullFace();

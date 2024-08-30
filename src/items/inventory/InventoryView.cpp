@@ -4,6 +4,7 @@
 #include "../../gui/GUIManager.h"
 
 constexpr float ITEM_ICON_SCALE = 0.75f;
+constexpr glm::vec3 AMOUNT_TEXT_OFFSET = glm::vec3(DEFAULT_SLOT_WIDTH * 0.4f, -DEFAULT_SLOT_HEIGHT * 0.4f, 0);
 
 glm::vec2 InventoryView::slotSize = glm::vec3(0);
 
@@ -46,7 +47,7 @@ void InventoryView::setItem(int column, int row, const ItemStack& item) const {
 	inventory->setItem(column, firstRow + row, item);
 }
 
-GUISector InventoryView::getGUISector(std::shared_ptr<GUIElement>& parent) const const {
+GUISector InventoryView::getGUISector(std::shared_ptr<GUIElement>& parent) const {
 	GUISector guiSector;
 
 	for (int row = firstRow; row < lastRow; ++row) {
@@ -80,7 +81,7 @@ std::shared_ptr<GUIElement> InventoryView::createRowElement(int row, std::shared
 std::shared_ptr<GUIElement> InventoryView::createSlotElement(int column, int row, std::shared_ptr<GUIElement>& rowElement) const {
 	const ItemStack& item = *inventory->getItem(column, row);
 
-	std::unique_ptr<Sprite> sprite = std::make_unique<Sprite>();
+	std::shared_ptr<Sprite> sprite = std::make_shared<Sprite>();
 	std::shared_ptr<GUIElement> element = std::make_shared<GUIElement>(
 		std::to_string(column),
 		Transform(),
@@ -103,5 +104,32 @@ std::shared_ptr<GUIElement> InventoryView::createSlotElement(int column, int row
 	float x = DEFAULT_SLOT_WIDTH * rowElement->transform.scale.x * (column - 0.5f * (SLOTS_IN_ROW - 1));
 	element->transform.position = rowElement->transform.position + glm::vec3(x, 1.0f, 0);
 
+	addItemAmountElement(item, element, rowElement);
+
 	return element;
+}
+
+void InventoryView::addItemAmountElement(
+	const ItemStack& item, std::shared_ptr<GUIElement>& slotElement, std::shared_ptr<GUIElement>& rowElement
+) const {
+	if (item.getType().material == AIR)
+		return;
+
+	Transform textTransform = slotElement->transform;
+	textTransform.position += rowElement->transform.scale * AMOUNT_TEXT_OFFSET;
+
+	std::shared_ptr<Text2D> text = std::make_shared<Text2D>(
+		std::to_wstring(item.getAmount()),
+		TextAlignment::RIGHT,
+		textTransform
+	);
+
+	std::shared_ptr<GUIElement> textElement = std::make_shared<GUIElement>(
+		"amount",
+		text,
+		true,
+		slotElement
+	);
+
+	slotElement->children.emplace(textElement->name, textElement);
 }

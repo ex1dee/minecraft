@@ -52,7 +52,7 @@ std::string Shader::readShaderCode(const char* path) {
 	try {
 		data = Files::read(path);
 	} catch (std::ifstream::failure e) {
-		std::cout << "ERROR::SHADER::FILE_READ\n" << e.what() << "\n";
+		std::cerr << "ERROR::SHADER::FILE_READ\n" << e.what() << "\n";
 	}
 
 	return data;
@@ -66,7 +66,7 @@ void Shader::shaderiv(uint32_t shader) {
 
 	if (!success) {
 		glGetShaderInfoLog(shader, sizeof(infoLog), NULL, infoLog);
-		std::cout << "ERROR::SHADER::COMPILE\n" << infoLog << "\n";
+		std::cerr << "ERROR::SHADER::COMPILE\n" << infoLog << "\n";
 	}
 }
 
@@ -78,7 +78,7 @@ void Shader::programiv(uint32_t program) {
 
 	if (!success) {
 		glGetProgramInfoLog(program, sizeof(infoLog), NULL, infoLog);
-		std::cout << "ERROR::SHADER::LINK\n" << infoLog << "\n";
+		std::cerr << "ERROR::SHADER::LINK\n" << infoLog << "\n";
 	}
 }
 

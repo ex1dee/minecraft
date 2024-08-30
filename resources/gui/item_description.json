@@ -1,7 +1,5 @@
 {
     "visible": false,
-    "hasTexture": true,
-    "hasText": false,
     "name": "item_description",
 
     "color": [ 0.2, 0, 0.2, 1 ],

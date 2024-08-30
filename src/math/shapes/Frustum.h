@@ -7,7 +7,6 @@
 #include "AABB.h"
 
 class Frustum {
-	void normalizePlanes();
 public:
 	std::array<Plane, 6> planes;
 

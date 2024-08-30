@@ -8,13 +8,13 @@ void Texture::load(GLenum target, const std::string& path, bool flip) {
 		GLenum format = TextureManager::getFormat(image.nchannels);
 
 		if (!format) {
-			std::cout << "Unsupported number of channels " << image.nchannels << " in file \"" << path << "\"\n";
+			std::cerr << "Unsupported number of channels " << image.nchannels << " in file \"" << path << "\"\n";
 		}
 
 		GL(glTexImage2D(target, 0, format, width, height, 0, format, GL_UNSIGNED_BYTE, image.data));
 		align();
 	} else {
-		std::cout << "Failed to load texture \"" << path << "\"\n" << stbi_failure_reason();
+		std::cerr << "Failed to load texture \"" << path << "\"\n" << stbi_failure_reason();
 	}
 }
 

@@ -9,13 +9,13 @@
 #include "../world/Sun.h"
 
 class SpriteRenderer {
-	std::vector<Sprite*> sprites;
+	std::vector<std::shared_ptr<Sprite>> sprites;
 	Shader* activeShader;
 
 	void updateShader(const Sun& sun, const Camera& camera);
 public:
 	void render(const Sun& sun, const Camera& camera);
-	void add(Sprite& sprite);
+	void add(std::shared_ptr<Sprite>& sprite);
 };
 
 #endif

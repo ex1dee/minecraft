@@ -3,6 +3,8 @@
 #include "World.h"
 
 constexpr float SUN_CHANGE_FOCUS_DIST = CHUNK_W * 1.5f;
+constexpr float TIME_TO_ANGLE_COEF = 360.0f / (float) TICK_PER_DAY;
+constexpr float ANGLE_OFFSET = TIME_TO_ANGLE_COEF * -((float) TICK_PER_DAY / 4.0f);
 
 Sun::Sun(Shader& FBOShader, World& world, std::shared_ptr<Player>& player)
 	: world(&world), player(player) {
@@ -22,7 +24,7 @@ Sun::Sun(Shader& FBOShader, World& world, std::shared_ptr<Player>& player)
 	setTime(0);
 }
 
-void Sun::setTime(float time) {
+void Sun::setTime(int time) {
 	float sunAngle = calcAngle(time);
 
 	light->direction.x = -sin(sunAngle);
@@ -32,8 +34,8 @@ void Sun::setTime(float time) {
 	light->position = getFocus() - light->direction * (float)CHUNK_H;
 }
 
-float Sun::calcAngle(float time) {
-	return glm::radians(time);
+float Sun::calcAngle(int time) {
+	return glm::radians(TIME_TO_ANGLE_COEF * (float) (time) + ANGLE_OFFSET);
 }
 
 glm::vec3& Sun::getFocus() {

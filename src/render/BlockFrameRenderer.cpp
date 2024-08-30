@@ -48,40 +48,40 @@ void BlockFrameRenderer::render(const Camera& camera) {
 }
 
 void BlockFrameRenderer::createModel(const Block& block, const Player& player) {
-	MeshData meshData(MeshType::CUBE, 3, GL_LINES);
+	std::unique_ptr<MeshData> meshData = std::make_unique<MeshData>(MeshType::CUBE, 3, GL_LINES);
 	Transform transform(block.getPosition());
 
 	for (auto& collider : block.getType().colliders) {
 		int index = 0;
 
 		for (const Rect& rect : collider->getRectangles(transform)) {
-			meshData.vertexPositions.push_back(rect.a.x);
-			meshData.vertexPositions.push_back(rect.a.y);
-			meshData.vertexPositions.push_back(rect.a.z);
+			meshData->vertexPositions.push_back(rect.a.x);
+			meshData->vertexPositions.push_back(rect.a.y);
+			meshData->vertexPositions.push_back(rect.a.z);
 
-			meshData.vertexPositions.push_back(rect.b.x);
-			meshData.vertexPositions.push_back(rect.b.y);
-			meshData.vertexPositions.push_back(rect.b.z);
+			meshData->vertexPositions.push_back(rect.b.x);
+			meshData->vertexPositions.push_back(rect.b.y);
+			meshData->vertexPositions.push_back(rect.b.z);
 
-			meshData.vertexPositions.push_back(rect.c.x);
-			meshData.vertexPositions.push_back(rect.c.y);
-			meshData.vertexPositions.push_back(rect.c.z);
+			meshData->vertexPositions.push_back(rect.c.x);
+			meshData->vertexPositions.push_back(rect.c.y);
+			meshData->vertexPositions.push_back(rect.c.z);
 
-			meshData.vertexPositions.push_back(rect.d.x);
-			meshData.vertexPositions.push_back(rect.d.y);
-			meshData.vertexPositions.push_back(rect.d.z);
+			meshData->vertexPositions.push_back(rect.d.x);
+			meshData->vertexPositions.push_back(rect.d.y);
+			meshData->vertexPositions.push_back(rect.d.z);
 
-			meshData.indices.push_back(index);
-			meshData.indices.push_back(index + 1);
+			meshData->indices.push_back(index);
+			meshData->indices.push_back(index + 1);
 
-			meshData.indices.push_back(index + 1);
-			meshData.indices.push_back(index + 2);
+			meshData->indices.push_back(index + 1);
+			meshData->indices.push_back(index + 2);
 
-			meshData.indices.push_back(index + 2);
-			meshData.indices.push_back(index + 3);
+			meshData->indices.push_back(index + 2);
+			meshData->indices.push_back(index + 3);
 
-			meshData.indices.push_back(index + 3);
-			meshData.indices.push_back(index);
+			meshData->indices.push_back(index + 3);
+			meshData->indices.push_back(index);
 
 			index += 4;
 		}

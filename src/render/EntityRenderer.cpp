@@ -1,15 +1,15 @@
 #include "EntityRenderer.h"
 
-void EntityRenderer::add(Entity& entity) {
-	if (!entity.getType().model->isEmpty())
-		entities.push_back(&entity);
+void EntityRenderer::add(std::shared_ptr<Entity>& entity) {
+	if (!entity->getType().model->isEmpty())
+		entities.push_back(entity);
 }
 
 void EntityRenderer::render(const Camera& camera, const Sun& sun, const Fog& fog) {
 	updateShader(camera, sun, fog);
 
-	for (Entity* entity : entities) {
-		//render(entity, camera, true);
+	for (auto& entity : entities) {
+		//render(*entity, &camera, true);
 	}
 
 	entities.clear();
@@ -37,14 +37,15 @@ void EntityRenderer::updateShader(const Camera& camera, const Sun& sun, const Fo
 void EntityRenderer::renderLights(const Sun& sun) {
 	activeShader = &sun.getLight().getFramebuffer().getShader();
 
-	for (Entity* entity : entities) {
+	for (auto& entity : entities) {
 		render(*entity);
 	}
 }
 
-void EntityRenderer::render(const Entity& entity, Camera* camera, bool onlyVisible) {
+void EntityRenderer::render(const Entity& entity, const Camera* camera, bool onlyVisible) {
 	updateModelMatrix(entity);
 
+	// only visible
 	entity.getType().model->draw(*activeShader);
 }
 

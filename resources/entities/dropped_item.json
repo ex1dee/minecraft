@@ -1,0 +1,22 @@
+{
+    "id": 1,
+
+    "eyes_offset": [ 0, 0, 0 ],
+
+    "offset": {
+        "position": [ 0, 0, 0 ],
+        "rotation": [ 0, 0, 0 ],
+        "scale": [ 0, 0, 0 ]
+    },
+
+    "collider": {
+        "position": [ 0, 0, 0 ],
+        "extents": [ 0.8, 1.85, 0.8 ]
+    },
+
+    "physics": {
+        "enabled": true,
+        "gravity": true,
+        "mass": 0.1
+    }
+}

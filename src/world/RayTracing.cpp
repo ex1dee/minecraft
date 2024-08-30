@@ -15,7 +15,7 @@ std::shared_ptr<Block> RayTracing::getNearestBlock(World& world, const Ray& ray,
 		std::shared_ptr<Block> block = world.getBlock(currentPos);
 
 		if (block != nullptr && block->isCollidable()) {
-			return std::move(block);
+			return block;
 		}
 	}
 

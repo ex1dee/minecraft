@@ -1,41 +1,24 @@
 #ifndef AABB_H
 #define AABB_H
 
+#include <vector>
+
 #include "../geometry/Transform.h"
 
 class AABB {
 public:
-	glm::vec3 min = glm::vec3(0);
 	glm::vec3 extents = glm::vec3(1);
+	glm::vec3 min = glm::vec3(0);
 
-	AABB() {}
-	AABB(const glm::vec3& min, const glm::vec3& max) {
-		this->min = min;
-		this->extents = max - min;
-	}
+	AABB() = default;
+	AABB(const glm::vec3& min, const glm::vec3& max);
 
 	AABB& operator=(const AABB& other) = default;
 	AABB& operator=(AABB&& other) = default;
 
-	glm::vec3 getVP(const glm::vec3& normal) const {
-		glm::vec3 res = min;
-
-		if (normal.x > 0) {
-			res.x += extents.x;
-		}
-		if (normal.y > 0) {
-			res.y += extents.y;
-		}
-		if (normal.z > 0) {
-			res.z += extents.z;
-		}
-
-		return res;
-	}
-
-	void applyTransform(const Transform& transform) {
-		min = transform.position;
-	}
+	std::vector<glm::vec3> getVertices() const;
+	void updateTransform(const Transform& transform);
+	glm::vec3 getVertexInDirection(const glm::vec3& normal) const;
 };
 
 #endif

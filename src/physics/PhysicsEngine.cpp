@@ -14,10 +14,6 @@ void PhysicsEngine::initialize(World& world) {
 	PhysicsEngine::world = &world;
 }
 
-void PhysicsEngine::finalize() { 
-
-}
-
 void PhysicsEngine::update(float deltaTime) {
 	if (deltaTime == 0)
 		return;

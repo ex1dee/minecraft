@@ -11,7 +11,7 @@ CHARS_NUMBER = 65535;
 
 void FTLoader::initialize() {
 	if (FT_Init_FreeType(&ft))
-		std::cout << "ERROR::FREETYPE\n" << "Could not init FreeType library\n";
+		std::cerr << "ERROR::FREETYPE\n" << "Could not init FreeType library\n";
 
 	load(FONT_MINECRAFTIAREGULAR_PATH);
 }
@@ -22,7 +22,7 @@ void FTLoader::finalize() {
 
 void FTLoader::load(const std::string& path) {
 	if (FT_New_Face(ft, path.c_str(), 0, &face))
-		std::cout << "ERROR::FREETYPE\n" << "Failed to load font at " << path << "\n";
+		std::cerr << "ERROR::FREETYPE\n" << "Failed to load font at " << path << "\n";
 
 	FT_Set_Pixel_Sizes(face, 0, GLYPH_SIZE_PX);
 	
@@ -35,8 +35,8 @@ void FTLoader::load(const std::string& path) {
 
 void FTLoader::loadChar(CharacterType c) {
 	if (FT_Load_Char(face, c, FT_LOAD_RENDER)) {
-		std::cout << "ERROR::FREETYPE\n" << "Failed to load glyph ";
-		std::wcout << c << "\n";
+		std::cerr << "ERROR::FREETYPE\n" << "Failed to load glyph ";
+		std::wcerr << c << "\n";
 	}
 	
 	FT_Bitmap& bitmap = face->glyph->bitmap;

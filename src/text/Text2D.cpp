@@ -56,7 +56,7 @@ void Text2D::setText(const std::wstring& text) {
 
 		sprites.push_back(std::move(createSprite(ftChar, x, y)));
 
-		x += (ftChar.advance.x >> 6) - ftChar.size.x * 0.5f - ftChar.bearing.x;
+		x += (ftChar.advance.x >> 6) - (ftChar.size.x * 0.5f + ftChar.bearing.x);
 	}
 }
 

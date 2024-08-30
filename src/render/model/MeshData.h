@@ -22,6 +22,9 @@ public:
 	MeshData() {}
 	MeshData(MeshType type, int dimensions, uint32_t mode = GL_TRIANGLES);
 
+	MeshData(MeshData&& other) = default;
+	MeshData& operator=(MeshData&& other) = default;
+
 	void reset();
 };
 

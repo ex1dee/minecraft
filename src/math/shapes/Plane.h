@@ -5,14 +5,17 @@
 
 #include "Triangle.h"
 
-struct Plane {
+class Plane {
+public:
 	glm::vec3 normal;
 	float distance;
 
 	Plane() = default;
 
-	Plane(const glm::vec3& normal, const glm::vec3& point)
-		: normal(glm::normalize(normal)), distance(-glm::dot(normal, point)) {}
+	Plane(const glm::vec3& normal, const glm::vec3& point) {
+		this->normal = glm::normalize(normal);
+		this->distance = glm::dot(this->normal, point);
+	}
 
 	Plane(const Triangle& triangle) {
 		glm::vec3 ab = triangle.b - triangle.a;
@@ -23,7 +26,7 @@ struct Plane {
 	}
 
 	float distanceToPoint(const glm::vec3& point) const {
-		return glm::abs(glm::dot(normal, point) + distance);
+		return glm::dot(normal, point) + distance;
 	}
 }; 
 

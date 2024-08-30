@@ -167,7 +167,9 @@
     <ClCompile Include="src\gui\GUIDatabase.cpp" />
     <ClCompile Include="src\gui\GUIManager.cpp" />
     <ClCompile Include="src\gui\InventoryGUI.cpp" />
+    <ClCompile Include="src\input\handlers\BlockInteractsInput.cpp" />
     <ClCompile Include="src\input\handlers\GUIInput.cpp" />
+    <ClCompile Include="src\items\DroppedItem.cpp" />
     <ClCompile Include="src\items\inventory\Inventory.cpp" />
     <ClCompile Include="src\items\inventory\InventoryView.cpp" />
     <ClCompile Include="src\items\ItemsDatabase.cpp" />
@@ -177,6 +179,7 @@
     <ClCompile Include="src\math\geometry\Transform.cpp" />
     <ClCompile Include="src\math\intersects\RayBoxIntersect.cpp" />
     <ClCompile Include="src\math\intersects\RayRectIntersect.cpp" />
+    <ClCompile Include="src\math\shapes\AABB.cpp" />
     <ClCompile Include="src\math\shapes\Frustum.cpp" />
     <ClCompile Include="src\math\geometry\Orientation.cpp" />
     <ClCompile Include="src\physics\collider\BoxCollider.cpp" />
@@ -239,8 +242,8 @@
     <ClCompile Include="src\textures\TextureAtlas.cpp" />
     <ClCompile Include="src\world\block\BlocksDatabase.cpp" />
     <ClCompile Include="src\world\chunk\ChunkManager.cpp" />
-    <ClCompile Include="src\world\chunk\ChunkMesh.cpp" />
-    <ClCompile Include="src\world\chunk\ChunkMeshBuilder.cpp" />
+    <ClCompile Include="src\world\chunk\ChunkModel.cpp" />
+    <ClCompile Include="src\world\chunk\ChunkModelBuilder.cpp" />
     <ClCompile Include="src\world\generation\terrain\SuperFlatGenerator.cpp" />
     <ClCompile Include="src\world\World.cpp" />
   </ItemGroup>
@@ -256,7 +259,9 @@
     <ClInclude Include="src\gui\GUIManager.h" />
     <ClInclude Include="src\gui\InventoryGUI.h" />
     <ClInclude Include="src\gui\InventoryItem.h" />
+    <ClInclude Include="src\input\handlers\BlockInteractsInput.h" />
     <ClInclude Include="src\input\handlers\GUIInput.h" />
+    <ClInclude Include="src\items\DroppedItem.h" />
     <ClInclude Include="src\items\inventory\Inventory.h" />
     <ClInclude Include="src\items\inventory\InventoryView.h" />
     <ClInclude Include="src\items\ItemStack.h" />
@@ -373,8 +378,8 @@
     <ClInclude Include="src\items\Material.h" />
     <ClInclude Include="src\world\block\BlocksDatabase.h" />
     <ClInclude Include="src\world\chunk\ChunkManager.h" />
-    <ClInclude Include="src\world\chunk\ChunkMesh.h" />
-    <ClInclude Include="src\world\chunk\ChunkMeshBuilder.h" />
+    <ClInclude Include="src\world\chunk\ChunkModel.h" />
+    <ClInclude Include="src\world\chunk\ChunkModelBuilder.h" />
     <ClInclude Include="src\world\generation\terrain\DefaultWorldGenerator.h" />
     <ClInclude Include="src\world\generation\terrain\SuperFlatGenerator.h" />
     <ClInclude Include="src\world\generation\terrain\TerrainGenerator.h" />
@@ -395,6 +400,7 @@
     <None Include="resources\blocks\snow_grass.json" />
     <None Include="resources\blocks\stone.json" />
     <None Include="resources\blocks\water.json" />
+    <None Include="resources\entities\dropped_item.json" />
     <None Include="resources\entities\player.json" />
     <None Include="resources\gui\inventory_titles.json" />
     <None Include="resources\gui\item_description.json" />
@@ -449,6 +455,9 @@
     <Image Include="resources\textures\skybox\right.bmp" />
     <Image Include="resources\textures\skybox\stars.jpg" />
     <Image Include="resources\textures\skybox\top.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\fonts\MinecraftiaRegular.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

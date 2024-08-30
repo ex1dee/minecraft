@@ -1,7 +1,6 @@
 #include "Chunk.h"
 
 #include "../World.h"
-#include "ChunkMeshBuilder.h"
 
 Chunk::Chunk(World& world, glm::ivec2 pos)
 	: world(&world), position(pos) {
@@ -10,7 +9,7 @@ Chunk::Chunk(World& world, glm::ivec2 pos)
 	}
 
 	makeAABB();
-	meshes.setAABB(aabb);
+	model.setAABB(aabb);
 }
 
 void Chunk::makeAABB() {
@@ -20,26 +19,18 @@ void Chunk::makeAABB() {
 	aabb = AABB(wp1, wp2);
 }
 
-void Chunk::render(Renderer& renderer) {
-	if (hasMesh()) {
-		bufferMesh();
-
-		renderer.addChunk(*this);
-	}
-}
-
-void Chunk::makeMesh() {
+void Chunk::makeModel() {
 	if (!hasMesh()) {
-		ChunkMeshBuilder(*this).build();
+		ChunkModelBuilder(*this, this->model).build();
 
 		bHasMesh = true;
 		buffered = false;
 	}
 }
 
-void Chunk::bufferMesh() {
-	if (!hasBuffered()) {
-		meshes.createBuffers();
+void Chunk::bufferModel() {
+	if (hasMesh() && !hasBuffered()) {
+		model.createBuffers();
 
 		buffered = true;
 	}
@@ -49,8 +40,7 @@ void Chunk::resetMeshes() {
 	bHasMesh = false;
 	buffered = false;
 
-	meshes.solid->getModel().reset();
-	meshes.liquid->getModel().reset();
+	model.reset();
 }
 
 void Chunk::load(TerrainGenerator& terrainGen) {
@@ -84,9 +74,9 @@ std::shared_ptr<Block> Chunk::getBlock(const glm::vec3& pos) {
 	return blocks[toBlockIndex(pos)];
 }
 
-void Chunk::setBlock(const glm::vec3& pos, Material material) {
+std::shared_ptr<Block> Chunk::setBlock(const glm::vec3& pos, Material material) {
 	if (pos.y < 0 || ceil(pos.y) >= CHUNK_H)
-		return;
+		return nullptr;
 
 	glm::vec3 worldPos = getWorldPosition(pos);
 
@@ -94,14 +84,13 @@ void Chunk::setBlock(const glm::vec3& pos, Material material) {
 	block->position = worldPos;
 
 	if (outOfBounds(pos)) {
-		world->setBlock(worldPos, material);
-
-		return;
+		return world->setBlock(worldPos, material);
 	}
 
 	updateHighestBlock(pos, *block);
-
 	blocks[toBlockIndex(pos)] = block;
+
+	return block;
 }
 
 bool Chunk::outOfBounds(const glm::vec3& pos) {
@@ -149,6 +138,30 @@ glm::vec3 Chunk::getLocalBlockPosition(int index) {
 	pos.z = (index / CHUNK_D) % CHUNK_D;
 	
 	return pos;
+}
+
+glm::vec3 Chunk::getLocalBlockPosition(const glm::vec3& pos) {
+	int x, z;
+
+	x = (int)floor(pos.x) % CHUNK_W;
+
+	if (pos.x < 0) {
+		x += CHUNK_W;
+
+		if (x == 16)
+			x = 0;
+	}
+
+	z = (int)floor(pos.z) % CHUNK_D;
+
+	if (pos.z < 0) {
+		z += CHUNK_D;
+
+		if (z == 16)
+			z = 0;
+	}
+
+	return glm::vec3(x, pos.y, z);
 }
 
 int Chunk::toBlockIndex(const glm::vec3& pos) {

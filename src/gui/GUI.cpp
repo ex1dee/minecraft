@@ -33,13 +33,13 @@ void GUI::setupElements(GUISector* sector) {
 
 void GUI::setupElement(GUIElement& element) {
 	if (!element.visible) {
-		if (element.hasTexture)
+		if (element.hasTexture())
 			element.sprite->reset();
 
 		return;
 	}
 
-	if (element.hasTexture) {
+	if (element.hasTexture()) {
 		element.sprite->transform.position = scaleByWindow(element.transform.position);
 		element.sprite->transform.rotation = element.transform.rotation;
 		element.sprite->transform.scale = scaleByWindow(element.transform.scale);
@@ -48,7 +48,7 @@ void GUI::setupElement(GUIElement& element) {
 		element.sprite->setup();
 	}
 
-	if (element.hasText) {
+	if (element.hasText()) {
 		element.text->setPosition(scaleByWindow(element.text->getPosition()));
 		element.text->setScale(scaleByWindow(element.text->getScale()));
 	}

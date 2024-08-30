@@ -7,7 +7,7 @@ Drawable::~Drawable() {
 Drawable::Drawable(const Drawable& other) {
 	buffers = other.buffers;
 
-	if (other.VAO != 0)
+	if (other.VAO)
 		setup();
 }
 

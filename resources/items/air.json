@@ -2,6 +2,8 @@
     "material": 0,
     "hasMeta": false,
 
+    "maxAmount": 1,
+
     "texture": {
         "path": "resources/textures/items/air.png",
         "atlas": {

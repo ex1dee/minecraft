@@ -11,15 +11,17 @@ constexpr float SPAWNPOINT_CHUNKS_RANGE = 100.0f;
 World::World(std::shared_ptr<Player>& player, std::shared_ptr<Renderer>& renderer)
 	: player(player), renderer(renderer) {
 	player->hookWorld(this);
-	seed = time(0);
 
 	chunkManager = ChunkManager(*this);
 	terrainGen = std::make_unique<DefaultWorldGenerator>(seed);
 
+	time = TICK_PER_DAY / 4;
+	seed = std::time(0);
 	isRunning = true;
 
 	updateDefaultSpawnPoint();
-	addLoadChunksThread();
+	addUpdateChunksThread();
+	addLoadChunksThreads();
 	
 	sun = std::make_unique<Sun>(ShadersDatabase::get(ShaderType::FRAMEBUFFER), *this, this->player);
 	clouds = std::make_unique<Clouds>(seed, player, *this);
@@ -47,10 +49,6 @@ const Fog& World::getFog() {
 	}
 }
 
-void World::addLoadChunksThread() {
-	loadThreads.push_back(std::thread([&]() { loadChunks(); }));
-}
-
 void World::updateDefaultSpawnPoint() {
 	glm::ivec2 chunkPos{ 0, 0 };
 	glm::vec3 blockPos{ 0, 0, 0 };
@@ -67,7 +65,7 @@ void World::updateDefaultSpawnPoint() {
 		chunkPos.y = rangedRand(randGen, -SPAWNPOINT_CHUNKS_RANGE, SPAWNPOINT_CHUNKS_RANGE);
 		blockPos.x = rangedRand(randGen, 0, CHUNK_W - 1);
 		blockPos.z = rangedRand(randGen, 0, CHUNK_D - 1);
-		
+
 		chunk = chunkManager.load(chunkPos);
 		blockPos.y = chunk->getHeightAt(blockPos);
 	}
@@ -77,6 +75,14 @@ void World::updateDefaultSpawnPoint() {
 	spawnPoint = spawnPos;
 }
 
+void World::addLoadChunksThreads() {
+	loadThreads.push_back(std::thread(&World::loadChunks, this));
+}
+
+void World::addUpdateChunksThread() {
+	updateThreads.push_back(std::thread(&World::updateChunks, this));
+}
+
 void World::loadChunks() {
 	while (isRunning) {
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));
@@ -84,9 +90,22 @@ void World::loadChunks() {
 		glm::ivec2 playerPos = getLocalChunkPosition(player->transform.position);
 		int loadDist = Config::settings["world"]["loadDistance"];
 		
+		chunkManager.deleteNullChunks();
 		chunkManager.makeMeshes(playerPos, loadDist);
 		chunkManager.unloadNotVisibleChunks(playerPos, loadDist);
 		chunkManager.deleteUnloadedChunks();
+	}
+}
+
+void World::updateChunks() {
+	while (isRunning) {
+		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+
+		for (auto& chunkPos : chunkUpdates) {
+			chunkManager.updateChunk(chunkPos);
+		}
+
+		chunkUpdates.clear();
 	}
 }
 
@@ -96,38 +115,33 @@ void World::render() {
 }
 
 void World::renderEntities() {
-	renderer->addEntity(*player);
+	std::shared_ptr<Entity> entity = std::dynamic_pointer_cast<Entity>(player);
+
+	renderer->addEntity(entity);
 }
 
 void World::renderChunks() {
-	for (auto& pair : chunkManager.loadedChunks) {
-		Chunk* chunk = pair.second.get();
+	for (auto& pair : chunkManager.visibleChunks) {
+		std::shared_ptr<Chunk> chunk = pair.second;
 		if (chunk == nullptr)
 			continue;
 
-		chunk->render(*renderer);
+		chunk->bufferModel();
+		renderer->addChunk(chunk);
 	}
 }
 
 void World::update(float deltaTime) {
-	updateChunks();
+	updateTime();
 
-//	sun->setTime((float)glfwGetTime() * 30.0f);
+	sun->setTime(time);
 	clouds->update(deltaTime);
 }
 
-void World::updateChunk(const glm::vec3& pos) {
-	std::shared_ptr<Chunk> chunk = getChunk(pos);
-	chunkUpdates.push_back(std::move(chunk));
-}
-
-void World::updateChunks() {
-	for (auto& chunk : chunkUpdates) {
-		chunk->resetMeshes();
-		chunk->makeMesh();
+void World::updateTime() {
+	if (++time >= TICK_PER_DAY) {
+		time = 0;
 	}
-
-	chunkUpdates.clear();
 }
 
 int World::getHeightAt(const glm::vec3& pos) {
@@ -145,25 +159,45 @@ std::shared_ptr<Block> World::getHighestBlockAt(const glm::vec3& pos) {
 
 std::shared_ptr<Block> World::getBlock(const glm::vec3& pos) {
 	WorldPosition worldPos = getWorldPosition(pos);
-	if (worldPos.chunk == nullptr || !worldPos.chunk->isLoaded())
+	if (!worldPos.chunk->isLoaded())
 		return nullptr;
 
 	return worldPos.chunk->getBlock(worldPos.localBlockPos);
 }
 
-void World::setBlock(const glm::vec3& pos, Material materialID) {
+std::shared_ptr<Block> World::setBlock(const glm::vec3& pos, Material material) {
 	WorldPosition worldPos = getWorldPosition(pos);
-	if (worldPos.chunk == nullptr || !worldPos.chunk->isLoaded())
-		return;
+	if (!worldPos.chunk->isLoaded())
+		return nullptr;
 
-	return worldPos.chunk->setBlock(worldPos.localBlockPos, materialID);
+	std::shared_ptr<Block> block = worldPos.chunk->setBlock(worldPos.localBlockPos, material);
+
+	if (!worldPos.chunk->hasMesh())
+		return nullptr;
+ 
+	if (worldPos.chunk.get() != getChunk(pos + glm::vec3(1, 0, 0)).get())
+		updateChunk(pos + glm::vec3(1, 0, 0));
+	if (worldPos.chunk.get() != getChunk(pos + glm::vec3(-1, 0, 0)).get())
+		updateChunk(pos + glm::vec3(-1, 0, 0));
+	if (worldPos.chunk.get() != getChunk(pos + glm::vec3(0, 0, 1)).get())
+		updateChunk(pos + glm::vec3(0, 0, 1));
+	if (worldPos.chunk.get() != getChunk(pos + glm::vec3(0, 0, -1)).get())
+		updateChunk(pos + glm::vec3(0, 0, -1));
+
+	updateChunk(pos);
+
+	return block;
+}
+
+void World::updateChunk(const glm::vec3& pos) {
+	chunkUpdates.insert(getLocalChunkPosition(pos));
 }
 
 WorldPosition World::getWorldPosition(const glm::vec3& pos) {
 	WorldPosition worldPos;
 
-	worldPos.localBlockPos = getLocalBlockPosition(floor(pos));
 	worldPos.chunk = getChunk(pos);
+	worldPos.localBlockPos = Chunk::getLocalBlockPosition(pos);
 
 	return worldPos;
 }
@@ -175,28 +209,4 @@ std::shared_ptr<Chunk> World::getChunk(const glm::vec3& pos) {
 
 glm::ivec2 World::getLocalChunkPosition(const glm::vec3& pos) {
 	return glm::ivec2(floor(pos.x / CHUNK_W), floor(pos.z / CHUNK_D));
-}
-
-glm::vec3 World::getLocalBlockPosition(const glm::vec3& pos) {
-	int x, z;
-
-	if (pos.x >= 0) {
-		x = (int)ceil(pos.x) % CHUNK_W;
-	} else {
-		x = CHUNK_W + (int)floor(pos.x) % CHUNK_W;
-
-		if (x == 16)
-			x = 0;
-	}
-
-	if (pos.z >= 0) {
-		z = (int)ceil(pos.z) % CHUNK_D;
-	} else {
-		z = CHUNK_D + (int)floor(pos.z) % CHUNK_D;
-
-		if (z == 16)
-			z = 0;
-	}
-
-	return glm::vec3(x, pos.y, z);
 }

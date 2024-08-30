@@ -2,7 +2,8 @@
 #define ENTITYID_H
 
 enum EntityID {
-	PLAYER = 0
+	PLAYER = 0,
+	DROPPED_ITEM = 1
 };
 
 #endif

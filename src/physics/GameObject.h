@@ -25,12 +25,12 @@ public:
 	GameObject(World* world);
 	~GameObject();
 
-	void hookWorld(World* world) { this->world = world; }
 	World* const getWorld() { return world; }
+	void hookWorld(World* world) { this->world = world; }
 
+	void updateTransform();
+	void updateTransform(Transform& transform);
 	Liquid* getLiquidAtObject();
-	void applyTransform();
-	void applyTransform(Transform& transform);
 };
 
 #endif

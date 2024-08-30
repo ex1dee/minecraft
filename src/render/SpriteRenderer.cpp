@@ -6,7 +6,7 @@ void SpriteRenderer::render(const Sun& sun, const Camera& camera) {
 	Renderer::startTransparentRender();
 	updateShader(sun, camera);
 
-	for (Sprite* sprite : sprites) {
+	for (auto& sprite : sprites) {
 		sprite->draw(*activeShader);
 	}
 
@@ -26,7 +26,7 @@ void SpriteRenderer::updateShader(const Sun& sun, const Camera& camera) {
 	activeShader->setVec3("sunDirection", sun.getLight().direction);
 }
 
-void SpriteRenderer::add(Sprite& sprite) {
-	if (sprite.texture.data != nullptr)
-		sprites.push_back(&sprite);
+void SpriteRenderer::add(std::shared_ptr<Sprite>& sprite) {
+	if (sprite->texture.data != nullptr)
+		sprites.push_back(sprite);
 }

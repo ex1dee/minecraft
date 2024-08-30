@@ -8,17 +8,16 @@ BoxCollider::BoxCollider(const glm::vec3& extents, const Transform& transform)
 }
 
 void BoxCollider::calcVertices() {
-	vertices.clear();
-
-	vertices.push_back({ 0.0f, 0.0f, 0.0f });
-	vertices.push_back({ extents.x, 0.0f, 0.0f });
-	vertices.push_back({ 0.0f, extents.y, 0.0f });
-	vertices.push_back({ 0.0f, 0.0f, extents.z });
-
-	vertices.push_back({ extents.x, extents.y, extents.z });
-	vertices.push_back({ extents.x, 0.0f, extents.z });
-	vertices.push_back({ 0.0f, extents.y, extents.z });
-	vertices.push_back({ extents.x, extents.y, 0.0f });
+	vertices = {
+        {0.0f, 0.0f, 0.0f}, 
+        {extents.x, 0.0f, 0.0f}, 
+        {0.0f, extents.y, 0.0f}, 
+        {0.0f, 0.0f, extents.z}, 
+        {extents.x, extents.y, extents.z}, 
+        {extents.x, 0.0f, extents.z}, 
+        {0.0f, extents.y, extents.z}, 
+        {extents.x, extents.y, 0.0f}
+    };
 
 	glm::mat4 model = calcModel();
 
@@ -29,7 +28,7 @@ void BoxCollider::calcVertices() {
 
 std::vector<Rect> BoxCollider::getRectangles(const Transform& transform) {
 	std::vector<Rect> rectangles;
-	applyTransform(transform);
+	updateTransform(transform);
 
 	for (int i = 0; i <= 4; i += 4) {
 		rectangles.push_back(Rect(
@@ -57,8 +56,9 @@ std::vector<Rect> BoxCollider::getRectangles(const Transform& transform) {
 	return rectangles;
 }
 
-void BoxCollider::applyTransform(const Transform& transform) {
+void BoxCollider::updateTransform(const Transform& transform) {
 	globalVertices.clear();
+	globalVertices.reserve(vertices.size());
 
 	glm::mat4 model = transform.calcModel();
 

@@ -39,9 +39,9 @@ void SkyboxRenderer::loadTexture() {
 }
 
 void SkyboxRenderer::makeModel() {
-	MeshData meshData(MeshType::CUBE, 3);
+    std::unique_ptr<MeshData> meshData = std::make_unique<MeshData>(MeshType::CUBE, 3);
 	
-	meshData.vertexPositions = {
+	meshData->vertexPositions = {
         // right
          1.0f, -1.0f, -1.0f,
          1.0f, -1.0f,  1.0f,

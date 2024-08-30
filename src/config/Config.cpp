@@ -10,6 +10,6 @@ void Config::initialize() {
 		settings = Json::parse("config/settings.json");
 		config = Json::parse("config/config.json");
 	} catch (std::ios_base::failure e) {
-		std::cout << "ERROR::CONFIG::PARSE\n" << e.what() << "\n";
+		std::cerr << "ERROR::CONFIG::PARSE\n" << e.what() << "\n";
 	}
 }

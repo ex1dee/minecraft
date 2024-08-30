@@ -1,7 +1,5 @@
 {
     "visible": false,
-    "hasTexture": false,
-    "hasText": false,
     "name": "inventory",
     "layer_offset": 1,
 
