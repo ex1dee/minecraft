@@ -20,7 +20,7 @@ public:
 
 	static void update(float deltaTime);
 	static void addObject(GameObject& object);
-	static void removeObject(GameObject& object);
+	static void removeObject(const GameObject& object);
 };
 
 #endif

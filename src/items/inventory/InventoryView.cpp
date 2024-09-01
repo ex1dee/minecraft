@@ -4,7 +4,10 @@
 #include "../../gui/GUIManager.h"
 
 constexpr float ITEM_ICON_SCALE = 0.75f;
-constexpr glm::vec3 AMOUNT_TEXT_OFFSET = glm::vec3(DEFAULT_SLOT_WIDTH * 0.4f, -DEFAULT_SLOT_HEIGHT * 0.4f, 0);
+
+constexpr glm::vec3
+AMOUNT_TEXT_OFFSET = glm::vec3(DEFAULT_SLOT_WIDTH * 0.4f, -DEFAULT_SLOT_HEIGHT * 0.4f, 0),
+AMOUNT_TEXT_SCALE = glm::vec3(0.04f);
 
 glm::vec2 InventoryView::slotSize = glm::vec3(0);
 
@@ -117,6 +120,7 @@ void InventoryView::addItemAmountElement(
 
 	Transform textTransform = slotElement->transform;
 	textTransform.position += rowElement->transform.scale * AMOUNT_TEXT_OFFSET;
+	textTransform.scale = rowElement->transform.scale * AMOUNT_TEXT_SCALE;
 
 	std::shared_ptr<Text2D> text = std::make_shared<Text2D>(
 		std::to_wstring(item.getAmount()),

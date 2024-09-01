@@ -1,24 +1,8 @@
 #include "ChunkModelBuilder.h"
 
-#include "../block/Block.h"
+#include "../block/BlockMeshConstants.h"
 #include "../block/BlockFaces.h"
-
-constexpr std::array<float, 12> frontFace{ 0, 0, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, };
-constexpr std::array<float, 12> backFace{ 1, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, };
-constexpr std::array<float, 12> leftFace{ 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 1, 0, };
-constexpr std::array<float, 12> rightFace{ 1, 0, 1, 1, 0, 0, 1, 1, 0, 1, 1, 1, };
-constexpr std::array<float, 12> topFace{ 0, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1, 0, };
-constexpr std::array<GLfloat, 12> bottomFace{ 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 1 };
-
-constexpr std::array<float, 12> xSide1{ 0, 0, 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, };
-constexpr std::array<float, 12> xSide2{ 0, 0, 1, 0, 1, 1, 1, 1, 0, 1, 0, 0, };
-
-constexpr glm::vec3 frontFaceNormal{ 0, 0, 1 };
-constexpr glm::vec3 backFaceNormal{ 0, 0, -1 };
-constexpr glm::vec3 leftFaceNormal{ -1, 0, 0 };
-constexpr glm::vec3 rightFaceNormal{ 1, 0, 0 };
-constexpr glm::vec3 topFaceNormal{ 0, 1, 0 };
-constexpr const glm::vec3 bottomFaceNormal{ 0, -1, 0 };
+#include "../block/Block.h"
 
 ChunkModelBuilder::ChunkModelBuilder(Chunk& chunk, ChunkModelCollection& model)
 	: chunk(&chunk), model(&model) {
@@ -55,7 +39,7 @@ void ChunkModelBuilder::setActiveMesh(const BlockType& blockType) {
 }
 
 void ChunkModelBuilder::addX(const glm::vec3& blockPos, const BlockType& blockType) {
-	AtlasCoords atlasCoords = BlocksDatabase::getTextureAtlas().getTextureCoords(blockType.texSideCoords);
+	AtlasCoords atlasCoords = BlocksDatabase::getTextureAtlas()->getTextureCoords(blockType.texSideCoords);
 
 	activeMesh->addBlockFace(xSide1, atlasCoords, chunk->getLocalPosition(), blockPos);
 	activeMesh->addBlockFace(xSide2, atlasCoords, chunk->getLocalPosition(), blockPos);
@@ -85,7 +69,7 @@ void ChunkModelBuilder::tryAddFace(const std::array<float, 12>& vertices,
 		return;
 
 	if (shouldAddFace(adjacentDir, blockType)) {
-		AtlasCoords atlasCoords = BlocksDatabase::getTextureAtlas().getTextureCoords(texCoords);
+		AtlasCoords atlasCoords = BlocksDatabase::getTextureAtlas()->getTextureCoords(texCoords);
 
 		activeMesh->addBlockFace(vertices, atlasCoords, chunk->getLocalPosition(), localBlockPosition, normal);
 	}

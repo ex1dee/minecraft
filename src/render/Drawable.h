@@ -12,19 +12,21 @@ protected:
 	uint32_t VAO, EBO;
 
 	void genVAO();
-	void addVBO(int dimensions, const std::vector<float>& vertices);
+	void addVBO(int dimensions, const std::vector<float>& vertices, int index);
 	void addEBO(const std::vector<uint32_t>& indices);
 public:
 	Drawable() = default;
-	~Drawable();
+	virtual ~Drawable();
 
 	Drawable(const Drawable& other);
 
 	virtual void setup();
-	virtual void reset() = 0;
+	virtual void reset();
 	virtual void draw(Shader& shader) = 0;
 
 	void resetBuffers();
+
+	uint32_t getVAO() { return VAO; }
 };
 
 #endif

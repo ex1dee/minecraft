@@ -24,6 +24,7 @@ public:
 
 	Sprite() = default;
 	Sprite(const Sprite& other);
+	~Sprite();
 
 	void setup() override;
 	void reset() override;

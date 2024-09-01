@@ -21,7 +21,7 @@ void ItemsDatabase::initialize() {
 		if (type->hasMeta)
 			type->meta = ItemMetaLoader::load(json["meta"]);
 
-		TextureLoader::loadSprite(json["texture"], type->texture);
+		TextureLoader::loadSprite(json["texture"], type->texture, false);
 
 		items.emplace(type->material, std::move(type));
 	}

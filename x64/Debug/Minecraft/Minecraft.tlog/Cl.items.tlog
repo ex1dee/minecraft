@@ -1,3 +1,4 @@
+C:\Users\User\source\repos\Minecraft\Minecraft\src\items\ItemModel.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\ItemModel.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\entity\EntitiesDatabase.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\EntitiesDatabase.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\entity\Entity.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\Entity.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\GL\GLHelper.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\GLHelper.obj
@@ -6,7 +7,8 @@ C:\Users\User\source\repos\Minecraft\Minecraft\src\gui\GUIDatabase.cpp;C:\Users\
 C:\Users\User\source\repos\Minecraft\Minecraft\src\gui\GUIManager.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\GUIManager.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\gui\InventoryGUI.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\InventoryGUI.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\input\handlers\BlockInteractsInput.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\BlockInteractsInput.obj
-C:\Users\User\source\repos\Minecraft\Minecraft\src\input\handlers\GUIInput.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\GUIInput.obj
+C:\Users\User\source\repos\Minecraft\Minecraft\src\input\handlers\InventoryInput.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\InventoryInput.obj
+C:\Users\User\source\repos\Minecraft\Minecraft\src\items\DroppedItem.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\DroppedItem.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\items\inventory\Inventory.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\Inventory.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\items\inventory\InventoryView.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\InventoryView.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\items\ItemsDatabase.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\ItemsDatabase.obj

@@ -52,9 +52,17 @@ std::shared_ptr<Block> ItemStack::toBlock(World* const world, const glm::vec3& p
 		block->state = std::make_unique<BlockState>(blockStateMeta->getState());
 	}
 
-	setAmount(amount - 1);
+	decreaseAmount();
 
 	return block;
+}
+
+void ItemStack::increaseAmount(int num) {
+	setAmount(amount + num);
+}
+
+void ItemStack::decreaseAmount(int num) {
+	setAmount(amount - num);
 }
 
 void ItemStack::setAmount(int amount) {

@@ -1,8 +1,1 @@
-﻿  EntityRenderer.cpp
-     Создается библиотека C:\Users\User\source\repos\Minecraft\x64\Release\Minecraft.lib и объект C:\Users\User\source\repos\Minecraft\x64\Release\Minecraft.exp
-  Создание кода
-  585 of 7372 functions ( 7.9%) were compiled, the rest were copied from previous compilation.
-    196 functions were new in current compilation
-    517 functions had inline decision re-evaluated but remain unchanged
-  Создание кода завершено
-  Minecraft.vcxproj -> C:\Users\User\source\repos\Minecraft\x64\Release\Minecraft.exe
+﻿  main.cpp

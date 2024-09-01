@@ -6,6 +6,7 @@
 #include "../math/geometry/Transform.h"
 #include "../math/shapes/AABB.h"
 #include "../render/model/Model.h"
+#include "../utils/UUIDWrapper.h"
 #include "collider/Collider.h"
 #include "PhysicsEngine.h"
 #include "RigidBody.h"
@@ -14,6 +15,8 @@ class World;
 
 class GameObject {
 protected:
+	bool collidesWithObjects;
+	UUIDWrapper uuid;
 	World* world;
 public:
 	std::unique_ptr<Collider> collider;
@@ -22,11 +25,16 @@ public:
 	Transform transform;
 	RigidBody rigidBody;
 
-	GameObject(World* world);
+	GameObject();
 	~GameObject();
 
+	bool operator==(const GameObject& other) const { return uuid == other.uuid; }
+	bool operator!=(const GameObject& other) const { return !operator==(other); }
+
 	World* const getWorld() { return world; }
-	void hookWorld(World* world) { this->world = world; }
+	const UUIDWrapper& getUUID() const { return uuid; }
+	bool isCollidesWithObjects() { return collidesWithObjects; }
+	void hookWorld(World* const world) { this->world = world; }
 
 	void updateTransform();
 	void updateTransform(Transform& transform);

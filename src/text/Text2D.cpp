@@ -122,15 +122,15 @@ float Text2D::getAlignmentOffset(const std::wstring& line) {
 	else if (alignment == TextAlignment::RIGHT)
 		lastIndex = line.size();
 
-	float offset = -getWidth(line, lastIndex);
+	float modelTransform = -getWidth(line, lastIndex);
 
 	if (alignment == TextAlignment::CENTER && line.size() % 2) {
 		const FTCharacter& ftChar = FTLoader::getCharacter(line[lastIndex]);
 
-		offset -= ftChar.advance.x >> 7;
+		modelTransform -= ftChar.advance.x >> 7;
 	}
 
-	return offset;
+	return modelTransform;
 }
 
 float Text2D::getWidth(const std::wstring& line, int length) {

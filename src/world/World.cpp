@@ -115,9 +115,12 @@ void World::render() {
 }
 
 void World::renderEntities() {
-	std::shared_ptr<Entity> entity = std::dynamic_pointer_cast<Entity>(player);
+	std::shared_ptr<Entity> playerEntity = std::dynamic_pointer_cast<Entity>(player);
+	renderer->addEntity(playerEntity);
 
-	renderer->addEntity(entity);
+	for (auto& entity : entities) {
+		renderer->addEntity(entity);
+	}
 }
 
 void World::renderChunks() {
@@ -131,8 +134,16 @@ void World::renderChunks() {
 	}
 }
 
+void World::playAnimations(float deltaTime) {
+	for (auto& entity : entities) {
+		if (entity != nullptr)
+			entity->playAnimation(player, deltaTime);
+	}
+}
+
 void World::update(float deltaTime) {
 	updateTime();
+	updateEntities(deltaTime);
 
 	sun->setTime(time);
 	clouds->update(deltaTime);
@@ -141,6 +152,15 @@ void World::update(float deltaTime) {
 void World::updateTime() {
 	if (++time >= TICK_PER_DAY) {
 		time = 0;
+	}
+}
+
+void World::updateEntities(float deltaTime) {
+	entities.erase(std::remove(entities.begin(), entities.end(), nullptr), entities.end());
+
+	for (auto& entity : entities) {
+		if (entity != nullptr && entity->needUpdate())
+			entity->update(player, deltaTime);
 	}
 }
 
@@ -159,7 +179,7 @@ std::shared_ptr<Block> World::getHighestBlockAt(const glm::vec3& pos) {
 
 std::shared_ptr<Block> World::getBlock(const glm::vec3& pos) {
 	WorldPosition worldPos = getWorldPosition(pos);
-	if (!worldPos.chunk->isLoaded())
+	if (worldPos.chunk == nullptr || !worldPos.chunk->isLoaded())
 		return nullptr;
 
 	return worldPos.chunk->getBlock(worldPos.localBlockPos);
@@ -167,9 +187,10 @@ std::shared_ptr<Block> World::getBlock(const glm::vec3& pos) {
 
 std::shared_ptr<Block> World::setBlock(const glm::vec3& pos, Material material) {
 	WorldPosition worldPos = getWorldPosition(pos);
-	if (!worldPos.chunk->isLoaded())
-		return nullptr;
 
+	if (worldPos.chunk == nullptr || !worldPos.chunk->isLoaded())
+		return nullptr;
+	
 	std::shared_ptr<Block> block = worldPos.chunk->setBlock(worldPos.localBlockPos, material);
 
 	if (!worldPos.chunk->hasMesh())
@@ -209,4 +230,12 @@ std::shared_ptr<Chunk> World::getChunk(const glm::vec3& pos) {
 
 glm::ivec2 World::getLocalChunkPosition(const glm::vec3& pos) {
 	return glm::ivec2(floor(pos.x / CHUNK_W), floor(pos.z / CHUNK_D));
+}
+
+void World::despawnEntity(const Entity& entity) {
+	PhysicsEngine::removeObject(entity);
+
+	entities.erase(std::remove_if(entities.begin(), entities.end(), [&](const auto& other) {
+		return entity == *other;
+	}), entities.end());
 }

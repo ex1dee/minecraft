@@ -58,6 +58,7 @@ struct Fog {
 
 out vec4 FragColor;
 in vec4 cameraSpacePos;
+in vec4 Color;
 in vec3 Normal;
 in vec3 FragPos;
 in vec2 TexCoords;
@@ -105,7 +106,7 @@ void main() {
 	if (length(texColor) == 0)
 		texColor = vec4(1);
 
-	FragColor = vec4(lighting, 1) * texColor;
+	FragColor = vec4(lighting, 1) * texColor * Color;
 
 	if (fog.enabled)
 		FragColor = mix(FragColor, fog.color, calcFogFactor());

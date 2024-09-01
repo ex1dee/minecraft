@@ -1,0 +1,19 @@
+{
+    "material": 9,
+    "hasMeta": true,
+
+    "maxAmount": 64,
+
+    "meta": {
+        "id": 0,
+        "name": "Stick",
+        "lore": []
+    },
+
+    "texture": {
+        "path": "resources/textures/items/stick.png",
+        "atlas": {
+            "use": false
+        }
+    }
+}

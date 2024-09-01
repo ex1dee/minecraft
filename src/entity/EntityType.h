@@ -11,10 +11,11 @@ public:
 	glm::vec3 colliderPosition;
 	glm::vec3 colliderExtents;
 	glm::vec3 eyesOffset;
+	Transform modelTransform;
 	float mass;
+	bool collidesWithObjects;
 	bool physics;
 	bool gravity;
-	Transform offset;
 };
 
 #endif

@@ -8,7 +8,7 @@ class CustomTexture : public Texture {
 	void load(const CustomImage<Td>& image, GLint wrap, GLint filter);
 public:
 	CustomTexture() {}
-	CustomTexture(const CustomImage<Td>& image, GLint wrap, GLint filter);
+	CustomTexture(const CustomImage<Td>& image, GLint wrap, GLint filter, bool unloadImage = false);
 };
 
 #endif

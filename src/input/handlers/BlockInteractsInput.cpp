@@ -9,7 +9,7 @@ float BlockInteractsInput::elapsedTime = 0.0f;
 void BlockInteractsInput::handle(Player& player, World& world, float deltaTime) {
 	std::shared_ptr<Block> block = player.getTargetBlock();
 	
-	if (block == nullptr || block->getType().material == AIR)
+	if (block == nullptr || block->getType().material == AIR || player.isOpenedBackpack())
 		return;
 
 	bool leftClicked = Input::clicked(GLFW_MOUSE_BUTTON_LEFT);
@@ -54,7 +54,7 @@ void BlockInteractsInput::handle(Player& player, World& world, float deltaTime) 
 glm::vec3 BlockInteractsInput::getAdjacentBlockPosition(Player& player, const Block& targetBlock) {
 	glm::vec3 targetBlockPosition = targetBlock.getPosition();
 	glm::vec3 targetBlockCenter = targetBlockPosition + glm::vec3(0.5f, 0.5f, 0.5f);
-	glm::vec3 intersect = targetBlock.intersect(player.getDirection()).getNearestTo(player.transform.position);
+	glm::vec3 intersect = targetBlock.intersect(player.getViewDirection()).getNearestTo(player.transform.position);
 
 	Transform transform(targetBlockPosition);
 	glm::vec3 rectCenter(0);

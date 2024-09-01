@@ -20,7 +20,8 @@ void CollisionDetector::detectO2O(std::vector<GameObject*>& objects) {
 			GameObject& obj1 = *objects[i];
 			GameObject& obj2 = *objects[j];
 
-			detect(obj1, obj2);
+			if (obj1.isCollidesWithObjects() && obj2.isCollidesWithObjects())
+				detect(obj1, obj2);
 		}
 	}
 }

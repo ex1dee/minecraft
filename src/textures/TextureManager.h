@@ -3,6 +3,8 @@
 
 #include "../shaders/Shader.h"
 
+constexpr const char* DEFAULT_TEXTURE_UNIFORM = "tex";
+
 class Texture;
 
 class TextureManager {

@@ -4,8 +4,7 @@
 #include "Renderer.h"
 
 void GUIRenderer::render() {
-	Renderer::startTransparentRender();
-	glDepthMask(GL_TRUE);
+	Renderer::startTransparentRender(true);
 
 	updateSpriteShader();
 	updateTextShader();

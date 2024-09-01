@@ -26,6 +26,8 @@ public:
 		
 	}
 
+	CustomImage& operator=(CustomImage&& other) = default;
+
 	GLenum getType() const {
 		return type;
 	}

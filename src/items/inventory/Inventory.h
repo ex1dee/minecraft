@@ -18,6 +18,8 @@ class Inventory {
 	int rowsNumber;
 	int size;
 
+	bool addItem(const ItemStack& item, int amount);
+
 	inline int getIndex(int column, int row) const { return row * SLOTS_IN_ROW + column; }
 	inline bool isCorrectIndex(int index) const { return index >= 0 && index < size; }
 public:

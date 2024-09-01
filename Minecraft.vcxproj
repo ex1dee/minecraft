@@ -160,6 +160,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\items\ItemModel.cpp" />
     <ClCompile Include="src\entity\EntitiesDatabase.cpp" />
     <ClCompile Include="src\entity\Entity.cpp" />
     <ClCompile Include="src\GL\GLHelper.cpp" />
@@ -168,7 +169,7 @@
     <ClCompile Include="src\gui\GUIManager.cpp" />
     <ClCompile Include="src\gui\InventoryGUI.cpp" />
     <ClCompile Include="src\input\handlers\BlockInteractsInput.cpp" />
-    <ClCompile Include="src\input\handlers\GUIInput.cpp" />
+    <ClCompile Include="src\input\handlers\InventoryInput.cpp" />
     <ClCompile Include="src\items\DroppedItem.cpp" />
     <ClCompile Include="src\items\inventory\Inventory.cpp" />
     <ClCompile Include="src\items\inventory\InventoryView.cpp" />
@@ -248,6 +249,7 @@
     <ClCompile Include="src\world\World.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\items\ItemModel.h" />
     <ClInclude Include="src\entity\EntitiesDatabase.h" />
     <ClInclude Include="src\entity\Entity.h" />
     <ClInclude Include="src\entity\EntityID.h" />
@@ -260,7 +262,7 @@
     <ClInclude Include="src\gui\InventoryGUI.h" />
     <ClInclude Include="src\gui\InventoryItem.h" />
     <ClInclude Include="src\input\handlers\BlockInteractsInput.h" />
-    <ClInclude Include="src\input\handlers\GUIInput.h" />
+    <ClInclude Include="src\input\handlers\InventoryInput.h" />
     <ClInclude Include="src\items\DroppedItem.h" />
     <ClInclude Include="src\items\inventory\Inventory.h" />
     <ClInclude Include="src\items\inventory\InventoryView.h" />
@@ -311,9 +313,11 @@
     <ClInclude Include="src\text\FTLoader.h" />
     <ClInclude Include="src\text\Text2D.h" />
     <ClInclude Include="src\text\TextAlignment.h" />
+    <ClInclude Include="src\utils\UUIDWrapper.h" />
     <ClInclude Include="src\utils\noise\NoiseManager.h" />
     <ClInclude Include="src\utils\noise\NoiseMap.h" />
     <ClInclude Include="src\utils\StringConverter.h" />
+    <ClInclude Include="src\world\block\BlockMeshConstants.h" />
     <ClInclude Include="src\world\block\states\BlockState.h" />
     <ClInclude Include="src\world\Clouds.h" />
     <ClInclude Include="src\render\EntityRenderer.h" />
@@ -417,6 +421,7 @@
     <None Include="resources\gui\hotbar.json" />
     <None Include="resources\items\air.json" />
     <None Include="resources\items\grass_block.json" />
+    <None Include="resources\items\stick.json" />
     <None Include="resources\models\player\model.gltf" />
     <None Include="shaders\clouds.fs" />
     <None Include="shaders\default.fs" />
@@ -464,6 +469,7 @@
     <Import Project="..\packages\glfw.3.4.0\build\native\glfw.targets" Condition="Exists('..\packages\glfw.3.4.0\build\native\glfw.targets')" />
     <Import Project="..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets" Condition="Exists('..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets')" />
     <Import Project="..\packages\Assimp.3.0.0\build\native\Assimp.targets" Condition="Exists('..\packages\Assimp.3.0.0\build\native\Assimp.targets')" />
+    <Import Project="..\packages\boost.1.86.0\build\boost.targets" Condition="Exists('..\packages\boost.1.86.0\build\boost.targets')" />
   </ImportGroup>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -472,5 +478,6 @@
     <Error Condition="!Exists('..\packages\glfw.3.4.0\build\native\glfw.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\glfw.3.4.0\build\native\glfw.targets'))" />
     <Error Condition="!Exists('..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Assimp.redist.3.0.0\build\native\Assimp.redist.targets'))" />
     <Error Condition="!Exists('..\packages\Assimp.3.0.0\build\native\Assimp.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Assimp.3.0.0\build\native\Assimp.targets'))" />
+    <Error Condition="!Exists('..\packages\boost.1.86.0\build\boost.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\boost.1.86.0\build\boost.targets'))" />
   </Target>
 </Project>

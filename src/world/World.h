@@ -19,7 +19,7 @@ class World {
 	std::unordered_set<glm::ivec2> chunkUpdates;
 	std::vector<std::thread> loadThreads;
 	std::vector<std::thread> updateThreads;
-	std::vector<Entity*> entities;
+	std::vector<std::shared_ptr<Entity>> entities;
 
 	glm::vec3 spawnPoint;
 	uint32_t seed;
@@ -35,7 +35,6 @@ class World {
 	Fog fog;
 
 	std::atomic<bool> isRunning;
-	std::mutex mainMutex;
 
 	void updateTime();
 	void loadChunks();
@@ -45,6 +44,7 @@ class World {
 	void addLoadChunksThreads();
 	void addUpdateChunksThread();
 	void updateDefaultSpawnPoint();
+	void updateEntities(float deltaTime);
 public:
 	World(std::shared_ptr<Player>& player, std::shared_ptr<Renderer>& renderer);
 	~World();
@@ -53,17 +53,49 @@ public:
 	const Clouds& getClouds() { return *clouds; }
 	TerrainGenerator& getTerrainGenerator() { return *terrainGen; }
 
-	const Fog& getFog();
-	int getHeightAt(const glm::vec3& pos);
 	void render();
+	void playAnimations(float deltaTime);
 	void update(float deltaTime);
 	void updateChunk(const glm::vec3& pos);
+	void despawnEntity(const Entity& entity);
+	int getHeightAt(const glm::vec3& pos);
 	WorldPosition getWorldPosition(const glm::vec3& pos);
 	glm::ivec2 getLocalChunkPosition(const glm::vec3& pos);
 	std::shared_ptr<Chunk> getChunk(const glm::vec3& pos);
 	std::shared_ptr<Block> getBlock(const glm::vec3& pos);
 	std::shared_ptr<Block> getHighestBlockAt(const glm::vec3& pos);
 	std::shared_ptr<Block> setBlock(const glm::vec3& pos, Material material);
+	const Fog& getFog();
+
+	template<typename T, typename... Ts, typename = typename std::enable_if_t<std::is_base_of_v<Entity, T>>>
+	std::shared_ptr<T> spawnEntity(const glm::vec3& pos, Ts&&... args) {
+		std::shared_ptr<T> TEntity = std::make_shared<T>(std::forward<Ts>(args)...);
+		std::shared_ptr<Entity> entity = std::dynamic_pointer_cast<Entity>(TEntity);
+		entity->transform.position = pos;
+		entity->hookWorld(this);
+
+		entities.push_back(entity);
+
+		return TEntity;
+	}
+
+	template<typename T>
+	std::vector<std::shared_ptr<T>> getEntitiesNearTo(const glm::vec3& position, float radius) {
+		std::vector<std::shared_ptr<T>> result;
+
+		for (auto& entity : entities) {
+			if (entity == nullptr)
+				continue;
+
+			std::shared_ptr<T> TEntity = std::dynamic_pointer_cast<T>(entity);
+
+			if (TEntity != nullptr && glm::distance(entity->transform.position, position) <= radius) {
+				result.push_back(TEntity);
+			}
+		}
+
+		return result;
+	}
 };
 
 #endif

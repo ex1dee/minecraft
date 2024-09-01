@@ -7,6 +7,7 @@ C:\Users\User\source\repos\Minecraft\Minecraft\src\gui\GUIManager.cpp;C:\Users\U
 C:\Users\User\source\repos\Minecraft\Minecraft\src\gui\InventoryGUI.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Release\InventoryGUI.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\input\handlers\BlockInteractsInput.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Release\BlockInteractsInput.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\input\handlers\GUIInput.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Release\GUIInput.obj
+C:\Users\User\source\repos\Minecraft\Minecraft\src\items\DroppedItem.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Release\DroppedItem.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\items\inventory\Inventory.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Release\Inventory.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\items\inventory\InventoryView.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Release\InventoryView.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\items\ItemsDatabase.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Release\ItemsDatabase.obj

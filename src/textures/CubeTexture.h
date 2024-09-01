@@ -9,7 +9,7 @@
 class CubeTexture : public Texture {
 	void load(const std::string& directory, const std::array<std::string, 6>& fileNames, bool flip);
 public:
-	CubeTexture(const std::string& directory, const std::array<std::string, 6>& fileNames, bool flip);
+	CubeTexture(const std::string& directory, const std::array<std::string, 6>& fileNames, bool flip, bool unloadImage = true);
 };
 
 #endif

@@ -38,8 +38,8 @@ public:
 	
 	static void enableCullFace();
 	static void disableCullFace();
-	static void startTransparentRender();
 	static void finishTransparentRender();
+	static void startTransparentRender(bool depthMask = false);
 };
 
 #endif

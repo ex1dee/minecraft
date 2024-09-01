@@ -17,14 +17,15 @@ Mesh::~Mesh() {
 void Mesh::setup() {
 	Drawable::setup();
 	
-	addVBO(data->dimensions, data->vertexPositions);
-	addVBO(3, data->colors);
-	addVBO(2, data->textureCoords);
-	addVBO(data->dimensions, data->normals);
+	addVBO(data->dimensions, data->vertexPositions, 0);
+	addVBO(data->dimensions, data->normals, 1);
+	addVBO(2, data->textureCoords, 2);
+	addVBO(4, data->colors, 3);
 	addEBO(data->indices);
 }
 
 void Mesh::draw(Shader& shader) {
+	shader.setBool("useColors", !data->colors.empty());
 	bindTextures(shader);
 
 	glBindVertexArray(VAO);
@@ -40,13 +41,13 @@ void Mesh::bindTextures(Shader& shader) {
 	int diffuseCount = 0;
 	int specularCount = 0;
 
-	for (Texture& texture : data->textures) {
+	for (auto& texture : data->textures) {
 		std::string uniform = "";
 
-		if (texture.getType() == TextureType::DIFFUSE) {
+		if (texture->getType() == TextureType::DIFFUSE) {
 			uniform += "material.diffuse[";
 			uniform += std::to_string(diffuseCount++);
-		} else if (texture.getType() == TextureType::SPECULAR) {
+		} else if (texture->getType() == TextureType::SPECULAR) {
 			uniform += "material.specular[";
 			uniform += std::to_string(specularCount++);
 		} else {
@@ -54,7 +55,7 @@ void Mesh::bindTextures(Shader& shader) {
 		}
 
 		uniform += "]";
-		TextureManager::bindTexture(texture, shader, uniform);
+		TextureManager::bindTexture(*texture, shader, uniform);
 	}
 
 	shader.setInt("material.diffuseCount", diffuseCount);
@@ -62,7 +63,7 @@ void Mesh::bindTextures(Shader& shader) {
 }
 
 void Mesh::reset() {
-	resetBuffers();
+	Drawable::reset();
 
 	data->reset();
 }

@@ -8,7 +8,7 @@
 
 class MeshData {
 public:
-	std::vector<Texture> textures;
+	std::vector<std::shared_ptr<Texture>> textures;
 	std::vector<uint32_t> indices;
 	std::vector<float> vertexPositions;
 	std::vector<float> textureCoords;
@@ -21,9 +21,6 @@ public:
 
 	MeshData() {}
 	MeshData(MeshType type, int dimensions, uint32_t mode = GL_TRIANGLES);
-
-	MeshData(MeshData&& other) = default;
-	MeshData& operator=(MeshData&& other) = default;
 
 	void reset();
 };

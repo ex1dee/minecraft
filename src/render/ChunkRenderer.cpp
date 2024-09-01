@@ -62,7 +62,7 @@ void ChunkRenderer::updateDefaultShader(const Camera& camera, const Sun& sun, co
 
 	activeShader->setInt("pointLightCount", 0);
 
-	TextureManager::bindTexture(BlocksDatabase::getTextureAtlas(), *activeShader, "tex");
+	TextureManager::bindTexture(*BlocksDatabase::getTextureAtlas(), *activeShader, DEFAULT_TEXTURE_UNIFORM);
 	TextureManager::bindDepthMap(sun.getLight().getFramebuffer().getDepthMap(), *activeShader, "sun.shadow.depthMap");
 }
 

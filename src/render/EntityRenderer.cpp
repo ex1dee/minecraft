@@ -1,18 +1,24 @@
 #include "EntityRenderer.h"
 
+#include "Renderer.h"
+
 void EntityRenderer::add(std::shared_ptr<Entity>& entity) {
-	if (!entity->getType().model->isEmpty())
+	if (entity->model != nullptr && !entity->model->isEmpty())
 		entities.push_back(entity);
 }
 
 void EntityRenderer::render(const Camera& camera, const Sun& sun, const Fog& fog) {
+	Renderer::startTransparentRender(true);
+
 	updateShader(camera, sun, fog);
 
 	for (auto& entity : entities) {
-		//render(*entity, &camera, true);
+		render(*entity, &camera, true);
 	}
 
 	entities.clear();
+
+	Renderer::finishTransparentRender();
 }
 
 void EntityRenderer::updateShader(const Camera& camera, const Sun& sun, const Fog& fog) {
@@ -43,18 +49,20 @@ void EntityRenderer::renderLights(const Sun& sun) {
 }
 
 void EntityRenderer::render(const Entity& entity, const Camera* camera, bool onlyVisible) {
+	if (entity.getType().id == PLAYER) // TODO: delete this line
+		return;
+
 	updateModelMatrix(entity);
 
-	// only visible
-	entity.getType().model->draw(*activeShader);
+	// TODO: only visible
+	entity.model->draw(*activeShader);
 }
 
 void EntityRenderer::updateModelMatrix(const Entity& entity) {
-	glm::mat4 matModel(1.0f);
-	
-	matModel = entity.transform.calcModel();
-	matModel *= entity.orientation.getRotation();
-	matModel *= entity.getType().offset.calcModel();
+	Transform transform = entity.transform;
+	transform.add(entity.modelTransform);
 
-	activeShader->setMat4("model", matModel);
+	//matModel *= entity.orientation.getRotation();
+
+	activeShader->setMat4("model", transform.calcModel());
 }

@@ -32,13 +32,14 @@ int main() {
 
         return -1;
     }
-
+    
     std::shared_ptr<Camera> camera = std::make_shared<Camera>();
     std::shared_ptr<Player> player = std::make_shared<Player>(camera);
 
     PlayState state(player);
 
-    player->getHotbarView().setItem(0, 0, ItemStack(GRASS_BLOCK, 32));
+    player->getHotbarView().setItem(0, 0, ItemStack(STICK, 32));
+    player->getHotbarView().setItem(1, 0, ItemStack(GRASS_BLOCK, 32));
 
     while (!Window::shouldClose()) {
         camera->update();

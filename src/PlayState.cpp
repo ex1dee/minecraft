@@ -4,7 +4,7 @@
 #include "input/handlers/MovementsInput.h"
 #include "input/handlers/CameraInput.h"
 #include "input/handlers/WindowInput.h"
-#include "input/handlers/GUIInput.h"
+#include "input/handlers/InventoryInput.h"
 
 #include "physics/PhysicsEngine.h"
 #include "gui/GUI.h"
@@ -33,7 +33,7 @@ PlayState::~PlayState() {
 }
 
 void PlayState::handleInput() {
-	GUIInput::handle(*player);
+	InventoryInput::handle(*player);
 
 	BlockInteractsInput::handle(*player, *world, physicsTickTimer.getSecPerTick());
 	MovementsInput::handle(*player, physicsTickTimer.getSecPerTick());
@@ -45,6 +45,8 @@ void PlayState::update() {
 	if (worldTickTimer.isTickElapsed()) {
 		world->update(worldTickTimer.getSecPerTick());
 	}
+
+	world->playAnimations(physicsTickTimer.getSecPerTick());
 
 	if (physicsTickTimer.isTickElapsed()) {
 		PhysicsEngine::update(physicsTickTimer.getSecPerTick());

@@ -4,7 +4,8 @@
 enum class MeshType {
 	CUBE = 0,
 	X = 1,
-	ASSIMP = 2
+	ASSIMP = 2,
+	ITEM = 3
 };
 
 #endif

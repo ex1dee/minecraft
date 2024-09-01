@@ -9,7 +9,7 @@ class BasicTexture : public Texture {
 	void load(bool flip);
 public:
 	BasicTexture() {}
-	BasicTexture(const std::string& path, bool flip, TextureType type);
+	BasicTexture(const std::string& path, bool flip, TextureType type, bool unloadImage = true);
 };
 
 #endif

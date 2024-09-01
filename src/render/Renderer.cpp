@@ -41,12 +41,12 @@ void Renderer::finishRender(World& world) {
 	glEnable(GL_MULTISAMPLE);
 	glDepthMask(GL_TRUE);
 
-	entityRenderer.render(camera, sun, fog);
 	chunkRenderer.render(camera, sun, fog);
 
 	disableCullFace();
 	
 	cloudsRenderer.render(clouds, sun, *player);
+	entityRenderer.render(camera, sun, fog);
 	blockFrameRenderer.render(*player);
 	spriteRenderer.render(sun, camera);
 	textRenderer.render(camera);
@@ -80,12 +80,12 @@ void Renderer::disableCullFace() {
 	glCullFace(GL_FRONT_AND_BACK);
 }
 
-void Renderer::startTransparentRender() {
+void Renderer::startTransparentRender(bool depthMask) {
 	disableCullFace();
 
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	glDepthMask(GL_FALSE);
+	glDepthMask(depthMask);
 }
 
 void Renderer::finishTransparentRender() {

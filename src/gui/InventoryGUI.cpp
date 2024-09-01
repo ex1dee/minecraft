@@ -78,6 +78,7 @@ void InventoryGUI::updateItemDesciption(Player& player) {
 
 	float textWidth = textElement->text->getMaxWidth();
 	float textHeight = textElement->text->getHeight();
+	
 	float width = glm::max(ITEM_DESCRIPTION_MIN_WIDTH, textWidth + 2 * ITEM_DESCRIPTION_PADDING_WIDTH);
 	float height = textHeight + ITEM_DESCRIPTION_PADDING_TOP + ITEM_DESCRIPTION_PADDING_BOTTOM;
 

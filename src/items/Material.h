@@ -10,7 +10,8 @@ enum Material {
 	WATER = 5,
 	SAND = 6,
 	SNOW_GRASS = 7,
-	SNOW_BLOCK = 8
+	SNOW_BLOCK = 8,
+	STICK = 9
 };
 
 #endif

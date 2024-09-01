@@ -27,7 +27,7 @@ void ChunkManager::makeMeshes(const glm::ivec2& playerChunkPos, int loadDist) {
 void ChunkManager::makeModel(const glm::ivec2& pos) {
 	std::shared_ptr<Chunk> chunk = getChunk(pos);
 
-	if (!chunk->hasMesh()) {
+	if (chunk == nullptr || !chunk->hasMesh()) {
 		load(pos + glm::ivec2(1, 0));
 		load(pos + glm::ivec2(-1, 0));
 		load(pos + glm::ivec2(0, 1));
@@ -43,8 +43,13 @@ void ChunkManager::makeModel(const glm::ivec2& pos) {
 std::shared_ptr<Chunk> ChunkManager::load(const glm::ivec2& pos) {
 	std::shared_ptr<Chunk> chunk = getChunk(pos);
 
-	if (chunk->isLoaded())
-		return chunk;
+	if (chunk != nullptr) {
+		if (chunk->isLoaded())
+			return chunk;
+	} else {
+		chunks.emplace(pos, std::make_shared<Chunk>(*world, pos));
+		chunk = getChunk(pos);
+	}
 
 	chunk->load(world->getTerrainGenerator());
 	visibleChunks.emplace(pos, chunk);
@@ -75,7 +80,7 @@ void ChunkManager::updateChunk(const glm::ivec2& pos) {
 
 std::shared_ptr<Chunk> ChunkManager::getChunk(const glm::ivec2& pos) {
 	if (!chunkExistsAt(pos) || chunks[pos] == nullptr)
-		chunks.emplace(pos, std::make_shared<Chunk>(*world, pos));
+		return nullptr;
 
 	return chunks[pos];
 }

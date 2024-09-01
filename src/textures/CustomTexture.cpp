@@ -4,8 +4,8 @@ template class CustomTexture<float>;
 template class CustomTexture<std::uint8_t>;
 
 template<typename Td>
-CustomTexture<Td>::CustomTexture(const CustomImage<Td>& image, GLint wrap, GLint filter)
-	: Texture(GL_TEXTURE_2D, TextureType::CUSTOM) {
+CustomTexture<Td>::CustomTexture(const CustomImage<Td>& image, GLint wrap, GLint filter, bool unloadImage)
+	: Texture(GL_TEXTURE_2D, TextureType::CUSTOM, unloadImage) {
 	load(image, wrap, filter);
 }
 

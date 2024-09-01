@@ -28,6 +28,8 @@ public:
 	ItemMeta& getMeta() const { return *meta; }
 	const ItemType& getType() const { return ItemsDatabase::get(material); }
 
+	void increaseAmount(int num = 1);
+	void decreaseAmount(int num = 1);
 	void setAmount(int amount);
 	void setMeta(const ItemMeta& meta);
 	std::shared_ptr<Block> toBlock(World* const world, const glm::vec3& position);

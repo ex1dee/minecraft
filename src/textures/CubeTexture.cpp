@@ -4,8 +4,8 @@
 #include "TextureManager.h"
 #include "Image.h"
 
-CubeTexture::CubeTexture(const std::string& directory, const std::array<std::string, 6>& fileNames, bool flip)
-	: Texture(GL_TEXTURE_CUBE_MAP, TextureType::CUBEMAP) {
+CubeTexture::CubeTexture(const std::string& directory, const std::array<std::string, 6>& fileNames, bool flip, bool unloadImage)
+	: Texture(GL_TEXTURE_CUBE_MAP, TextureType::CUBEMAP, unloadImage) {
 	load(directory, fileNames, flip);
 }
 

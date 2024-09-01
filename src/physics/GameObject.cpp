@@ -2,8 +2,7 @@
 
 #include "../world/World.h"
 
-GameObject::GameObject(World* world)
-	: world(world) {
+GameObject::GameObject() {
 
 }
 

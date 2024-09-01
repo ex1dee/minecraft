@@ -1,7 +1,7 @@
 #include "BasicTexture.h"
 
-BasicTexture::BasicTexture(const std::string& path, bool flip, TextureType type)
-	: Texture(GL_TEXTURE_2D, type) {
+BasicTexture::BasicTexture(const std::string& path, bool flip, TextureType type, bool unloadImage)
+	: Texture(GL_TEXTURE_2D, type, unloadImage) {
 	this->path = path;
 
 	load(flip);

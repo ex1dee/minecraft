@@ -31,7 +31,7 @@ void PhysicsEngine::update(float deltaTime) {
 	}
 }
 
-void PhysicsEngine::removeObject(GameObject& object) {
+void PhysicsEngine::removeObject(const GameObject& object) {
 	objects.erase(std::remove(objects.begin(), objects.end(), &object), objects.end());
 }
 
@@ -43,7 +43,7 @@ void PhysicsEngine::prepare(GameObject& object) {
 	rb.acceleration = rb.force / rb.mass;
 	rb.newVelocity = rb.velocity + rb.acceleration * deltaTime;
 	rb.deltaPosition = rb.newVelocity * deltaTime;
-
+	
 	rb.force = glm::vec3(0);
 }
 
@@ -53,13 +53,13 @@ void PhysicsEngine::addForces(GameObject& object) {
 	if (rb.physicsType == PhysicsType::STATIC) {
 		rb.force = glm::vec3(0);
 	} else {
-		rb.force += GRAVITY;
+		rb.force += rb.mass * GRAVITY;
 
 		Liquid* liquid = object.getLiquidAtObject();
 
 		if (liquid != nullptr) {
-			rb.force += ARHIMEDE;
-			rb.force.y -= glm::min(0.0f, rb.velocity.y) * liquid->getViscosity();
+			rb.force += rb.mass * ARHIMEDE;
+			rb.force.y -= rb.mass * glm::min(0.0f, rb.velocity.y) * liquid->getViscosity();
 		}
 	}
 }

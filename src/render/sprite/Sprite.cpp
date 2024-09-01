@@ -10,17 +10,8 @@ Sprite::Sprite(const Sprite& other) {
 	setup();
 }
 
-Rect&& Sprite::getRect() {
-	Rect rect(
-		glm::vec3(vertexPositions[0], vertexPositions[1], vertexPositions[2]),
-		glm::vec3(vertexPositions[3], vertexPositions[4], vertexPositions[5]),
-		glm::vec3(vertexPositions[6], vertexPositions[7], vertexPositions[8]),
-		glm::vec3(vertexPositions[9], vertexPositions[10], vertexPositions[11])
-	);
-
-	rect.updateTransform(transform);
-
-	return std::move(rect);
+Sprite::~Sprite() {
+	reset();
 }
 
 void Sprite::setup() {
@@ -32,8 +23,8 @@ void Sprite::setup() {
 	calcVertices();
 	calcTextureCoords();
 
-	addVBO(3, vertexPositions);
-	addVBO(2, textureCoords);
+	addVBO(3, vertexPositions, 0);
+	addVBO(2, textureCoords, 1);
 	addEBO(indices);
 }
 
@@ -101,11 +92,11 @@ void Sprite::draw(Shader& shader) {
 }
 
 void Sprite::bindTexture(Shader& shader) {
-	TextureManager::bindTexture(*texture.data, shader, "tex");
+	TextureManager::bindTexture(*texture.data, shader, DEFAULT_TEXTURE_UNIFORM);
 }
 
 void Sprite::reset() {
-	resetBuffers();
+	Drawable::reset();
 
 	vertexPositions.clear();
 	textureCoords.clear();
@@ -114,4 +105,17 @@ void Sprite::reset() {
 
 void Sprite::resetTexture() {
 	texture.data.reset();
+}
+
+Rect&& Sprite::getRect() {
+	Rect rect(
+		glm::vec3(vertexPositions[0], vertexPositions[1], vertexPositions[2]),
+		glm::vec3(vertexPositions[3], vertexPositions[4], vertexPositions[5]),
+		glm::vec3(vertexPositions[6], vertexPositions[7], vertexPositions[8]),
+		glm::vec3(vertexPositions[9], vertexPositions[10], vertexPositions[11])
+	);
+
+	rect.updateTransform(transform);
+
+	return std::move(rect);
 }

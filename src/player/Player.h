@@ -54,7 +54,10 @@ public:
 	InventoryView* getOpenInventoryView() { return openInventoryView.get(); }
 	InventoryView& getBackpackView() { return *backpackView; }
 	InventoryView& getHotbarView() { return *hotbarView; }
+	Inventory& getInventory() { return *inventory; }
 	const InventoryItem& getDraggedItem() { return draggedItem; }
+
+	void setSelectedItem(const ItemStack& item) const { hotbarView->setItem(selectedSlot, 0, item); }
 
 	void openBackpack();
 	void closeBackpack();

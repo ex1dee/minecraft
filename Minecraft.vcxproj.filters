@@ -242,7 +242,7 @@
     <ClCompile Include="src\gui\InventoryGUI.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\input\handlers\GUIInput.cpp">
+    <ClCompile Include="src\input\handlers\InventoryInput.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\text\FTLoader.cpp">
@@ -270,6 +270,9 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\items\DroppedItem.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\items\ItemModel.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -408,7 +411,7 @@
     <ClInclude Include="src\items\inventory\InventoryView.h" />
     <ClInclude Include="src\gui\GUIManager.h" />
     <ClInclude Include="src\gui\InventoryGUI.h" />
-    <ClInclude Include="src\input\handlers\GUIInput.h" />
+    <ClInclude Include="src\input\handlers\InventoryInput.h" />
     <ClInclude Include="src\text\FTLoader.h" />
     <ClInclude Include="src\text\FTCharacter.h" />
     <ClInclude Include="src\text\Text2D.h" />
@@ -418,6 +421,9 @@
     <ClInclude Include="src\gui\InventoryItem.h" />
     <ClInclude Include="src\input\handlers\BlockInteractsInput.h" />
     <ClInclude Include="src\items\DroppedItem.h" />
+    <ClInclude Include="src\items\ItemModel.h" />
+    <ClInclude Include="src\world\block\BlockMeshConstants.h" />
+    <ClInclude Include="src\utils\UUIDWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />
@@ -463,6 +469,7 @@
     <None Include="resources\gui\item_description.json" />
     <None Include="resources\gui\item_description_text.json" />
     <None Include="resources\entities\dropped_item.json" />
+    <None Include="resources\items\stick.json" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\blocks_atlas.png">

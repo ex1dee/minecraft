@@ -14,6 +14,7 @@ void EntitiesDatabase::initialize() {
 		nlohmann::json json = Json::parse(path);
 
 		type->id = json["id"];
+		type->collidesWithObjects = json["physics"]["collidesWithObjects"];
 		type->physics = json["physics"]["enabled"];
 		type->gravity = json["physics"]["gravity"];
 		type->mass = json["physics"]["mass"];
@@ -21,11 +22,11 @@ void EntitiesDatabase::initialize() {
 		type->colliderPosition = Json::toVec3(json["collider"]["position"]);
 		type->colliderExtents = Json::toVec3(json["collider"]["extents"]);
 		
-		type->offset.position = Json::toVec3(json["offset"]["position"]);
-		type->offset.rotation = Json::toVec3(json["offset"]["rotation"]);
-		type->offset.scale = Json::toVec3(json["offset"]["scale"]);
+		type->modelTransform.position = Json::toVec3(json["modelTransform"]["position"]);
+		type->modelTransform.rotation = Json::toVec3(json["modelTransform"]["rotation"]);
+		type->modelTransform.scale = Json::toVec3(json["modelTransform"]["scale"]);
 
-		type->eyesOffset = Json::toVec3(json["eyes_offset"]);
+		type->eyesOffset = Json::toVec3(json["eyesOffset"]);
 
 		if (json.contains("model"))
 			type->model = AssimpLoader::load(Files::getFullPath(MODELS_DIR, json["model"]["path"]));

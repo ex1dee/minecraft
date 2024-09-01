@@ -4,7 +4,8 @@
 #include <glm/glm.hpp>
 
 namespace Mathf {
-	inline float lerp(float a, float b, float t) {
+	template<typename T>
+	inline T lerp(const T& a, const T& b, float t) {
 		return a + t * (b - a);
 	}
 

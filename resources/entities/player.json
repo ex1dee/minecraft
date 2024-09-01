@@ -5,9 +5,9 @@
         "path": "player/model.stl"
     },
 
-    "eyes_offset": [ 0, 1.5, 0 ],
+    "eyesOffset": [ 0, 1.5, 0 ],
 
-    "offset": {
+    "modelTransform": {
         "position": [ 2.2, 0, 0 ],
         "rotation": [ -90, 90, 0 ],
         "scale": [ 0.031, 0.031, 0.031 ]
@@ -20,6 +20,7 @@
 
     "physics": {
         "enabled": true,
+        "collidesWithObjects": true,
         "gravity": true,
         "mass": 1.0
     }
