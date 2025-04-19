@@ -1,0 +1,24 @@
+{
+    "id": 1,
+
+    "eyesOffset": [ 0.15, 0.15, 0.15 ],
+    "isInCameraSpace": false,
+
+    "modelTransform": {
+        "position": [ 0, 0.25, 0 ],
+        "rotation": [ 0, 0, 0 ],
+        "scale": [ 1, 1, 1 ]
+    },
+
+    "collider": {
+        "position": [ 0, 0, 0 ],
+        "extents": [ 0.3, 0.3, 0.3 ]
+    },
+
+    "physics": {
+        "enabled": true,
+        "collidesWithObjects": false,
+        "gravity": true,
+        "mass": 10
+    }
+}

@@ -19,7 +19,7 @@ public:
 	const glm::vec3& getExtents() { return extents; }
 
 	std::vector<Rect> getRectangles(const Transform& transform);
-	void updateTransform(const Transform& transform) override;
+	void applyTransform(const Transform& transform) override;
 };
 
 #endif

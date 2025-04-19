@@ -27,7 +27,8 @@ void PhysicsEngine::update(float deltaTime) {
 	CollisionDetector::detect(objects, *world);
 
 	for (GameObject* object : objects) {
-		updatePosition(*object);
+		if (object->isAtLoadedChunk())
+			updatePosition(*object);
 	}
 }
 

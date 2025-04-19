@@ -13,6 +13,10 @@ GLenum TextureManager::getFormat(int nchannels) {
 		return NULL;
 }
 
+void TextureManager::unbindTexture(Shader& shader, const std::string& uniform) {
+	bindTexture(0, shader, uniform, GL_TEXTURE_2D);
+}
+
 void TextureManager::bindTexture(const Texture& texture, Shader& shader, const std::string& uniform) {
 	bindTexture(texture.getID(), shader, uniform, texture.getTarget());
 }

@@ -91,6 +91,6 @@ void DepthFramebuffer::updateView(const glm::vec3& front, const glm::vec3& posit
 	view = glm::lookAt(
 		position,
 		position + front,
-		orientation.up
+		orientation.getUp()
 	);
 }

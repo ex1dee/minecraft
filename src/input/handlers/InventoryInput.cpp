@@ -20,13 +20,33 @@ void InventoryInput::handle(Player& player) {
 }
 
 void InventoryInput::checkSwitchingSlot(Player& player) {
+	checkKeyboardSwitchingSlot(player);
+	checkScrollSwitchingSlot(player);
+}
+
+void InventoryInput::checkKeyboardSwitchingSlot(Player& player) {
 	for (int key = GLFW_KEY_1; key <= GLFW_KEY_9; ++key) {
 		if (Input::justPressed(key)) {
-			player.selectSlot(key - GLFW_KEY_1);
-			player.getHotbarView().setNeedUpdate(true);
-
+			selectSlot(player, key - GLFW_KEY_1);
 			break;
 		}
+	}
+}
+
+void InventoryInput::checkScrollSwitchingSlot(Player& player) {
+	int scrollSign = -glm::sign(Input::getScrollYOffset());
+
+	if (scrollSign != 0) {
+		selectSlot(player, (player.getSelectedSlot() + scrollSign + 9) % 9);
+	}
+}
+
+void InventoryInput::selectSlot(Player& player, int slot) {
+	player.selectSlot(slot);
+	player.getHotbarView().setNeedUpdate(true);
+
+	if (player.getSelectedItem()->getType().material != AIR) {
+		GUI::getRightArm()->getAnimator("switch_item")->playAnimation(false);
 	}
 }
 
@@ -50,20 +70,28 @@ void InventoryInput::checkSwitchingInventory(Player& player) {
 }
 
 void InventoryInput::checkDraggingItems(Player& player, InventoryItem& itemOnCursor) {
-	if (!itemOnCursor.isValid())
-		return;
-
-	InventoryView* view = itemOnCursor.view;
-	Inventory& inventory = view->getInventory();
-	ItemStack& item = *itemOnCursor.item;
-	int column = itemOnCursor.column;
-	int row = itemOnCursor.row;
-
-	InventoryView* top = player.getOpenInventoryView();
-	InventoryView& center = player.getBackpackView();
-	InventoryView& bottom = player.getHotbarView();
-
 	if (Input::justClicked(GLFW_MOUSE_BUTTON_LEFT)) {
+		const InventoryItem& draggedItem = player.getDraggedItem();
+
+		if (itemOnCursor.element == nullptr) {
+			if (draggedItem.isValid()) {
+				throwItem(player, draggedItem.item, true);
+				player.resetDraggedItem();
+			}
+
+			return;
+		}
+
+		InventoryView* view = itemOnCursor.view;
+		Inventory& inventory = view->getInventory();
+		ItemStack& item = *itemOnCursor.item;
+		int column = itemOnCursor.column;
+		int row = itemOnCursor.row;
+
+		InventoryView* top = player.getOpenInventoryView();
+		InventoryView& center = player.getBackpackView();
+		InventoryView& bottom = player.getHotbarView();
+
 		if (Input::pressed(GLFW_KEY_LEFT_SHIFT) && itemOnCursor.item->getType().material != AIR) {
 			if (top != nullptr) {
 				if (view == top) {
@@ -83,8 +111,6 @@ void InventoryInput::checkDraggingItems(Player& player, InventoryItem& itemOnCur
 				}
 			}
 		} else {
-			const InventoryItem& draggedItem = player.getDraggedItem();
-
 			if (itemOnCursor.item->getType().material != AIR) {
 				if (!draggedItem.isValid()) {
 					player.setDraggedItem(itemOnCursor);
@@ -94,6 +120,7 @@ void InventoryInput::checkDraggingItems(Player& player, InventoryItem& itemOnCur
 					view->setItem(column, row, ItemStack(*draggedItem.item));
 					itemOnCursor.item = prevItem;
 
+					player.resetDraggedItem();
 					player.setDraggedItem(itemOnCursor);
 				}
 			} else {
@@ -109,27 +136,32 @@ void InventoryInput::checkDraggingItems(Player& player, InventoryItem& itemOnCur
 void InventoryInput::checkThrowItem(Player& player, InventoryItem& itemOnCursor) {
 	if (Input::justPressed(GLFW_KEY_Q)) {
 		std::shared_ptr<ItemStack> item = getThrownItem(player, itemOnCursor);
-
-		if (item->getType().material == AIR)
-			return;
 		
-		int prevItemsAmount = item->getAmount();
-		int thrownItemsAmount = Input::pressed(GLFW_KEY_LEFT_CONTROL) ? prevItemsAmount : 1;
-
-		std::shared_ptr<ItemStack> thrownItem = std::make_shared<ItemStack>(*item);
-		item->decreaseAmount(thrownItemsAmount);
-		thrownItem->setAmount(prevItemsAmount - item->getAmount());
-
-		const EntityType& droppedItemType = EntitiesDatabase::get(DROPPED_ITEM);
-		Ray playerDirection = player.getViewDirection();
-
-		std::shared_ptr<DroppedItem> droppedItem = player.getWorld()->spawnEntity<DroppedItem>(
-			playerDirection.start + 0.5f * (playerDirection.direction * player.getType().colliderExtents.z - droppedItemType.colliderExtents),
-			thrownItem
-		);
-
-		droppedItem->rigidBody.velocity += player.getViewDirection().direction * THROW_ITEM_FORCE + player.rigidBody.velocity;
+		throwItem(player, item, Input::pressed(GLFW_KEY_LEFT_CONTROL));
 	}
+}
+
+void InventoryInput::throwItem(Player& player, const std::shared_ptr<ItemStack>& item, bool throwAway) {
+	if (item->getType().material == AIR)
+		return;
+
+	int prevItemsAmount = item->getAmount();
+	int thrownItemsAmount = throwAway ? prevItemsAmount : 1;
+
+	std::shared_ptr<ItemStack> thrownItem = std::make_shared<ItemStack>(*item);
+	item->decreaseAmount(thrownItemsAmount);
+	thrownItem->setAmount(prevItemsAmount - item->getAmount());
+
+	Ray playerDirection = player.getViewDirection();
+
+	std::shared_ptr<DroppedItem> droppedItem = player.getWorld()->spawnEntity<DroppedItem>(
+		playerDirection.start + 0.5f * (
+			playerDirection.direction * player.getType().colliderExtents.z - EntitiesDatabase::get(ITEM).colliderExtents
+			),
+		thrownItem
+	);
+
+	droppedItem->rigidBody.velocity += player.getViewDirection().direction * THROW_ITEM_FORCE + player.rigidBody.velocity;
 }
 
 std::shared_ptr<ItemStack> InventoryInput::getThrownItem(Player& player, InventoryItem& itemOnCursor) {

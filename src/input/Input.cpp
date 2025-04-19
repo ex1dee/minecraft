@@ -2,10 +2,13 @@
 
 #include <GLFW/glfw3.h>
 
-CursorPos Input::cursorPos;
+double Input::scrollXOffset = 0;
+double Input::scrollYOffset = 0;
+uint64_t Input::lastScrollFrame = 0;
+uint64_t Input::frame = 0;
 Button Input::keys[1024] = {};
 Button Input::mouse[12] = {};
-uint64_t Input::frame = 0;
+CursorPos Input::cursorPos;
 
 void Input::pollEvents() {
 	cursorPos.delta = glm::vec2(0);
@@ -36,6 +39,12 @@ void Input::cursorPosCallback(GLFWwindow* window, double xpos, double ypos) {
 	cursorPos.last = cursorPos.current;
 	cursorPos.current = glm::vec2(xpos, ypos);
 	cursorPos.delta = cursorPos.current - cursorPos.last;
+}
+
+void Input::scrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
+	scrollXOffset = xoffset;
+	scrollYOffset = yoffset;
+	lastScrollFrame = frame;
 }
 
 bool Input::pressed(int key) {

@@ -23,8 +23,8 @@ void Sprite::setup() {
 	calcVertices();
 	calcTextureCoords();
 
-	addVBO(3, vertexPositions, 0);
-	addVBO(2, textureCoords, 1);
+	addVBO(3, vertexPositions, 0, GL_FLOAT);
+	addVBO(2, textureCoords, 1, GL_FLOAT);
 	addEBO(indices);
 }
 
@@ -115,7 +115,7 @@ Rect&& Sprite::getRect() {
 		glm::vec3(vertexPositions[9], vertexPositions[10], vertexPositions[11])
 	);
 
-	rect.updateTransform(transform);
+	rect.applyTransform(transform);
 
 	return std::move(rect);
 }

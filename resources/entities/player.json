@@ -2,15 +2,23 @@
     "id": 0,
 
     "model": {
-        "path": "player/model.stl"
+        "path": "player/player.gltf",
+        "flipTexture": false,
+
+        "animations": {
+            "walking": "player/walking.gltf",
+            "sitting": "player/sitting.gltf",
+            "hit": "player/hit.gltf"
+        }
     },
 
     "eyesOffset": [ 0, 1.5, 0 ],
+    "isInCameraSpace": false,
 
     "modelTransform": {
-        "position": [ 2.2, 0, 0 ],
-        "rotation": [ -90, 90, 0 ],
-        "scale": [ 0.031, 0.031, 0.031 ]
+        "position": [ 0, 0, 0 ],
+        "rotation": [ 0, 90, 0 ],
+        "scale": [ 1, 1, 1 ]
     },
 
     "collider": {

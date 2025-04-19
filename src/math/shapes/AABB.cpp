@@ -21,7 +21,7 @@ glm::vec3 AABB::getVertexInDirection(const glm::vec3& normal) const {
 	return res;
 }
 
-void AABB::updateTransform(const Transform& transform) {
+void AABB::applyTransform(const Transform& transform) {
 	min = transform.position;
 	extents *= transform.scale;
 }

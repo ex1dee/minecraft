@@ -26,7 +26,7 @@ class Chunk {
 	AABB aabb;
 
 	bool updating = false;
-	bool bHasMesh = false;
+	bool meshed = false;
 	bool buffered = false;
 	bool loaded = false;
 
@@ -43,7 +43,7 @@ public:
 	Chunk(World& world, glm::ivec2 pos);
 
 	bool isLoaded() { return loaded; }
-	bool hasMesh() { return bHasMesh; }
+	bool hasMesh() { return meshed; }
 	bool hasBuffered() { return buffered; }
 	bool isUpdating() { return updating; }
 

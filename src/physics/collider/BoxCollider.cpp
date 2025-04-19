@@ -28,7 +28,7 @@ void BoxCollider::calcVertices() {
 
 std::vector<Rect> BoxCollider::getRectangles(const Transform& transform) {
 	std::vector<Rect> rectangles;
-	updateTransform(transform);
+	applyTransform(transform);
 
 	for (int i = 0; i <= 4; i += 4) {
 		rectangles.push_back(Rect(
@@ -56,7 +56,7 @@ std::vector<Rect> BoxCollider::getRectangles(const Transform& transform) {
 	return rectangles;
 }
 
-void BoxCollider::updateTransform(const Transform& transform) {
+void BoxCollider::applyTransform(const Transform& transform) {
 	globalVertices.clear();
 	globalVertices.reserve(vertices.size());
 

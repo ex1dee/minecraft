@@ -11,18 +11,18 @@ Entity::Entity(EntityID id)
 	hookWorld(world);
 
 	const EntityType& type = getType();
-
+	isInCameraSpace = type.isInCameraSpace;
 	modelTransform = type.modelTransform;
+
+	for (auto pair : type.animations) {
+		animators.emplace(pair.first, Animator(pair.second));
+	}
 
 	Transform transform;
 	transform.position = type.colliderPosition;
-
 	collider = std::make_unique<BoxCollider>(type.colliderExtents, transform);
 
-	if (type.model != nullptr) {
-		model = type.model;
-		model->aabb.extents = type.colliderExtents;
-	}
+	setModel(type.model);
 
 	if (type.physics) {
 		collidesWithObjects = type.collidesWithObjects;
@@ -38,10 +38,10 @@ bool Entity::isOnGround() const {
 	glm::vec3 extents = ((BoxCollider*) collider.get())->getExtents();
 	glm::vec3 colliderCenter = transform.position + collider->getPosition();
 
-	std::shared_ptr<Block> block1 = world->getBlock(colliderCenter + glm::vec3(extents.x, -0.00001f, 0));
-	std::shared_ptr<Block> block2 = world->getBlock(colliderCenter + glm::vec3(extents.x, -0.00001f, extents.z));
-	std::shared_ptr<Block> block3 = world->getBlock(colliderCenter + glm::vec3(0, -0.00001f, extents.z));
-	std::shared_ptr<Block> block4 = world->getBlock(colliderCenter + glm::vec3(0, -0.00001f, 0));
+	std::shared_ptr<Block> block1 = world->getBlock(colliderCenter + glm::vec3(extents.x, GROUND_OFFSET_Y, 0));
+	std::shared_ptr<Block> block2 = world->getBlock(colliderCenter + glm::vec3(extents.x, GROUND_OFFSET_Y, extents.z));
+	std::shared_ptr<Block> block3 = world->getBlock(colliderCenter + glm::vec3(0, GROUND_OFFSET_Y, extents.z));
+	std::shared_ptr<Block> block4 = world->getBlock(colliderCenter + glm::vec3(0, GROUND_OFFSET_Y, 0));
 
 	return (block1 != nullptr && block1->isCollidable())
 		|| (block2 != nullptr && block2->isCollidable())
@@ -54,7 +54,7 @@ std::shared_ptr<Block> Entity::getTargetBlock() const {
 }
 
 Ray Entity::getViewDirection() const {
-	return Ray(getEyesPosition(), orientation.front);
+	return Ray(getEyesPosition(), orientation.getFront());
 }
 
 Liquid* Entity::getLiquidAtEyes() const {
@@ -90,7 +90,7 @@ bool Entity::isCollidesWithBlock(const glm::vec3& position, const BlockType& typ
 	Transform transform(position);
 
 	for (auto& blockBox : type.colliders) {
-		blockBox->updateTransform(transform);
+		blockBox->applyTransform(transform);
 
 		Collision collision = BoxBoxCollision::detect(*blockBox, *(BoxCollider*)collider.get());
 
@@ -102,7 +102,8 @@ bool Entity::isCollidesWithBlock(const glm::vec3& position, const BlockType& typ
 }
 
 bool Entity::needUpdate() const {
-	std::shared_ptr<Chunk> chunk = world->getChunk(transform.position);
+	if (isInCameraSpace)
+		return true;
 
 	if (transform.position.y < 0 || transform.position.y >= CHUNK_H) {
 		world->despawnEntity(*this);
@@ -110,5 +111,34 @@ bool Entity::needUpdate() const {
 		return false;
 	}
 
-	return chunk != nullptr && chunk->isLoaded();
+	return isAtLoadedChunk();
+}
+
+void Entity::setModel(const std::shared_ptr<Model>& model) {
+	if (model == nullptr)
+		return;
+
+	this->model = model;
+	this->model->aabb.extents = getType().colliderExtents;
+}
+
+std::vector<glm::mat4> Entity::updateAnimators() {
+	if (!hasAnimators())
+		return {};
+
+	int bonesNumber = animators.begin()->second.boneMatrices.size();
+	std::vector<glm::mat4> boneMatrices(bonesNumber, glm::mat4(1.0f));
+	
+	for (auto& pair : animators) {
+		Animator& animator = pair.second;
+		animator.update();
+
+		assert(animator.boneMatrices.size() == bonesNumber);
+		
+		for (int i = 0; i < bonesNumber; ++i) {
+			boneMatrices[i] *= animator.boneMatrices[i];
+		}
+	}
+
+	return boneMatrices;
 }

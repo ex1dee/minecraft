@@ -1,0 +1,12 @@
+#ifndef ANIMATIONCONSTANTS_H
+#define ANIMATIONCONSTANTS_H
+
+constexpr int
+MAX_BONES = 20,
+MAX_BONE_INFLUENCE = 4,
+UNDEFINED_BONE_ID = -1;
+
+constexpr float
+DEFAULT_ANIMATION_SPEED = 1.0f;
+
+#endif

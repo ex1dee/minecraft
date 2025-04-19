@@ -3,7 +3,8 @@
 
 enum EntityID {
 	PLAYER = 0,
-	DROPPED_ITEM = 1
+	ITEM = 1,
+	RIGHT_ARM = 2
 };
 
 #endif

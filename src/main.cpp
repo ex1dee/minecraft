@@ -5,11 +5,11 @@
 #include "window/Window.h"
 #include "input/Input.h"
 #include "config/Config.h"
+#include "text/FTLoader.h"
 #include "shaders/ShadersDatabase.h"
 #include "entity/EntitiesDatabase.h"
 #include "world/block/BlocksDatabase.h"
 #include "items/ItemsDatabase.h"
-#include "text/FTLoader.h"
 #include "gui/GUIDatabase.h"
 #include "gui/GUI.h"
 
@@ -40,6 +40,8 @@ int main() {
 
     player->getHotbarView().setItem(0, 0, ItemStack(STICK, 32));
     player->getHotbarView().setItem(1, 0, ItemStack(GRASS_BLOCK, 32));
+
+    glfwSetTime(0);
 
     while (!Window::shouldClose()) {
         camera->update();

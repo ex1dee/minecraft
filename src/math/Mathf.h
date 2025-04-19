@@ -3,6 +3,8 @@
 
 #include <glm/glm.hpp>
 
+constexpr float FLOAT_COMPARE_EPSILON = 1e-5;
+
 namespace Mathf {
 	template<typename T>
 	inline T lerp(const T& a, const T& b, float t) {
@@ -17,7 +19,7 @@ namespace Mathf {
 		return t * t * t * (t * (t * 6 - 15) + 10);
 	}
 
-	inline bool equals(float a, float b, float epsilon) {
+	inline bool equals(float a, float b, float epsilon = 0.0f) {
 		return glm::abs(a - b) <= epsilon;
 	}
 }

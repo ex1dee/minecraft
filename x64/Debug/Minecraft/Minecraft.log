@@ -1,3 +1,37 @@
-﻿  InventoryInput.cpp
-  DroppedItem.cpp
+﻿  Entity.cpp
+C:\Users\User\source\repos\Minecraft\Minecraft\src\math\Mathf.h(6,39): warning C4305: инициализация: усечение из "double" в "const float"
+  (компиляция исходного файла "src/entity/Entity.cpp")
+  
+C:\Users\User\source\repos\Minecraft\Minecraft\src\animation\skeletal\Animation.h(25,37): warning C4244: return: преобразование "double" в "float", возможна потеря данных
+  (компиляция исходного файла "src/entity/Entity.cpp")
+  
+C:\Users\User\source\repos\Minecraft\Minecraft\src\animation\skeletal\Animation.h(26,31): warning C4244: return: преобразование "double" в "float", возможна потеря данных
+  (компиляция исходного файла "src/entity/Entity.cpp")
+  
+C:\Users\User\source\repos\Minecraft\Minecraft\src\entity\Entity.cpp(128,18): warning C4267: инициализация: преобразование из "size_t" в "int"; возможна потеря данных
+freetype.lib(ftinit.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(ftinit.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(ftbase.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(ftbase.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(autofit.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(autofit.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(truetype.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(truetype.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(type1.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(type1.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(cff.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(cff.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(type1cid.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(type1cid.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(pfr.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(pfr.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(type42.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(type42.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(winfnt.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(winfnt.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(pcf.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(pcf.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(psaux.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(psaux.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(psmodule.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(psmodule.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(pshinter.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(pshinter.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(raster.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(raster.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(sfnt.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(sfnt.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(smooth.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(smooth.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(bdf.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(bdf.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(ftsystem.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(ftsystem.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(ftgzip.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(ftgzip.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(ftlzw.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(ftlzw.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(ftbitmap.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(ftbitmap.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+freetype.lib(ftdebug.obj) : warning LNK4099: "" PDB не найден с "freetype.lib(ftdebug.obj)" или на ""; компоновка объекта выполняется как при отсутствии отладочных данных
+     Создается библиотека C:\Users\User\source\repos\Minecraft\x64\Debug\Minecraft.lib и объект C:\Users\User\source\repos\Minecraft\x64\Debug\Minecraft.exp
+LINK : warning LNK4098: библиотека по умолчанию "MSVCRT" конфликтует с использованием других библиотек; используйте /NODEFAULTLIB:library
   Minecraft.vcxproj -> C:\Users\User\source\repos\Minecraft\x64\Debug\Minecraft.exe

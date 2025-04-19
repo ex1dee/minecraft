@@ -2,28 +2,39 @@
 #define ASSIMPLOADER_H
 
 #include <assimp/Importer.hpp>
-#include <assimp/scene.h>
 #include <assimp/postprocess.h>
+#include <assimp/scene.h>
 
 #include <vector>
 #include <string>
+#include <map>
 
+#include "../animation/skeletal/Bone/BoneInfo.h"
 #include "../render/model/Model.h"
 
 class AssimpLoader {
-	static std::string directory;
-	static std::unique_ptr<Model> model;
+	std::unique_ptr<Model> model = nullptr;
+	std::string directory;
+	bool flipTexture;
 
-	static TextureType getTextureTypeBy(aiTextureType type);
-	static void addMesh(const aiScene* scene, const aiMesh* mesh);
-	static void addIndices(const aiMesh* mesh, MeshData& meshData);
-	static void addVertices(const aiMesh* mesh, MeshData& meshData);
-	static void processNode(const aiScene* scene, const aiNode* node);
-	static void addVertex(const aiMesh* mesh, MeshData& meshData, int i);
-	static void addMaterial(const aiScene* scene, const aiMesh* mesh, MeshData& meshData);
-	static void loadMaterialTextures(MeshData& meshData, aiMaterial* material, aiTextureType type);
+	std::map<std::string, BoneInfo> boneInfoMap;
+	int boneCounter = 0;
+
+	TextureType getTextureTypeBy(aiTextureType type);
+	void addMesh(const aiScene* scene, const aiMesh* mesh);
+	void addIndices(const aiMesh* mesh, MeshData& meshData);
+	void addVertices(const aiMesh* mesh, MeshData& meshData);
+	void processNode(const aiScene* scene, const aiNode* node);
+	void addVertex(const aiMesh* mesh, MeshData& meshData, int i);
+	void addMaterial(const aiScene* scene, const aiMesh* mesh, MeshData& meshData);
+	void addBoneWeights(const aiScene* scene, const aiMesh* mesh, MeshData& meshData);
+	void loadMaterialTextures(MeshData& meshData, aiMaterial* material, aiTextureType type);
 public:
-	static std::unique_ptr<Model> load(const std::string& path);
+	AssimpLoader(const std::string& path, bool flipTexture = false);
+	std::unique_ptr<Model> finish() { return std::move(model); }
+
+	auto& getBoneInfoMap() { return boneInfoMap; }
+	int& getBoneCount() { return boneCounter; }
 };
 
 #endif

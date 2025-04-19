@@ -72,7 +72,7 @@ void ChunkManager::updateChunk(const glm::ivec2& pos) {
 	ChunkModelCollection newModel;
 	ChunkModelBuilder(*chunk, newModel).build();
 	chunk->model = newModel;
-	chunk->bHasMesh = true;
+	chunk->meshed = true;
 	chunk->buffered = false;
 
 	chunk->updating = false;

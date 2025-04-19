@@ -8,15 +8,9 @@ ITEM_ROTATION_SPEED = 0.05f,
 PICKUP_DURATION = 0.125f,
 START_PICKUP_RADIUS = 2.0f;
 
-DroppedItem::DroppedItem(std::shared_ptr<ItemStack>& item, float pickupTimeSec)
-	: Entity(DROPPED_ITEM), item(item), pickupTimeSec(pickupTimeSec), rotation(glm::vec3(0)), offset(getType().modelTransform.position) {
-	std::shared_ptr<ItemModel> itemModel = std::make_shared<ItemModel>(item, getType().colliderExtents.x);
-	model = std::dynamic_pointer_cast<Model>(itemModel);
-
-	if (!itemModel->isBlockItem())
-		transform.rotation.z = 90.0f;
-
-	transform.rotateOrigin = getType().colliderExtents * 0.5f;
+DroppedItem::DroppedItem(const std::shared_ptr<ItemStack>& item, float pickupTimeSec)
+	: Item(item), pickupTimeSec(pickupTimeSec), rotation(glm::vec3(0)), offset(getType().modelTransform.position) {
+	
 }
 
 void DroppedItem::update(const std::shared_ptr<Player>& player, float deltaTime) {
@@ -32,14 +26,14 @@ void DroppedItem::update(const std::shared_ptr<Player>& player, float deltaTime)
 	}
 }
 
-void DroppedItem::playAnimation(const std::shared_ptr<Player>& player, float deltaTime) {
+void DroppedItem::playIdleAnimation(const std::shared_ptr<Player>& player, float deltaTime) {
 	playLevitationAnimation(player, deltaTime);
 	playPickupAnimation(player, deltaTime);
 }
 
 void DroppedItem::playLevitationAnimation(const std::shared_ptr<Player>& player, float deltaTime) {
 	rotation.y += ITEM_ROTATION_SPEED;
-	
+
 	if (rotation.y > 360.0f)
 		rotation.y -= 360.0f;
 

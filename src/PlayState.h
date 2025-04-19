@@ -6,7 +6,7 @@
 
 #include "player/Player.h"
 #include "world/World.h"
-#include "utils/Timer.h"
+#include "utils/TickTimer.h"
 
 class PlayState {
 	std::atomic<bool> isRunning;
@@ -15,8 +15,8 @@ class PlayState {
 	std::shared_ptr<Camera> camera;
 	std::shared_ptr<World> world;
 
-	Timer worldTickTimer;
-	Timer physicsTickTimer;
+	TickTimer worldTickTimer;
+	TickTimer physicsTickTimer;
 public:
 	PlayState(std::shared_ptr<Player>& player);
 	~PlayState();

@@ -27,7 +27,7 @@ public:
 	glm::vec3 getRotation() { return rotation; }
 	glm::vec3 getScale() { return rotation; }
 
-	virtual void updateTransform(const Transform& transform) = 0;
+	virtual void applyTransform(const Transform& transform) = 0;
 };
 
 enum class ColliderType {

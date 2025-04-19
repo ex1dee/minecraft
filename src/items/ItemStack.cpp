@@ -13,13 +13,14 @@ ItemStack::ItemStack(Material material, int amount)
 }
 
 ItemStack::ItemStack(const Block& block, int amount)
-	: amount(amount) {
-	material = block.getType().material;
+	: material(block.getType().material), amount(amount) {
+	assert(ItemsDatabase::contains(material));
 
-	if (block.state != nullptr)
+	if (block.state != nullptr) {
 		meta = std::make_unique<BlockStateMeta>(*getType().meta, block.state);
-	else
+	} else {
 		meta = std::make_unique<ItemMeta>(*getType().meta);
+	}
 }
 
 ItemStack::ItemStack(const ItemStack& other) {

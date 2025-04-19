@@ -14,6 +14,7 @@ World::World(std::shared_ptr<Player>& player, std::shared_ptr<Renderer>& rendere
 
 	chunkManager = ChunkManager(*this);
 	terrainGen = std::make_unique<DefaultWorldGenerator>(seed);
+	//terrainGen = std::make_unique<SuperFlatGenerator>();
 
 	time = TICK_PER_DAY / 4;
 	seed = std::time(0);
@@ -35,8 +36,8 @@ World::~World() {
 	}
 }
 
-const Fog& World::getFog() {
-	Liquid* liquid = player->getLiquidAtEyes();
+const Fog& World::getFogForEntity(const Entity& entity) {
+	Liquid* liquid = entity.getLiquidAtEyes();
 	
 	if (liquid != nullptr) {
 		return liquid->getFog();
@@ -137,7 +138,7 @@ void World::renderChunks() {
 void World::playAnimations(float deltaTime) {
 	for (auto& entity : entities) {
 		if (entity != nullptr)
-			entity->playAnimation(player, deltaTime);
+			entity->playIdleAnimation(player, deltaTime);
 	}
 }
 
@@ -145,7 +146,7 @@ void World::update(float deltaTime) {
 	updateTime();
 	updateEntities(deltaTime);
 
-	sun->setTime(time);
+	sun->setTime(time * 10);
 	clouds->update(deltaTime);
 }
 
@@ -157,10 +158,11 @@ void World::updateTime() {
 
 void World::updateEntities(float deltaTime) {
 	entities.erase(std::remove(entities.begin(), entities.end(), nullptr), entities.end());
-
+	
 	for (auto& entity : entities) {
-		if (entity != nullptr && entity->needUpdate())
+		if (entity != nullptr && entity->needUpdate()) {
 			entity->update(player, deltaTime);
+		}
 	}
 }
 

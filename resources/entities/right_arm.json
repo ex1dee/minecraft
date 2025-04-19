@@ -1,0 +1,34 @@
+{
+    "id": 2,
+
+    "model": {
+        "path": "right_arm/right_arm.gltf",
+        "flipTexture": false,
+
+        "animations": {
+            "hit": "right_arm/hit.gltf",
+            "switch_item": "right_arm/switch_item.gltf"
+        }
+    },
+
+    "eyesOffset": [ 0, 0, 0 ],
+    "isInCameraSpace": true,
+
+    "modelTransform": {
+        "position": [ 0.08, -0.0, -0.1 ],
+        "rotation": [ 0, -60, 0 ],
+        "scale": [ 1, 1, 1 ]
+    },
+
+    "collider": {
+        "position": [ 0, 0, 0 ],
+        "extents": [ 0, 0, 0 ]
+    },
+
+    "physics": {
+        "enabled": false,
+        "collidesWithObjects": false,
+        "gravity": false,
+        "mass": 0
+    }
+}

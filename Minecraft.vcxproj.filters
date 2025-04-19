@@ -194,7 +194,7 @@
     <ClCompile Include="src\world\generation\terrain\DefaultWorldGenerator.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="src\utils\Timer.cpp">
+    <ClCompile Include="src\utils\TickTimer.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\physics\GameObject.cpp">
@@ -273,6 +273,27 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="src\items\ItemModel.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\animation\skeletal\bone\Bone.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\animation\skeletal\Animation.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\animation\skeletal\Animator.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\utils\Timer.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\RightArm.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\input\handlers\HitHandler.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\items\Item.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
@@ -381,7 +402,7 @@
     <ClInclude Include="src\render\GUIRenderer.h" />
     <ClInclude Include="src\input\handlers\WindowInput.h" />
     <ClInclude Include="src\utils\noise\PerlinNoise2D.h" />
-    <ClInclude Include="src\utils\Timer.h" />
+    <ClInclude Include="src\utils\TickTimer.h" />
     <ClInclude Include="src\render\model\MeshType.h" />
     <ClInclude Include="src\physics\PhysicsType.h" />
     <ClInclude Include="src\math\shapes\Planes.h" />
@@ -424,6 +445,22 @@
     <ClInclude Include="src\items\ItemModel.h" />
     <ClInclude Include="src\world\block\BlockMeshConstants.h" />
     <ClInclude Include="src\utils\UUIDWrapper.h" />
+    <ClInclude Include="src\animation\skeletal\bone\BoneInfo.h" />
+    <ClInclude Include="src\animation\skeletal\bone\Bone.h" />
+    <ClInclude Include="src\animation\skeletal\bone\key\KeyPosition.h" />
+    <ClInclude Include="src\animation\skeletal\bone\key\KeyRotation.h" />
+    <ClInclude Include="src\animation\skeletal\bone\key\KeyScale.h" />
+    <ClInclude Include="src\utils\AssimpHelper.h" />
+    <ClInclude Include="src\animation\skeletal\bone\key\AnimationKey.h" />
+    <ClInclude Include="src\animation\skeletal\Animation.h" />
+    <ClInclude Include="src\animation\skeletal\AnimationNode.h" />
+    <ClInclude Include="src\animation\skeletal\Animator.h" />
+    <ClInclude Include="src\animation\AnimationConstants.h" />
+    <ClInclude Include="src\utils\Timer.h" />
+    <ClInclude Include="src\animation\skeletal\AnimatorState.h" />
+    <ClInclude Include="src\gui\RightArm.h" />
+    <ClInclude Include="src\input\handlers\HitHandler.h" />
+    <ClInclude Include="src\items\Item.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />
@@ -468,8 +505,9 @@
     <None Include="resources\gui\inventory_titles.json" />
     <None Include="resources\gui\item_description.json" />
     <None Include="resources\gui\item_description_text.json" />
-    <None Include="resources\entities\dropped_item.json" />
+    <None Include="resources\entities\item.json" />
     <None Include="resources\items\stick.json" />
+    <None Include="resources\entities\right_arm.json" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\blocks_atlas.png">

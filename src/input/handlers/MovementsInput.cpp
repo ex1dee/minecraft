@@ -5,7 +5,8 @@
 
 constexpr float
 RUN_ZOOM_TIME_SEC = 0.15f,
-RUN_MIN_ZOOM = -15.0f;
+RUN_MIN_ZOOM = -15.0f,
+WALKING_ANIMATION_COEF = 1.25f;
 
 std::unordered_map<int, glm::vec3> MovementsInput::keys;
 ZoomHandler MovementsInput::runZoom = ZoomHandler(RUN_ZOOM_TIME_SEC, 0.0f, RUN_MIN_ZOOM);
@@ -28,6 +29,8 @@ void MovementsInput::handle(Player& player, float deltaTime) {
 	checkRunZoom(player, deltaTime);
 	checkSwimming(player, liquid);
 	checkFlying(player, speed);
+
+	playWalkingAnimation(player, speed);
 }
 
 float MovementsInput::calcSpeed(Player& player, Liquid* const liquid) {
@@ -35,7 +38,7 @@ float MovementsInput::calcSpeed(Player& player, Liquid* const liquid) {
 
 	player.sprinting = Input::pressed(GLFW_KEY_LEFT_CONTROL);
 	player.sneaking = Input::pressed(GLFW_KEY_LEFT_SHIFT);
-
+	
 	if (player.flying) {
 		speed *= PLAYER_FLYING_COEF;
 	} else if (liquid != nullptr) {
@@ -122,5 +125,18 @@ void MovementsInput::check(int key, RigidBody* const rigidBody, const glm::vec3&
 			rigidBody->velocity += velocity;
 			keys.emplace(key, velocity);
 		}
+	}
+}
+
+void MovementsInput::playWalkingAnimation(Player& player, float speed) {
+	if (Input::justPressed(GLFW_KEY_LEFT_SHIFT))
+		player.getAnimator("sitting")->playAnimation(false, DEFAULT_ANIMATION_SPEED, true);
+	else if (!Input::pressed(GLFW_KEY_LEFT_SHIFT))
+		player.getAnimator("sitting")->finishAnimation(true);
+
+	if (Input::pressed(GLFW_KEY_W) || Input::pressed(GLFW_KEY_S) || Input::pressed(GLFW_KEY_A) || Input::pressed(GLFW_KEY_D)) {
+		player.getAnimator("walking")->playAnimation(true, speed / player.getWalkSpeed() * WALKING_ANIMATION_COEF);
+	} else {
+		player.getAnimator("walking")->finishAnimation(true);
 	}
 }

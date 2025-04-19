@@ -6,7 +6,7 @@ ItemModel::ItemModel(const std::shared_ptr<ItemStack>& item, float size)
 	: item(item), size(size) {
 	meshData = std::make_unique<MeshData>(MeshType::ITEM, 3);
 
-	if (BlocksDatabase::contains(item->getType().material)) {
+	if (item->getType().hasCubeMesh()) {
 		setupBlockItem();
 	} else {
 		setupItem();
@@ -17,11 +17,6 @@ ItemModel::ItemModel(const std::shared_ptr<ItemStack>& item, float size)
 
 void ItemModel::setupBlockItem() {
 	const BlockType& blockType = BlocksDatabase::get(item->getType().material);
-
-	if (blockType.meshType != MeshType::CUBE) {
-		setupItem();
-		return;
-	}
 
 	meshData->textures.push_back(BlocksDatabase::getTextureAtlas());
 	blockItem = true;

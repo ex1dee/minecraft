@@ -13,7 +13,6 @@ glm::mat4 Transform::calcModel() const {
 	if (rotation.z != 0) model = glm::rotate(model, glm::radians(rotation.z), glm::vec3(0, 0, 1));
 	
 	model = glm::translate(model, -rotateOrigin);
-
 	model = glm::scale(model, scale);
 
 	return model;

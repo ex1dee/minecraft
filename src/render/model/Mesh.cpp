@@ -17,10 +17,14 @@ Mesh::~Mesh() {
 void Mesh::setup() {
 	Drawable::setup();
 	
-	addVBO(data->dimensions, data->vertexPositions, 0);
-	addVBO(data->dimensions, data->normals, 1);
-	addVBO(2, data->textureCoords, 2);
-	addVBO(4, data->colors, 3);
+	addVBO(data->dimensions, data->vertexPositions, 0, GL_FLOAT);
+	addVBO(data->dimensions, data->normals, 1, GL_FLOAT);
+	addVBO(2, data->textureCoords, 2, GL_FLOAT);
+	addVBO(4, data->colors, 3, GL_FLOAT);
+	
+	addVBO(MAX_BONE_INFLUENCE, data->vertexBoneWeights, 4, GL_FLOAT);
+	addVBO(MAX_BONE_INFLUENCE, data->vertexBoneIDs, 5, GL_INT);
+
 	addEBO(data->indices);
 }
 

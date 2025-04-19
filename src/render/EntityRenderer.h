@@ -14,12 +14,12 @@ class EntityRenderer {
 	Shader* activeShader;
 
 	void updateModelMatrix(const Entity& entity);
-	void updateShader(const Camera& camera, const Sun& sun, const Fog& fog);
-	void render(const Entity& entity, const Camera* camera = nullptr, bool onlyVisible = false);
+	void updateShader(const Camera& camera, const Sun& sun);
+	void render(Entity& entity, const Camera* camera = nullptr, bool onlyVisible = false);
 public:
 	void add(std::shared_ptr<Entity>& entity);
 	void renderLights(const Sun& sun);
-	void render(const Camera& camera, const Sun& sun, const Fog& fog);
+	void render(const Camera& camera, const Sun& sun);
 };
 
 #endif

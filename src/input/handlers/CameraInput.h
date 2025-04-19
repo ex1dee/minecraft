@@ -1,7 +1,7 @@
 #ifndef CAMERAINPUT_H
 #define CAMERAINPUT_H
 
-#include "../../player/CameraViewMode.h""
+#include "../../player/CameraViewMode.h"
 #include "../../player/Player.h"
 #include "ZoomHandler.h"
 

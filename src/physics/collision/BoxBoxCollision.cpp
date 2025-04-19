@@ -25,7 +25,7 @@ void BoxBoxCollision::detect(GameObject& obj, const Block& block) {
 	Transform transform(block.getPosition());
 
 	for (auto& blockBox : block.getType().colliders) {
-		blockBox->updateTransform(transform);
+		blockBox->applyTransform(transform);
 
 		Collision collision = detect(box, *blockBox);
 		CollisionHandler::handle(collision, obj, block);

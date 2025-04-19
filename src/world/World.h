@@ -59,13 +59,22 @@ public:
 	void updateChunk(const glm::vec3& pos);
 	void despawnEntity(const Entity& entity);
 	int getHeightAt(const glm::vec3& pos);
+	const Fog& getFogForEntity(const Entity& entity);
 	WorldPosition getWorldPosition(const glm::vec3& pos);
 	glm::ivec2 getLocalChunkPosition(const glm::vec3& pos);
 	std::shared_ptr<Chunk> getChunk(const glm::vec3& pos);
 	std::shared_ptr<Block> getBlock(const glm::vec3& pos);
 	std::shared_ptr<Block> getHighestBlockAt(const glm::vec3& pos);
 	std::shared_ptr<Block> setBlock(const glm::vec3& pos, Material material);
-	const Fog& getFog();
+
+	template<typename T, typename... Ts, typename = typename std::enable_if_t<std::is_base_of_v<Entity, T>>>
+	std::shared_ptr<T> spawnCameraSpaceEntity(const glm::vec3& pos, Ts&&... args) {
+		std::shared_ptr<T> TEntity = spawnEntity<T>(pos, std::forward<Ts>(args)...);
+		std::shared_ptr<Entity> entity = std::dynamic_pointer_cast<Entity>(TEntity);
+		entity->isInCameraSpace = true;
+
+		return TEntity;
+	}
 
 	template<typename T, typename... Ts, typename = typename std::enable_if_t<std::is_base_of_v<Entity, T>>>
 	std::shared_ptr<T> spawnEntity(const glm::vec3& pos, Ts&&... args) {

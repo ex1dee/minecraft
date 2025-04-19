@@ -2,9 +2,10 @@
 
 #include "input/handlers/BlockInteractsInput.h"
 #include "input/handlers/MovementsInput.h"
+#include "input/handlers/InventoryInput.h"
 #include "input/handlers/CameraInput.h"
 #include "input/handlers/WindowInput.h"
-#include "input/handlers/InventoryInput.h"
+#include "input/handlers/HitHandler.h"
 
 #include "physics/PhysicsEngine.h"
 #include "gui/GUI.h"
@@ -34,10 +35,10 @@ PlayState::~PlayState() {
 
 void PlayState::handleInput() {
 	InventoryInput::handle(*player);
-
 	BlockInteractsInput::handle(*player, *world, physicsTickTimer.getSecPerTick());
 	MovementsInput::handle(*player, physicsTickTimer.getSecPerTick());
 	CameraInput::handle(*player, physicsTickTimer.getSecPerTick());
+	HitHandler::handle(*player);
 	WindowInput::handle();
 }
 

@@ -23,21 +23,6 @@ void Drawable::genVAO() {
 	GL(glBindVertexArray(VAO));
 }
 
-void Drawable::addVBO(int dimensions, const std::vector<float>& vertices, int index) {
-	if (!vertices.size())
-		return;
-
-	uint32_t VBO;
-	GL(glGenBuffers(1, &VBO));
-	GL(glBindBuffer(GL_ARRAY_BUFFER, VBO));
-	GL(glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW));
-	
-	GL(glVertexAttribPointer(index, dimensions, GL_FLOAT, false, 0, 0));
-	GL(glEnableVertexAttribArray(index));
-
-	buffers.push_back(VBO);
-}
-
 void Drawable::addEBO(const std::vector<uint32_t>& indices) {
 	if (!indices.size())
 		return;

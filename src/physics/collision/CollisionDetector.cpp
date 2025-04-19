@@ -10,7 +10,7 @@ void CollisionDetector::detect(std::vector<GameObject*>& objects, World& world) 
 
 void CollisionDetector::updateTransforms(std::vector<GameObject*>& objects) {
 	for (GameObject* obj : objects) {
-		obj->updateTransform();
+		obj->applyTransform();
 	}
 }
 
@@ -31,9 +31,11 @@ void CollisionDetector::detectO2B(std::vector<GameObject*>& objects, World& worl
 		if (obj->rigidBody.physicsType == PhysicsType::STATIC)
 			continue;
 
-		for (float x = -1; x <= obj->model->aabb.extents.x + 1; ++x) {
-			for (float z = -1; z <= obj->model->aabb.extents.z + 1; ++z) {
-				for (float y = 0; y <= obj->model->aabb.extents.y + 1; ++y) {
+		std::shared_ptr<Model> model = obj->getModel();
+
+		for (float x = -1; x <= model->aabb.extents.x + 1; ++x) {
+			for (float z = -1; z <= model->aabb.extents.z + 1; ++z) {
+				for (float y = 0; y <= model->aabb.extents.y + 1; ++y) {
 					std::shared_ptr<Block> block = world.getBlock(obj->transform.position + glm::vec3(x, y, z));
 
 					detectO2B(*obj, world, block);
@@ -41,7 +43,7 @@ void CollisionDetector::detectO2B(std::vector<GameObject*>& objects, World& worl
 			}
 		}
 	
-		for (const glm::vec3& vertex : obj->model->aabb.getVertices()) {
+		for (const glm::vec3& vertex : model->aabb.getVertices()) {
 			Ray ray(vertex, obj->rigidBody.deltaPosition);
 			std::shared_ptr<Block> block = RayTracing::getNearestBlock(world, ray, glm::length(obj->rigidBody.deltaPosition) + 0.1);
 

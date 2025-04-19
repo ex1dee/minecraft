@@ -17,7 +17,7 @@ public:
 	AABB& operator=(AABB&& other) = default;
 
 	std::vector<glm::vec3> getVertices() const;
-	void updateTransform(const Transform& transform);
+	void applyTransform(const Transform& transform);
 	glm::vec3 getVertexInDirection(const glm::vec3& normal) const;
 };
 

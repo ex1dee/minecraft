@@ -23,7 +23,7 @@ void Chunk::makeModel() {
 	if (!hasMesh()) {
 		ChunkModelBuilder(*this, this->model).build();
 
-		bHasMesh = true;
+		meshed = true;
 		buffered = false;
 	}
 }
@@ -37,7 +37,7 @@ void Chunk::bufferModel() {
 }
 
 void Chunk::resetMeshes() {
-	bHasMesh = false;
+	meshed = false;
 	buffered = false;
 
 	model.reset();

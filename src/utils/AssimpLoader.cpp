@@ -1,27 +1,24 @@
 #include "AssimpLoader.h"
 
 #include "../textures/TextureLoader.h"
+#include "AssimpHelper.h"
 #include "Files.h"
 
-std::string AssimpLoader::directory;
-std::unique_ptr<Model> AssimpLoader::model;
-
-std::unique_ptr<Model> AssimpLoader::load(const std::string& path) {
+AssimpLoader::AssimpLoader(const std::string& path, bool flipTexture) {
 	Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
 
 	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) {
 		std::cerr << "ERROR::ASSIMP\n" << importer.GetErrorString() << "\n";
-
-		return nullptr;
+		
+		return;
 	}
 
+	this->flipTexture = flipTexture;
 	directory = Files::getDirectory(path);
 	model = std::make_unique<Model>();
 
 	processNode(scene, scene->mRootNode);
-	
-	return std::move(model);
 }
 
 void AssimpLoader::processNode(const aiScene* scene, const aiNode* node) {
@@ -39,9 +36,13 @@ void AssimpLoader::processNode(const aiScene* scene, const aiNode* node) {
 void AssimpLoader::addMesh(const aiScene* scene, const aiMesh* mesh) {
 	std::unique_ptr<MeshData> meshData = std::make_unique<MeshData>(MeshType::ASSIMP, 3);
 
+	meshData->vertexBoneWeights.assign(mesh->mNumVertices * MAX_BONE_INFLUENCE, 0.0f);
+	meshData->vertexBoneIDs.assign(mesh->mNumVertices * MAX_BONE_INFLUENCE, UNDEFINED_BONE_ID);
+
 	addVertices(mesh, *meshData);
 	addIndices(mesh, *meshData);
 	addMaterial(scene, mesh, *meshData);
+	addBoneWeights(scene, mesh, *meshData);
 
 	model->addMesh(meshData);
 }
@@ -60,7 +61,7 @@ void AssimpLoader::addVertex(const aiMesh* mesh, MeshData& meshData, int i) {
 	meshData.normals.push_back(mesh->mNormals[i].x);
 	meshData.normals.push_back(mesh->mNormals[i].y);
 	meshData.normals.push_back(mesh->mNormals[i].z);
-
+	
 	if (mesh->mTextureCoords[0]) {
 		meshData.textureCoords.push_back(mesh->mTextureCoords[0][i].x);
 		meshData.textureCoords.push_back(mesh->mTextureCoords[0][i].y);
@@ -92,7 +93,7 @@ void AssimpLoader::loadMaterialTextures(MeshData& meshData, aiMaterial* material
 		material->GetTexture(type, i, &texName);
 		
 		std::string path = Files::getFullPath(directory, texName.C_Str());
-		meshData.textures.push_back(TextureLoader::loadBasic(path, true, getTextureTypeBy(type)));
+		meshData.textures.push_back(TextureLoader::loadBasic(path, flipTexture, getTextureTypeBy(type)));
 	}
 }
 
@@ -101,4 +102,41 @@ TextureType AssimpLoader::getTextureTypeBy(aiTextureType type) {
 		return TextureType::DIFFUSE;
 	else if (type == aiTextureType_SPECULAR)
 		return TextureType::SPECULAR;
+}
+
+void AssimpLoader::addBoneWeights(const aiScene* scene, const aiMesh* mesh, MeshData& meshData) {
+	for (int boneIndex = 0; boneIndex < mesh->mNumBones; ++boneIndex) {
+		std::string boneName = mesh->mBones[boneIndex]->mName.C_Str();
+		int boneID;
+
+		if (boneInfoMap.find(boneName) == boneInfoMap.end()) {
+			BoneInfo boneInfo;
+			boneInfo.id = boneCounter;
+			boneInfo.offset = AssimpHelper::getGLMMatrix(mesh->mBones[boneIndex]->mOffsetMatrix);
+
+			boneInfoMap.emplace(boneName, boneInfo);
+			boneID = boneCounter++;
+		} else {
+			boneID = boneInfoMap[boneName].id;
+		}
+
+		auto weights = mesh->mBones[boneIndex]->mWeights;
+		int numWeights = mesh->mBones[boneIndex]->mNumWeights;
+
+		for (int weightIndex = 0; weightIndex < numWeights; ++weightIndex) {
+			int vertexID = weights[weightIndex].mVertexId;
+			float weight = weights[weightIndex].mWeight;
+			
+			for (int i = 0; i < MAX_BONE_INFLUENCE; ++i) {
+				int vertexBoneID = vertexID * MAX_BONE_INFLUENCE + i;
+				
+				if (meshData.vertexBoneIDs[vertexBoneID] == UNDEFINED_BONE_ID) {
+					meshData.vertexBoneIDs[vertexBoneID] = boneID;
+					meshData.vertexBoneWeights[vertexBoneID] = weight;
+
+					break;
+				}
+			}
+		}
+	}
 }

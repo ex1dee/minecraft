@@ -57,7 +57,7 @@ void Camera::updateOrientation() {
 
 void Camera::updateView() {
 	transform.position = player->transform.position + player->getType().eyesOffset;
-	viewDir = player->orientation.front;
+	viewDir = player->orientation.getFront();
 
 	if (viewMode != FIRST_PERSON) {
 		updateTPSLook();
@@ -83,9 +83,11 @@ void Camera::updateTPSLook() {
 		viewDir = glm::normalize(transform.position - pos);
 		transform.position = pos + viewDir * CAMERA_INTERSECT_OFFSET;
 	} else {
-		transform.position += viewSign * -player->orientation.front * CAMERA_TPS_COEF;
+		transform.position += viewSign * -player->orientation.getFront() * CAMERA_TPS_COEF;
 		viewDir *= viewSign;
 	}
+
+	transform.position += player->modelTransform.position;
 }
 
 void Camera::updateProjection() {

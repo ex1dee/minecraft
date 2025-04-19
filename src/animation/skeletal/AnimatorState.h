@@ -1,0 +1,13 @@
+#ifndef ANIMATORSTATE_H
+#define ANIMATORSTATE_H
+
+enum class AnimatorState {
+	IDLE,
+	PLAYING_LOOP,
+	PLAYING_SINGLE,
+	FINISHING_SMOOTH,
+	FINISHING_SHARP,
+	STOPPED
+};
+
+#endif

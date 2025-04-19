@@ -15,6 +15,7 @@ void EntitiesDatabase::initialize() {
 
 		type->id = json["id"];
 		type->collidesWithObjects = json["physics"]["collidesWithObjects"];
+		type->isInCameraSpace = json["isInCameraSpace"];
 		type->physics = json["physics"]["enabled"];
 		type->gravity = json["physics"]["gravity"];
 		type->mass = json["physics"]["mass"];
@@ -28,8 +29,19 @@ void EntitiesDatabase::initialize() {
 
 		type->eyesOffset = Json::toVec3(json["eyesOffset"]);
 
-		if (json.contains("model"))
-			type->model = AssimpLoader::load(Files::getFullPath(MODELS_DIR, json["model"]["path"]));
+		if (json.contains("model")) {
+			AssimpLoader assimpLoader(Files::getFullPath(MODELS_DIR, json["model"]["path"]), json["model"]["flipTexture"]);
+			
+			if (json["model"].contains("animations")) {
+				std::map<std::string, std::string> animations = json["model"]["animations"];
+
+				for (std::pair<std::string, std::string> p : animations) {
+					type->animations.emplace(p.first, std::make_shared<Animation>(Files::getFullPath(MODELS_DIR, p.second), assimpLoader));
+				}
+			}
+
+			type->model = assimpLoader.finish();
+		}
 
 		entities[type->id] = std::move(type);
 	}

@@ -8,6 +8,7 @@
 #include "../items/inventory/Inventory.h"
 #include "../player/Player.h"
 #include "GUIDatabase.h"
+#include "RightArm.h"
 
 constexpr float
 GUI_DEFAULT_WIDTH = 1920.0f,
@@ -16,14 +17,17 @@ GUI_ORTHO_NEAR = 0.0f,
 GUI_ORTHO_FAR = 10.0f;
 
 class GUI {
+	static std::shared_ptr<RightArm> rightArm;
 	static glm::mat4 projection;
 	static bool windowScaled;
 
 	static void setup();
 	static void setupProjection();
+	static void updateRightArm(Player& player);
 public:
 	static void initialize();
 
+	static std::shared_ptr<RightArm> getRightArm() { return rightArm; }
 	static const glm::mat4& getProjection() { return projection; }
 	static const glm::mat4& getView() { return glm::mat4(1); }
 

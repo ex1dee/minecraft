@@ -1,9 +1,12 @@
 #include "GUI.h"
 
 #include "../window/Window.h"
+#include "../input/Input.h"
+#include "../world/World.h"
 #include "InventoryGUI.h"
 #include "GUIManager.h"
 
+std::shared_ptr<RightArm> GUI::rightArm;
 bool GUI::windowScaled = false;
 glm::mat4 GUI::projection;
 
@@ -72,6 +75,13 @@ glm::vec3 GUI::scaleByWindow(const glm::vec3& vec) {
 
 void GUI::update(Player& player) {
 	InventoryGUI::update(player, windowScaled);
-	
+	updateRightArm(player);
+
 	windowScaled = false;
+}
+
+void GUI::updateRightArm(Player& player) {
+	if (rightArm == nullptr) {
+		rightArm = player.getWorld()->spawnEntity<RightArm>(EntitiesDatabase::get(RIGHT_ARM).modelTransform.position);
+	}
 }

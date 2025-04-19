@@ -9,7 +9,6 @@
 class Model {
 protected:
 	std::vector<std::unique_ptr<Mesh>> meshes;
-
 	float shininess;
 public:
 	AABB aabb;

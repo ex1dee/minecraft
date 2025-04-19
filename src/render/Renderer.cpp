@@ -26,7 +26,7 @@ void Renderer::finishRender(World& world) {
 	glDisable(GL_CULL_FACE);
 	glDepthMask(GL_FALSE);
 
-	const Fog& fog = world.getFog();
+	const Fog& fog = world.getFogForEntity(*player);
 	const Clouds& clouds = world.getClouds();
 	Camera& camera = player->getCamera();
 
@@ -46,7 +46,7 @@ void Renderer::finishRender(World& world) {
 	disableCullFace();
 	
 	cloudsRenderer.render(clouds, sun, *player);
-	entityRenderer.render(camera, sun, fog);
+	entityRenderer.render(camera, sun);
 	blockFrameRenderer.render(*player);
 	spriteRenderer.render(sun, camera);
 	textRenderer.render(camera);

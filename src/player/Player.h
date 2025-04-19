@@ -59,6 +59,7 @@ public:
 
 	void setSelectedItem(const ItemStack& item) const { hotbarView->setItem(selectedSlot, 0, item); }
 
+	void update();
 	void openBackpack();
 	void closeBackpack();
 	void closeInventory();

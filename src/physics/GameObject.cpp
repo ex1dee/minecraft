@@ -10,7 +10,19 @@ GameObject::~GameObject() {
 	PhysicsEngine::removeObject(*this);
 }
 
-Liquid* GameObject::getLiquidAtObject() {
+bool GameObject::isAtLoadedChunk() const {
+	std::shared_ptr<Chunk> chunk = world->getChunk(transform.position);
+
+	return chunk != nullptr && chunk->isLoaded();
+}
+
+bool GameObject::isAtBufferedChunk() const {
+	std::shared_ptr<Chunk> chunk = world->getChunk(transform.position);
+
+	return chunk != nullptr && chunk->hasBuffered();
+}
+
+Liquid* GameObject::getLiquidAtObject() const {
 	std::shared_ptr<Block> block = world->getBlock(transform.position + glm::vec3(0, 0.3f, 0));
 
 	if (block != nullptr)
@@ -19,12 +31,16 @@ Liquid* GameObject::getLiquidAtObject() {
 	return nullptr;
 }
 
-void GameObject::updateTransform(Transform& transform) {
-	collider->updateTransform(transform);
-	model->aabb.updateTransform(transform);
+void GameObject::applyTransform(Transform& transform) {
+	collider->applyTransform(transform);
+	model->aabb.applyTransform(transform);
 }
 
-void GameObject::updateTransform() {
-	collider->updateTransform(transform);
-	model->aabb.updateTransform(transform);
+void GameObject::applyTransform() {
+	collider->applyTransform(transform);
+	model->aabb.applyTransform(transform);
+}
+
+std::shared_ptr<Block> GameObject::getGround() const {
+	return world->getBlock(transform.position + glm::vec3(0, GROUND_OFFSET_Y, 0));
 }

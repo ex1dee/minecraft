@@ -36,7 +36,7 @@ public:
 		return a + (c - a) * 0.5f;
 	}
 
-	void updateTransform(const Transform& transform) override {
+	void applyTransform(const Transform& transform) override {
 		glm::mat4 model = transform.calcModel();
 
 		a = glm::vec3(model * glm::vec4(a, 1));

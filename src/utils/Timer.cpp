@@ -2,45 +2,20 @@
 
 #include <GLFW/glfw3.h>
 
-Timer::~Timer() {
-	thread.join();
+Timer::Timer()
+	: lastTime(0.0f), deltaTime(0.0f), currentTime(0.0f), resetTime(0.0f) {
+
 }
 
-void Timer::start(double secPerTick, std::atomic<bool>* isRunning) {
-	*isRunning = true;
+float Timer::getDeltaTime() {
+	currentTime = glfwGetTime() - resetTime;
+	deltaTime = currentTime - lastTime;
+	lastTime = currentTime;
 
-	this->secPerTick = secPerTick;
-	this->isRunning = isRunning;
-	this->lastTime = 0;
-
-	thread = std::thread([&]() { update(); });
+	return deltaTime;
 }
 
-void Timer::update() {
-	while (isRunning) {
-		std::this_thread::sleep_for(std::chrono::microseconds(100));
-
-		currentTime = glfwGetTime();
-		deltaTime = currentTime - lastTime;
-		lastTime = currentTime;
-
-		if (!tickElapsed) {
-			tickLag += deltaTime;
-
-			if (tickLag >= secPerTick) {
-				tickElapsed = true;
-				tickLag = 0;
-			}
-		}
-	}
-}
-
-bool Timer::isTickElapsed() {
-	if (tickElapsed) {
-		tickElapsed = false;
-
-		return true;
-	}
-
-	return false;
+void Timer::reset() {
+	resetTime = glfwGetTime();
+	lastTime = 0.0f;
 }

@@ -113,6 +113,7 @@ void Window::setCallbacks() {
     glfwSetKeyCallback(window, Input::keyCallback);
     glfwSetMouseButtonCallback(window, Input::mouseButtonCallback);
     glfwSetCursorPosCallback(window, Input::cursorPosCallback);
+    glfwSetScrollCallback(window, Input::scrollCallback);
     glfwSetFramebufferSizeCallback(window, framebufferSizeCallback);
 }
 

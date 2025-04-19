@@ -1,3 +1,9 @@
+C:\Users\User\source\repos\Minecraft\Minecraft\src\animation\skeletal\Animation.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\Animation.obj
+C:\Users\User\source\repos\Minecraft\Minecraft\src\animation\skeletal\Animator.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\Animator.obj
+C:\Users\User\source\repos\Minecraft\Minecraft\src\animation\skeletal\bone\Bone.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\Bone.obj
+C:\Users\User\source\repos\Minecraft\Minecraft\src\gui\RightArm.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\RightArm.obj
+C:\Users\User\source\repos\Minecraft\Minecraft\src\input\handlers\HitHandler.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\HitHandler.obj
+C:\Users\User\source\repos\Minecraft\Minecraft\src\items\Item.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\Item.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\items\ItemModel.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\ItemModel.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\entity\EntitiesDatabase.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\EntitiesDatabase.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\entity\Entity.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\Entity.obj
@@ -50,6 +56,7 @@ C:\Users\User\source\repos\Minecraft\Minecraft\src\textures\TextureLoader.cpp;C:
 C:\Users\User\source\repos\Minecraft\Minecraft\src\text\FTLoader.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\FTLoader.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\text\Text2D.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\Text2D.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\AssimpLoader.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\AssimpLoader.obj
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Timer.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\Timer.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\noise\NoiseManager.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\NoiseManager.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\noise\NoiseMap.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\NoiseMap.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\noise\PerlinNoise2D.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\PerlinNoise2D.obj
@@ -62,7 +69,7 @@ C:\Users\User\source\repos\Minecraft\Minecraft\src\world\Sun.cpp;C:\Users\User\s
 C:\Users\User\source\repos\Minecraft\Minecraft\src\PlayState.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\PlayState.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\render\ChunkRenderer.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\ChunkRenderer.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\render\framebuffer\DepthFramebuffer.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\DepthFramebuffer.obj
-C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\Timer.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\Timer.obj
+C:\Users\User\source\repos\Minecraft\Minecraft\src\utils\TickTimer.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\TickTimer.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\world\chunk\Chunk.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\Chunk.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\textures\CubeTexture.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\CubeTexture.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\textures\BasicTexture.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\BasicTexture.obj

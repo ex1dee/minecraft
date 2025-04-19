@@ -1,5 +1,6 @@
 #include "BlockInteractsInput.h"
 
+#include "../../items/DroppedItem.h"
 #include "../Input.h"
 
 constexpr float BLOCK_INTERACT_INTERVAL_SEC = 0.5f;
@@ -28,25 +29,38 @@ void BlockInteractsInput::handle(Player& player, World& world, float deltaTime) 
 		elapsedTime += deltaTime;
 	}
 
-	glm::vec3 blockPos = block->getPosition();
-
 	if (leftClicked && block->getType().isSolid) {
-		world.setBlock(blockPos, Material::AIR);
+		breakBlock(player, world, block);
 	} else if (rightClicked) {
-		glm::vec3 adjacentBlockPos = getAdjacentBlockPosition(player, *block);
-		std::shared_ptr<Block> oldAdjacentBlock = world.getBlock(adjacentBlockPos);
+		placeBlock(player, world, block);
+	}
+}
 
-		if (adjacentBlockPos.y < 0 || adjacentBlockPos.y >= CHUNK_H
-		 || (oldAdjacentBlock != nullptr && oldAdjacentBlock->getType().isSolid))
-			return;
+void BlockInteractsInput::breakBlock(Player& player, World& world, const std::shared_ptr<Block>& targetBlock) {
+	world.setBlock(targetBlock->getPosition(), Material::AIR);
 
-		std::shared_ptr<ItemStack> selectedItem = player.getSelectedItem();
-		Material material = selectedItem->getType().material;
-		
-		if (material != AIR) {
-			if (BlocksDatabase::contains(material) && !player.isAtBlock(adjacentBlockPos, BlocksDatabase::get(material))) {
-				selectedItem->toBlock(&world, adjacentBlockPos);
-			}
+	if (ItemsDatabase::contains(targetBlock->getType().material)) {
+		player.getWorld()->spawnEntity<DroppedItem>(
+			targetBlock->getPosition() + glm::vec3(0.5f) - 0.5f * EntitiesDatabase::get(ITEM).colliderExtents,
+			std::make_shared<ItemStack>(*targetBlock)
+		);
+	}
+}
+
+void BlockInteractsInput::placeBlock(Player& player, World& world, const std::shared_ptr<Block>& targetBlock) {
+	glm::vec3 adjacentBlockPos = getAdjacentBlockPosition(player, *targetBlock);
+	std::shared_ptr<Block> oldAdjacentBlock = world.getBlock(adjacentBlockPos);
+
+	if (adjacentBlockPos.y < 0 || adjacentBlockPos.y >= CHUNK_H
+		|| (oldAdjacentBlock != nullptr && oldAdjacentBlock->getType().isSolid))
+		return;
+
+	std::shared_ptr<ItemStack> selectedItem = player.getSelectedItem();
+	Material material = selectedItem->getType().material;
+
+	if (material != AIR) {
+		if (BlocksDatabase::contains(material) && !player.isAtBlock(adjacentBlockPos, BlocksDatabase::get(material))) {
+			selectedItem->toBlock(&world, adjacentBlockPos);
 		}
 	}
 }

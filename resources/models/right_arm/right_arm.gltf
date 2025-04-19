@@ -1,0 +1,340 @@
+{
+    "asset" : {
+        "generator" : "Khronos glTF Blender I/O v3.4.50",
+        "version" : "2.0"
+    },
+    "scene" : 0,
+    "scenes" : [
+        {
+            "name" : "Scene",
+            "nodes" : [
+                3
+            ]
+        }
+    ],
+    "nodes" : [
+        {
+            "name" : "right_arm",
+            "rotation" : [
+                0.08242445439100266,
+                0.7786707878112793,
+                -0.6187790036201477,
+                0.06317109614610672
+            ],
+            "scale" : [
+                1.0000001192092896,
+                0.9999997019767761,
+                1
+            ],
+            "translation" : [
+                2.498764753341675,
+                -0.8595598936080933,
+                0.8385983109474182
+            ]
+        },
+        {
+            "name" : "neutral_bone",
+            "rotation" : [
+                -0.7071068286895752,
+                0,
+                0,
+                0.7071068286895752
+            ]
+        },
+        {
+            "mesh" : 0,
+            "name" : "Body",
+            "skin" : 0
+        },
+        {
+            "children" : [
+                2,
+                0,
+                1
+            ],
+            "name" : "Armature",
+            "scale" : [
+                0.11999999731779099,
+                0.11999999731779099,
+                0.11999999731779099
+            ],
+            "translation" : [
+                0,
+                0.3284119963645935,
+                0
+            ]
+        }
+    ],
+    "animations" : [
+        {
+            "channels" : [
+                {
+                    "sampler" : 0,
+                    "target" : {
+                        "node" : 0,
+                        "path" : "translation"
+                    }
+                },
+                {
+                    "sampler" : 1,
+                    "target" : {
+                        "node" : 0,
+                        "path" : "rotation"
+                    }
+                },
+                {
+                    "sampler" : 2,
+                    "target" : {
+                        "node" : 0,
+                        "path" : "scale"
+                    }
+                }
+            ],
+            "name" : "ArmatureAction",
+            "samplers" : [
+                {
+                    "input" : 8,
+                    "interpolation" : "LINEAR",
+                    "output" : 9
+                },
+                {
+                    "input" : 8,
+                    "interpolation" : "LINEAR",
+                    "output" : 10
+                },
+                {
+                    "input" : 8,
+                    "interpolation" : "LINEAR",
+                    "output" : 11
+                }
+            ]
+        }
+    ],
+    "materials" : [
+        {
+            "doubleSided" : true,
+            "name" : "Material.002",
+            "pbrMetallicRoughness" : {
+                "baseColorTexture" : {
+                    "index" : 0
+                },
+                "metallicFactor" : 0,
+                "roughnessFactor" : 0.5
+            }
+        }
+    ],
+    "meshes" : [
+        {
+            "name" : "Cube.001",
+            "primitives" : [
+                {
+                    "attributes" : {
+                        "COLOR_0" : 0,
+                        "POSITION" : 1,
+                        "TEXCOORD_0" : 2,
+                        "NORMAL" : 3,
+                        "JOINTS_0" : 4,
+                        "WEIGHTS_0" : 5
+                    },
+                    "indices" : 6,
+                    "material" : 0
+                }
+            ]
+        }
+    ],
+    "textures" : [
+        {
+            "sampler" : 0,
+            "source" : 0
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/png",
+            "name" : "skin",
+            "uri" : "skin.png"
+        }
+    ],
+    "skins" : [
+        {
+            "inverseBindMatrices" : 7,
+            "joints" : [
+                0,
+                1
+            ],
+            "name" : "Armature"
+        }
+    ],
+    "accessors" : [
+        {
+            "bufferView" : 0,
+            "componentType" : 5123,
+            "count" : 24,
+            "normalized" : true,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 1,
+            "componentType" : 5126,
+            "count" : 24,
+            "max" : [
+                0.5513411164283752,
+                0.4774796664714813,
+                0.14906944334506989
+            ],
+            "min" : [
+                0.1734113097190857,
+                0.12763096392154694,
+                -0.5993961095809937
+            ],
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 2,
+            "componentType" : 5126,
+            "count" : 24,
+            "type" : "VEC2"
+        },
+        {
+            "bufferView" : 3,
+            "componentType" : 5126,
+            "count" : 24,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 4,
+            "componentType" : 5121,
+            "count" : 24,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 5,
+            "componentType" : 5126,
+            "count" : 24,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 6,
+            "componentType" : 5123,
+            "count" : 36,
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 7,
+            "componentType" : 5126,
+            "count" : 2,
+            "type" : "MAT4"
+        },
+        {
+            "bufferView" : 8,
+            "componentType" : 5126,
+            "count" : 7,
+            "max" : [
+                0.25
+            ],
+            "min" : [
+                0
+            ],
+            "type" : "SCALAR"
+        },
+        {
+            "bufferView" : 9,
+            "componentType" : 5126,
+            "count" : 7,
+            "type" : "VEC3"
+        },
+        {
+            "bufferView" : 10,
+            "componentType" : 5126,
+            "count" : 7,
+            "type" : "VEC4"
+        },
+        {
+            "bufferView" : 11,
+            "componentType" : 5126,
+            "count" : 7,
+            "type" : "VEC3"
+        }
+    ],
+    "bufferViews" : [
+        {
+            "buffer" : 0,
+            "byteLength" : 192,
+            "byteOffset" : 0,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 288,
+            "byteOffset" : 192,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 192,
+            "byteOffset" : 480,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 288,
+            "byteOffset" : 672,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 96,
+            "byteOffset" : 960,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 384,
+            "byteOffset" : 1056,
+            "target" : 34962
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 72,
+            "byteOffset" : 1440,
+            "target" : 34963
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 128,
+            "byteOffset" : 1512
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 28,
+            "byteOffset" : 1640
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 84,
+            "byteOffset" : 1668
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 112,
+            "byteOffset" : 1752
+        },
+        {
+            "buffer" : 0,
+            "byteLength" : 84,
+            "byteOffset" : 1864
+        }
+    ],
+    "samplers" : [
+        {
+            "magFilter" : 9728,
+            "minFilter" : 9984
+        }
+    ],
+    "buffers" : [
+        {
+            "byteLength" : 1948,
+            "uri" : "right_arm.bin"
+        }
+    ]
+}

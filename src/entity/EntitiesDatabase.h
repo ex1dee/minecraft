@@ -10,7 +10,7 @@ class EntitiesDatabase {
 public:
 	static void initialize();
 
-	static const EntityType& get(EntityID id) { return *entities[id]; }
+	static const EntityType& get(EntityID id) const { return *entities[id]; }
 };
 
 #endif
