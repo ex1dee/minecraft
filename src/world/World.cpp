@@ -37,7 +37,7 @@ World::~World() {
 }
 
 const Fog& World::getFogForEntity(const Entity& entity) {
-	Liquid* liquid = entity.getLiquidAtEyes();
+	Liquid* liquid = Block::getMeta<Liquid>(entity.getBlockAtEyes().get());
 	
 	if (liquid != nullptr) {
 		return liquid->getFog();
@@ -146,14 +146,12 @@ void World::update(float deltaTime) {
 	updateTime();
 	updateEntities(deltaTime);
 
-	sun->setTime(time * 10);
+	sun->setTime(12000);
 	clouds->update(deltaTime);
 }
 
 void World::updateTime() {
-	if (++time >= TICK_PER_DAY) {
-		time = 0;
-	}
+	time = ++time % TICK_PER_DAY;
 }
 
 void World::updateEntities(float deltaTime) {
@@ -164,6 +162,8 @@ void World::updateEntities(float deltaTime) {
 			entity->update(player, deltaTime);
 		}
 	}
+
+	player->update(deltaTime);
 }
 
 int World::getHeightAt(const glm::vec3& pos) {

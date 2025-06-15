@@ -11,7 +11,7 @@ std::shared_ptr<TextureAtlas> BlocksDatabase::textureAtlas;
 void BlocksDatabase::initialize() {
 	textureAtlas = TextureLoader::loadAtlas("resources/textures/blocks_atlas.png", glm::vec2(16, 16), true, TextureType::DIFFUSE);
 
-	for (const std::string& path : Files::getFolderFiles(BLOCKS_DIR)) {
+	for (const std::string& path : Files::getFolderFiles(BLOCKS_DIR, false, "json")) {
 		nlohmann::json json = Json::parse(path);
 
 		std::unique_ptr<BlockType> type = std::make_unique<BlockType>();
@@ -24,8 +24,10 @@ void BlocksDatabase::initialize() {
 		type->isOpaque = json["opaque"];
 		type->isSolid = json["solid"];
 		type->material = json["material"];
+		
+		type->loadSoundPrefix(json);
 
-		if (json.find("meta") != json.end()) {
+		if (json.contains("meta")) {
 			type->meta = BlockMetaLoader::load(json["meta"]["id"], json);
 		}
 

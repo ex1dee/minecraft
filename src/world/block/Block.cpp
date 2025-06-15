@@ -23,3 +23,7 @@ IntersectList Block::intersect(const Ray& ray) const {
 bool Block::isCollidable() const { 
 	return !getType().colliders.empty();
 }
+
+bool Block::isLiquid() const { 
+	return getMeta<Liquid>(this) != nullptr; 
+}

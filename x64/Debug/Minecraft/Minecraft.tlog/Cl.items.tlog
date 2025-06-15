@@ -50,6 +50,12 @@ C:\Users\User\source\repos\Minecraft\Minecraft\src\render\SpriteRenderer.cpp;C:\
 C:\Users\User\source\repos\Minecraft\Minecraft\src\render\sprite\Sprite.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\Sprite.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\render\TextRenderer.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\TextRenderer.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\shaders\ShadersDatabase.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\ShadersDatabase.obj
+C:\Users\User\source\repos\Minecraft\Minecraft\src\sounds\ChannelGroup.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\ChannelGroup.obj
+C:\Users\User\source\repos\Minecraft\Minecraft\src\sounds\FMODHelper.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\FMODHelper.obj
+C:\Users\User\source\repos\Minecraft\Minecraft\src\sounds\Sound.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\Sound.obj
+C:\Users\User\source\repos\Minecraft\Minecraft\src\sounds\SoundEngine.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\SoundEngine.obj
+C:\Users\User\source\repos\Minecraft\Minecraft\src\sounds\SoundsDatabase.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\SoundsDatabase.obj
+C:\Users\User\source\repos\Minecraft\Minecraft\src\sounds\SoundSource.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\SoundSource.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\textures\CustomTexture.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\CustomTexture.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\textures\Texture.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\Texture.obj
 C:\Users\User\source\repos\Minecraft\Minecraft\src\textures\TextureLoader.cpp;C:\Users\User\source\repos\Minecraft\Minecraft\x64\Debug\Minecraft\TextureLoader.obj

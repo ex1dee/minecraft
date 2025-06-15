@@ -9,7 +9,7 @@ constexpr const char* MODELS_DIR = "resources/models";
 std::unordered_map<EntityID, std::unique_ptr<EntityType>> EntitiesDatabase::entities;
 
 void EntitiesDatabase::initialize() {
-	for (const std::string& path : Files::getFolderFiles(ENTITIES_DIR)) {
+	for (const std::string& path : Files::getFolderFiles(ENTITIES_DIR, false, "json")) {
 		std::unique_ptr<EntityType> type = std::make_unique<EntityType>();
 		nlohmann::json json = Json::parse(path);
 

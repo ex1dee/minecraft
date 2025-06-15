@@ -8,7 +8,7 @@ std::unordered_map<Material, std::unique_ptr<ItemType>> ItemsDatabase::items;
 constexpr const char* ITEMS_DIR = "resources/items";
 
 void ItemsDatabase::initialize() {
-	for (const std::string& path : Files::getFolderFiles(ITEMS_DIR)) {
+	for (const std::string& path : Files::getFolderFiles(ITEMS_DIR, false, "json")) {
 		std::unique_ptr<ItemType> type = std::make_unique<ItemType>();
 		nlohmann::json json = Json::parse(path);
 

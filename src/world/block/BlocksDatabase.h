@@ -14,7 +14,7 @@ public:
 
 	static const std::shared_ptr<TextureAtlas>& getTextureAtlas() { return textureAtlas; }
 	static const BlockType& get(Material material) { return *blocks[material]; }
-	static bool contains(Material material) { return blocks.find(material) != blocks.end(); }
+	static bool contains(Material material) { return blocks.contains(material); }
 };
 
 #endif

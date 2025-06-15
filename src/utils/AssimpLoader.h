@@ -7,7 +7,7 @@
 
 #include <vector>
 #include <string>
-#include <map>
+#include <unordered_map>
 
 #include "../animation/skeletal/Bone/BoneInfo.h"
 #include "../render/model/Model.h"
@@ -17,7 +17,7 @@ class AssimpLoader {
 	std::string directory;
 	bool flipTexture;
 
-	std::map<std::string, BoneInfo> boneInfoMap;
+	std::unordered_map<std::string, BoneInfo> boneInfoMap;
 	int boneCounter = 0;
 
 	TextureType getTextureTypeBy(aiTextureType type);

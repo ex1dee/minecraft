@@ -16,6 +16,12 @@ Animator::Animator(const std::shared_ptr<Animation>& animation)
 	calcBoneTransform(&animation->getRoot(), glm::mat4(1.0f));
 }
 
+void Animator::replayAnimation(bool loop, float speed, bool switchable) {
+	animationTime = 0.0f;
+
+	playAnimation(loop, speed, switchable);
+}
+
 void Animator::playAnimation(bool loop, float speed, bool switchable) {
 	if (isStopped()) {
 		timer.reset();
@@ -113,7 +119,7 @@ void Animator::calcBoneTransform(const AnimationNode* node, const glm::mat4& par
 	glm::mat4 globalTransform = parentTransform * nodeTransform;
 	auto& boneInfoMap = animation->getBoneInfoMap();
 
-	if (boneInfoMap.find(node->boneName) != boneInfoMap.end())
+	if (boneInfoMap.contains(node->boneName))
 		boneMatrices[boneInfoMap[node->boneName].id] = globalTransform * boneInfoMap[node->boneName].offset;
 
 	for (int i = 0; i < node->children.size(); ++i)

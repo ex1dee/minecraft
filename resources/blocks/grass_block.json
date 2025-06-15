@@ -10,5 +10,7 @@
         "side": [ 1, 15 ],
         "top": [ 0, 15 ],
         "bottom": [ 2, 15 ]
-    }
+    },
+
+    "soundPrefix": "blocks.grass_block"
 }

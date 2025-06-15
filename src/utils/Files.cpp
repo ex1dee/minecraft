@@ -1,16 +1,49 @@
 #include "Files.h"
 
+#include <cassert>
 #include <fstream>
 #include <sstream>
-#include <iostream>
 #include <filesystem>
 
 std::string Files::getFullPath(const std::string& dirPath, const std::string& fileName) {
 	return dirPath + "/" + fileName;
 }
 
+std::string Files::getPathSegmentAfter(const std::string& path, const std::string& prefix) {
+	int i;
+
+	for (i = 0; i < path.size(); ++i) {
+		if (path[i] != prefix[i])
+			return path.substr(i);
+	}
+
+	return path;
+}
+
 std::string Files::getDirectory(const std::string& path) {
-	return path.substr(0, path.find_last_of('/'));
+	return path.substr(0, getLastSeparatorIndex(path));
+}
+
+std::string Files::getLastPathSegment(const std::string& path) {
+	return path.substr(getLastSeparatorIndex(path) + 1);
+}
+
+std::string Files::getFileExtension(const std::string& path) {
+	return path.substr(path.find_first_of('.') + 1);
+}
+
+std::string Files::getPathBeforeExtension(const std::string& path) {
+	return path.substr(0, path.find_last_of('.'));
+}
+
+int Files::getLastSeparatorIndex(const std::string& path) {
+	int l1 = path.find_last_of('/');
+	if (l1 >= std::string::npos) l1 = -1;
+
+	int l2 = path.find_last_of('\\');
+	if (l2 == std::string::npos) l2 = -1;
+
+	return std::max(l1, l2);
 }
 
 std::string Files::read(const std::string& path) {
@@ -42,18 +75,12 @@ void Files::close(std::fstream& file) {
 	file.close();
 }
 
-std::vector<std::string> Files::getFolderFiles(const std::string& dirPath) {
-	std::vector<std::string> files;
+std::vector<std::string> Files::getFolderFiles(const std::string& dirPath, bool onlyDirectories, const std::string& extension) {
+	return getFolderFiles<std::filesystem::directory_iterator>(dirPath, onlyDirectories, extension);
+}
 
-	if (isDirectory(dirPath)) {
-		for (const auto& entry : std::filesystem::directory_iterator(dirPath)) {
-			files.push_back(entry.path().string());
-		}
-	} else {
-		std::cerr << "Folder \"" << dirPath << "\" was not found\n";
-	}
-	
-	return files;
+std::vector<std::string> Files::getFolderFilesDeep(const std::string& dirPath, bool onlyDirectories, const std::string& extension) {
+	return getFolderFiles<std::filesystem::recursive_directory_iterator>(dirPath, onlyDirectories, extension);
 }
 
 bool Files::isDirectory(const std::string& path) {

@@ -1,12 +1,50 @@
 #include "Player.h"
 
+#include "../sounds/SoundEngine.h"
 #include "../window/Window.h"
 #include "../world/World.h"
 #include "Camera.h"
 
+constexpr float MIN_LIQUID_SPLASH_DOT = 8.0f;
+
 Player::Player(std::shared_ptr<Camera>& camera)
 	: camera(camera), Entity(PLAYER) {
 	setupInventory();
+}
+
+void Player::update(float deltaTime) {
+	Entity::update(nullptr, deltaTime);
+
+	handleLiquidInteraction();
+
+	// TODO: В класс Ambient.AmbientSound (и поле класса inWater)
+	std::shared_ptr<Block> blockAtEyes = getBlockAtEyes();
+
+	if (blockAtEyes->isLiquid()) {
+		SoundEngine::getSound("ambient.under_water.noise")->play();
+	} else {
+		SoundEngine::getSound("ambient.under_water.noise")->setPaused(true);
+		
+		if (prevBlockAtEyes->isLiquid()) {
+			prevBlockAtEyes->getType().tryPlay3DSound("emerge_splash", prevBlockAtEyes->getPosition());
+		}
+	}
+
+	prevBlockAtEyes = blockAtEyes;
+}
+
+void Player::handleLiquidInteraction() {
+	std::shared_ptr<Block> blockUnderfoot = getBlockUnderfoot();
+
+	if (blockUnderfoot != nullptr && prevBlockUnderfoot != nullptr
+		&& !prevBlockUnderfoot->isLiquid() && blockUnderfoot->isLiquid()
+		&& !world->getBlock(blockUnderfoot->getPosition() + glm::vec3(0, 1, 0))->isLiquid()
+		&& glm::dot(glm::vec3(0, -1, 0), rigidBody.velocity) > MIN_LIQUID_SPLASH_DOT)
+	{
+		blockUnderfoot->getType().tryPlay3DSound("splash", blockUnderfoot->getPosition());
+	}
+
+	prevBlockUnderfoot = blockUnderfoot;
 }
 
 void Player::setupInventory() {

@@ -34,6 +34,7 @@ public:
 	void continueAnimation();
 	void finishAnimation(bool smooth);
 	void playAnimation(bool loop, float speed = DEFAULT_ANIMATION_SPEED, bool switchable = false);
+	void replayAnimation(bool loop, float speed = DEFAULT_ANIMATION_SPEED, bool switchable = false);
 };
 
 #endif

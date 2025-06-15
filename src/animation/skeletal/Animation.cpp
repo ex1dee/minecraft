@@ -49,7 +49,7 @@ void Animation::readBones(const aiAnimation* animation, AssimpLoader& assimpLoad
         
         bones.emplace(boneName, Bone(boneName, boneCount, channel));
 
-        if (boneInfoMap.find(boneName) == boneInfoMap.end()) {
+        if (!boneInfoMap.contains(boneName)) {
             boneInfoMap.emplace(boneName, BoneInfo());
             boneCount++;
         }

@@ -1,5 +1,6 @@
 #include "BlockInteractsInput.h"
 
+#include "../../sounds/SoundEngine.h"
 #include "../../items/DroppedItem.h"
 #include "../Input.h"
 
@@ -37,6 +38,7 @@ void BlockInteractsInput::handle(Player& player, World& world, float deltaTime) 
 }
 
 void BlockInteractsInput::breakBlock(Player& player, World& world, const std::shared_ptr<Block>& targetBlock) {
+	targetBlock->getType().tryPlay3DSound("dig", targetBlock->getPosition(), glm::vec3(0), true);
 	world.setBlock(targetBlock->getPosition(), Material::AIR);
 
 	if (ItemsDatabase::contains(targetBlock->getType().material)) {
@@ -60,7 +62,8 @@ void BlockInteractsInput::placeBlock(Player& player, World& world, const std::sh
 
 	if (material != AIR) {
 		if (BlocksDatabase::contains(material) && !player.isAtBlock(adjacentBlockPos, BlocksDatabase::get(material))) {
-			selectedItem->toBlock(&world, adjacentBlockPos);
+			std::shared_ptr<Block> newBlock = selectedItem->toBlock(&world, adjacentBlockPos);
+			newBlock->getType().tryPlay3DSound("dig", newBlock->getPosition(), glm::vec3(0), true);
 		}
 	}
 }

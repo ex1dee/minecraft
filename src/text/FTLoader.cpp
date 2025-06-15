@@ -65,7 +65,7 @@ void FTLoader::loadChar(CharacterType c) {
 }
 
 const FTCharacter& FTLoader::getCharacter(CharacterType c) {
-	if (chars.find(c) == chars.end())
+	if (!chars.contains(c))
 		return *chars[UNKNOWN_SYMBOL];
 
 	return *chars[c];

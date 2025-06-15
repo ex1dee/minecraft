@@ -110,7 +110,7 @@ void Chunk::updateHighestBlock(const glm::vec3& pos, const Block& block) {
 	glm::ivec2 posXZ = glm::ivec2(pos.x, pos.z);
 	float y = pos.y;
 
-	if (highestBlocks.find(posXZ) == highestBlocks.end()) {
+	if (!highestBlocks.contains(posXZ)) {
 		highestBlocks.emplace(posXZ, y);
 	}
 	else {

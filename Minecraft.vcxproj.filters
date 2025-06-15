@@ -296,6 +296,24 @@
     <ClCompile Include="src\items\Item.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="src\sounds\SoundEngine.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sounds\Sound.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sounds\ChannelGroup.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sounds\FMODHelper.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sounds\SoundsDatabase.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sounds\SoundSource.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\window\Window.h">
@@ -461,6 +479,17 @@
     <ClInclude Include="src\gui\RightArm.h" />
     <ClInclude Include="src\input\handlers\HitHandler.h" />
     <ClInclude Include="src\items\Item.h" />
+    <ClInclude Include="src\sounds\SoundEngine.h" />
+    <ClInclude Include="src\sounds\Sound.h" />
+    <ClInclude Include="src\sounds\ChannelGroup.h" />
+    <ClInclude Include="src\sounds\SoundConstants.h" />
+    <ClInclude Include="src\sounds\FMODHelper.h" />
+    <ClInclude Include="src\sounds\AudioResource.h" />
+    <ClInclude Include="src\sounds\W3DAttributes.h" />
+    <ClInclude Include="src\sounds\SoundsDatabase.h" />
+    <ClInclude Include="src\sounds\SoundType.h" />
+    <ClInclude Include="src\sounds\ChannelGroupID.h" />
+    <ClInclude Include="src\sounds\SoundSource.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="config\settings.json" />
@@ -508,6 +537,18 @@
     <None Include="resources\entities\item.json" />
     <None Include="resources\items\stick.json" />
     <None Include="resources\entities\right_arm.json" />
+    <None Include="resources\sounds\blocks\grass_block\steps.json" />
+    <None Include="resources\sounds\blocks\sand\steps.json" />
+    <None Include="resources\sounds\blocks\sand\dig.json" />
+    <None Include="resources\sounds\blocks\grass_block\dig.json" />
+    <None Include="resources\sounds\blocks\water\splash.json" />
+    <None Include="resources\sounds\ambient\under_water\noise.json" />
+    <None Include="resources\sounds\blocks\water\emerge_splash.json" />
+    <None Include="src\animation\skeletal\bone\Bone.inl" />
+    <None Include="src\render\Drawable.inl" />
+    <None Include="src\utils\Files.inl" />
+    <None Include="src\world\block\Block.inl" />
+    <None Include="src\world\World.inl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\blocks_atlas.png">

@@ -2,6 +2,7 @@
 
 #include "../physics/collision/BoxBoxCollision.h"
 #include "../physics/collider/BoxCollider.h"
+#include "../sounds/SoundEngine.h"
 #include "../world/RayTracing.h"
 
 constexpr float ENTITY_MAX_TARGET_BLOCK_DIST = 5.0f;
@@ -14,7 +15,7 @@ Entity::Entity(EntityID id)
 	isInCameraSpace = type.isInCameraSpace;
 	modelTransform = type.modelTransform;
 
-	for (auto pair : type.animations) {
+	for (auto pair : type.animations) { 
 		animators.emplace(pair.first, Animator(pair.second));
 	}
 
@@ -34,19 +35,47 @@ Entity::Entity(EntityID id)
 	}
 }
 
+void Entity::update(const std::shared_ptr<Player>& player, float deltaTime) {
+	
+}
+
 bool Entity::isOnGround() const {
-	glm::vec3 extents = ((BoxCollider*) collider.get())->getExtents();
+	for (const auto& block : getBlocksUnderfoot()) {
+		if (block != nullptr && block->isCollidable())
+			return true;
+	}
+
+	return false;
+}
+
+std::shared_ptr<Block> Entity::getBlockUnderfoot() const {
+	std::shared_ptr<Block> nearestBlock = nullptr;
+	float minDist = FLT_MAX;
+
+	for (const auto& block : getBlocksUnderfoot()) {
+		if (block != nullptr) {
+			float dist = glm::distance(block->getPosition(), transform.position);
+
+			if (dist < minDist) {
+				minDist = dist;
+				nearestBlock = block;
+			}
+		}
+	}
+
+	return nearestBlock;
+}
+
+std::array<std::shared_ptr<Block>, 4> Entity::getBlocksUnderfoot() const {
+	glm::vec3 extents = ((BoxCollider*)collider.get())->getExtents();
 	glm::vec3 colliderCenter = transform.position + collider->getPosition();
 
-	std::shared_ptr<Block> block1 = world->getBlock(colliderCenter + glm::vec3(extents.x, GROUND_OFFSET_Y, 0));
-	std::shared_ptr<Block> block2 = world->getBlock(colliderCenter + glm::vec3(extents.x, GROUND_OFFSET_Y, extents.z));
-	std::shared_ptr<Block> block3 = world->getBlock(colliderCenter + glm::vec3(0, GROUND_OFFSET_Y, extents.z));
-	std::shared_ptr<Block> block4 = world->getBlock(colliderCenter + glm::vec3(0, GROUND_OFFSET_Y, 0));
-
-	return (block1 != nullptr && block1->isCollidable())
-		|| (block2 != nullptr && block2->isCollidable())
-		|| (block3 != nullptr && block3->isCollidable())
-		|| (block4 != nullptr && block4->isCollidable());
+	return {
+		world->getBlock(colliderCenter + glm::vec3(extents.x, GROUND_OFFSET_Y, 0)),
+		world->getBlock(colliderCenter + glm::vec3(extents.x, GROUND_OFFSET_Y, extents.z)),
+		world->getBlock(colliderCenter + glm::vec3(0, GROUND_OFFSET_Y, extents.z)),
+		world->getBlock(colliderCenter + glm::vec3(0, GROUND_OFFSET_Y, 0))
+	};
 }
 
 std::shared_ptr<Block> Entity::getTargetBlock() const {
@@ -58,12 +87,16 @@ Ray Entity::getViewDirection() const {
 }
 
 Liquid* Entity::getLiquidAtEyes() const {
-	std::shared_ptr<Block> block = world->getBlock(getEyesPosition() - glm::vec3(0, 0.075f, 0));
+	std::shared_ptr<Block> block = getBlockAtEyes();
 
 	if (block != nullptr)
 		return ((Liquid*)block->getType().meta.get());
 
 	return nullptr;
+}
+
+std::shared_ptr<Block> Entity::getBlockAtEyes() const {
+	return world->getBlock(getEyesPosition() - glm::vec3(0, 0.075f, 0));
 }
 
 glm::vec3 Entity::getEyesPosition() const {

@@ -6,8 +6,8 @@
 #include "Bone/Bone.h"
 
 class Animation {
-	std::map<std::string, BoneInfo> boneInfoMap;
-	std::map<std::string, Bone> bones;
+	std::unordered_map<std::string, BoneInfo> boneInfoMap;
+	std::unordered_map<std::string, Bone> bones;
 	AnimationNode root;
 	double ticksPerSecond;
 	double duration;
@@ -17,7 +17,7 @@ class Animation {
 public:
 	Animation(const std::string& path, AssimpLoader& assimpLoader);
 
-	bool containsBone(const std::string& name) const { return bones.find(name) != bones.end(); }
+	bool containsBone(const std::string& name) const { return bones.contains(name); }
 	Bone* getBone(const std::string& name) { return bones.contains(name) ? &bones[name] : nullptr; }
 
 	AnimationNode& getRoot() { return root; }

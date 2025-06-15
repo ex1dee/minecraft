@@ -25,6 +25,7 @@ public:
 		: mass(mass) {}
 
 	PhysicsType getPhysicsType() { return physicsType; }
+	glm::vec3 getDeltaPosition() { return deltaPosition; }
 
 	void setPhysicsType(PhysicsType type) {
 		this->physicsType = type;

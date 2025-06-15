@@ -32,6 +32,8 @@ class Player : public Entity {
 	std::shared_ptr<InventoryView> openInventoryView;
 	std::shared_ptr<InventoryView> backpackView;
 	std::shared_ptr<InventoryView> hotbarView;
+	std::shared_ptr<Block> prevBlockUnderfoot;
+	std::shared_ptr<Block> prevBlockAtEyes;
 	std::shared_ptr<Inventory> pOpenInventory;
 	std::shared_ptr<Inventory> inventory;
 	InventoryItem draggedItem;
@@ -59,13 +61,14 @@ public:
 
 	void setSelectedItem(const ItemStack& item) const { hotbarView->setItem(selectedSlot, 0, item); }
 
-	void update();
 	void openBackpack();
 	void closeBackpack();
 	void closeInventory();
 	void resetDraggedItem();
 	void selectSlot(int slot);
 	void setFlying(bool flying);
+	void update(float deltaTime);
+	void handleLiquidInteraction();
 	void setDraggedItem(const InventoryItem& item);
 	void setNeedUpdateInventoryViews(bool needUpdate);
 	void openInventory(const std::shared_ptr<Inventory>& inventory);

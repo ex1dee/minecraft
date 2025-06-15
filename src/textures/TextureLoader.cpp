@@ -75,7 +75,7 @@ std::shared_ptr<CubeTexture> TextureLoader::loadCube(
 
 template<typename T> 
 static std::shared_ptr<T> TextureLoader::getTexture(const std::string& key) {
-	if (textures.find(key) != textures.end()) {
+	if (textures.contains(key)) {
 		return std::dynamic_pointer_cast<T>(textures[key]);
 	} else {
 		return nullptr;

@@ -1,11 +1,13 @@
 #include "MovementsInput.h"
 
+#include "../../sounds/SoundEngine.h"
 #include "../../player/Camera.h"
 #include "../Input.h"
 
 constexpr float
 RUN_ZOOM_TIME_SEC = 0.15f,
 RUN_MIN_ZOOM = -15.0f,
+RUN_MIN_DELTA_POSITION = 1e-5,
 WALKING_ANIMATION_COEF = 1.25f;
 
 std::unordered_map<int, glm::vec3> MovementsInput::keys;
@@ -31,6 +33,7 @@ void MovementsInput::handle(Player& player, float deltaTime) {
 	checkFlying(player, speed);
 
 	playWalkingAnimation(player, speed);
+	playWalkingSound(player);
 }
 
 float MovementsInput::calcSpeed(Player& player, Liquid* const liquid) {
@@ -85,7 +88,7 @@ void MovementsInput::checkSwimming(Player& player, Liquid* const liquid) {
 		if (Input::pressed(GLFW_KEY_SPACE)) {
 			rb->velocity.y = player.getJumpForce() * PLAYER_INLIQUID_JUMP_COEF;
 			keys.emplace(GLFW_KEY_SPACE, rb->velocity);
-		} else if (keys.find(GLFW_KEY_SPACE) != keys.end()) {
+		} else if (keys.contains(GLFW_KEY_SPACE)) {
 			rb->velocity.y -= keys[GLFW_KEY_SPACE].y;
 			keys.erase(GLFW_KEY_SPACE);
 		}
@@ -110,7 +113,7 @@ void MovementsInput::checkFlying(Player& player, float speed) {
 }
 
 void MovementsInput::check(int key, RigidBody* const rigidBody, const glm::vec3& velocity) {
-	if (keys.find(key) != keys.end()) {
+	if (keys.contains(key)) {
 		if (!Input::pressed(key)) {
 			rigidBody->velocity += -keys[key];
 			keys.erase(key);
@@ -134,9 +137,25 @@ void MovementsInput::playWalkingAnimation(Player& player, float speed) {
 	else if (!Input::pressed(GLFW_KEY_LEFT_SHIFT))
 		player.getAnimator("sitting")->finishAnimation(true);
 
-	if (Input::pressed(GLFW_KEY_W) || Input::pressed(GLFW_KEY_S) || Input::pressed(GLFW_KEY_A) || Input::pressed(GLFW_KEY_D)) {
+	if (isWalkKeyPressed()) {
 		player.getAnimator("walking")->playAnimation(true, speed / player.getWalkSpeed() * WALKING_ANIMATION_COEF);
 	} else {
 		player.getAnimator("walking")->finishAnimation(true);
 	}
+}
+
+void MovementsInput::playWalkingSound(Player& player) {
+	std::shared_ptr<Block> blockUnderfoot = player.getBlockUnderfoot();
+
+	if (isWalkKeyPressed() && !player.getBlockAtEyes()->isLiquid()
+		&& glm::length(player.rigidBody.getDeltaPosition()) >= RUN_MIN_DELTA_POSITION
+		&& glm::length(player.rigidBody.velocity) >= player.getWalkSpeed() * PLAYER_SPRINT_COEF
+		&& blockUnderfoot != nullptr)
+	{
+		blockUnderfoot->getType().tryPlay3DSound("steps", blockUnderfoot->getPosition());
+	}
+}
+
+bool MovementsInput::isWalkKeyPressed() {
+	return Input::pressed(GLFW_KEY_W) || Input::pressed(GLFW_KEY_S) || Input::pressed(GLFW_KEY_A) || Input::pressed(GLFW_KEY_D);
 }

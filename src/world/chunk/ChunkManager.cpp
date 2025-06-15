@@ -86,7 +86,7 @@ std::shared_ptr<Chunk> ChunkManager::getChunk(const glm::ivec2& pos) {
 }
 
 bool ChunkManager::chunkExistsAt(const glm::ivec2& pos) {
-	return chunks.find(pos) != chunks.end();
+	return chunks.contains(pos);
 }
 
 void ChunkManager::unloadNotVisibleChunks(const glm::ivec2& playerChunkPos, int loadDist) {

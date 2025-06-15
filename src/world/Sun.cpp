@@ -4,7 +4,7 @@
 
 constexpr float SUN_CHANGE_FOCUS_DIST = CHUNK_W * 1.5f;
 constexpr float TIME_TO_ANGLE_COEF = 360.0f / (float) TICK_PER_DAY;
-constexpr float ANGLE_OFFSET = TIME_TO_ANGLE_COEF * -((float) TICK_PER_DAY / 4.0f);
+constexpr float ANGLE_OFFSET = TIME_TO_ANGLE_COEF * -((float) TICK_PER_DAY / 4.0f) - 90.0f;
 
 Sun::Sun(Shader& FBOShader, World& world, std::shared_ptr<Player>& player)
 	: world(&world), player(player) {

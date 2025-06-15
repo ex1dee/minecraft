@@ -10,7 +10,7 @@
 class EntityType {
 public:
 	EntityID id;
-	std::map<std::string, std::shared_ptr<Animation>> animations;
+	std::unordered_map<std::string, std::shared_ptr<Animation>> animations;
 	std::shared_ptr<Model> model;
 	glm::vec3 colliderPosition;
 	glm::vec3 colliderExtents;

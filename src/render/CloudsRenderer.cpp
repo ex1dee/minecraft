@@ -3,7 +3,7 @@
 #include "../render/Renderer.h"
 
 void CloudsRenderer::render(const Clouds& clouds, const Sun& sun, const Player& player) {
-	if (player.getLiquidAtEyes() != nullptr)
+	if (player.getBlockAtEyes()->isLiquid())
 		return;
 
 	updateShader(player.getCamera(), sun);

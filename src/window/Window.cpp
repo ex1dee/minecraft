@@ -26,7 +26,8 @@ bool Window::shouldClose() {
 
 void Window::initialize() {
     if (!glfwInit()) {
-        throw "Failed to initialize GLFW";
+        std::cerr << "Failed to initialize GLFW\n";
+        throw;
     }
     
     createWindow();

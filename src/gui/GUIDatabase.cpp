@@ -12,13 +12,13 @@ GUISector GUIDatabase::root;
 void GUIDatabase::initialize() {
 	GUISector elements;
 
-	for (const std::string& path : Files::getFolderFiles(GUI_DIR)) {
+	for (const std::string& path : Files::getFolderFiles(GUI_DIR, false, "json")) {
 		std::shared_ptr<GUIElement> element;
 
 		nlohmann::json json = Json::parse(path);
 		std::string name = json["name"];
 
-		if (elements.find(name) != elements.end())
+		if (elements.contains(name))
 			element = elements[name];
 		else
 			element = std::make_shared<GUIElement>();
@@ -53,7 +53,7 @@ void GUIDatabase::addChildren(std::shared_ptr<GUIElement> element, const nlohman
 	for (const std::string& childName : json["children"]) {
 		std::shared_ptr<GUIElement> child;
 
-		if (elements.find(childName) != elements.end())
+		if (elements.contains(childName))
 			child = elements[childName];
 		else
 			child = std::make_shared<GUIElement>();

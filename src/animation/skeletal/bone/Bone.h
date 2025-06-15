@@ -38,16 +38,9 @@ public:
 	std::string getName() const { return name; }
 	int getID() { return id; }
 
-	template<typename T>
-	int getKeyIndex(float time, const std::vector<T>& keys) const {
-		for (int i = 0; i < keys.size() - 1; ++i) {
-			if (time <= keys[i + 1].timeStamp) {
-				return i;
-			}
-		}
-
-		return keys.size() - 1;
-	}
+	template<typename T> int getKeyIndex(float time, const std::vector<T>& keys) const;
 };
+
+#include "Bone.inl"
 
 #endif

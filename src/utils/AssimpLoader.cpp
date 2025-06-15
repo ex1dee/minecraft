@@ -109,7 +109,7 @@ void AssimpLoader::addBoneWeights(const aiScene* scene, const aiMesh* mesh, Mesh
 		std::string boneName = mesh->mBones[boneIndex]->mName.C_Str();
 		int boneID;
 
-		if (boneInfoMap.find(boneName) == boneInfoMap.end()) {
+		if (!boneInfoMap.contains(boneName)) {
 			BoneInfo boneInfo;
 			boneInfo.id = boneCounter;
 			boneInfo.offset = AssimpHelper::getGLMMatrix(mesh->mBones[boneIndex]->mOffsetMatrix);

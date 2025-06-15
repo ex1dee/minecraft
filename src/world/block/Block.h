@@ -26,8 +26,13 @@ public:
 	const glm::vec3& getPosition() const { return position; }
 	const BlockType& getType() const { return BlocksDatabase::get(material); }
 
+	bool isLiquid() const;
 	bool isCollidable() const;
 	IntersectList intersect(const Ray& ray) const;
+
+	template<typename T> static T* getMeta(const Block* const block);
 };
+
+#include "Block.inl"
 
 #endif

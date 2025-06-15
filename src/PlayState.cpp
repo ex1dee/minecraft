@@ -8,6 +8,7 @@
 #include "input/handlers/HitHandler.h"
 
 #include "physics/PhysicsEngine.h"
+#include "sounds/SoundEngine.h"
 #include "gui/GUI.h"
 
 constexpr float
@@ -53,6 +54,7 @@ void PlayState::update() {
 		PhysicsEngine::update(physicsTickTimer.getSecPerTick());
 	}
 
+	SoundEngine::update(player);
 	GUI::update(*player);
 }
 

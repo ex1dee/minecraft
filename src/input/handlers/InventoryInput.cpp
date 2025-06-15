@@ -46,7 +46,7 @@ void InventoryInput::selectSlot(Player& player, int slot) {
 	player.getHotbarView().setNeedUpdate(true);
 
 	if (player.getSelectedItem()->getType().material != AIR) {
-		GUI::getRightArm()->getAnimator("switch_item")->playAnimation(false);
+		GUI::getRightArm()->getAnimator("switch_item")->replayAnimation(false);
 	}
 }
 

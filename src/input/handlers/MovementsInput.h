@@ -10,7 +10,9 @@ class MovementsInput {
 	static std::unordered_map<int, glm::vec3> keys;
 	static ZoomHandler runZoom;
 
+	static bool isWalkKeyPressed();
 	static float calcSpeed(Player& player, Liquid* const liquid);
+	static void playWalkingSound(Player& player);
 	static void checkFlying(Player& player, float speed);
 	static void checkRunZoom(Player& player, float deltaTime);
 	static void playWalkingAnimation(Player& player, float speed);

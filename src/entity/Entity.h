@@ -13,8 +13,9 @@ class Block;
 
 class Entity : public GameObject {
 	EntityID id;
+	std::unordered_map<std::string, Animator> animators;
 
-	std::map<std::string, Animator> animators;
+	std::array<std::shared_ptr<Block>, 4> getBlocksUnderfoot() const;
 public:
 	Transform modelTransform;
 	bool isInCameraSpace;
@@ -22,7 +23,7 @@ public:
 	Entity(EntityID id);
 	virtual ~Entity() = default;
 
-	virtual void update(const std::shared_ptr<Player>& player, float deltaTime) {}
+	virtual void update(const std::shared_ptr<Player>& player, float deltaTime);
 	virtual void playIdleAnimation(const std::shared_ptr<Player>& player, float deltaTime) {}
 
 	const EntityType& getType() const { return EntitiesDatabase::get(id); }
@@ -35,6 +36,8 @@ public:
 	glm::vec3 getColliderCenter() const;
 	std::vector<glm::mat4> updateAnimators();
 	std::shared_ptr<Block> getTargetBlock() const;
+	std::shared_ptr<Block> getBlockAtEyes() const;
+	std::shared_ptr<Block> getBlockUnderfoot() const;
 	void setModel(const std::shared_ptr<Model>& model);
 	bool isAtBlock(const glm::vec3& position) const;
 	bool isAtBlock(const glm::vec3& position, const BlockType& type) const;

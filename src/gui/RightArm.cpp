@@ -15,5 +15,5 @@ RightArm::RightArm()
 }
 
 void RightArm::update(const std::shared_ptr<Player>& player, float deltaTime) {
-
+	Entity::update(player, deltaTime);
 }
