@@ -71,8 +71,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>C:\Users\User\YandexDisk\INFO's recopy\ОСНОВНОЕ\БИБЛИОТЕКИ\OpenGL\OpenGL\includes;C:\OpenGL\includes\;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\User\YandexDisk\INFO's recopy\ОСНОВНОЕ\БИБЛИОТЕКИ\OpenGL\OpenGL\libs;C:\OpenGL\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\YandexDisk\INFO%27s recopy\ОСНОВНОЕ\БИБЛИОТЕКИ\OpenGL\OpenGL\includes;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\YandexDisk\INFO%27s recopy\ОСНОВНОЕ\БИБЛИОТЕКИ\OpenGL\OpenGL\libs;C:\Users\User\YandexDisk\INFO's recopy\ОСНОВНОЕ\БИБЛИОТЕКИ\OpenGL\OpenGL\libs;C:\OpenGL\libs;$(LibraryPath)</LibraryPath>
     <ReferencePath />
     <LibraryWPath />
     <IntDir>$(Platform)\$(Configuration)\$(ProjectName)\</IntDir>
@@ -80,8 +80,8 @@
     </GlfwPlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>C:\Users\User\YandexDisk\INFO's recopy\ОСНОВНОЕ\БИБЛИОТЕКИ\OpenGL\OpenGL\includes;C:\OpenGL\includes\;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\User\YandexDisk\INFO's recopy\ОСНОВНОЕ\БИБЛИОТЕКИ\OpenGL\OpenGL\libs;C:\OpenGL\libs;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\YandexDisk\INFO%27s recopy\ОСНОВНОЕ\БИБЛИОТЕКИ\OpenGL\OpenGL\includes;C:\Users\User\YandexDisk\INFO's recopy\ОСНОВНОЕ\БИБЛИОТЕКИ\OpenGL\OpenGL\includes;C:\OpenGL\includes\;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\YandexDisk\INFO%27s recopy\ОСНОВНОЕ\БИБЛИОТЕКИ\OpenGL\OpenGL\libs;C:\Users\User\YandexDisk\INFO's recopy\ОСНОВНОЕ\БИБЛИОТЕКИ\OpenGL\OpenGL\libs;C:\OpenGL\libs;$(LibraryPath)</LibraryPath>
     <ReferencePath />
     <LibraryWPath />
   </PropertyGroup>
@@ -432,6 +432,7 @@
     <ClInclude Include="src\world\WorldPosition.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="config\config.json" />
     <None Include="config\settings.json" />
     <None Include="packages.config" />

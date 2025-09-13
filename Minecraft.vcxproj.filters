@@ -549,6 +549,7 @@
     <None Include="src\utils\Files.inl" />
     <None Include="src\world\block\Block.inl" />
     <None Include="src\world\World.inl" />
+    <None Include=".gitignore" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\textures\blocks_atlas.png">
